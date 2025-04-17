@@ -1,11 +1,4 @@
-<let amount = '';
-if (selected) {
-  if (selected.classList.contains('custom')) {
-    amount = customInput.value || '0';
-  } else {
-    amount = selected.dataset.amount;
-  }
-}<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8" />
@@ -251,7 +244,14 @@ if (selected) {
     chargeButton.addEventListener('click', () => {
       const username = document.getElementById('username').value;
       const selected = document.querySelector('.coin-option.selected');
-      const amount = selected ? selected.dataset.amount : '';
+      let amount = '';
+      if (selected) {
+        if (selected.classList.contains('custom')) {
+          amount = customInput.value || '0';
+        } else {
+          amount = selected.dataset.amount;
+        }
+      }
       document.getElementById('popupUser').innerText = 'اسم المستخدم: ' + username;
       document.getElementById('popupCoins').innerText = 'عدد العملات: ' + amount;
       popup.style.display = 'flex';
