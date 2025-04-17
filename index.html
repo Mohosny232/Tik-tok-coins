@@ -275,14 +275,17 @@
       }, 80);
     });
 
-   cancelBtn.addEventListener('click', () => {
-  popup.style.display = 'none';
-  payNowBtn.disabled = false;
-  payNowBtn.innerText = "ادفع الآن";
-  payNowBtn.style.opacity = 1;
-  payNowBtn.style.color = "white";
-  document.getElementById('progressBar').style.width = '0%';
-  document.getElementById('progressText').innerText = '';
-  document.getElementById('successSection').style.display = 'none';
-  document.getElementById('progressContainer').style.display = 'none';
-}); 
+    cancelBtn.addEventListener('click', () => {
+      popup.style.display = 'none';
+      payNowBtn.disabled = false;
+      payNowBtn.innerText = "ادفع الآن";
+      payNowBtn.style.opacity = 1;
+      payNowBtn.style.color = "white";
+      document.getElementById('progressBar').style.width = '0%';
+      document.getElementById('progressText').innerText = '';
+      document.getElementById('successSection').style.display = 'none';
+      document.getElementById('progressContainer').style.display = 'none';
+    });
+  </script>
+</body>
+</html>
