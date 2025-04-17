@@ -247,10 +247,13 @@
       let amount = '';
       if (selected) {
         if (selected.classList.contains('custom')) {
-          amount = customInput.value || '0';
+          amount = customInput.value.trim();
+          if (!amount) amount = '0';
         } else {
           amount = selected.dataset.amount;
         }
+      } else {
+        amount = '0';
       }
       document.getElementById('popupUser').innerText = 'اسم المستخدم: ' + username;
       document.getElementById('popupCoins').innerText = 'عدد العملات: ' + amount;
