@@ -46,36 +46,31 @@
       font-weight: 700;
       font-size: 18px;
       box-sizing: border-box;
-      min-height: 110px
-  display: flex;
-  flex-direction: row-reverse;
-  align-items: center;
-  justify-content: space-between;
-  padding: 10px;
-  gap: 10px;
-      }
+      display: flex;
+      flex-direction: row-reverse;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      min-height: 70px;
+    }
     .coin-option.selected {
       border: 2px solid #ff2d55;
       background-color: #fff0f4;
     }
     .coin-option small {
-      margin-top: 6px;
       font-size: 13px;
       color: #777;
       font-weight: normal;
     }
     .coin-img {
-  width: 60px;
-  height: 60px;
-  object-fit: cover;
-  margin-left: 0;
-    }
+      width: 60px;
+      height: 60px;
+      object-fit: cover;
     }
     .custom-input {
       width: 90%;
       font-size: 16px;
       padding: 4px;
-      margin-top: 6px;
       border: none;
       background: transparent;
       text-align: center;
@@ -148,12 +143,12 @@
     <h1><span class="tiktok">TikTok</span> شحن عملات</h1>
     <input type="text" id="username" placeholder="اكتب اسم المستخدم" />
     <div class="coins">
-      <div class="coin-option"><span>30</span> <img src="coin-new.png" class="coin-img"> <small>$0.38</small></div>
-      <div class="coin-option"><span>350</span> <img src="coin-new.png" class="coin-img"> <small>$4.50</small></div>
-      <div class="coin-option"><span>700</span> <img src="coin-new.png" class="coin-img"> <small>$8.90</small></div>
-      <div class="coin-option"><span>1400</span> <img src="coin-new.png" class="coin-img"> <small>$17.78</small></div>
-      <div class="coin-option"><span>3500</span> <img src="coin-new.png" class="coin-img"> <small>$44.30</small></div>
-      <div class="coin-option"><span>17000</span> <img src="coin-new.png" class="coin-img"> <small>$221.38</small></div>
+      <div class="coin-option"><img src="coin-new.png" class="coin-img"><span>30</span> <small>$0.38</small></div>
+      <div class="coin-option"><img src="coin-new.png" class="coin-img"><span>350</span> <small>$4.50</small></div>
+      <div class="coin-option"><img src="coin-new.png" class="coin-img"><span>700</span> <small>$8.90</small></div>
+      <div class="coin-option"><img src="coin-new.png" class="coin-img"><span>1400</span> <small>$17.78</small></div>
+      <div class="coin-option"><img src="coin-new.png" class="coin-img"><span>3500</span> <small>$44.30</small></div>
+      <div class="coin-option"><img src="coin-new.png" class="coin-img"><span>17000</span> <small>$221.38</small></div>
       <div class="coin-option custom">
         <div>مخصص</div>
         <input type="number" id="customAmount" class="custom-input" placeholder="اكتب عدد" />
