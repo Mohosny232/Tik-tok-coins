@@ -228,9 +228,10 @@
 
       payNowBtn.addEventListener('click', () => {
         payNowBtn.disabled = true;
-        payNowBtn.innerText = 'جاري الدفع...';
-        payNowBtn.style.color = 'white';
-
+        payNowBtn.disabled = true;
+payNowBtn.innerText = 'جاري الدفع...';
+payNowBtn.style.background = '#999'; // زر رمادي
+payNowBtn.style.color = 'white';     // لون الخط أبيض
         const progressBar = document.getElementById('progressBar');
         const progressContainer = document.getElementById('progressContainer');
         const progressText = document.getElementById('progressText');
@@ -254,7 +255,9 @@
             `;
             successSection.style.display = 'block';
             payNowBtn.innerText = 'ادفع الآن';
-            payNowBtn.disabled = false;
+payNowBtn.disabled = false;
+payNowBtn.style.background = '#ff2d55'; // يرجع أحمر
+payNowBtn.style.color = 'white';
           }
         }, 80);
       });
