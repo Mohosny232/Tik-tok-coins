@@ -6,7 +6,7 @@ input { padding: 10px; font-size: 18px; width: 80%; margin: 15px auto; border-ra
 .coins { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
 .coin-option { background: #f9f9f9; padding: 12px; border-radius: 10px; cursor: pointer; width: 110px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); font-size: 18px; }
 .coin-option.selected { border: 2px solid #ff2d55; }
-.coin-option img { width: 42px; height: 36px; }
+.coin-option img { width: 50px; height: 45px; }
 .coin-icon.big { width: 30px; vertical-align: middle; margin-left: 5px; }
 button { background: #ff004f; color: white; border: none; padding: 15px 30px; font-size: 20px; border-radius: 20px; margin-top: 20px; cursor: pointer; font-weight: bold; width: 100%; max-width: 400px; }
 #progressSection { margin-top: 20px; display: none; }
