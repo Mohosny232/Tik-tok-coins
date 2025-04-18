@@ -250,11 +250,10 @@
             document.getElementById('successSound').play();
             successSection.innerHTML = `
               <img src="success.gif" style="width: 100px; margin-top: 10px;" />
-              <p style="font-weight:bold; font-size:18px; margin-top:10px;">
-                تم تحويل العملات: ${amount}
-                <img src="coin-new.png" class="coin-img" />
-              </p>
-            `;
+              <p style="font-weight:bold; font-size:18px; margin-top:10px; display: flex; justify-content: center; align-items: center; gap: 6px;">
+  تم تحويل العملات: <span>${amount}</span>
+  <img src="coin-new.png" class="coin-img" />
+</p>
             successSection.style.display = 'block';
             payNowBtn.innerText = 'ادفع الآن';
             payNowBtn.disabled = false;
