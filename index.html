@@ -84,8 +84,7 @@
       font-size: 18px;
       font-weight: bold;
       cursor: pointer;
-    }
-    .popup {
+    }.popup {
       display: none;
       position: fixed;
       top: 0; left: 0; right: 0; bottom: 0;
@@ -170,9 +169,7 @@
 
     <audio id="clickSound" src="click.mp3"></audio>
     <audio id="typeSound" src="type.mp3"></audio>
-    <audio id="successSound" src="success.mp3"></audio>
-
-    <script>
+    <audio id="successSound" src="success.mp3"></audio><script>
       const usernameInput = document.getElementById('username');
       const chargeButton = document.getElementById('charge');
       const coinOptions = document.querySelectorAll('.coin-option');
@@ -250,8 +247,8 @@
             document.getElementById('successSound').play();
             successSection.innerHTML = `
               <img src="success.gif" style="width: 100px; margin-top: 10px;" />
-              <p style="font-weight:bold; font-size:18px; margin-top:10px;">
-                تم تحويل العملات: ${amount}
+              <p style="font-weight:bold; font-size:18px; margin-top:10px; display: flex; justify-content: center; align-items: center; gap: 6px;">
+                تم تحويل العملات: <span>${amount}</span>
                 <img src="coin-new.png" class="coin-img" />
               </p>
             `;
