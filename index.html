@@ -41,16 +41,14 @@
       background: #f2f2f2;
       padding: 10px;
       border-radius: 12px;
-      text-align: center;
       cursor: pointer;
       font-weight: 700;
       font-size: 18px;
-      box-sizing: border-box;
       display: flex;
       flex-direction: row-reverse;
       justify-content: center;
       align-items: center;
-      gap: 10px;
+      gap: 6px;
       min-height: 70px;
     }
     .coin-option.selected {
@@ -86,19 +84,16 @@
       font-size: 18px;
       font-weight: bold;
       cursor: pointer;
-    }  
-  .popup 
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0,0,0,0.6);
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-  }
+    }
+    .popup {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.6);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
     .popup-content {
       background: white;
       padding: 20px;
@@ -191,10 +186,19 @@
 
       let amount = '';
 
-      usernameInput.addEventListener('input', () => {
+      function playTypeSound() {
         const sound = document.getElementById('typeSound');
         sound.currentTime = 0;
         sound.play();
+      }
+
+      usernameInput.addEventListener('input', playTypeSound);
+      customInput.addEventListener('input', (e) => {
+        playTypeSound();
+        document.querySelectorAll('.coin-option').forEach(o => o.classList.remove('selected'));
+        document.querySelector('.coin-option.custom').classList.add('selected');
+        amount = e.target.value;
+        chargeButton.innerText = `شحن ${amount} عملة`;
       });
 
       document.querySelectorAll('button, .coin-option, #customAmount, #username').forEach(el => {
@@ -215,13 +219,6 @@
             chargeButton.innerText = `شحن ${amount} عملة`;
           }
         });
-      });
-
-      customInput.addEventListener('input', (e) => {
-        document.querySelectorAll('.coin-option').forEach(o => o.classList.remove('selected'));
-        document.querySelector('.coin-option.custom').classList.add('selected');
-        amount = e.target.value;
-        chargeButton.innerText = `شحن ${amount} عملة`;
       });
 
       chargeButton.addEventListener('click', () => {
@@ -277,4 +274,4 @@
       });
     </script>
 </body>
-</html>
+  </html>
