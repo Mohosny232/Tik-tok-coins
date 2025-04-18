@@ -98,7 +98,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0,background: rgba(0,0,0,0.6);
+      background: rgba(0,0,0,0.6);
       justify-content: center;
       align-items: center;
       z-index: 1000;
@@ -119,7 +119,7 @@
       margin: 15px 0;
     }
     .payment-method img {
-      width: 80px;
+      width: 60px;
     }
     .progress-container {
       display: none;
@@ -175,16 +175,17 @@
         <input type="number" id="customAmount" class="custom-input" placeholder="اكتب عدد" />
       </div>
     </div>
-    <button id="charge">الشحن</button>
+    <button id="charge">شحن</button>
   </div>
 
+  <!-- المنبثقة -->
   <div class="popup" id="paymentPopup">
     <div class="popup-content">
       <p id="popupUser"></p>
       <p id="popupCoins"></p>
       <div class="payment-method">
-  <span>طريقة الدفع:</span>
-  <img src="visa.png" alt="Visa" style="width: 60px; height: auto; vertical-align: middle;">
+        <span>طريقة الدفع:</span>
+        <img src="visa.png" alt="Visa">
       </div>
       <div class="progress-container" id="progressContainer">
         <div class="progress-bar" id="progressBar"></div>
@@ -216,16 +217,6 @@
       chargeButton.innerText = `شحن ${value} عملة`;
     }
 
-    function selectCustom() {
-      document.querySelectorAll('.coin-option').forEach(e => e.classList.remove('selected'));
-      document.querySelector('.coin-option.custom').classList.add('selected');
-      updateChargeCoins(customInput.value);
-    }
-
-    customInput.addEventListener('input', (e) => {
-      updateChargeCoins(e.target.value);
-    });
-
     document.getElementById('username').addEventListener('input', () => {
       typeSound.currentTime = 0;
       typeSound.play();
@@ -235,8 +226,13 @@
       option.addEventListener('click', () => {
         document.querySelectorAll('.coin-option').forEach(e => e.classList.remove('selected'));
         option.classList.add('selected');
-        updateChargeCoins(option.textContent.trim());
+        updateChargeCoins(option.textContent.trim().split(' ')[0]);
       });
+    });
+
+    customInput.addEventListener('input', (e) => {
+      document.querySelector('.coin-option.custom').classList.add('selected');
+      updateChargeCoins(e.target.value);
     });
 
     document.querySelectorAll('button, .coin-option, #username, #customAmount').forEach(el => {
@@ -260,6 +256,7 @@
       } else {
         amount = '0';
       }
+
       document.getElementById('popupUser').innerText = 'اسم المستخدم: ' + username;
       document.getElementById('popupCoins').innerText = 'عدد العملات: ' + amount;
       popup.style.display = 'flex';
@@ -303,4 +300,4 @@
     });
   </script>
 </body>
-</html>
+  </html>
