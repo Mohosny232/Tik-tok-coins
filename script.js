@@ -46,3 +46,35 @@ document.getElementById('charge').addEventListener('click', () => {
     }
   }, 80);
 });
+payNowBtn.addEventListener('click', () => {
+  payNowBtn.disabled = true;
+  payNowBtn.innerText = 'جاري الدفع...';
+  payNowBtn.style.color = 'white';
+
+  const progressBar = document.getElementById('progressBar');
+  const progressContainer = document.getElementById('progressContainer');
+  const progressText = document.getElementById('progressText');
+
+  progressContainer.style.display = 'block';
+  let percent = 0;
+  const interval = setInterval(() => {
+    percent += 1;
+    progressBar.style.width = percent + '%';
+    progressText.innerText = percent + '%';
+    if (percent >= 100) {
+      clearInterval(interval);
+      document.getElementById('successSound').play();
+      successSection.innerHTML = `
+        <img src="success.gif" style="width: 100px; margin-top: 10px;" />
+        <p style="font-weight:bold; font-size:18px; margin-top:10px;">
+          تم تحويل العملات: ${amount}
+          <img src="coin-new.png" class="coin-img" />
+        </p>
+      `;
+      successSection.style.display = 'block';
+      // يرجع الزر بعد الدفع (اختياري)
+      payNowBtn.disabled = false;
+      payNowBtn.innerText = 'ادفع الآن';
+    }
+  }, 80);
+});
