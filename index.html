@@ -236,7 +236,11 @@
       chargeButton.addEventListener('click', () => {
         if (amount !== '') {
           popupUser.innerText = 'اسم المستخدم: ' + usernameInput.value;
-          popupCoins.innerText = 'عدد العملات: ' + amount;
+          popupCoins.innerHTML = `عدد العملات:
+  <span style="display:inline-flex; align-items:center; gap:4px;">
+    ${amount}
+    <img src="coin-new.png" style="width: 20px; height: 20px; object-fit: cover;" />
+  </span>`;
           popup.style.display = 'flex';
         }
       });
