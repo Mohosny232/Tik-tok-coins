@@ -67,86 +67,149 @@
 }
 
 /* خليه خارج small */
-.coin-img {
-  width: 50px;
-  height: 50px;
-  object-fit: cover;
-  display: inline-block;
-  margin: 0;
-  padding: 0;
-}
-      .custom-input {
-      width: 90%;
-      font-size: 16px;
-      padding: 4px;
-      border: none;
-      background: transparent;
-      text-align: center;
-    }
-    #charge, #payNow {
-      width: 100%;
-      padding: 14px;
-      margin-top: 25px;
-      background: #ff2d55;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      font-size: 18px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-    .popup {
-      display: none;
-      position: fixed;
-      top: 0; left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: rgba(0,0,0,0.6);
-      justify-content: center;
-      align-items: center;
-      z-index: 1000;
-    }
-    .popup-content {
-      background: white;
-      padding: 15px;
-      border-radius: 12px;
-      text-align: center;
-      width: 90%;
-      max-width: 300px;
-      margin: auto;
-    }
-    .progress-container {
-      display: none;
-      width: 100%;
-      background-color: #ddd;
-      border-radius: 6px;
-      margin-top: 20px;
-    }
-    .progress-bar {
-      height: 10px;
-      width: 0%;
-      background-color: #111;
-      border-radius: 6px;
-    }
-    #progressText {
-      margin-top: 10px;
-      font-weight: bold;
-    }
-    #successSection {
-      display: none;
-      margin-top: 20px;
-    }
-    #cancelBtn {
-      background: transparent;
-      border: 1px solid #aaa;
-      color: #555;
-      padding: 6px 16px;
-      border-radius: 6px;
-      font-size: 14px;
-      margin-top: 12px;
-      cursor: pointer;
-    }
-  </style>
+<style>
+  * {
+    box-sizing: border-box;
+  }
+  html, body {
+    overflow-x: hidden;
+    margin: 0;
+    font-family: 'Tajawal', sans-serif;
+    background: #fff;
+  }
+  .container {
+    max-width: 400px;
+    margin: auto;
+    padding: 20px;
+  }
+  h1 {
+    text-align: center;
+    font-weight: 700;
+  }
+  .tiktok {
+    color: red;
+  }
+  #username {
+    width: 100%;
+    padding: 12px;
+    font-size: 18px;
+    margin-bottom: 20px;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    text-align: center;
+  }
+  .coins {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    padding: 0 10px;
+  }
+  .coin-option {
+    background: #f2f2f2;
+    padding: 8px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 15px;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    min-height: 58px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  }
+  .coin-option.selected {
+    border: 2px solid #ff2d55;
+    background-color: #fff0f4;
+  }
+  .coin-option small {
+    font-size: 13px;
+    color: #777;
+    font-weight: normal;
+  }
+
+  .coin-img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+  }
+
+  .custom-input {
+    width: 90%;
+    font-size: 16px;
+    padding: 4px;
+    border: none;
+    background: transparent;
+    text-align: center;
+  }
+  #charge, #payNow {
+    width: 100%;
+    padding: 14px;
+    margin-top: 25px;
+    background: #ff2d55;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  .popup {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0,0,0,0.6);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  .popup-content {
+    background: white;
+    padding: 15px;
+    border-radius: 12px;
+    text-align: center;
+    width: 90%;
+    max-width: 300px;
+    margin: auto;
+  }
+  .progress-container {
+    display: none;
+    width: 100%;
+    background-color: #ddd;
+    border-radius: 6px;
+    margin-top: 20px;
+  }
+  .progress-bar {
+    height: 10px;
+    width: 0%;
+    background-color: #111;
+    border-radius: 6px;
+  }
+  #progressText {
+    margin-top: 10px;
+    font-weight: bold;
+  }
+  #successSection {
+    display: none;
+    margin-top: 20px;
+  }
+  #cancelBtn {
+    background: transparent;
+    border: 1px solid #aaa;
+    color: #555;
+    padding: 6px 16px;
+    border-radius: 6px;
+    font-size: 14px;
+    margin-top: 12px;
+    cursor: pointer;
+  }
+</style>
 </head>
 <body>
   <div class="container">
