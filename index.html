@@ -273,7 +273,7 @@
         if (amount !== '') {
           popupUser.innerText = 'اسم المستخدم: ' + usernameInput.value;
           popupCoins.innerText = 'عدد العملات: ' + amount;
-          popup.style.display = 'flex';
+          popup.classList.add('show');
         }
       });
 
@@ -314,7 +314,7 @@ payNowBtn.style.color = 'white';
       });
 
       cancelBtn.addEventListener('click', () => {
-        popup.style.display = 'none';
+        popup.classList.remove('show');
         document.getElementById('progressBar').style.width = '0%';
         document.getElementById('progressText').innerText = '';
         document.getElementById('progressContainer').style.display = 'none';
