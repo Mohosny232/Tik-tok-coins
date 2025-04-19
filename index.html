@@ -132,7 +132,18 @@
       font-size: 14px;
       margin-top: 12px;
       cursor: pointer;
-    }
+    }.popup-content {
+  animation: popupFade 0.3s ease;
+}
+@keyframes popupFade {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
   </style>
 </head>
 <body>
