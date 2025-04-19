@@ -83,62 +83,78 @@
       border-radius: 8px;
       font-size: 18px;
       font-weight: bold;
-      cursor: pointer;
-    }.popup {
-      display: flex;
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0,0,0,0.6);
-      justify-content: center;
-      align-items: center;
-      z-index: 1000;
-      .popup-content {
+      cursor: pointer
+      .popup {
+  display: none; /* نخليها تظهر فقط وقت الحاجة */
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.popup.show {
+  display: flex; /* تظهر النافذة عند إضافة الكلاس show */
+}
+
+.popup-content {
   background: white;
   padding: 20px;
   border-radius: 16px;
   text-align: center;
   width: 85%;
-  max-width: 280px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  max-width: 300px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
   animation: popupFade 0.3s ease;
-  margin: auto;
-direction: ltr;
-text-align: center;
- { successSection img
-{width: 80px;
+  direction: rtl;
+}
+
+@keyframes popupFade {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+}
+
+#successSection img {
+  width: 80px;
   height: auto;
   margin-bottom: 10px;
-  }
-    .progress-container {
-      display: none;
-      width: 100%;
-      background-color: #ddd;
-      border-radius: 6px;
-      margin-top: 20px;
-    }
-    .progress-bar {
-      height: 10px;
-      width: 0%;
-      background-color: #111;
-      border-radius: 6px;
-    }
-    #progressText {
-      margin-top: 10px;
-      font-weight: bold;
-    }
-    #successSection {
-      display: none;
-      margin-top: 20px;
-    }
-    #cancelBtn {
-      background: transparent;
-      border: 1px solid #aaa;
-      color: #555;
-      padding: 6px 16px;
-      border-radius: 6px;
-      font-size: 14px;
-      margin-top: 12px;
-      cursor: pointer;
+}
+
+.progress-container {
+  width: 100%;
+  background-color: #ddd;
+  border-radius: 6px;
+  margin-top: 20px;
+}
+
+.progress-bar {
+  height: 10px;
+  width: 0%;
+  background-color: #111;
+  border-radius: 6px;
+}
+
+#progressText {
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+#cancelBtn {
+  background: transparent;
+  border: 1px solid #aaa;
+  color: #555;
+  padding: 6px 16px;
+  border-radius: 6px;
+  font-size: 14px;
+  margin-top: 12px;
+  cursor: pointer;
+}
     }.popup-content {
   animation: popupFade 0.3s ease;
 }
