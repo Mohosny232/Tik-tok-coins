@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+٧<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
   <metameta charset="UTF-8" />
@@ -45,24 +45,25 @@
   padding: 0 10px; /* يضيف مسافة من اليمين والشمال */
   box-sizing: border-box;
     }
-    }.coin-option {
-  background: #f2f2f2;
-  padding: 6px;
-  border-radius: 10px;
+    .coin-option {
+  background: #f2f2f2;       /* لون الخلفية الرمادي */
+  padding: 10px;
+  border-radius: 12px;       /* الحواف الدائرية */
   cursor: pointer;
   font-weight: 700;
-  font-size: 15px;
+  font-size: 16px;
   display: flex;
   flex-direction: row-reverse;
   justify-content: center;
   align-items: center;
-  gap: 4px;
-  min-height: 54px;
+  gap: 6px;
+  min-height: 60px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);  /* ظل خفيف للخانة */
     }
-    .coin-option.selected {
-      border: 2px solid #ff2d55;
-      background-color: #fff0f4;
-    }
+     .coin-option.selected {
+  border: 2px solid #ff2d55;
+  background-color: #fff0f4;
+     }
     .coin-option small {
       font-size: 13px;
       color: #777;
