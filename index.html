@@ -38,28 +38,28 @@
       border: 2px solid #ccc;
       border-radius: 10px;
       text-align: center;
-    }.coins {
+    .coins {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 15px;
-  padding: 0 10px; /* يضيف مسافة من اليمين والشمال */
+  padding: 0 12px;
   box-sizing: border-box;
     }
-    .coin-option {
-  background: #f2f2f2;       /* لون الخلفية الرمادي */
+.coin-option {
+  background: #f2f2f2;
   padding: 10px;
-  border-radius: 12px;       /* الحواف الدائرية */
+  border-radius: 12px;
   cursor: pointer;
   font-weight: 700;
-  font-size: 16px;
+  font-size: 15px;
   display: flex;
   flex-direction: row-reverse;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
   min-height: 60px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);  /* ظل خفيف للخانة */
-    }
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
      .coin-option.selected {
   border: 2px solid #ff2d55;
   background-color: #fff0f4;
@@ -68,12 +68,12 @@
       font-size: 13px;
       color: #777;
       font-weight: normal;
-    }
-    .coin-img {
-      width: 60px;
-      height: 60px;
-      object-fit: cover;
-    }
+.coin-img {
+  width: 36px;
+  height: 36px;
+  object-fit: cover;
+  flex-shrink: 0; /* يمنعها من الانكماش */
+}
     .custom-input {
       width: 90%;
       font-size: 16px;
