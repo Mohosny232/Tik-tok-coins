@@ -150,17 +150,24 @@ text-align: center;
   to {
     transform: scale(1);
     opacity: 1;
-  }
-  .popup {
+.popup {
   display: flex;
   justify-content: center;
   align-items: center;
-}#successSection img {
-  width: 80px;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 1000;
+}
+    #successSection img {
+  width: 60px;
   margin: 10px auto;
-}progressText {
-  margin: 8px 0;
-      }
+  display: block;
+}
+
+#progressText {
+  margin: 10px 0;
+}
   </style>
 </head>
 <body>
