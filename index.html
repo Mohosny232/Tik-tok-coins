@@ -318,41 +318,40 @@
       let popupCount = 0;
       const targetAmount = parseInt(amount);
       const targetTop = currentCoins - targetAmount;
+const interval = setInterval(() => {
+  percent++;
+  progressBar.style.width = percent + '%';
+  progressText.innerText = percent + '%';
 
-      const interval = setInterval(() => {
-        percent++;
-        progressBar.style.width = percent + '%';
-        progressText.innerText = percent + '%';
+  const step = Math.ceil(targetAmount / 100);
+  popupCount += step;
+  currentCoins -= step;
 
-        const step = Math.ceil(targetAmount / 100);
-        popupCount += step;
-        currentCoins -= step;
+  if (popupCount >= targetAmount) popupCount = targetAmount;
+  if (currentCoins <= targetTop) currentCoins = targetTop;
 
-        if (popupCount >= targetAmount) popupCount = targetAmount;
-        if (currentCoins <= targetTop) currentCoins = targetTop;
+  // هنا التعديل
+  topCoinDisplay.innerHTML = `${currentCoins} <img src="coin-new.png" style="width: 14px; height: 14px; object-fit: contain; position: relative; top: -1px;" />`;
 
-        topCoinDisplay.innerHTML = `${currentCoins} <img src="coin-new.png" class="coin-img" />`;
-        popupCoins.querySelector('span span').textContent = popupCount;
+  popupCoins.querySelector('span span').textContent = popupCount;
 
-        if (percent >= 100) {
-          clearInterval(interval);
-          document.getElementById('successSound').play();
-          successSection.innerHTML = `
-            <div style="text-align:center;">
-              <img src="success.gif" style="width: 80px; margin-top: -30px;" />
-            </div>
-            <p style="font-weight:bold; font-size:18px; margin-top: 30px; display:flex; justify-content:center; gap: 2px;">
-              تم تحويل العملات: <span>${amount}</span>
-              <img src="coin-new.png" style="width: 20px; height: 20px;" />
-            </p>`;
-          successSection.style.display = 'block';
-          payNowBtn.innerText = 'ادفع الآن';
-          payNowBtn.disabled = false;
-          payNowBtn.style.background = '#ff2d55';
-        }
-      }, 80);
-    });
-
+  if (percent >= 100) {
+    clearInterval(interval);
+    document.getElementById('successSound').play();
+    successSection.innerHTML = `
+      <div style="text-align:center;">
+        <img src="success.gif" style="width: 80px; margin-top: 5px;" />
+      </div>
+      <p style="font-weight:bold; font-size:18px; margin-top: -70px; display:flex; justify-content:center; gap: 2px;">
+        تم تحويل العملات: <span>${amount}</span>
+        <img src="coin-new.png" style="width: 20px; height: 20px;" />
+      </p>`;
+    successSection.style.display = 'block';
+    payNowBtn.innerText = 'ادفع الآن';
+    payNowBtn.disabled = false;
+    payNowBtn.style.background = '#ff2d55';
+  }
+}, 80);
     cancelBtn.addEventListener('click', () => {
       popup.style.display = 'none';
       progressBar.style.width = '0%';
