@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="ar" dir="rtl">
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
@@ -31,6 +32,7 @@
     .top-details {
       display: flex;
       flex-direction: column;
+      font-family: 'Tajawal';
     }
     .top-details .username {
       font-weight: bold;
@@ -42,12 +44,87 @@
       gap: 3px;
       font-family: 'DINNextLTArabic-Bold';
     }
-    .coin-img {
+    .coins .coin-img {
       width: 16px;
       height: 16px;
       object-fit: contain;
       position: relative;
       top: -1px;
+    }
+    .container {
+      max-width: 400px;
+      margin: auto;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      font-weight: 700;
+    }
+    .tiktok { color: red; }
+    #username {
+      width: 100%;
+      padding: 12px;
+      font-size: 18px;
+      margin-bottom: 20px;
+      border: 2px solid #ccc;
+      border-radius: 10px;
+      text-align: center;
+    }
+    .coins-section {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      padding: 0 10px;
+    }
+    .coin-option {
+      background: #f2f2f2;
+      padding: 8px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 15px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 4px;
+      min-height: 65px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    .coin-option.selected {
+      border: 2px solid #ff2d55;
+      background-color: #fff0f4;
+    }
+    .price-line {
+      display: flex;
+      flex-direction: row-reverse;
+      align-items: center;
+      gap: 2px;
+      font-family: 'DINNextLTArabic-Bold';
+    }
+    .coin-option small {
+      font-size: 13px;
+      color: #777;
+    }
+    .custom-input {
+      width: 90%;
+      font-size: 16px;
+      padding: 4px;
+      border: none;
+      background: transparent;
+      text-align: center;
+    }
+    #charge, #payNow {
+      width: 100%;
+      padding: 14px;
+      margin-top: 25px;
+      background: #ff2d55;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
     }
     .popup {
       display: none;
@@ -67,6 +144,7 @@
       text-align: center;
       width: 90%;
       max-width: 300px;
+      margin: auto;
     }
     .progress-container {
       display: none;
@@ -89,6 +167,16 @@
       display: none;
       margin-top: 10px;
     }
+    @keyframes shake {
+      0% { transform: translateX(0); }
+      25% { transform: translateX(-4px); }
+      50% { transform: translateX(4px); }
+      75% { transform: translateX(-4px); }
+      100% { transform: translateX(0); }
+    }
+    .shake {
+      animation: shake 0.4s;
+    }
   </style>
 </head>
 <body>
@@ -96,9 +184,32 @@
     <img src="your-photo.jpg" alt="User" />
     <div class="top-details">
       <span class="username">Mohosny100</span>
-      <span class="coins top-coin-count" id="topCoinNumber">999999999 <img src="coin-new.png" class="coin-img" /></span>
+      <span class="coins" id="topCoinNumber">
+        999999999
+        <img src="coin-new.png" alt="coin" class="coin-img" />
+      </span>
     </div>
-  </div>  <!-- منبثقة الدفع -->  <div class="popup" id="paymentPopup">
+  </div>
+
+  <div class="container">
+    <h1><span class="tiktok">TikTok</span> شحن عملات</h1>
+    <input type="text" id="username" placeholder="اكتب اسم المستخدم" />
+    <div class="coins-section">
+      <div class="coin-option"><div class="price-line"><span>30</span><img src="coin-new.png" class="coin-img" /></div><small>$0.38</small></div>
+      <div class="coin-option"><div class="price-line"><span>350</span><img src="coin-new.png" class="coin-img" /></div><small>$4.50</small></div>
+      <div class="coin-option"><div class="price-line"><span>700</span><img src="coin-new.png" class="coin-img" /></div><small>$8.90</small></div>
+      <div class="coin-option"><div class="price-line"><span>1400</span><img src="coin-new.png" class="coin-img" /></div><small>$17.78</small></div>
+      <div class="coin-option"><div class="price-line"><span>3500</span><img src="coin-new.png" class="coin-img" /></div><small>$44.30</small></div>
+      <div class="coin-option"><div class="price-line"><span>17000</span><img src="coin-new.png" class="coin-img" /></div><small>$221.38</small></div>
+      <div class="coin-option custom">
+        <div>مخصص</div>
+        <input type="number" id="customAmount" class="custom-input" placeholder="اكتب عدد" />
+      </div>
+    </div>
+    <button id="charge">شراء مقابل</button>
+  </div>
+
+  <div class="popup" id="paymentPopup">
     <div class="popup-content">
       <p id="popupUser"></p>
       <p id="popupCoins"></p>
@@ -114,38 +225,102 @@
       <button id="payNow">ادفع الآن</button>
       <button id="cancelBtn">إلغاء</button>
     </div>
-  </div>  <!-- الأصوات --><audio id="clickSound" src="click.mp3"></audio> <audio id="typeSound" src="type.mp3"></audio> <audio id="successSound" src="success.mp3"></audio>
+  </div>
+
+  <audio id="clickSound" src="click.mp3"></audio>
+  <audio id="typeSound" src="type.mp3"></audio>
+  <audio id="successSound" src="success.mp3"></audio>
 
   <script>
-    let amount = '';
-    let totalCoins = 999999999;
     const topCoinDisplay = document.getElementById('topCoinNumber');
     const usernameInput = document.getElementById('username');
-    const payNowBtn = document.getElementById('payNow');
+    const chargeButton = document.getElementById('charge');
+    const coinOptions = document.querySelectorAll('.coin-option');
+    const customInput = document.getElementById('customAmount');
     const popup = document.getElementById('paymentPopup');
+    const payNowBtn = document.getElementById('payNow');
+    const cancelBtn = document.getElementById('cancelBtn');
     const popupUser = document.getElementById('popupUser');
     const popupCoins = document.getElementById('popupCoins');
+    const progressBar = document.getElementById('progressBar');
+    const progressText = document.getElementById('progressText');
     const successSection = document.getElementById('successSection');
+
+    let totalCoins = 999999999;
+    let amount = '';
+
+    const prices = {
+      30: 0.38, 350: 4.5, 700: 8.9, 1400: 17.78, 3500: 44.3, 17000: 221.38
+    };
+
+    usernameInput.addEventListener('input', () => {
+      document.getElementById('typeSound').play();
+    });
+
+    document.querySelectorAll('button, .coin-option, #customAmount, #username').forEach(el => {
+      el.addEventListener('click', () => {
+        const click = document.getElementById('clickSound');
+        click.currentTime = 0;
+        click.play();
+      });
+    });
+
+    customInput.addEventListener('input', (e) => {
+      document.querySelectorAll('.coin-option').forEach(o => o.classList.remove('selected'));
+      document.querySelector('.coin-option.custom').classList.add('selected');
+      amount = e.target.value;
+      let price = (amount * 0.012666).toFixed(2);
+      chargeButton.innerText = `شراء مقابل $${price}`;
+    });
+
+    coinOptions.forEach(option => {
+      option.addEventListener('click', () => {
+        document.querySelectorAll('.coin-option').forEach(o => o.classList.remove('selected'));
+        option.classList.add('selected');
+        const span = option.querySelector('span');
+        if (span) {
+          amount = span.innerText.trim();
+          const price = prices[amount] || (amount * 0.012666).toFixed(2);
+          chargeButton.innerText = `شراء مقابل $${price}`;
+        }
+      });
+    });
+
+    chargeButton.addEventListener('click', () => {
+      if (usernameInput.value.trim() === '' || amount === '') {
+        usernameInput.classList.add('shake');
+        document.querySelector('.coins-section').classList.add('shake');
+        setTimeout(() => {
+          usernameInput.classList.remove('shake');
+          document.querySelector('.coins-section').classList.remove('shake');
+        }, 400);
+        return;
+      }
+      popupUser.innerHTML = `اسم المستخدم: ${usernameInput.value}`;
+      popupCoins.innerHTML = `
+        <span>عدد العملات:</span>
+        <span style="display:inline-flex; align-items:center; gap:2px;">
+          <span>0</span>
+          <img src="coin-new.png" style="width: 20px; height: 20px;" />
+        </span>`;
+      popup.style.display = 'flex';
+    });
 
     payNowBtn.addEventListener('click', () => {
       payNowBtn.disabled = true;
       payNowBtn.innerText = 'جاري الدفع...';
-      payNowBtn.style.color = 'white';
       payNowBtn.style.background = '#999';
 
-      const progressBar = document.getElementById('progressBar');
-      const progressText = document.getElementById('progressText');
-      const progressContainer = document.getElementById('progressContainer');
-      progressContainer.style.display = 'block';
+      document.getElementById('progressContainer').style.display = 'block';
 
       let percent = 0;
       let currentCoins = totalCoins;
+      let popupCount = 0;
       const targetAmount = parseInt(amount);
       const targetTop = currentCoins - targetAmount;
-      let popupCount = 0;
 
       const interval = setInterval(() => {
-        percent += 1;
+        percent++;
         progressBar.style.width = percent + '%';
         progressText.innerText = percent + '%';
 
@@ -156,29 +331,39 @@
         if (popupCount >= targetAmount) popupCount = targetAmount;
         if (currentCoins <= targetTop) currentCoins = targetTop;
 
-        if (topCoinDisplay) topCoinDisplay.innerHTML = `${currentCoins} <img src="coin-new.png" class="coin-img" />`;
-        popupCoins.innerHTML = `${popupCount} <img src="coin-new.png" class="coin-img" />`;
+        topCoinDisplay.innerHTML = `${currentCoins} <img src="coin-new.png" class="coin-img" />`;
+        popupCoins.querySelector('span span').textContent = popupCount;
 
         if (percent >= 100) {
           clearInterval(interval);
           document.getElementById('successSound').play();
           successSection.innerHTML = `
-            <div style="text-align: center;">
+            <div style="text-align:center;">
               <img src="success.gif" style="width: 80px; margin-top: 5px;" />
             </div>
-            <p style="font-weight:bold; font-size:18px; margin-top: -70px; display:inline-flex; align-items:center; justify-content: center; gap: 2px;">
-              تم تحويل العملات:
-              <span style="font-family: 'Tajawal';">${amount}</span>
-              <img src="coin-new.png" style="width: 20px; height: 20px; vertical-align: middle; position: relative; top:-3px;" />
+            <p style="font-weight:bold; font-size:18px; margin-top: -70px; display:flex; justify-content:center; gap: 2px;">
+              تم تحويل العملات: <span>${amount}</span>
+              <img src="coin-new.png" style="width: 20px; height: 20px;" />
             </p>`;
           successSection.style.display = 'block';
           payNowBtn.innerText = 'ادفع الآن';
           payNowBtn.disabled = false;
           payNowBtn.style.background = '#ff2d55';
-          payNowBtn.style.color = 'white';
-          totalCoins = currentCoins;
         }
       }, 80);
     });
-  </script></body>
+
+    cancelBtn.addEventListener('click', () => {
+      popup.style.display = 'none';
+      progressBar.style.width = '0%';
+      progressText.innerText = '';
+      document.getElementById('progressContainer').style.display = 'none';
+      successSection.innerHTML = '';
+      successSection.style.display = 'none';
+      payNowBtn.disabled = false;
+      payNowBtn.innerText = 'ادفع الآن';
+      payNowBtn.style.background = '#ff2d55';
+    });
+  </script>
+</body>
 </html>
