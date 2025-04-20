@@ -254,22 +254,28 @@
     });
 
     chargeButton.addEventListener('click', () => {
-      if (usernameInput.value.trim() === '' || amount === '') {
-        if (usernameInput.value.trim() === '') usernameInput.classList.add('shake');
-        if (amount === '') document.querySelector('.coins').classList.add('shake');
-        setTimeout(() => {
-          usernameInput.classList.remove('shake');
-          document.querySelector('.coins').classList.remove('shake');
-        }, 400);
-        return;
-      }
-popupUser.innerHTML = `<span style="font-family: 'Tajawal', sans-serif;">اسم المستخدم: ${usernameInput.value}</span>`;
-    popupCoins.innerHTML = `عدد العملات:
-  <span style="display:inline-flex; align-items:center; gap:2px;">
-    <span style="font-family: 'Tajawal', sans-serif;">${amount}</span>
-    <img src="coin-new.png" style="width: 20px; height: 20px; object-fit: cover; position: relative; top:-2px;" />
-  </span>`;
-popup.style.display = 'flex';
+  if (usernameInput.value.trim() === '' || amount === '') {
+    if (usernameInput.value.trim() === '') {
+      usernameInput.classList.add('shake');
+    }
+    if (amount === '') {
+      document.querySelector('.coins').classList.add('shake');
+    }
+
+    setTimeout(() => {
+      usernameInput.classList.remove('shake');
+      document.querySelector('.coins').classList.remove('shake');
+    }, 400);
+    return;
+  }
+
+  popupUser.innerHTML = `<span style="font-family: 'Tajawal', sans-serif;">اسم المستخدم: ${usernameInput.value}</span>`;
+  popupCoins.innerHTML = `عدد العملات:
+    <span style="display:inline-flex; align-items:center; gap:2px;">
+      <span style="font-family: 'Tajawal', sans-serif;">${amount}</span>
+      <img src="coin-new.png" style="width: 20px; height: 20px; object-fit: cover; position: relative; top:-2px;" />
+    </span>`;
+  popup.style.display = 'flex';
 });
 
 payNowBtn.addEventListener('click', () => {
@@ -295,7 +301,7 @@ payNowBtn.addEventListener('click', () => {
       successSection.innerHTML = `
         <img src="success.gif" style="width: 80px; margin-top: -30px;" />
         <p style="font-weight:bold; font-size:18px; margin-top: -70px; display:inline-flex; align-items:center; gap: 2px;">
-          تم تحويل العملات: 
+          تم تحويل العملات:
           <span style="font-family: 'Tajawal', sans-serif;">${amount}</span>
           <img src="coin-new.png" style="width: 20px; height: 20px; object-fit: cover; vertical-align: middle; position: relative; top:-3px;" />
         </p>`;
