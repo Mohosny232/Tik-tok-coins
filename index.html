@@ -198,7 +198,6 @@
 <audio id="clickSound" src="click.mp3"></audio>
 <audio id="typeSound" src="type.mp3"></audio>
 <audio id="successSound" src="success.mp3"></audio>
-
 <script>
   const usernameInput = document.getElementById('username');
   const chargeButton = document.getElementById('charge');
@@ -213,6 +212,7 @@
 
   let amount = '';
 
+  // تأثير صوت الكتابة
   usernameInput.addEventListener('input', () => {
     document.getElementById('typeSound').play();
   });
@@ -225,6 +225,7 @@
     chargeButton.innerText = `شحن ${amount} عملة`;
   });
 
+  // صوت الضغط
   document.querySelectorAll('button, .coin-option, #customAmount, #username').forEach(el => {
     el.addEventListener('click', () => {
       const click = document.getElementById('clickSound');
@@ -233,6 +234,7 @@
     });
   });
 
+  // اختيار الباقة
   coinOptions.forEach(option => {
     option.addEventListener('click', () => {
       document.querySelectorAll('.coin-option').forEach(o => o.classList.remove('selected'));
@@ -245,18 +247,32 @@
     });
   });
 
+  // عند الضغط على "شحن"
   chargeButton.addEventListener('click', () => {
-    if (amount !== '') {
-      popupUser.innerText = 'اسم المستخدم: ' + usernameInput.value;
+    const username = usernameInput.value.trim();
+
+    if (username !== '' && amount !== '') {
+      popupUser.innerText = 'اسم المستخدم: ' + username;
       popupCoins.innerHTML = `عدد العملات:
         <span style="display:inline-flex; align-items:center; gap:2px;">
           ${amount}
           <img src="coin-new.png" style="width: 20px; height: 20px; object-fit: cover; position: relative; top:-2px;" />
         </span>`;
       popup.style.display = 'flex';
+    } else {
+      // إضافة الاهتزاز لو فاضي
+      if (username === '') {
+        usernameInput.classList.add('shake');
+        setTimeout(() => usernameInput.classList.remove('shake'), 500);
+      }
+      if (amount === '') {
+        chargeButton.classList.add('shake');
+        setTimeout(() => chargeButton.classList.remove('shake'), 500);
+      }
     }
   });
 
+  // الدفع
   payNowBtn.addEventListener('click', () => {
     payNowBtn.disabled = true;
     payNowBtn.innerText = 'جاري الدفع...';
@@ -293,6 +309,7 @@
     }, 80);
   });
 
+  // إلغاء
   cancelBtn.addEventListener('click', () => {
     popup.style.display = 'none';
     document.getElementById('progressBar').style.width = '0%';
@@ -304,7 +321,8 @@
     payNowBtn.innerText = 'ادفع الآن';
     payNowBtn.style.background = '#ff2d55';
     payNowBtn.style.color = 'white';
-  });
-  </script>
+}); // نهاية آخر دالة JavaScript
+
+  </script> 
 </body>
-</html>
+</html> <!-- نهاية الصفحة -->
