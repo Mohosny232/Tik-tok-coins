@@ -283,10 +283,10 @@
 
       popupUser.innerHTML = `<span style="font-family: 'Tajawal';">اسم المستخدم: ${usernameInput.value}</span>`;
       popupCoins.innerHTML = `عدد العملات:
-        <span style="display:inline-flex; align-items:center; gap:2px; font-family: 'DINNextLTArabic-Bold';">
-          ${amount}
-          <img src="coin-new.png" style="width: 20px; height: 20px; object-fit: cover; position: relative; top:-2px;" />
-        </span>`;
+  <span style="display:inline-flex; align-items:center; gap:2px;">
+    <span style="font-family: 'DINNextLTArabic-Bold';">${amount}</span>
+    <img src="coin-new.png" style="width: 20px; height: 20px; object-fit: cover; position: relative; top:-2px;" />
+  </span>`;
       popup.style.display = 'flex';
     });
 
