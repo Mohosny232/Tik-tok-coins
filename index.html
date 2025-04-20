@@ -266,10 +266,10 @@
 
       popupUser.innerText = 'اسم المستخدم: ' + usernameInput.value;
       popupCoins.innerHTML = `عدد العملات:
-        <span style="display:inline-flex; align-items:center; gap:2px; font-family:'DINNextLTArabic-Bold'; font-size:17px;">
-          ${amount}
-          <img src="coin-new.png" style="width: 20px; height: 20px; position: relative; top:-2px;" />
-        </span>`;
+        <span style="display:inline-flex; align-items:center; gap:2px; font-family: 'DIN Next LT Arabic', 'Tajawal', sans-serif; font-weight: bold; font-size: 18px;">
+  ${amount}
+  <img src="coin-new.png" style="width: 20px; height: 20px; object-fit: cover; position: relative; top:-2px;" />
+</span>
       popup.style.display = 'flex';
     });
 
@@ -294,7 +294,7 @@
           clearInterval(interval);
           document.getElementById('successSound').play();
           successSection.innerHTML = `
-            <img src="success.gif" style="width: 80px; margin: 10px auto 5px; display: block;" />
+            <img src="success.gif" style="width: 80px; margin: 10px auto 0; display: block;" />
             <p style="font-weight:bold; font-size:18px; margin: 5px 0; display:inline-flex; align-items:center; gap: 2px; font-family:'DINNextLTArabic-Bold';">
               تم تحويل العملات: ${amount}
               <img src="coin-new.png" style="width: 20px; height: 20px; vertical-align: middle; position: relative; top:-3px;" />
