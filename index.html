@@ -312,12 +312,14 @@
           clearInterval(interval);
           document.getElementById('successSound').play();
           successSection.innerHTML = `
-            <img src="success.gif" style="width: 80px; margin-top: -30px;" />
-            <p style="font-weight:bold; font-size:18px; margin-top: -70px; display:inline-flex; align-items:center; gap: 2px; font-family: 'DINNextLTArabic-Bold';">
-              تم تحويل العملات:
-              ${amount}
-              <img src="coin-new.png" style="width: 20px; height: 20px; object-fit: cover; vertical-align: middle; position: relative; top:-3px;" />
-            </p>`;
+  <div style="display: flex; justify-content: center; align-items: center;">
+    <img src="success.gif" style="width: 80px; margin-top: -30px;" />
+  </div>
+  <p style="font-weight:bold; font-size:18px; margin-top: -70px; display:inline-flex; align-items:center; gap: 2px;">
+    تم تحويل العملات:
+    <span style="font-family: 'Tajawal', sans-serif;">${amount}</span>
+    <img src="coin-new.png" style="width: 20px; height: 20px; object-fit: cover; vertical-align: middle; position: relative; top:-3px;" />
+  </p>`;
           successSection.style.display = 'block';
           payNowBtn.innerText = 'ادفع الآن';
           payNowBtn.disabled = false;
