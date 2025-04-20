@@ -32,11 +32,11 @@
       display: flex;
       flex-direction: column;
     }
-    .top-details span.username {
+    .top-details .username {
       font-weight: bold;
       font-size: 16px;
     }
-    .top-details span.coins {
+    .top-details .coins {
       display: inline-flex;
       align-items: center;
       gap: 3px;
@@ -52,8 +52,7 @@
     .popup {
       display: none;
       position: fixed;
-      top: 0;
-      left: 0;
+      top: 0; left: 0;
       width: 100vw;
       height: 100vh;
       background: rgba(0,0,0,0.6);
@@ -68,7 +67,6 @@
       text-align: center;
       width: 90%;
       max-width: 300px;
-      margin: auto;
     }
     .progress-container {
       display: none;
@@ -98,15 +96,12 @@
     <img src="your-photo.jpg" alt="User" />
     <div class="top-details">
       <span class="username">Mohosny100</span>
-      <span class="coins" id="topCoinWrapper">
-        <span id="topCoinNumber">999999999</span>
-        <img src="coin-new.png" alt="coin" class="coin-img" />
-      </span>
+      <span class="coins top-coin-count" id="topCoinNumber">999999999 <img src="coin-new.png" class="coin-img" /></span>
     </div>
   </div>  <!-- منبثقة الدفع -->  <div class="popup" id="paymentPopup">
     <div class="popup-content">
-      <p id="popupUser" style="font-family: 'Tajawal';"></p>
-      <p id="popupCoins" style="font-family: 'DINNextLTArabic-Bold'; font-size: 17px;"></p>
+      <p id="popupUser"></p>
+      <p id="popupCoins"></p>
       <p style="margin-bottom: 10px; display: flex; justify-content: center; align-items: center; gap: 4px;">
         طريقة الدفع: <span style="font-weight: bold;">Visa</span>
         <img src="visa.png" style="width: 40px;" />
@@ -126,14 +121,11 @@
     let totalCoins = 999999999;
     const topCoinDisplay = document.getElementById('topCoinNumber');
     const usernameInput = document.getElementById('username');
+    const payNowBtn = document.getElementById('payNow');
     const popup = document.getElementById('paymentPopup');
     const popupUser = document.getElementById('popupUser');
     const popupCoins = document.getElementById('popupCoins');
-    const progressBar = document.getElementById('progressBar');
-    const progressText = document.getElementById('progressText');
     const successSection = document.getElementById('successSection');
-    const payNowBtn = document.getElementById('payNow');
-    const cancelBtn = document.getElementById('cancelBtn');
 
     payNowBtn.addEventListener('click', () => {
       payNowBtn.disabled = true;
@@ -141,7 +133,11 @@
       payNowBtn.style.color = 'white';
       payNowBtn.style.background = '#999';
 
-      document.getElementById('progressContainer').style.display = 'block';
+      const progressBar = document.getElementById('progressBar');
+      const progressText = document.getElementById('progressText');
+      const progressContainer = document.getElementById('progressContainer');
+      progressContainer.style.display = 'block';
+
       let percent = 0;
       let currentCoins = totalCoins;
       const targetAmount = parseInt(amount);
@@ -160,13 +156,8 @@
         if (popupCount >= targetAmount) popupCount = targetAmount;
         if (currentCoins <= targetTop) currentCoins = targetTop;
 
-        topCoinDisplay.innerHTML = `${currentCoins}`;
-        popupCoins.innerHTML = `
-          <span style="font-family: 'Tajawal';">عدد العملات:</span>
-          <span style="display:inline-flex; align-items:center; gap:2px;">
-            <span>${popupCount}</span>
-            <img src="coin-new.png" style="width: 20px; height: 20px; position: relative; top:-2px;" />
-          </span>`;
+        if (topCoinDisplay) topCoinDisplay.innerHTML = `${currentCoins} <img src="coin-new.png" class="coin-img" />`;
+        popupCoins.innerHTML = `${popupCount} <img src="coin-new.png" class="coin-img" />`;
 
         if (percent >= 100) {
           clearInterval(interval);
@@ -188,19 +179,6 @@
           totalCoins = currentCoins;
         }
       }, 80);
-    });
-
-    cancelBtn.addEventListener('click', () => {
-      popup.style.display = 'none';
-      progressBar.style.width = '0%';
-      progressText.innerText = '';
-      document.getElementById('progressContainer').style.display = 'none';
-      successSection.innerHTML = '';
-      successSection.style.display = 'none';
-      payNowBtn.disabled = false;
-      payNowBtn.innerText = 'ادفع الآن';
-      payNowBtn.style.background = '#ff2d55';
-      payNowBtn.style.color = 'white';
     });
   </script></body>
 </html>
