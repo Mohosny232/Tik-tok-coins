@@ -259,17 +259,30 @@
 
   // عند الضغط على "شحن"
   chargeButton.addEventListener('click', () => {
-    const username = usernameInput.value.trim();
+  if (usernameInput.value.trim() === '' || amount === '') {
+    if (usernameInput.value.trim() === '') {
+      usernameInput.classList.add('shake');
+    }
+    if (amount === '') {
+      document.querySelector('.coins').classList.add('shake');
+    }
 
-    if (username !== '' && amount !== '') {
-      popupUser.innerText = 'اسم المستخدم: ' + username;
-      popupCoins.innerHTML = `عدد العملات:
-        <span style="display:inline-flex; align-items:center; gap:2px;">
-          ${amount}
-          <img src="coin-new.png" style="width: 20px; height: 20px; object-fit: cover; position: relative; top:-2px;" />
-        </span>`;
-      popup.style.display = 'flex';
-    } else {
+    setTimeout(() => {
+      usernameInput.classList.remove('shake');
+      document.querySelector('.coins').classList.remove('shake');
+    }, 400);
+
+    return;
+  }
+
+  popupUser.innerText = 'اسم المستخدم: ' + usernameInput.value;
+  popupCoins.innerHTML = `عدد العملات:
+    <span style="display:inline-flex; align-items:center; gap:2px;">
+      ${amount}
+      <img src="coin-new.png" style="width: 20px; height: 20px; object-fit: cover; position: relative; top:-2px;" />
+    </span>`;
+  popup.style.display = 'flex';
+});
       // إضافة الاهتزاز لو فاضي
       if (username === '') {
         usernameInput.classList.add('shake');
