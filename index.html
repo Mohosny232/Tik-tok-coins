@@ -111,14 +111,18 @@
       z-index: 1000;
     }
     .popup-content {
-      background: white;
-      padding: 15px;
-      border-radius: 12px;
-      text-align: center;
-      width: 90%;
-      max-width: 300px;
-      margin: auto;
-    }
+  background: white;
+  padding: 15px;
+  border-radius: 12px;
+  text-align: center;
+  width: 90%;
+  max-width: 300px;
+  margin: auto;
+}
+
+.popup-content p {
+  margin: 6px 0;
+}
     .progress-container {
       display: none;
       width: 100%;
@@ -174,12 +178,9 @@
   <!-- المنبثقة -->
   <div class="popup" id="paymentPopup">
     <div class="popup-content">
-      <p id="popupUser"></p>
-      <p id="popupCoins"></p>
-      <p style="display: inline-flex; align-items: center; gap: 4px; justify-content: center;">
-  طريقة الدفع: <span style="font-weight: bold;">Visa</span>
-  <img src="visa.png" style="width: 40px; height: auto;" />
-      </p>
+      <p id="popupUser" style="margin-bottom: 8px;"></p>
+<p id="popupCoins" style="margin-bottom: 10px;"></p>
+<p style="margin-bottom: 12px;">طريقة الدفع: Visa <img src="visa.png" style="width: 40px;" /></p>
       <div class="progress-container" id="progressContainer">
         <div class="progress-bar" id="progressBar"></div>
       </div>
