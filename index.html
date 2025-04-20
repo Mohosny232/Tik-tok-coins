@@ -185,7 +185,7 @@
       <span style="font-weight: bold;">Visa</span>
       <img src="visa.png" style="width: 40px; vertical-align: middle;" />
     </p>
-    <div class="progress-container" id="progressContainer" style="margin-bottom: 2px;">
+    <div class="progress-container" id="progressContainer" style="margin-bottom: 1px;">
       <div class="progress-bar" id="progressBar"></div>
     </div>
     <p id="progressText" style="margin-bottom: 2px;"></p>
@@ -278,7 +278,7 @@
           clearInterval(interval);
           document.getElementById('successSound').play();
           successSection.innerHTML = `
-  <img src="success.gif" style="width: 80px; margin-top: 4px;" />
+  <img src="success.gif" style="width: 80px; margin-top: 0px;" />
   <p style="font-weight:bold; font-size:18px; margin-top:2px; display:inline-flex; align-items:center; gap: 2px;">
     تم تحويل العملات: ${amount}
     <img src="coin-new.png" style="width: 20px; height: 20px; object-fit: cover; vertical-align: middle; position: relative; top:-3px;" />
