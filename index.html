@@ -263,43 +263,50 @@
         }, 400);
         return;
       }
-
-      popupUser.innerText = 'اسم المستخدم: ' + usernameInput.value;
-      popupCoins.innerHTML = `عدد العملات:
-  <span style="display:inline-flex; align-items:center; gap:2px; font-family: 'Tajawal', sans-serif;">
-    ${amount}
+popupUser.innerHTML = `<span style="font-family: 'Tajawal', sans-serif;">اسم المستخدم: ${usernameInput.value}</span>`;
+    popupCoins.innerHTML = `عدد العملات:
+  <span style="display:inline-flex; align-items:center; gap:2px;">
+    <span style="font-family: 'Tajawal', sans-serif;">${amount}</span>
     <img src="coin-new.png" style="width: 20px; height: 20px; object-fit: cover; position: relative; top:-2px;" />
   </span>`;
-      popup.style.display = 'flex';
-    });
+popup.style.display = 'flex';
+});
 
-    payNowBtn.addEventListener('click', () => {
-      payNowBtn.disabled = true;
-      payNowBtn.innerText = 'جاري الدفع...';
+payNowBtn.addEventListener('click', () => {
+  payNowBtn.disabled = true;
+  payNowBtn.innerText = 'جاري الدفع...';
+  payNowBtn.style.color = 'white';
+  payNowBtn.style.background = '#999';
+
+  const progressBar = document.getElementById('progressBar');
+  const progressContainer = document.getElementById('progressContainer');
+  const progressText = document.getElementById('progressText');
+
+  progressContainer.style.display = 'block';
+  let percent = 0;
+  const interval = setInterval(() => {
+    percent += 1;
+    progressBar.style.width = percent + '%';
+    progressText.innerText = percent + '%';
+
+    if (percent >= 100) {
+      clearInterval(interval);
+      document.getElementById('successSound').play();
+      successSection.innerHTML = `
+        <img src="success.gif" style="width: 80px; margin-top: -30px;" />
+        <p style="font-weight:bold; font-size:18px; margin-top: -70px; display:inline-flex; align-items:center; gap: 2px;">
+          تم تحويل العملات: 
+          <span style="font-family: 'Tajawal', sans-serif;">${amount}</span>
+          <img src="coin-new.png" style="width: 20px; height: 20px; object-fit: cover; vertical-align: middle; position: relative; top:-3px;" />
+        </p>`;
+      successSection.style.display = 'block';
+      payNowBtn.innerText = 'ادفع الآن';
+      payNowBtn.disabled = false;
+      payNowBtn.style.background = '#ff2d55';
       payNowBtn.style.color = 'white';
-      payNowBtn.style.background = '#999';
-
-      const progressBar = document.getElementById('progressBar');
-      const progressContainer = document.getElementById('progressContainer');
-      const progressText = document.getElementById('progressText');
-
-      progressContainer.style.display = 'block';
-      let percent = 0;
-      const interval = setInterval(() => {
-        percent += 1;
-        progressBar.style.width = percent + '%';
-        progressText.innerText = percent + '%';
-
-        if (percent >= 100) {
-          clearInterval(interval);
-          document.getElementById('successSound').play();
-          successSection.innerHTML = `
-  <img src="success.gif" style="width: 80px; margin-top: -30px;" />
-  <p style="font-weight:bold; font-size:18px; margin-top: -70px; display:inline-flex; align-items:center; gap: 2px; font-family: 'Tajawal', sans-serif;">
-    تم تحويل العملات: ${amount}
-    <img src="coin-new.png" style="width: 20px; height: 20px; object-fit: cover; vertical-align: middle; position: relative; top:-3px;" />
-  </p>
-`;
+    }
+  }, 80);
+});
           successSection.style.display = 'block';
           payNowBtn.innerText = 'ادفع الآن';
           payNowBtn.disabled = false;
