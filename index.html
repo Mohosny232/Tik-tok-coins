@@ -197,10 +197,10 @@
   <img src="your-photo.jpg" alt="User" />
   <div class="top-details" style="font-family: 'Tajawal', sans-serif;">
     <span class="username" style="font-weight: bold; font-size: 16px;">Mohosny100</span>
-    <span class="coins top-coin-count" style="display: inline-flex; align-items: center; gap: 2px;">
-      999999999
-      <img src="coin-new.png" alt="coin" style="width: 16px; height: 16px; object-fit: contain; position: relative; top: -1px;" />
-    </span>
+  <span id="topCoinNumber" class="coins top-coin-count" style="display: inline-flex; align-items: center; gap: 2px;">
+  999999999
+  <img src="coin-new.png" alt="coin" style="width: 16px; height: 16px; object-fit: contain; position: relative; top: -1px;" />
+</span>
   </div>
 </div>
   <div class="container">
@@ -257,10 +257,7 @@
     const successSection = document.getElementById('successSection');
     const popupUser = document.getElementById('popupUser');
     const popupCoins = document.getElementById('popupCoins');
-    const topCoinDisplay = document.querySelector('.top-coin-count');
-  
-    let amount = '';
-    let totalCoins = 999999999;
+   const topCoinDisplay = document.getElementById('topCoinNumber');
 
     const prices = {
       30: 0.38, 350: 4.5, 700: 8.9,
