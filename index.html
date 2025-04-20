@@ -176,20 +176,24 @@
   </div>
 
   <!-- المنبثقة -->
-  <div class="popup" id="paymentPopup">
-    <div class="popup-content">
-      <p id="popupUser" style="margin-bottom: 8px;"></p>
-<p id="popupCoins" style="margin-bottom: 10px;"></p>
-<p style="margin-bottom: 12px;">طريقة الدفع: Visa <img src="visa.png" style="width: 40px;" /></p>
-      <div class="progress-container" id="progressContainer">
-        <div class="progress-bar" id="progressBar"></div>
-      </div>
-      <p id="progressText"></p>
-      <div id="successSection"></div>
-      <button id="payNow">ادفع الآن</button>
-      <button id="cancelBtn">إلغاء</button>
+<div class="popup" id="paymentPopup">
+  <div class="popup-content">
+    <p id="popupUser" style="margin-bottom: 10px;"></p>
+    <p id="popupCoins" style="margin-bottom: 10px;"></p>
+    <p style="margin-bottom: 10px; display: flex; justify-content: center; align-items: center; gap: 6px;">
+      طريقة الدفع:
+      <span style="font-weight: bold;">Visa</span>
+      <img src="visa.png" style="width: 40px; vertical-align: middle;" />
+    </p>
+    <div class="progress-container" id="progressContainer" style="margin-bottom: 10px;">
+      <div class="progress-bar" id="progressBar"></div>
     </div>
+    <p id="progressText" style="margin-bottom: 10px;"></p>
+    <div id="successSection" style="margin-bottom: 10px;"></div>
+    <button id="payNow" style="margin-bottom: 8px;">ادفع الآن</button>
+    <button id="cancelBtn">إلغاء</button>
   </div>
+</div>
 
   <audio id="clickSound" src="click.mp3"></audio>
   <audio id="typeSound" src="type.mp3"></audio>
