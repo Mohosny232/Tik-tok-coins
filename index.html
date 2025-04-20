@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<!DOCTYPE html><html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
@@ -16,6 +15,32 @@
       margin: 0;
       font-family: 'Tajawal', sans-serif;
       background: #fff;
+    }
+    .top-section {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 20px;
+    }
+    .top-section img {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+    .top-details {
+      display: flex;
+      flex-direction: column;
+    }
+    .top-details span.username {
+      font-weight: bold;
+      font-size: 16px;
+    }
+    .top-details span.coins {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      font-family: 'DINNextLTArabic-Bold';
     }
     .container {
       max-width: 400px;
@@ -36,38 +61,12 @@
       border-radius: 10px;
       text-align: center;
     }
-    .coins {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
-      padding: 0 10px;
-    }
-    .coin-option {
-      background: #f2f2f2;
-      padding: 8px;
-      border-radius: 10px;
-      cursor: pointer;
-      font-weight: 700;
-      font-size: 15px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      gap: 4px;
-      min-height: 65px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    }
-    .coin-option.selected {
-      border: 2px solid #ff2d55;
-      background-color: #fff0f4;
-    }
     .coin-img {
       width: 20px;
       height: 20px;
       object-fit: cover;
-      display: inline-block;
       position: relative;
-      top: -3px;
+      top: -2px;
     }
     .price-line {
       display: flex;
@@ -75,19 +74,6 @@
       align-items: center;
       gap: 2px;
       font-family: 'DINNextLTArabic-Bold';
-    }
-    .coin-option small {
-      font-size: 13px;
-      color: #777;
-      font-weight: normal;
-    }
-    .custom-input {
-      width: 90%;
-      font-size: 16px;
-      padding: 4px;
-      border: none;
-      background: transparent;
-      text-align: center;
     }
     #charge, #payNow {
       width: 100%;
@@ -101,59 +87,8 @@
       font-weight: bold;
       cursor: pointer;
     }
-    .popup {
-      display: none;
-      position: fixed;
-      top: 0; left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: rgba(0,0,0,0.6);
-      justify-content: center;
-      align-items: center;
-      z-index: 1000;
-    }
-    .popup-content {
-      background: white;
-      padding: 15px;
-      border-radius: 12px;
-      text-align: center;
-      width: 90%;
-      max-width: 300px;
-      margin: auto;
-    }
-    .popup-content p {
-      margin: 6px 0;
-    }
-    .progress-container {
-      display: none;
-      width: 100%;
-      background-color: #ddd;
-      border-radius: 6px;
-      margin-top: 20px;
-    }
-    .progress-bar {
-      height: 10px;
-      width: 0%;
-      background-color: #111;
-      border-radius: 6px;
-    }
-    #progressText {
-      margin-top: 10px;
-      font-weight: bold;
-    }
-    #successSection {
-      display: none;
-      margin-top: 10px;
-    }
-    #cancelBtn {
-      background: transparent;
-      border: 1px solid #aaa;
-      color: #555;
-      padding: 6px 16px;
-      border-radius: 6px;
-      font-size: 14px;
-      margin-top: 20px;
-      cursor: pointer;
+    .shake {
+      animation: shake 0.4s;
     }
     @keyframes shake {
       0% { transform: translateX(0); }
@@ -162,9 +97,16 @@
       75% { transform: translateX(-4px); }
       100% { transform: translateX(0); }
     }
-    .shake {
-      animation: shake 0.4s;
-    }
+  </style>
+</head>
+<body>
+  <div class="top-section">
+    <img src="your-photo.jpg" alt="User" />
+    <div class="top-details">
+      <span class="username">Mohosny100</span>
+      <span class="coins top-coin-count">999999999 <img src="coin-new.png" alt="coin" class="coin-img"></span>
+    </div>
+  </div>  <!-- باقي العناصر (form + coins + popup + script) يتم استكماله هنا بعد دمج العداد -->
   </style>
 </head>
 <body>
