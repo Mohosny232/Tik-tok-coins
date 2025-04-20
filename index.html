@@ -1,10 +1,15 @@
-<!DOCTYPE html><html lang="ar" dir="rtl">
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>شحن عملات TikTok</title>
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@700&display=swap" rel="stylesheet">
   <style>
+    @font-face {
+      font-family: 'DINNextLTArabic-Bold';
+      src: url('DINNextLTArabic-Bold.ttf');
+    }
     * { box-sizing: border-box; }
     html, body {
       overflow-x: hidden;
@@ -69,7 +74,6 @@
       flex-direction: row-reverse;
       align-items: center;
       gap: 2px;
-      font-family: 'DIN Next LT Arabic Bold', sans-serif;
     }
     .coin-option small {
       font-size: 13px;
@@ -138,7 +142,7 @@
     }
     #successSection {
       display: none;
-      margin-top: 20px;
+      margin-top: 10px;
     }
     #cancelBtn {
       background: transparent;
@@ -147,7 +151,7 @@
       padding: 6px 16px;
       border-radius: 6px;
       font-size: 14px;
-      margin-top: 12px;
+      margin-top: 20px;
       cursor: pointer;
     }
     @keyframes shake {
@@ -163,7 +167,6 @@
   </style>
 </head>
 <body>
-  <!-- هكمل لك باقي الكود هنا بنفس التعديلات --><body>
   <div class="container">
     <h1><span class="tiktok">TikTok</span> شحن عملات</h1>
     <input type="text" id="username" placeholder="اكتب اسم المستخدم" />
@@ -179,25 +182,30 @@
         <input type="number" id="customAmount" class="custom-input" placeholder="اكتب عدد" />
       </div>
     </div>
-    <button id="charge">شراء مقابل</button>
-  </div>  <!-- المنبثقة -->  <div class="popup" id="paymentPopup">
+    <button id="charge">شحن</button>
+  </div>
+
+  <div class="popup" id="paymentPopup">
     <div class="popup-content">
-      <p id="popupUser" style="margin-bottom: 4px;"></p>
-      <p id="popupCoins" style="margin-bottom: 4px;"></p>
+      <p id="popupUser"></p>
+      <p id="popupCoins" style="font-family: 'DINNextLTArabic-Bold'; font-size: 17px;"></p>
       <p style="margin-bottom: 10px; display: flex; justify-content: center; align-items: center; gap: 4px;">
-        طريقة الدفع:
-        <span style="font-weight: bold;">Visa</span>
-        <img src="visa.png" style="width: 40px; vertical-align: middle;" />
+        طريقة الدفع: <span style="font-weight: bold;">Visa</span>
+        <img src="visa.png" style="width: 40px;" />
       </p>
-      <div class="progress-container" id="progressContainer" style="margin-bottom: 1px;">
+      <div class="progress-container" id="progressContainer">
         <div class="progress-bar" id="progressBar"></div>
       </div>
-      <p id="progressText" style="margin-bottom: 2px;"></p>
-      <div id="successSection" style="margin-bottom: 2px;"></div>
-      <button id="payNow" style="margin-top: -5px;">ادفع الآن</button>
-      <button id="cancelBtn" style="margin-top: 20px;">إلغاء</button>
+      <p id="progressText"></p>
+      <div id="successSection"></div>
+      <button id="payNow">ادفع الآن</button>
+      <button id="cancelBtn">إلغاء</button>
     </div>
-  </div><audio id="clickSound" src="click.mp3"></audio> <audio id="typeSound" src="type.mp3"></audio> <audio id="successSound" src="success.mp3"></audio>
+  </div>
+
+  <audio id="clickSound" src="click.mp3"></audio>
+  <audio id="typeSound" src="type.mp3"></audio>
+  <audio id="successSound" src="success.mp3"></audio>
 
   <script>
     const usernameInput = document.getElementById('username');
@@ -212,7 +220,6 @@
     const popupCoins = document.getElementById('popupCoins');
 
     let amount = '';
-    let price = '';
 
     usernameInput.addEventListener('input', () => {
       document.getElementById('typeSound').play();
@@ -223,10 +230,7 @@
       document.querySelectorAll('.coin-option').forEach(o => o.classList.remove('selected'));
       document.querySelector('.coin-option.custom').classList.add('selected');
       amount = e.target.value;
-      if (amount && !isNaN(amount)) {
-        price = (amount * 0.01267).toFixed(2);
-        chargeButton.innerText = `شراء مقابل $${price}`;
-      }
+      chargeButton.innerText = `شحن ${amount} عملة`;
     });
 
     document.querySelectorAll('button, .coin-option, #customAmount, #username').forEach(el => {
@@ -242,23 +246,17 @@
         document.querySelectorAll('.coin-option').forEach(o => o.classList.remove('selected'));
         option.classList.add('selected');
         const span = option.querySelector('span');
-        const priceEl = option.querySelector('small');
-        if (span && priceEl) {
+        if (span) {
           amount = span.innerText.trim();
-          price = priceEl.innerText.replace('$', '');
-          chargeButton.innerText = `شراء مقابل $${price}`;
+          chargeButton.innerText = `شحن ${amount} عملة`;
         }
       });
     });
 
     chargeButton.addEventListener('click', () => {
       if (usernameInput.value.trim() === '' || amount === '') {
-        if (usernameInput.value.trim() === '') {
-          usernameInput.classList.add('shake');
-        }
-        if (amount === '') {
-          document.querySelector('.coins').classList.add('shake');
-        }
+        if (usernameInput.value.trim() === '') usernameInput.classList.add('shake');
+        if (amount === '') document.querySelector('.coins').classList.add('shake');
         setTimeout(() => {
           usernameInput.classList.remove('shake');
           document.querySelector('.coins').classList.remove('shake');
@@ -267,10 +265,11 @@
       }
 
       popupUser.innerText = 'اسم المستخدم: ' + usernameInput.value;
-      popupCoins.innerHTML = `عدد العملات: <span style="display:inline-flex; align-items:center; gap:2px; font-family: 'DIN Next LT Arabic Bold', sans-serif;">
-        ${amount}
-        <img src="coin-new.png" style="width: 20px; height: 20px; object-fit: cover; position: relative; top:-2px;" />
-      </span>`;
+      popupCoins.innerHTML = `عدد العملات:
+        <span style="display:inline-flex; align-items:center; gap:2px; font-family:'DINNextLTArabic-Bold'; font-size:17px;">
+          ${amount}
+          <img src="coin-new.png" style="width: 20px; height: 20px; position: relative; top:-2px;" />
+        </span>`;
       popup.style.display = 'flex';
     });
 
@@ -295,12 +294,11 @@
           clearInterval(interval);
           document.getElementById('successSound').play();
           successSection.innerHTML = `
-            <img src="success.gif" style="width: 80px; margin-top: -30px;" />
-            <p style="font-weight:bold; font-size:18px; margin-top: -70px; display:inline-flex; align-items:center; gap: 2px; font-family: 'DIN Next LT Arabic Bold', sans-serif;">
+            <img src="success.gif" style="width: 80px; margin: 10px auto 5px; display: block;" />
+            <p style="font-weight:bold; font-size:18px; margin: 5px 0; display:inline-flex; align-items:center; gap: 2px; font-family:'DINNextLTArabic-Bold';">
               تم تحويل العملات: ${amount}
-              <img src="coin-new.png" style="width: 20px; height: 20px; object-fit: cover; vertical-align: middle; position: relative; top:-3px;" />
-            </p>
-          `;
+              <img src="coin-new.png" style="width: 20px; height: 20px; vertical-align: middle; position: relative; top:-3px;" />
+            </p>`;
           successSection.style.display = 'block';
           payNowBtn.innerText = 'ادفع الآن';
           payNowBtn.disabled = false;
@@ -324,4 +322,4 @@
     });
   </script>
 </body>
-</html> <!-- نهاية الصفحة -->
+</html> 
