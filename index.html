@@ -258,7 +258,7 @@
     const popupUser = document.getElementById('popupUser');
     const popupCoins = document.getElementById('popupCoins');
     const topCoinDisplay = document.querySelector('.top-coin-count');
-
+  
     let amount = '';
     let totalCoins = 999999999;
 
@@ -377,17 +377,20 @@
     });
 
     cancelBtn.addEventListener('click', () => {
-      popup.style.display = 'none';
-      document.getElementById('progressBar').style.width = '0%';
-      document.getElementById('progressText').innerText = '';
-      document.getElementById('progressContainer').style.display = 'none';
-      successSection.innerHTML = '';
-      successSection.style.display = 'none';
-      payNowBtn.disabled = false;
-      payNowBtn.innerText = 'ادفع الآن';
-      payNowBtn.style.background = '#ff2d55';
-      payNowBtn.style.color = 'white';
-    });
+  popup.style.display = 'none';
+  document.getElementById('progressBar').style.width = '0%';
+  document.getElementById('progressText').innerText = '';
+  document.getElementById('progressContainer').style.display = 'none';
+  successSection.innerHTML = '';
+  successSection.style.display = 'none';
+  payNowBtn.disabled = false;
+  payNowBtn.innerText = 'ادفع الآن';
+  payNowBtn.style.background = '#ff2d55';
+  payNowBtn.style.color = 'white';
+
+  // تحديث عداد العملات في الأعلى عند الإلغاء (لو حبيت ترجعه لحالته الأصلية)
+  document.getElementById('topCoinNumber').textContent = totalCoins;
+});
   </script>
 </body>
 </html>
