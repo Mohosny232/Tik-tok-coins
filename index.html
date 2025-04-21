@@ -36,6 +36,13 @@
       border-radius: 50%;
       object-fit: cover;
     }
+    .fixed-coin {
+  width: 24px !important;
+  height: 24px !important;
+  object-fit: contain;
+  position: relative;
+  top: -1px;
+    }
     .top-details {
       display: flex;
       flex-direction: column;
@@ -199,9 +206,9 @@
     <div class="top-details">
       <span class="username">Mohosny100</span>
       <span class="coins" id="topCoinNumber" style="display: inline-flex; align-items: center; gap: 2px;">
-  <span id="coinCount" style="font-family: 'DINNextLTArabic-Bold'; font-size: 20px;">999999999</span>
-  <img src="coin-new.png" alt="coin" class="top-coin-img" />
-      </span>
+  <span style="font-family: 'DINNextLTArabic-Bold'; font-size: 20px;">999999999</span>
+  <img src="coin-new.png" alt="coin" class="fixed-coin" />
+</span>
     </div>
   </div>
 
@@ -344,7 +351,7 @@
 
         if (popupCount >= targetAmount) popupCount = targetAmount;
         if (currentCoins <= targetTop) currentCoins = targetTop;
-        document.getElementById('coinCount').textContent = currentCoins;
+        topCoinDisplay.innerHTML = `<span style="font-size: 20px;">${currentCoins}</span> <img src="coin-new.png" class="fixed-coin" />`;
         popupCoins.querySelector('span span').textContent = popupCount;
 
         if (percent >= 100) {
