@@ -330,8 +330,6 @@
     if (popupCount >= targetAmount) popupCount = targetAmount;
     if (currentCoins <= targetTop) currentCoins = targetTop;
 
-    topCoinDisplay.innerHTML = `${currentCoins} <img src="coin-new.png" style="width: 14px; height: 14px; object-fit: contain; position: relative; top: -1px;" />`;
-
     popupCoins.querySelector('span span').textContent = popupCount;
 
     if (percent >= 100) {
