@@ -21,7 +21,14 @@
       display: flex;
       align-items: center;
       gap: 12px;
-      padding: 20px;
+      padding: 20px
+    }
+    .top-coin-img {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+  position: relative;
+  top: -1px;
     }
     .top-section img {
       width: 70px;
@@ -338,8 +345,7 @@
         if (popupCount >= targetAmount) popupCount = targetAmount;
         if (currentCoins <= targetTop) currentCoins = targetTop;
 
-        topCoinDisplay.innerHTML = `<span style="font-size: 20px;">${currentCoins}</span> <img src="coin-new.png" style="width: 14px; height: 14px; object-fit: contain; position: relative; top: -1px;" />`;
-
+        document.getElementById('coinCount').textContent = currentCoins;
         popupCoins.querySelector('span span').textContent = popupCount;
 
         if (percent >= 100) {
