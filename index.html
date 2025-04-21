@@ -24,8 +24,8 @@
       padding: 20px;
     }
     .top-section img {
-      width: 70px;
-      height: 70px;
+      width: 50px;
+      height: 50px;
       border-radius: 50%;
       object-fit: cover;
     }
@@ -192,8 +192,8 @@
     <div class="top-details">
       <span class="username">Mohosny100</span>
       <!-- تم تعديل العنصر ليستخدم خط Tajawal وحجم خط 20px -->
-      <span class="coins" id="topCoinNumber" style="font-family:'Tajawal'; font-size:20px;">
-        <span style="font-size: 20px;">999999999</span>
+      <span class="coins" id="topCoinNumber" style="font-family:'Tajawal'; font-size:30px;">
+        <span style="font-size: 15px;">999999999</span>
         <img src="coin-new.png" alt="coin" />
       </span>
     </div>
@@ -239,7 +239,8 @@
   <audio id="typeSound" src="type.mp3"></audio>
   <audio id="successSound" src="success.mp3"></audio>
 
-  <script>
+<script>
+  let interval; // متغير عام للعداد
     const topCoinDisplay = document.getElementById('topCoinNumber');
     const usernameInput = document.getElementById('username');
     const chargeButton = document.getElementById('charge');
