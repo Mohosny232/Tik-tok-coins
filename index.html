@@ -4,73 +4,60 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>شحن عملات TikTok</title>
-  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+
   <style>
     @font-face {
       font-family: 'DINNextLTArabic-Bold';
       src: url('DINNextLTArabic-Bold.ttf');
     }
- body, * {
-  font-family: 'Tajawal', sans-serif !important;
- }
-    * { box-sizing: border-box; }
-    html, body {
-      overflow-x: hidden;
+
+    * {
+      box-sizing: border-box;
       margin: 0;
+      padding: 0;
       font-family: 'Tajawal', sans-serif;
-      background: #fff;
     }
+
+    body {
+      background-color: #fff;
+      overflow-x: hidden;
+    }
+
     .top-section {
       display: flex;
       align-items: center;
       gap: 12px;
-      padding: 20px
+      padding: 20px;
     }
-.top-coin-img {
-  width: 20px;
-  height: 20px;
-  object-fit: contain;
-  position: relative;
-  top: -1px;
-}
-.top-coin-number img {
-  width: 20px;
-  height: 20px;
-  object-fit: contain;
-  position: relative;
-  top: -1px;
-}
+
     .top-section img {
       width: 70px;
       height: 70px;
       border-radius: 50%;
       object-fit: cover;
     }
-    .fixed-coin {
-  width: 24px !important;
-  height: 24px !important;
-  object-fit: contain;
-  position: relative;
-  top: -1px;
-    }
+
     .top-details {
       display: flex;
       flex-direction: column;
-      font-family: 'Tajawal';
     }
+
     .top-details .username {
       font-weight: bold;
       font-size: 16px;
     }
+
     .top-details .coins {
       display: inline-flex;
       align-items: center;
-      gap: 3px;
+      gap: 4px;
       font-family: 'DINNextLTArabic-Bold';
     }
+
     .top-details .coins img {
-      width: 14px;
-      height: 14px;
+      width: 16px;
+      height: 16px;
       object-fit: contain;
       position: relative;
       top: -1px;
@@ -79,7 +66,9 @@
     .price-line .coin-img {
       width: 20px !important;
       height: 20px !important;
-      top: -1px !important;
+      object-fit: contain;
+      position: relative;
+      top: -1px;
     }
 
     .container {
@@ -87,11 +76,16 @@
       margin: auto;
       padding: 20px;
     }
+
     h1 {
       text-align: center;
       font-weight: 700;
     }
-    .tiktok { color: red; }
+
+    .tiktok {
+      color: red;
+    }
+
     #username {
       width: 100%;
       padding: 12px;
@@ -101,12 +95,14 @@
       border-radius: 10px;
       text-align: center;
     }
+
     .coins-section {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 12px;
       padding: 0 10px;
     }
+
     .coin-option {
       background: #f2f2f2;
       padding: 8px;
@@ -122,21 +118,17 @@
       min-height: 65px;
       box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     }
+
     .coin-option.selected {
       border: 2px solid #ff2d55;
       background-color: #fff0f4;
     }
-    .price-line {
-      display: flex;
-      flex-direction: row-reverse;
-      align-items: center;
-      gap: 2px;
-      font-family: 'DINNextLTArabic-Bold';
-    }
+
     .coin-option small {
       font-size: 13px;
       color: #777;
     }
+
     .custom-input {
       width: 90%;
       font-size: 16px;
@@ -145,6 +137,7 @@
       background: transparent;
       text-align: center;
     }
+
     #charge, #payNow {
       width: 100%;
       padding: 14px;
@@ -157,6 +150,7 @@
       font-weight: bold;
       cursor: pointer;
     }
+
     .popup {
       display: none;
       position: fixed;
@@ -168,6 +162,7 @@
       align-items: center;
       z-index: 1000;
     }
+
     .popup-content {
       background: white;
       padding: 15px;
@@ -177,6 +172,7 @@
       max-width: 300px;
       margin: auto;
     }
+
     .progress-container {
       display: none;
       width: 100%;
@@ -184,20 +180,35 @@
       border-radius: 6px;
       margin-top: 20px;
     }
+
     .progress-bar {
       height: 10px;
       width: 0%;
       background-color: #111;
       border-radius: 6px;
     }
+
     #progressText {
       margin-top: 10px;
       font-weight: bold;
     }
+
     #successSection {
       display: none;
       margin-top: 10px;
     }
+
+    #cancelBtn {
+      margin-top: 15px;
+      background: transparent;
+      border: 1px solid #aaa;
+      color: #555;
+      padding: 6px 16px;
+      border-radius: 6px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
     @keyframes shake {
       0% { transform: translateX(0); }
       25% { transform: translateX(-4px); }
@@ -205,6 +216,7 @@
       75% { transform: translateX(-4px); }
       100% { transform: translateX(0); }
     }
+
     .shake {
       animation: shake 0.4s;
     }
