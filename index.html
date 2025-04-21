@@ -323,7 +323,7 @@
       const targetAmount = parseInt(amount);
       const targetTop = currentCoins - targetAmount;
 
-      const interval = setInterval(() => {
+      interval = setInterval(() => {
         percent++;
         progressBar.style.width = percent + '%';
         progressText.innerText = percent + '%';
