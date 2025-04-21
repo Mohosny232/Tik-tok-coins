@@ -206,7 +206,7 @@
     <div class="top-details">
       <span class="username">Mohosny100</span>
       <span class="coins" id="topCoinNumber" style="display: inline-flex; align-items: center; gap: 2px;">
-  <span style="font-family: 'DINNextLTArabic-Bold'; font-size: 20px;">999999999</span>
+  <span style="font-family: 'DINNextLTArabic-Bold'; font-size: 15px;">999999999</span>
   <img src="coin-new.png" alt="coin" class="fixed-coin" />
 </span>
     </div>
@@ -351,7 +351,7 @@
 
         if (popupCount >= targetAmount) popupCount = targetAmount;
         if (currentCoins <= targetTop) currentCoins = targetTop;
-        topCoinDisplay.innerHTML = `<span style="font-size: 20px;">${currentCoins}</span> <img src="coin-new.png" style="width: 14px; height: 14px; object-fit: contain; position: relative; top: 2px;" />`;
+        topCoinDisplay.innerHTML = `<span style="font-size: 20px;">${currentCoins}</span> <img src="coin-new.png" style="width: 14px; height: 14px; object-fit: contain; position: relative; top: 5px;" />`;
         popupCoins.querySelector('span span').textContent = popupCount;
 
         if (percent >= 100) {
