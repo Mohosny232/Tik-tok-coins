@@ -235,7 +235,7 @@
   <audio id="successSound" src="success.mp3"></audio>
 
 <script>
-  let interval; // متغير عام للعداد
+    let interval = null;
     const topCoinDisplay = document.getElementById('topCoinNumber');
     const usernameInput = document.getElementById('username');
     const chargeButton = document.getElementById('charge');
@@ -357,7 +357,10 @@
       }, 80);
     });
 
-    cancelBtn.addEventListener('click', () => {
+    cancelBtn.addEventListener('click', () => {if (interval) {
+  clearInterval(interval);
+  interval = null;
+}
       clearInterval(interval);
       popup.style.display = 'none';
       progressBar.style.width = '0%';
