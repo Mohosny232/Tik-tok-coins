@@ -311,7 +311,12 @@
       popup.style.display = 'flex';
     });
 
-    payNowBtn.addEventListener('click', () => {
+    
+payNowBtn.addEventListener('click', () => {
+  if (interval) {
+    clearInterval(interval);
+    interval = null;
+  }
       payNowBtn.disabled = true;
       payNowBtn.innerText = 'جاري الدفع...';
       payNowBtn.style.background = '#999';
