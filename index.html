@@ -148,8 +148,8 @@
     }
     .circular-progress {
   position: relative;
-  width: 80px;
-  height: 80px;
+  width: 100px;
+  height: 100px;
   background: conic-gradient(#333 0%, #ccc 0%);
   border-radius: 50%;
   display: flex;
@@ -161,8 +161,9 @@
 .circular-progress span {
   position: absolute;
   font-weight: bold;
+  font-family: 'Tajawal';
   color: #333;
-  font-family: Arial, sans-serif;
+  font-size: 16px;
 }
 #percentage {
   position: absolute;
@@ -322,39 +323,22 @@ chargeButton.addEventListener('click', () => {
   successSection.style.display = 'none';
 
   document.getElementById("loadingBox").style.display = "block";
+let percent = 0;
+let loadingInterval = setInterval(() => {
+  percent++;
+  if (percent > 100) percent = 100;
 
-  let percent = 0;
-  let popupCount = 0;
-  let currentCoins = totalCoins;
-  const targetTop = currentCoins - parseInt(amount);
-  const step = Math.ceil(amount / 100);
+  document.getElementById("progressCircle").style.background =
+    `conic-gradient(#333 ${percent}%, #ccc ${percent}%)`;
 
-  interval = setInterval(() => {
-    percent++;
-    if (percent > 100) percent = 100;
+  document.getElementById("percentage").innerText = percent + "%";
 
-    // تحميل الدائرة
-    document.getElementById("progressCircle").style.background =
-      `conic-gradient(#333 ${percent}%, #ccc ${percent}%)`;
-
-    // نسبة مئوية داخل الدائرة
-    document.getElementById("percentage").innerText = percent + "%";
-
-    // عداد العملات
-    popupCount += step;
-    currentCoins -= step;
-
-    if (popupCount >= amount) popupCount = amount;
-    if (currentCoins <= targetTop) currentCoins = targetTop;
-
-    topCoinDisplay.querySelector('span').textContent = currentCoins;
-    popupCoins.querySelector('span span').textContent = popupCount;
-
-    if (percent >= 100) {
-      clearInterval(interval);
-      document.getElementById("loadingBox").style.display = "none";
-      document.getElementById('successSound').play();
-
+  if (percent >= 100) {
+    clearInterval(loadingInterval);
+    document.getElementById("loadingBox").style.display = "none";
+    // أظهر رسالة النجاح هنا
+  }
+}, 150); // يخلص في 15 ثانية (150 × 100)
       successSection.innerHTML = `
         <div style="text-align:center;">
           <img src="success.gif" style="width: 80px; margin-top: -15px;" />
