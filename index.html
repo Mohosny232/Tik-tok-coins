@@ -264,80 +264,41 @@
   let totalCoins = 999999999;
   let amount = '';
 // ===== زر شراء مقابل (فتح المنبثقة) =====
-    // === إصلاح مشكلة عرض المنبثقة ===
+
     const popup = document.querySelector('.popup');
     popup.style.backgroundColor = 'white';  // تغيير الخلفية إلى اللون الأبيض
     popup.style.display = 'none';  // افتراضيًا المنبثقة مخفية
-  
+
     chargeButton.addEventListener('click', () => {
-  if (usernameInput.value.trim() === '' || amount === '') {
-    usernameInput.classList.add('shake');
-    document.querySelector('.coins-section').classList.add('shake');
-    setTimeout(() => {
-      usernameInput.classList.remove('shake');
-      document.querySelector('.coins-section').classList.remove('shake');
-    }, 400);
-    return;
-  }
-
-  popupUser.innerHTML = `اسم المستخدم: ${usernameInput.value}`;
-  popupCoins.innerHTML = `
-    <span>عدد العملات:</span>
-    <span style="display:inline-flex; align-items:center; gap:2px;">
-      <span>0</span>
-      <img src="coin-new.png" style="width: 20px; height: 20px;" />
-    </span>`;
-  popup.style.display = 'flex';
-});
-  const prices = {
-    30: 0.38, 350: 4.5, 700: 8.9, 1400: 17.78, 3500: 44.3, 17000: 221.38
-  };
-
-  usernameInput.addEventListener('input', () => {
-    document.getElementById('typeSound').play();
-  });
-
-  document.querySelectorAll('button, .coin-option, #customAmount, #username').forEach(el => {
-    el.addEventListener('click', () => {
-      const click = document.getElementById('clickSound');
-      click.currentTime = 0;
-      click.play();
-    });
-  });
-
-  customInput.addEventListener('input', (e) => {
-    document.querySelectorAll('.coin-option').forEach(o => o.classList.remove('selected'));
-    document.querySelector('.coin-option.custom').classList.add('selected');
-    amount = e.target.value;
-    let price = (amount * 0.012666).toFixed(2);
-    chargeButton.innerText = `شراء مقابل $${price}`;
-  });
-
-  coinOptions.forEach(option => {
-    option.addEventListener('click', () => {
-      document.querySelectorAll('.coin-option').forEach(o => o.classList.remove('selected'));
-      option.classList.add('selected');
-      const span = option.querySelector('span');
-      if (span) {
-        amount = span.innerText.trim();
-        const price = prices[amount] || (amount * 0.012666).toFixed(2);
-        chargeButton.innerText = `شراء مقابل $${price}`;
+      if (usernameInput.value.trim() === '' || amount === '') {
+        usernameInput.classList.add('shake');
+        document.querySelector('.coins-section').classList.add('shake');
+        setTimeout(() => {
+          usernameInput.classList.remove('shake');
+          document.querySelector('.coins-section').classList.remove('shake');
+        }, 400);
+        return;
       }
+
+      popupUser.innerHTML = `اسم المستخدم: ${usernameInput.value}`;
+      popupCoins.innerHTML = `
+        <span>عدد العملات:</span>
+        <span style="display:inline-flex; align-items:center; gap:2px;">
+          <span>0</span>
+          <img src="coin-new.png" style="width: 20px; height: 20px;" />
+        </span>`;
+      popup.style.display = 'flex'; // عرض المنبثقة بشكل صحيح عند الضغط على زر "شراء مقابل"
     });
-  });
-  payNowBtn.addEventListener('click', () => {
-  if (!amount || isNaN(amount)) return;
-let percent = 0;
-let loadingInterval = null;
-  payNowBtn.disabled = true;
-  payNowBtn.innerText = 'جاري الدفع...';
-  payNowBtn.style.background = '#999';
-  successSection.innerHTML = '';
-  successSection.style.display = 'none';
 
-  document.getElementById("loadingBox").style.display = "block";
-  percent = 0;
+    payNowBtn.addEventListener('click', () => {
+      if (!amount || isNaN(amount)) return;
 
+      let percent = 0;
+      let loadingInterval = null;
+      payNowBtn.disabled = true;
+      payNowBtn.innerText = 'جاري الدفع...';
+      payNowBtn.style.background = '#999';
+      successSection.innerHTML = '';
   loadingInterval = setInterval(() => {
     percent++;
     if (percent > 100) percent = 100;
@@ -347,7 +308,6 @@ let loadingInterval = null;
 
     document.getElementById("percentage").innerText = percent + "%";
 
-    if (percent >= 100) {
       clearInterval(loadingInterval);
       document.getElementById("loadingBox").style.display = "none";
       document.getElementById('successSound').play();
