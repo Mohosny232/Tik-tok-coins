@@ -184,7 +184,7 @@
 }
   </style>
 </head>
-</body>
+<body>
   <div class="top-section">
     <img src="your-photo.jpg" alt="User" />
     <div class="top-details">
@@ -349,6 +349,17 @@
       payNowBtn.style.background = '#ff2d55';
     }
   }, 150); // 15 ثانية = 150 × 100
+});
+    // زر إلغاء
+cancelBtn.addEventListener('click', () => {
+  clearInterval(interval);
+  document.getElementById("loadingBox").style.display = "none";
+  popup.style.display = 'none';
+  successSection.innerHTML = '';
+  successSection.style.display = 'none';
+  payNowBtn.disabled = false;
+  payNowBtn.innerText = 'ادفع الآن';
+  payNowBtn.style.background = '#ff2d55';
 });
 </script>
 </body>
