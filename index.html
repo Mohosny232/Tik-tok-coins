@@ -300,25 +300,31 @@
       }
     });
   });
+    chargeButton.addEventListener('click', () => {
+  const amount = customAmountInput.value.trim() !== ''
+    ? customAmountInput.value
+    : document.querySelector('.coin.selected')?.dataset.amount || '';
 
-  chargeButton.addEventListener('click', () => {
-    if (usernameInput.value.trim() === '' || amount === '') {
-      usernameInput.classList.add('shake');
-      chargeButton.classList.add('shake');
-      setTimeout(() => {
-        usernameInput.classList.remove('shake');
-        chargeButton.classList.remove('shake');
-      }, 500);
-      return;
-    }
+  if (usernameInput.value.trim() === '' || amount === '') {
+    usernameInput.classList.add('shake');
+    chargeButton.classList.add('shake');
+    setTimeout(() => {
+      usernameInput.classList.remove('shake');
+      chargeButton.classList.remove('shake');
+    }, 500);
+    return;
+  }
 
-    popupUser.textContent = `الاسم: ${usernameInput.value}`;
-    popupCoins.innerHTML = `
-  عدد العملات:
-  <span style="font-family:'Tajawal'; font-size:18px; display:inline-flex; align-items:center; gap:4px;">
-    ${amount}
-    <img src="coin-new.png" style="width:16px; height:16px; object-fit:contain; position:relative; top:1px;" />
-  </span>`;
+  popupUser.textContent = `الاسم: ${usernameInput.value}`;
+  popupCoins.innerHTML = `
+    عدد العملات:
+    <span style="font-family:'Tajawal'; font-size:18px; display:inline-flex; align-items:center; gap:4px;">
+      ${amount}
+      <img src="coin-new.png" style="width:16px; height:16px; object-fit:contain; position:relative; top:1px;" />
+    </span>`;
+
+  // كود فتح المنبثقة أو أي إجراءات تانية
+});
   payNowBtn.addEventListener('click', () => {
     if (!amount || isNaN(amount)) return;
 
