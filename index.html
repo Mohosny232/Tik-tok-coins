@@ -186,6 +186,10 @@
   </style>
 </head>
 <body>
+  <audio id="clickSound" src="click.mp3"></audio>
+  <audio id="typeSound" src="type.mp3"></audio>
+  <audio id="successSound" src="success.mp3"></audio>
+  
   <div class="top-section">
     <img src="your-photo.jpg" alt="User" />
     <div class="top-details">
@@ -215,31 +219,23 @@
     </div>
     <button id="charge">شراء مقابل</button>
   </div>
-<!-- داخل ملف index.html -->
-<div class="popup-content">
-  <p id="popupUser"></p>
-  <p id="popupCoins"></p>
-
   <p style="margin-bottom: 10px; display: flex; justify-content: center; align-items: center; gap: 4px;">
     طريقة الدفع: <span style="font-weight: bold;">Visa</span>
     <img src="visa.png" style="width: 40px;" />
   </p>
-
-  <!-- لودينج الدائري -->
-  <div id="loadingBox" style="display: none; margin-top: 20px;">
-    <div class="circular-progress" id="progressCircle">
-      <span id="percentage">0%</span>
-    </div>
-  </div>
-
+<div class="popup" id="paymentPopup">
+    <div class="popup-content">
+      <p id="popupUser"></p>
+      <p id="popupCoins"></p>
+      <div id="loadingBox" style="display:none; margin-top: 20px;">
+        <div class="circular-progress" id="progressCircle">
+          <span id="percentage">0%</span>
+        </div>
+      </div>
   <div id="successSection" style="margin-top: 20px;"></div>
-
   <button id="payNow" style="margin-top: 10px;">ادفع الآن</button>
   <button id="cancelBtn" style="margin-top: 25px;">إلغاء</button>
 </div>
-  <audio id="clickSound" src="click.mp3"></audio>
-  <audio id="typeSound" src="type.mp3"></audio>
-  <audio id="successSound" src="success.mp3"></audio>
   <script>
   let interval = null;
   const topCoinDisplay = document.getElementById('topCoinNumber');
@@ -327,50 +323,32 @@ payNowBtn.addEventListener('click', () => {
   payNowBtn.style.background = '#999';
   successSection.innerHTML = '';
   successSection.style.display = 'none';
-
+  payNowBtn.addEventListener('click', () => {
+  let percent = 0;
   document.getElementById("loadingBox").style.display = "block";
-  percent = 0;
-
-  loadingInterval = setInterval(() => {
+  interval = setInterval(() => {
     percent++;
     if (percent > 100) percent = 100;
-
-    document.getElementById("progressCircle").style.background =
-      `conic-gradient(#333 ${percent}%, #ccc ${percent}%)`;
-
-    document.getElementById("percentage").innerText = percent + "%";
-
-    if (percent >= 100) {
-      clearInterval(loadingInterval);
+    document.getElementById("progressCircle").style.background = `conic-gradient(#333 ${percent}%, #ccc ${percent}%)`;
+    percentageText.textContent = percent + "%";
+    if (percent === 100) {
+      clearInterval(interval);
       document.getElementById("loadingBox").style.display = "none";
       document.getElementById('successSound').play();
-
-      successSection.innerHTML = `
-        <div style="text-align:center;">
-          <img src="success.gif" style="width: 80px; margin-top: -15px;" />
-        </div>
-        <p style="font-weight:bold; font-size:18px; margin-top: -10px; display:flex; justify-content:center; gap: 2px;">
-          تم تحويل العملات: <span>${amount}</span>
-          <img src="coin-new.png" style="width: 20px; height: 20px;" />
-        </p>`;
-      successSection.style.display = 'block';
-      payNowBtn.innerText = 'ادفع الآن';
-      payNowBtn.disabled = false;
-      payNowBtn.style.background = '#ff2d55';
+      successSection.innerHTML = `<p style='font-weight:bold;'>تم الشراء بنجاح!</p>`;
     }
-  }, 150); // 15 ثانية = 100 خطوة × 150 مللي ثانية
+  }, 150);
 });
 
 cancelBtn.addEventListener('click', () => {
-  clearInterval(loadingInterval);
+  clearInterval(interval);
   document.getElementById("loadingBox").style.display = "none";
   popup.style.display = 'none';
   successSection.innerHTML = '';
-  successSection.style.display = 'none';
   payNowBtn.disabled = false;
   payNowBtn.innerText = 'ادفع الآن';
   payNowBtn.style.background = '#ff2d55';
-});
+});   
 </script>
 </body>
 </html>
