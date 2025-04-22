@@ -323,21 +323,34 @@ chargeButton.addEventListener('click', () => {
 
   document.getElementById("loadingBox").style.display = "block";
 let percent = 0;
-let loadingInterval = setInterval(() => {
-  percent++;
-  if (percent > 100) percent = 100;
+let loadingInterval = null;
 
-  document.getElementById("progressCircle").style.background =
-    `conic-gradient(#333 ${percent}%, #ccc ${percent}%)`;
+payNowBtn.addEventListener('click', () => {
+  if (!amount || isNaN(amount)) return;
 
-  document.getElementById("percentage").innerText = percent + "%";
+  payNowBtn.disabled = true;
+  payNowBtn.innerText = 'جاري الدفع...';
+  payNowBtn.style.background = '#999';
+  successSection.innerHTML = '';
+  successSection.style.display = 'none';
 
-  if (percent >= 100) {
-    clearInterval(loadingInterval);
-    document.getElementById("loadingBox").style.display = "none";
-    // أظهر رسالة النجاح هنا
-  }
-}, 150); // يخلص في 15 ثانية (150 × 100)
+  document.getElementById("loadingBox").style.display = "block";
+  percent = 0;
+
+  loadingInterval = setInterval(() => {
+    percent++;
+    if (percent > 100) percent = 100;
+
+    document.getElementById("progressCircle").style.background =
+      `conic-gradient(#333 ${percent}%, #ccc ${percent}%)`;
+
+    document.getElementById("percentage").innerText = percent + "%";
+
+    if (percent >= 100) {
+      clearInterval(loadingInterval);
+      document.getElementById("loadingBox").style.display = "none";
+      document.getElementById('successSound').play();
+
       successSection.innerHTML = `
         <div style="text-align:center;">
           <img src="success.gif" style="width: 80px; margin-top: -15px;" />
@@ -351,11 +364,11 @@ let loadingInterval = setInterval(() => {
       payNowBtn.disabled = false;
       payNowBtn.style.background = '#ff2d55';
     }
-  }, 150); // 15 ثانية = 150 × 100
+  }, 150); // 15 ثانية = 100 خطوة × 150 مللي ثانية
 });
-    // زر إلغاء
+
 cancelBtn.addEventListener('click', () => {
-  clearInterval(interval);
+  clearInterval(loadingInterval);
   document.getElementById("loadingBox").style.display = "none";
   popup.style.display = 'none';
   successSection.innerHTML = '';
