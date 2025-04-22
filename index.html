@@ -158,28 +158,32 @@
       justify-content: center;
       z-index: 9999;
     }
-    .loader {
-      width: 80px;
-      height: 80px;
-      border: 6px solid #ccc;
-      border-top: 6px solid #333;
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    #percentage {
-      position: absolute;
-      font-weight: bold;
-      color: #333;
-      font-family: Arial, sans-serif;
-    }
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
+    /* ===== لودينج دائري ===== */
+.loader {
+  width: 60px;
+  height: 60px;
+  border: 6px solid #ccc;
+  border-top: 6px solid #333;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: auto;
+}
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* ===== الاهتزاز ===== */
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-4px); }
+  50% { transform: translateX(4px); }
+  75% { transform: translateX(-4px); }
+  100% { transform: translateX(0); }
+}
+.shake {
+  animation: shake 0.4s;
+}
   </style>
 </head>
 <body>
@@ -228,6 +232,11 @@
         طريقة الدفع: <span style="font-weight: bold;">Visa</span>
         <img src="visa.png" style="width: 40px;" />
       </p>
+      <!-- قبل زر ادفع الآن -->
+<div id="loadingBox" style="display:none; margin-top: 20px;">
+  <div class="loader" style="margin: auto;"></div>
+  <div id="percentage" style="margin-top: 10px; font-weight: bold; font-family: Arial; color: #333;">0%</div>
+</div>
       <div id="successSection"></div>
       <button id="payNow">ادفع الآن</button>
       <button id="cancelBtn">إلغاء</button>
@@ -293,7 +302,15 @@
     });
   });
 
-  chargeButton.addEventListener('click', () => {
+  chargeButton.addEventListener('click', () => {if (usernameInput.value.trim() === '' || amount === '') {
+  usernameInput.classList.add('shake');
+  document.querySelector('.coins-section').classList.add('shake');
+  setTimeout(() => {
+    usernameInput.classList.remove('shake');
+    document.querySelector('.coins-section').classList.remove('shake');
+  }, 400);
+  return;
+}
     if (usernameInput.value.trim() === '' || amount === '') {
       usernameInput.classList.add('shake');
       document.querySelector('.coins-section').classList.add('shake');
@@ -343,54 +360,62 @@
       }
     }, intervalTime);
   }
+payNowBtn.addEventListener('click', () => {
+  if (!amount || isNaN(amount)) return;
 
-  payNowBtn.addEventListener('click', () => {
-    if (!amount || isNaN(amount)) return;
+  payNowBtn.disabled = true;
+  payNowBtn.innerText = 'جاري الدفع...';
+  payNowBtn.style.background = '#999';
+  successSection.innerHTML = '';
+  successSection.style.display = 'none';
 
-    payNowBtn.disabled = true;
-    payNowBtn.innerText = 'جاري الدفع...';
-    payNowBtn.style.background = '#999';
-    successSection.innerHTML = '';
-    successSection.style.display = 'none';
+  const coins = parseInt(amount);
+  let duration = 30;
+  if (coins <= 30) duration = 30;
+  else if (coins <= 350) duration = 60;
+  else if (coins <= 700) duration = 120;
+  else if (coins <= 1400) duration = 180;
+  else duration = 240;
 
-    const coins = parseInt(amount);
-    let duration = 30;
-    if (coins <= 30) duration = 30;
-    else if (coins <= 350) duration = 60;
-    else if (coins <= 700) duration = 120;
-    else if (coins <= 1400) duration = 180;
-    else duration = 240;
+  let currentCoins = totalCoins;
+  let popupCount = 0;
+  const targetTop = currentCoins - coins;
+  const step = Math.ceil(coins / 100);
 
-    let currentCoins = totalCoins;
-    let popupCount = 0;
-    const targetTop = currentCoins - coins;
-    const step = Math.ceil(coins / 100);
+  document.getElementById("loadingBox").style.display = "block";
 
-    const coinInterval = setInterval(() => {
-      popupCount += step;
-      currentCoins -= step;
+  const loadingInterval = setInterval(() => {
+    percent++;
+    document.getElementById("percentage").innerText = percent + "%";
+    popupCount += step;
+    currentCoins -= step;
 
-      if (popupCount >= coins) popupCount = coins;
-      if (currentCoins <= targetTop) currentCoins = targetTop;
+    if (popupCount >= coins) popupCount = coins;
+    if (currentCoins <= targetTop) currentCoins = targetTop;
 
-      topCoinDisplay.querySelector('span').textContent = currentCoins;
-      popupCoins.querySelector('span span').textContent = popupCount;
+    topCoinDisplay.querySelector('span').textContent = currentCoins;
+    popupCoins.querySelector('span span').textContent = popupCount;
 
-      if (popupCount >= coins) clearInterval(coinInterval);
-    }, (duration * 1000) / 100);
+    if (percent >= 100) {
+      clearInterval(loadingInterval);
+      document.getElementById("loadingBox").style.display = "none";
+      document.getElementById('successSound').play();
+      successSection.innerHTML = `
+        <div style="text-align:center;">
+          <img src="success.gif" style="width: 80px; margin-top: -15px;" />
+        </div>
+        <p style="font-weight:bold; font-size:18px; margin-top: -10px; display:flex; justify-content:center; gap: 2px;">
+          تم تحويل العملات: <span>${amount}</span>
+          <img src="coin-new.png" style="width: 20px; height: 20px;" />
+        </p>`;
+      successSection.style.display = 'block';
+      payNowBtn.innerText = 'ادفع الآن';
+      payNowBtn.disabled = false;
+      payNowBtn.style.background = '#ff2d55';
+    }
+  }, (duration * 1000) / 100);
+});
 
-    startLoadingAnimation(duration);
-  });
-
-  cancelBtn.addEventListener('click', () => {
-    loadingWrapper.style.display = 'none';
-    successSection.innerHTML = '';
-    successSection.style.display = 'none';
-    payNowBtn.disabled = false;
-    payNowBtn.innerText = 'ادفع الآن';
-    payNowBtn.style.background = '#ff2d55';
-    popup.style.display = 'none';
-  });
 </script>
 </body>
 </html>
