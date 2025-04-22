@@ -171,6 +171,40 @@
   color: #333;
   font-family: Arial, sans-serif;
 }
+    #paymentPopup {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.payment-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.payment-option input {
+  width: 20px;
+  height: 20px;
+}
+
+.payment-option label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 16px;
+  font-family: 'Tajawal', sans-serif;
+  cursor: pointer;
+}
+
+#payNowBtn {
+  background-color: #ff2d55;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  margin-top: 20px;
+      }
 
 /* ===== الاهتزاز ===== */
 @keyframes shake {
@@ -234,6 +268,31 @@
       <button id="payNow" style="margin-top: 10px;">ادفع الآن</button>
       <button id="cancelBtn" style="margin-top: 25px;">إلغاء</button>
     </div>
+  </div>
+  <!-- منبثقة الدفع -->
+<div id="paymentPopup" style="display:none;">
+  <div class="payment-option">
+    <input type="radio" name="payment-method" id="visa" value="visa" />
+    <label for="visa">
+      <img src="visa-icon.png" alt="Visa" style="width: 40px; height: 25px;"/>
+      <span>فيزا</span>
+    </label>
+  </div>
+  
+  <div class="payment-option">
+    <input type="radio" name="payment-method" id="mastercard" value="mastercard" />
+    <label for="mastercard">
+      <img src="mastercard-icon.png" alt="MasterCard" style="width: 40px; height: 25px;"/>
+      <span>ماستر كارد</span>
+    </label>
+  </div>
+
+  <div class="payment-option">
+    <input type="radio" name="payment-method" id="paypal" value="paypal" />
+    <label for="paypal">
+      <img src="paypal-icon.png" alt="PayPal" style="width: 40px; height: 25px;"/>
+      <span>باي بال</span>
+    </label>
   </div>
   <script>
   let interval = null;
@@ -315,7 +374,17 @@
   // زر الدفع
   payNowBtn.addEventListener('click', () => {
     if (!amount || isNaN(amount)) return;
+  const selectedPaymentMethod = document.querySelector('input[name="payment-method"]:checked');
+  if (!selectedPaymentMethod) {
+    alert("يرجى اختيار طريقة دفع.");
+    return;
+  }
 
+  const paymentMethod = selectedPaymentMethod.value;
+  alert(`تم اختيار طريقة الدفع: ${paymentMethod}`);
+  
+  // هنا يمكنك تنفيذ الإجراء المطلوب بعد اختيار طريقة الدفع
+});
     payNowBtn.disabled = true;
     payNowBtn.innerText = 'جاري الدفع...';
     payNowBtn.style.background = '#999';
