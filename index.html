@@ -231,7 +231,7 @@
   <div id="percentage" style="margin-top: 10px; font-weight: bold; font-family: Arial; color: #333;">0%</div>
 </div>
       <div id="successSection"></div>
-      <button id="payNow">ادفع الآن</button>
+      <button id="payNow" style="margin-top: -20px;">ادفع الآن</button>
       <button id="cancelBtn">إلغاء</button>
     </div>
   </div>
@@ -398,7 +398,17 @@ payNowBtn.addEventListener('click', () => {
     }
   }, (duration * 1000) / 100);
 });
-
+// زر إلغاء
+cancelBtn.addEventListener('click', () => {
+  clearInterval(interval);
+  document.getElementById("loadingBox").style.display = "none";
+  popup.style.display = 'none';
+  successSection.innerHTML = '';
+  successSection.style.display = 'none';
+  payNowBtn.disabled = false;
+  payNowBtn.innerText = 'ادفع الآن';
+  payNowBtn.style.background = '#ff2d55';
+});
 </script>
 </body>
 </html>
