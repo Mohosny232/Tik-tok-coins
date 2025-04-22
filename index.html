@@ -186,14 +186,7 @@
 }
   </style>
 </head>
-<body>
-  <div id="loadingContainer" style="display: none;">
-    <div class="loading-wrapper">
-      <div class="loader">
-        <span id="percentage">0%</span>
-      </div>
-    </div>
-  </div>
+</body>
   <div class="top-section">
     <img src="your-photo.jpg" alt="User" />
     <div class="top-details">
@@ -259,8 +252,7 @@
   const popupUser = document.getElementById('popupUser');
   const popupCoins = document.getElementById('popupCoins');
   const successSection = document.getElementById('successSection');
-  const loadingWrapper = document.getElementById("loadingContainer");
-  const percentageText = document.getElementById("percentage");
+   const percentageText = document.getElementById("percentage");
 
   let totalCoins = 999999999;
   let amount = '';
@@ -310,17 +302,7 @@
     document.querySelector('.coins-section').classList.remove('shake');
   }, 400);
   return;
-}
-    if (usernameInput.value.trim() === '' || amount === '') {
-      usernameInput.classList.add('shake');
-      document.querySelector('.coins-section').classList.add('shake');
-      setTimeout(() => {
-        usernameInput.classList.remove('shake');
-        document.querySelector('.coins-section').classList.remove('shake');
-      }, 400);
-      return;
-    }
-
+  }
     popupUser.innerHTML = `اسم المستخدم: ${usernameInput.value}`;
     popupCoins.innerHTML = `
       <span>عدد العملات:</span>
@@ -378,6 +360,7 @@ payNowBtn.addEventListener('click', () => {
   else duration = 240;
 
   let currentCoins = totalCoins;
+  let percent = 0;
   let popupCount = 0;
   const targetTop = currentCoins - coins;
   const step = Math.ceil(coins / 100);
