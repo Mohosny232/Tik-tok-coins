@@ -351,93 +351,87 @@
     });
   });
 
-  // زر شراء مقابل (فتح المنبثقة)
-  chargeButton.addEventListener('click', () => {
-    if (usernameInput.value.trim() === '' || amount === '') {
-      usernameInput.classList.add('shake');
-      document.querySelector('.coins-section').classList.add('shake');
-      setTimeout(() => {
-        usernameInput.classList.remove('shake');
-        document.querySelector('.coins-section').classList.remove('shake');
-      }, 400);
-      return;
-    }
-
-    popupUser.innerHTML = `اسم المستخدم: ${usernameInput.value}`;
-    popupCoins.innerHTML = `
-      <span>عدد العملات:</span>
-      <span style="display:inline-flex; align-items:center; gap:2px;">
-        <span>0</span>
-        <img src="coin-new.png" style="width: 20px; height: 20px;" />
-      </span>`;
-    popup.style.display = 'flex';
-  });
-// زر الدفع القديم
-payNowBtn.addEventListener('click', () => {
-  // التحقق من وجود مبلغ
-  if (!amount || isNaN(amount)) return;
-
-  // التحقق من اختيار طريقة الدفع
-  const selectedPaymentMethod = document.querySelector('input[name="payment-method"]:checked');
   
-  if (!selectedPaymentMethod) {
-    alert("يرجى اختيار طريقة دفع.");
-    return;
-  }
+        const chargeButton = document.getElementById('chargeButton');
+        const usernameInput = document.getElementById('username');
+        const amountInput = document.getElementById('amount');
+        const popup = document.getElementById('popup');
+        const popupUser = document.getElementById('popupUser');
+        const popupCoins = document.getElementById('popupCoins');
+        const progressCircle = document.getElementById('progressCircle');
+        const percentageText = document.getElementById('percentageText');
+        const payNowBtn = document.getElementById('payNow');
+        const cancelBtn = document.getElementById('cancelBtn');
+        const successSection = document.getElementById('successSection');
 
-  const paymentMethod = selectedPaymentMethod.value;
-  alert(`تم اختيار طريقة الدفع: ${paymentMethod}`);
-  
-  // بدء عملية الدفع
-  payNowBtn.disabled = true;
-  payNowBtn.innerText = 'جاري الدفع...';
-  payNowBtn.style.background = '#999';
-  successSection.innerHTML = '';
-  successSection.style.display = 'none';
-  document.getElementById("loadingBox").style.display = "block";
+        // استجابة عند الضغط على زر "شراء مقابل"
+        chargeButton.addEventListener('click', () => {
+            const username = usernameInput.value.trim();
+            const amount = amountInput.value.trim();
 
-  let percent = 0;
-  let popupCount = 0;
-  let currentCoins = totalCoins;
-  const targetTop = currentCoins - parseInt(amount);
-  const step = Math.ceil(amount / 100);
+            // التحقق من المدخلات
+            if (username === '' || amount === '') {
+                usernameInput.classList.add('shake');
+                amountInput.classList.add('shake');
+                setTimeout(() => {
+                    usernameInput.classList.remove('shake');
+                    amountInput.classList.remove('shake');
+                }, 400);
+                return; // لا تفتح المنبثقة إذا كانت المدخلات غير صحيحة
+            }
 
-  interval = setInterval(() => {
-    percent++;
-    if (percent > 100) percent = 100;
+            // تعيين البيانات في المنبثقة
+            popupUser.innerText = `اسم المستخدم: ${username}`;
+            popupCoins.innerText = `عدد العملات: ${amount}`;
 
-    document.getElementById("progressCircle").style.background =
-      `conic-gradient(#333 ${percent}%, #ccc ${percent}%)`;
-    percentageText.textContent = percent + "%";
+            // إظهار المنبثقة
+            popup.style.display = 'flex';
 
-    popupCount += step;
-    currentCoins -= step;
+            // إخفاء محتوى الصفحة الأساسي عند فتح المنبثقة
+            document.querySelector('.container').style.display = 'none';
 
-    if (popupCount >= amount) popupCount = amount;
-    if (currentCoins <= targetTop) currentCoins = targetTop;
+            // بدء تحميل الشريط
+            startLoading();
+        });
 
-    topCoinDisplay.querySelector('span').textContent = currentCoins;
-    popupCoins.querySelector('span span').textContent = popupCount;
+        // إلغاء المنبثقة
+        cancelBtn.addEventListener('click', () => {
+            popup.style.display = 'none';
+            document.querySelector('.container').style.display = 'block'; // إعادة عرض المحتوى الأساسي
+        });
 
-    if (percent >= 100) {
-      clearInterval(interval);
-      document.getElementById("loadingBox").style.display = "none";
-      document.getElementById('successSound').play();
-      successSection.innerHTML = `
-        <div style="text-align:center;">
-          <img src="success.gif" style="width: 80px; margin-top: -15px;" />
-        </div>
-        <p style="font-weight:bold; font-size:18px; margin-top: -10px; display:flex; justify-content:center; gap: 2px;">
-          تم تحويل العملات: <span>${amount}</span>
-          <img src="coin-new.png" style="width: 20px; height: 20px;" />
-        </p>`;
-      successSection.style.display = 'block';
-      payNowBtn.innerText = 'ادفع الآن';
-      payNowBtn.disabled = false;
-      payNowBtn.style.background = '#ff2d55';
-    }
-  }, 150); // 15 ثانية = 150 × 100
-});
+        // بدء عملية تحميل الشريط
+        function startLoading() {
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += 1;
+                percentageText.innerText = `${progress}%`;
+                progressCircle.style.background = `conic-gradient(#ff2d55 ${progress * 3.6}deg, #ccc 0deg)`;
+
+                if (progress === 100) {
+                    clearInterval(interval);
+                    showSuccess();
+                }
+            }, 100);
+        }
+
+        // عرض رسالة النجاح بعد اكتمال العملية
+        function showSuccess() {
+            successSection.innerHTML = `<img src="success.gif" alt="نجاح" style="width: 50px; height: 50px; margin-bottom: 15px;" />`;
+            successSection.innerHTML += `<p>تم الدفع بنجاح!</p>`;
+            payNowBtn.style.display = 'none'; // إخفاء زر الدفع بعد إتمام العملية
+            document.getElementById('successSound').play(); // تشغيل صوت النجاح عند الدفع
+        }
+
+        // تشغيل صوت عند الضغط على زر "ادفع الآن"
+        payNowBtn.addEventListener('click', () => {
+            document.getElementById('clickSound').play();
+        });
+
+        // تشغيل صوت عند الكتابة
+        usernameInput.addEventListener('input', () => {
+            document.getElementById('typeSound').play();
+        });
 </script>
 </body>
 </html>
