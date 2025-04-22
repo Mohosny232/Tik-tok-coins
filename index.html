@@ -242,6 +242,7 @@
   <button id="payNow" style="margin-top: 10px;">ادفع الآن</button>
   <button id="cancelBtn" style="margin-top: 25px;">إلغاء</button>
 </div>
+   <input type="number" id="customAmount" placeholder="أدخل عدد العملات"> 
   <audio id="clickSound" src="click.mp3"></audio>
   <audio id="typeSound" src="type.mp3"></audio>
   <audio id="successSound" src="success.mp3"></audio>
@@ -262,7 +263,10 @@
 
   let totalCoins = 999999999;
   let amount = '';
-
+function updatePriceButton() {
+  let price = (amount * 0.015).toFixed(2); // عدل السعر هنا لو تحب
+  buyBtn.textContent = `شراء مقابل $${price}`;
+    }
   const prices = {
     30: 0.38, 350: 4.5, 700: 8.9, 1400: 17.78, 3500: 44.3, 17000: 221.38
   };
@@ -274,23 +278,24 @@ usernameInput.addEventListener('input', () => {
 let selectedCoins = 0;
 
 coinOptions.forEach(option => {
+coinOptions.forEach(option => {
   option.addEventListener('click', () => {
-    coinOptions.forEach(opt => opt.classList.remove('selected'));
-    option.classList.add('selected');
-    const value = option.querySelector('.price-line span');
-    if (value) {
-      selectedCoins = parseInt(value.textContent);
-      amount = selectedCoins;
-      customInput.value = '';
-    } else {
-      selectedCoins = 0;
-    }
+    const customAmountInput = document.getElementById("customAmount"); // لازم يكون ID العنصر كده
+customAmountInput.addEventListener("input", () => {
+  coinOptions.forEach(opt => opt.classList.remove("selected"));
+  let val = parseInt(customAmountInput.value);
+  amount = isNaN(val) ? 0 : val;
+  updatePriceButton();
+});
+    
   });
 });
 
-customInput.addEventListener('input', () => {
-  coinOptions.forEach(opt => opt.classList.remove('selected'));
-  selectedCoins = parseInt(customInput.value) || 0;
+customAmountInput.addEventListener("input", () => {
+  coinBoxes.forEach(b => b.classList.remove("selected"));
+  let val = parseInt(customAmountInput.value);
+  amount = isNaN(val) ? 0 : val;
+  updatePriceButton();
 });
 
 chargeButton.addEventListener('click', () => {
@@ -329,8 +334,12 @@ payNowBtn.addEventListener('click', () => {
     if (percent >= 100) {
       clearInterval(interval);
       document.getElementById('successSound').play();
-      successSection.innerHTML = `<img src="success.gif" style="width:100px;margin:auto;" />`;
-    } else {
+     successSound.play();
+successSection.innerHTML = `
+  <img src="success.gif" alt="نجاح" style="width: 100px; margin: 10px auto;" />
+  <p style="font-weight: bold; font-family: 'Tajawal'; font-size: 18px;">تم تحويل العملات بنجاح!</p>
+`;
+  } else {
       percent++;
       percentageText.textContent = percent + '%';
       progressCircle.style.background = `conic-gradient(#333 ${percent}%, #ccc ${percent}%)`;
