@@ -228,9 +228,11 @@
   </div>
 <div class="popup" id="paymentPopup">
   <div class="popup-content">
-    <p id="popupUser" style="font-family: 'Tajawal'; font-size: 16px;"></p>
-    <p id="popupCoins" style="font-family: 'Tajawal'; font-size: 18px;"></p>
-
+    <p id="popupUser"></p>
+    <p id="popupCoins"></p>
+    ...
+  </div>
+</div>
     <p style="margin-bottom: 10px; display: flex; justify-content: center; align-items: center; gap: 4px;">
       طريقة الدفع: <span style="font-weight: bold;">Visa</span>
       <img src="visa.png" style="width: 40px;" />
@@ -308,25 +310,27 @@ customInput.addEventListener('input', () => {
   amount = selectedCoins;
   updatePriceButton();
 });
-
-chargeButton.addEventListener('click', () => {
-  const username = usernameInput.value.trim();
-  if (!username || selectedCoins === 0) {
-    if (!username) usernameInput.classList.add('shake');
-    if (selectedCoins === 0) customInput.classList.add('shake');
+document.getElementById('charge').addEventListener('click', () => {
+  if (usernameInput.value.trim() === '' || amount === '') {
+    usernameInput.classList.add('shake');
+    document.querySelector('.coins-section').classList.add('shake');
     setTimeout(() => {
       usernameInput.classList.remove('shake');
-      customInput.classList.remove('shake');
+      document.querySelector('.coins-section').classList.remove('shake');
     }, 400);
     return;
   }
 
-  document.getElementById('clickSound').play();
-  popup.style.display = 'flex';
-  popupUser.innerHTML = `المستخدم: <span style="font-weight:bold">${username}</span>`;
-  popupCoins.innerHTML = `عدد العملات: <span style="font-family:'DINNextLTArabic-Bold'">${selectedCoins}</span> <img src="coin-new.png" style="width:18px;height:18px;vertical-align:middle;" />`;
-});
+  document.getElementById('paymentPopup').style.display = 'flex';
 
+  popupUser.textContent = `الاسم: ${usernameInput.value}`;
+  popupCoins.innerHTML = `
+    عدد العملات:
+    <span style="font-family:'Tajawal'; font-size:18px; display:inline-flex; align-items:center; gap:4px;">
+      ${amount}
+      <img src="coin-new.png" style="width:16px; height:16px;" />
+    </span>`;
+});
 cancelBtn.addEventListener('click', () => {
   clearInterval(interval);
   document.getElementById("loadingBox").style.display = "none";
