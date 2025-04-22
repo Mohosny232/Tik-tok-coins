@@ -318,10 +318,6 @@ chargeButton.addEventListener('click', () => {
   if (!amount || isNaN(amount)) return;
 let percent = 0;
 let loadingInterval = null;
-
-payNowBtn.addEventListener('click', () => {
-  if (!amount || isNaN(amount)) return;
-
   payNowBtn.disabled = true;
   payNowBtn.innerText = 'جاري الدفع...';
   payNowBtn.style.background = '#999';
