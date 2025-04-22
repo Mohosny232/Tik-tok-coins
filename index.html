@@ -262,33 +262,37 @@
   const percentageText = document.getElementById("percentage");
 
   let totalCoins = 999999999;
-  let amount = '';
+ let amount = ''; // <<< هنا مكانه الصح
+
 
   // ===== ضبط خصائص المنبثقة أولاً =====
   popup.style.backgroundColor = 'white';
   popup.style.display = 'none';
 
   // ===== عند الضغط على زر "شراء مقابل" =====
-  chargeButton.addEventListener('click', () => {
-    if (usernameInput.value.trim() === '' || amount === '') {
-      usernameInput.classList.add('shake');
-      document.querySelector('.coins-section').classList.add('shake');
-      setTimeout(() => {
-        usernameInput.classList.remove('shake');
-        document.querySelector('.coins-section').classList.remove('shake');
-      }, 400);
-      return;
-    }
+chargeButton.addEventListener('click', () => {
+  if (usernameInput.value.trim() === '' || amount === '') {
+    // تشغيل الاهتزاز على حقل الاسم
+    usernameInput.classList.add('shake');
+    setTimeout(() => {
+      usernameInput.classList.remove('shake');
+    }, 500);
 
-    popupUser.innerHTML = `اسم المستخدم: ${usernameInput.value}`;
-    popupCoins.innerHTML = `
-      <span>عدد العملات:</span>
-      <span style="display:inline-flex; align-items:center; gap:2px;">
-        <span>${amount}</span>
-        <img src="coin-new.png" style="width: 20px; height: 20px;" />
-      </span>`;
-    popup.style.display = 'flex';
-  });
+    // تشغيل الاهتزاز على زر الشراء
+    chargeButton.classList.add('shake');
+    setTimeout(() => {
+      chargeButton.classList.remove('shake');
+    }, 500);
+
+    return; // إيقاف العملية في حال كانت البيانات ناقصة
+  }
+
+  // تعبئة بيانات المنبثقة عند صحة البيانات
+  popupUser.textContent = `الاسم: ${usernameInput.value}`;
+  popupCoins.innerHTML = `عدد العملات: <span style="font-family:'DINNextLTArabic-Bold'; font-size:18px;">${amount}</span> <img src="coin-new.png" class="coin-img" />`;
+
+  popup.style.display = 'flex';
+});
 
   // ===== عند الضغط على "ادفع الآن" =====
   payNowBtn.addEventListener('click', () => {
