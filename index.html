@@ -255,7 +255,27 @@
 
   let totalCoins = 999999999;
   let amount = '';
+// ===== زر شراء مقابل (فتح المنبثقة) =====
+chargeButton.addEventListener('click', () => {
+  if (usernameInput.value.trim() === '' || amount === '') {
+    usernameInput.classList.add('shake');
+    document.querySelector('.coins-section').classList.add('shake');
+    setTimeout(() => {
+      usernameInput.classList.remove('shake');
+      document.querySelector('.coins-section').classList.remove('shake');
+    }, 400);
+    return;
+  }
 
+  popupUser.innerHTML = `اسم المستخدم: ${usernameInput.value}`;
+  popupCoins.innerHTML = `
+    <span>عدد العملات:</span>
+    <span style="display:inline-flex; align-items:center; gap:2px;">
+      <span>0</span>
+      <img src="coin-new.png" style="width: 20px; height: 20px;" />
+    </span>`;
+  popup.style.display = 'flex';
+});
   const prices = {
     30: 0.38, 350: 4.5, 700: 8.9, 1400: 17.78, 3500: 44.3, 17000: 221.38
   };
