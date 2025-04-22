@@ -313,10 +313,12 @@
     }
 
     popupUser.textContent = `الاسم: ${usernameInput.value}`;
-    popupCoins.innerHTML = `عدد العملات: <span style="font-family:'DINNextLTArabic-Bold'; font-size:18px;">${amount}</span> <img src="coin-new.png" class="coin-img" />`;
-    popup.style.display = 'flex';
-  });
-
+    popupCoins.innerHTML = `
+  عدد العملات:
+  <span style="font-family:'Tajawal'; font-size:18px; display:inline-flex; align-items:center; gap:4px;">
+    ${amount}
+    <img src="coin-new.png" style="width:16px; height:16px; object-fit:contain; position:relative; top:1px;" />
+  </span>`;
   payNowBtn.addEventListener('click', () => {
     if (!amount || isNaN(amount)) return;
 
