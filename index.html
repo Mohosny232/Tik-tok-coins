@@ -232,7 +232,7 @@
 </div>
       <div id="successSection"></div>
       <button id="payNow" style="margin-top: -20px;">ادفع الآن</button>
-      <button id="cancelBtn">إلغاء</button>
+      <button id="cancelBtn" style="margin-top: 25px;">إلغاء</button>
     </div>
   </div>
 
@@ -366,8 +366,7 @@ payNowBtn.addEventListener('click', () => {
   const step = Math.ceil(coins / 100);
 
   document.getElementById("loadingBox").style.display = "block";
-
-  const loadingInterval = setInterval(() => {
+  interval = setInterval(() => {
     percent++;
     document.getElementById("percentage").innerText = percent + "%";
     popupCount += step;
