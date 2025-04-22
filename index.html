@@ -166,11 +166,17 @@
   border-top: 6px solid #333;
   border-radius: 50%;
   animation: spin 1s linear infinite;
-  margin: auto;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+
+#percentage {
+  position: absolute;
+  font-weight: bold;
+  color: #333;
+  font-family: Arial, sans-serif;
 }
 
 /* ===== الاهتزاز ===== */
@@ -227,7 +233,9 @@
       </p>
       <!-- قبل زر ادفع الآن -->
 <div id="loadingBox" style="display:none; margin-top: 20px;">
-  <div class="loader" style="margin: auto;"></div>
+  <div class="loader">
+  <span id="percentage">0%</span>
+  </div>
   <div id="percentage" style="margin-top: 10px; font-weight: bold; font-family: Arial; color: #333;">0%</div>
 </div>
       <div id="successSection"></div>
@@ -352,13 +360,7 @@ payNowBtn.addEventListener('click', () => {
   successSection.style.display = 'none';
 
   const coins = parseInt(amount);
-  let duration = 30;
-  if (coins <= 30) duration = 30;
-  else if (coins <= 350) duration = 60;
-  else if (coins <= 700) duration = 120;
-  else if (coins <= 1400) duration = 180;
-  else duration = 240;
-
+  let duration = 15;
   let currentCoins = totalCoins;
   let percent = 0;
   let popupCount = 0;
