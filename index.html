@@ -313,7 +313,8 @@
     }, 500);
     return;
   }
-document.getElementById('paymentPopup').style.display = 'block';
+console.log("تم الضغط على زر الشراء");
+      document.getElementById('paymentPopup').style.display = 'block';
   popupUser.textContent = `الاسم: ${usernameInput.value}`;
   popupCoins.innerHTML = `
     عدد العملات:
