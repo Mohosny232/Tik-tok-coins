@@ -377,17 +377,24 @@
   });
 
   cancelBtn.addEventListener('click', () => {
-  clearInterval(interval); // وقف العد بس
-    popup.style.display = 'none';
-    successSection.innerHTML = '';
-    successSection.style.display = 'none';
-    payNowBtn.disabled = false;
-    payNowBtn.innerText = 'ادفع الآن';
-    payNowBtn.style.background = '#ff2d55';
-    loadingBox.style.display = 'none';
-    percentageText.textContent = '0%';
-    progressCircle.style.background = 'conic-gradient(#eee 0%, #eee 0%)';
-  });
+  clearInterval(interval); // وقف المؤقت
+  interval = null;         // إعادة تعيينه
+
+  // إخفاء المنبثقة والمكونات
+  popup.style.display = 'none';
+  successSection.innerHTML = '';
+  successSection.style.display = 'none';
+  loadingBox.style.display = 'none';
+
+  // إعادة تعيين زر الدفع
+  payNowBtn.disabled = false;
+  payNowBtn.innerText = 'ادفع الآن';
+  payNowBtn.style.background = '#ff2d55';
+
+  // إعادة تعيين اللودينج الدائري
+  percentageText.textContent = '0%';
+  progressCircle.style.background = 'conic-gradient(#4cd964 0deg, #eee 0deg)';
+});
 </script>
 </body>
 </html>
