@@ -277,7 +277,7 @@
   const popupCoins = document.getElementById('popupCoins');
   const successSection = document.getElementById('successSection');
   const loadingBox = document.getElementById('loadingBox');
-  const progressCircle = document.querySelector('.circular-progress .progress');
+  const progressCircle = document.querySelector('.circular-progress. progress');
    const percentageText = document.getElementById("percentage");
   let totalCoins = 999999999;
   let amount = '';
@@ -341,13 +341,12 @@
   });
 
   payNowBtn.addEventListener('click', () => {
+  loadingBox.style.display = 'block'; 
     payNowBtn.disabled = true;
     payNowBtn.innerText = 'جاري الدفع...';
     payNowBtn.style.background = '#999';
     successSection.innerHTML = '';
     successSection.style.display = 'none';
-
-   loadingBox.style.display = 'block';
 
 let percent = 0;
 let popupCount = 0;
