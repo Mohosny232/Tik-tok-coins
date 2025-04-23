@@ -369,11 +369,14 @@
 
         if (percent === 100) {
   clearInterval(interval);
+  
   // اخفاء اللودينج بعد 0.5 ثانية علشان يبقى في انتقال ناعم
   setTimeout(() => {
     loadingBox.style.display = 'none';
+
     // تشغيل صوت النجاح
     document.getElementById('successSound').play();
+
     // إظهار النجاح
     successSection.innerHTML = `
       <div style="text-align:center;">
@@ -383,13 +386,14 @@
         تم تحويل العملات: <span>${amount}</span>
         <img src="coin-new.png" style="width: 20px; height: 20px;" />
       </p>`;
-          successSection.style.display = 'block';
-          payNowBtn.disabled = false;
-          payNowBtn.innerText = 'ادفع الآن';
-          payNowBtn.style.background = '#ff2d55';
-        }
-      }, 80);
-    });
+
+    successSection.style.display = 'block';
+
+    payNowBtn.innerText = 'ادفع الآن';
+    payNowBtn.disabled = false;
+    payNowBtn.style.background = '#ff2d55';
+  }, 500); // <-- نهاية setTimeout
+} // <-- نهاية if
 
     cancelBtn.addEventListener('click', () => {
       clearInterval(interval);
