@@ -377,7 +377,8 @@
   });
 
   cancelBtn.addEventListener('click', () => {
-  clearInterval(interval); // يوقف العداد
+  clearInterval(interval); // يوقف العداد 
+  popup.style.display = 'none'; // إخفاء المنبثقة
   interval = null; // إعادة تعيين
   successSection.innerHTML = '';
   successSection.style.display = 'none';
@@ -391,3 +392,4 @@
 </script>
 </body>
 </html>
+
