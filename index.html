@@ -147,25 +147,46 @@
       margin: auto;
     }
    .circular-progress {
-  position: relative;
   width: 100px;
   height: 100px;
-  background: conic-gradient(#000 0%, #444 0%);
   border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: auto;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  background: none;
+  position: relative;
+}
+
+.circular-progress svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.circular-progress circle {
+  fill: none;
+  stroke-width: 10;
+  stroke-linecap: round;
+}
+
+.circular-progress .bg {
+  stroke: #eee; /* خلفية خفيفة */
+}
+
+.circular-progress .progress {
+  stroke: #000; /* الخط الأسود */
+  stroke-dasharray: 283; /* محيط الدائرة */
+  stroke-dashoffset: 283;
+  transition: stroke-dashoffset 0.3s linear;
 }
 
 .circular-progress span {
   position: absolute;
-  font-weight: bold;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   font-family: 'Tajawal', sans-serif;
-  color: #fff;
   font-size: 18px;
-} 
+  color: #000;
+  font-weight: bold;
+}
 #percentage {
   position: absolute;
   font-weight: bold;
@@ -228,10 +249,14 @@
 
   <!-- لودينج الدائري -->
   <div id="loadingBox" style="display: none; margin-top: 20px;">
-  <div class="circular-progress" id="progressCircle">
+  <div class="circular-progress">
+    <svg>
+      <circle class="bg" cx="50" cy="50" r="45" />
+      <circle class="progress" cx="50" cy="50" r="45" />
+    </svg>
     <span id="percentage">0%</span>
   </div>
-  </div>
+</div>
 
   <div id="successSection" style="margin-top: 20px;"></div>
 
@@ -334,16 +359,16 @@
     const coins = parseInt(amount);
     const targetTop = currentCoins - coins;
     const step = Math.ceil(coins / 100);
+      // تعبئة الدائرة باللون الأسود تدريجي
+  const progressCircle = document.querySelector('.circular-progress .progress');
+  const circleLength = 2 * Math.PI * 45; // نصف القطر 45
 
-     interval = setInterval(() => {
+    interval = setInterval(() => {
       percent++;
       if (percent > 100) percent = 100;
 
-      // تعبئة الدائرة باللون الأسود تدريجي
-  const angle = percent * 3.6;
-  document.getElementById("progressCircle").style.background = `conic-gradient(#000 ${angle}deg, #444 ${angle}deg)`;
-  document.getElementById("percentage").textContent = `${percent}%`;
-
+      const offset = circleLength - (circleLength * percent) / 100;
+     progressCircle.style.strokeDashoffset = offset;
       // عد العملات
       popupCount += step;
       currentCoins -= step;
@@ -354,6 +379,7 @@
       topCoinDisplay.querySelector('span').textContent = currentCoins;
       popupCoins.querySelector('span span').textContent = popupCount;
 
+      document.getElementById("percentage").textContent = `${percent}%`;
       if (percent === 100) {
         clearInterval(interval);
         document.getElementById("loadingBox").style.display = 'none';
@@ -392,4 +418,3 @@
 </script>
 </body>
 </html>
-
