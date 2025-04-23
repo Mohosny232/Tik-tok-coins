@@ -391,33 +391,3 @@
 </script>
 </body>
 </html>
-
-
-
-
-
-
-let percent = 0;
-interval = setInterval(() => {
-  percent++;
-  if (percent > 100) percent = 100;
-
-  
-  if (percent === 100) {
-    clearInterval(interval);
-    document.getElementById("loadingBox").style.display = 'none';
-    popup.style.display = 'none';
-    document.getElementById('successSound').play();
-
-    successSection.innerHTML = `
-      
-    successSection.style.display = 'block';
-    payNowBtn.disabled = false;
-    payNowBtn.innerText = 'ادفع الآن';
-    payNowBtn.style.background = '#ff2d55';
-  }
-}, 80);
-
-
-
-
