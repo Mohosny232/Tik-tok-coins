@@ -153,23 +153,26 @@
       max-width: 300px;
       margin: auto;
     }
-    .progress-container {
-      display: none;
-      width: 100%;
-      background-color: #ddd;
-      border-radius: 6px;
-      margin-top: 20px;
-    }
-    .progress-bar {
-      height: 10px;
-      width: 0%;
-      background-color: #111;
-      border-radius: 6px;
-    }
-    #progressText {
-      margin-top: 10px;
-      font-weight: bold;
-    }
+    /* ===== لودينج دائري بشكل احترافي ===== */
+.circular-loader {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: conic-gradient(#ff2d55 0%, #eee 0%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px auto;
+  position: relative;
+}
+
+.circular-loader span {
+  position: absolute;
+  font-family: 'Tajawal';
+  font-weight: bold;
+  font-size: 22px;
+  color: #000;
+}
     #successSection {
       display: none;
       margin-top: 10px;
@@ -224,10 +227,22 @@
         طريقة الدفع: <span style="font-weight: bold;">Visa</span>
         <img src="visa.png" style="width: 40px;" />
       </p>
-      <div class="progress-container" id="progressContainer">
-        <div class="progress-bar" id="progressBar"></div>
-      </div>
-      <p id="progressText"></p>
+      <div id="loadingBox" style="display: none; margin-top: 20px;">
+  <div style="position: relative; width: 120px; height: 120px; margin: auto;">
+    <svg width="120" height="120">
+      <circle cx="60" cy="60" r="50" stroke="#ddd" stroke-width="10" fill="none" />
+      <circle id="progressCircle" cx="60" cy="60" r="50" stroke="#000" stroke-width="10" fill="none"
+        stroke-linecap="round"
+        stroke-dasharray="314"
+        stroke-dashoffset="314"
+        transform="rotate(-90 60 60)" />
+    </svg>
+    <div id="percentageText"
+      style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); font-size:22px; font-family:'Tajawal'; font-weight:bold;">
+      0%
+    </div>
+  </div>
+</div>
       <div id="successSection"></div>
       <button id="payNow" style="margin-top: -16px;">ادفع الآن</button>
       <button id="cancelBtn" style="margin-top: 10px;">إلغاء</button>
@@ -319,31 +334,19 @@
       payNowBtn.innerText = 'جاري الدفع...';
       payNowBtn.style.background = '#999';
       document.getElementById('progressContainer').style.display = 'block';
+let percent = 0;
+interval = setInterval(() => {
+  percent++;
+  if (percent > 100) percent = 100;
 
-      let percent = 0;
-      let currentCoins = totalCoins;
-      let popupCount = 0;
-      const targetAmount = parseInt(amount);
-      const targetTop = currentCoins - targetAmount;
+  let angle = percent * 3.6;
+  progressCircle.style.background = `conic-gradient(#4cd964 ${angle}deg, #eee ${angle}deg)`;
+  percentageText.textContent = `${percent}%`;
 
-      const interval = setInterval(() => {
-        percent++;
-        progressBar.style.width = percent + '%';
-        progressText.innerText = percent + '%';
-
-        const step = Math.ceil(targetAmount / 100);
-        popupCount += step;
-        currentCoins -= step;
-
-        if (popupCount >= targetAmount) popupCount = targetAmount;
-        if (currentCoins <= targetTop) currentCoins = targetTop;
-
-        topCoinDisplay.innerHTML = `<span style="font-size: 20px;">${currentCoins}</span> <img src="coin-new.png" style="width: 14px; height: 14px; object-fit: contain; position: relative; top: -1px;" />`;
-
-        popupCoins.querySelector('span span').textContent = popupCount;
-
-        if (percent >= 100) {
-          clearInterval(interval);
+  if (percent === 100) {
+    clearInterval(interval);
+    loadingBox.style.display = 'none';
+        popupCoins.querySelector('span span').textContent = popupCount
           document.getElementById('successSound').play();
           successSection.innerHTML = `
             <div style="text-align:center;">
