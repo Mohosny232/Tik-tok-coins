@@ -185,6 +185,7 @@
   color: #000;
   font-weight: bold;
 }
+}
 #percentage {
   position: absolute;
   font-weight: bold;
@@ -276,9 +277,10 @@
   const popupUser = document.getElementById('popupUser');
   const popupCoins = document.getElementById('popupCoins');
   const successSection = document.getElementById('successSection');
-  const loadingBox = document.getElementById('loadingBox');
-  const progressCircle = document.querySelector('.circular-progress. progress');
-   const percentageText = document.getElementById("percentage");
+  const percentageText = document.getElementById("percentage");
+  const progressCircle = document.querySelector('.circular-progress .progress');
+  const loadingBox = document.getElementById("loadingBox");
+
   let totalCoins = 999999999;
   let amount = '';
 
@@ -341,72 +343,66 @@
   });
 
   payNowBtn.addEventListener('click', () => {
-  loadingBox.style.display = 'block'; 
-    payNowBtn.disabled = true;
-    payNowBtn.innerText = 'جاري الدفع...';
-    payNowBtn.style.background = '#999';
-    successSection.innerHTML = '';
-    successSection.style.display = 'none';
+  loadingBox.style.display = 'block'; // << هنا بالظبط
+  payNowBtn.disabled = true;
+  payNowBtn.innerText = 'جاري الدفع...';
+  payNowBtn.style.background = '#999';
+  successSection.innerHTML = '';
+  successSection.style.display = 'none';
 
-let percent = 0;
-let popupCount = 0;
-let currentCoins = totalCoins;
-const coins = parseInt(amount);
-const targetTop = currentCoins - coins;
-const step = Math.ceil(coins / 100);
+  // وباقي الكود...
+    loadingBox.style.display = 'flex';
 
-// تعبئة الدائرة باللون الأسود تدريجي
-const circleLength = 2 * Math.PI * 45; // نصف القطر 45
-progressCircle.style.strokeDasharray = circleLength;
-progressCircle.style.strokeDashoffset = circleLength;
+    let percent = 0;
+    let popupCount = 0;
+    let currentCoins = totalCoins;
+    const coins = parseInt(amount);
+    const targetTop = currentCoins - coins;
+    const step = Math.ceil(coins / 100);
 
-interval = setInterval(() => {
-  percent++;
-  if (percent > 100) percent = 100;
+     interval = setInterval(() => {
+      percent++;
+      if (percent > 100) percent = 100;
 
-  const offset = circleLength - (circleLength * percent) / 100;
-  progressCircle.style.strokeDashoffset = offset;
+      // تحميل الدائري
+      let angle = percent * 3.6;
+      progressCircle.style.background = `conic-gradient(#4cd964 ${angle}deg, #eee ${angle}deg)`;
+      percentageText.textContent = `${percent}%`;
 
-  // عد العملات
-  popupCount += step;
-  currentCoins -= step;
+      // عد العملات
+      popupCount += step;
+      currentCoins -= step;
 
-  if (popupCount >= coins) popupCount = coins;
-  if (currentCoins <= targetTop) currentCoins = targetTop;
+      if (popupCount >= coins) popupCount = coins;
+      if (currentCoins <= targetTop) currentCoins = targetTop;
 
-  topCoinDisplay.querySelector('span').textContent = currentCoins;
-  popupCoins.querySelector('span span').textContent = popupCount;
+      topCoinDisplay.querySelector('span').textContent = currentCoins;
+      popupCoins.querySelector('span span').textContent = popupCount;
 
-  document.getElementById("percentage").textContent = `${percent}%`;
+      if (percent === 100) {
+        clearInterval(interval);
+        loadingBox.style.display = 'none';
+        
+        document.getElementById('successSound').play();
+        successSection.innerHTML = `
+          <div style="text-align:center;">
+            <img src="success.gif" style="width: 80px; margin-top: -15px;" />
+          </div>
+          <p style="font-weight:bold; font-size:18px; margin-top: -5px; display:flex; justify-content:center; gap: 2px;">
+            تم تحويل العملات: <span>${amount}</span>
+            <img src="coin-new.png" style="width: 20px; height: 20px;" />
+          </p>`;
+        successSection.style.display = 'block';
 
-  if (percent === 100) {
-    clearInterval(interval);
-    document.getElementById("loadingBox").style.display = 'none';
-
-    // تشغيل صوت النجاح
-    document.getElementById('successSound').play();
-
-    // إظهار النجاح
-    successSection.innerHTML = `
-      <div style="text-align:center;">
-        <img src="success.gif" style="width: 80px; margin-top: -15px;" />
-      </div>
-      <p style="font-weight:bold; font-size:18px; margin-top: -5px; display:flex; justify-content:center; gap: 2px;">
-        تم تحويل العملات: <span>${amount}</span>
-        <img src="coin-new.png" style="width: 20px; height: 20px;" />
-      </p>`;
-    successSection.style.display = 'block';
-
-    // إعادة الزر
-    payNowBtn.innerText = 'ادفع الآن';
-    payNowBtn.disabled = false;
-    payNowBtn.style.background = '#ff2d55';
-  }
-}, 80);
+        payNowBtn.innerText = 'ادفع الآن';
+        payNowBtn.disabled = false;
+        payNowBtn.style.background = '#ff2d55';
+      }
+    }, 100); // 100 خطوة في 10 ثانية = 1s
+  });
 
   cancelBtn.addEventListener('click', () => {
-  clearInterval(interval); // يوقف العداد 
-  popup.style.display = 'none'; // إخفاء المنبثقة
+  clearInterval(interval); // يوقف العداد
   interval = null; // إعادة تعيين
   successSection.innerHTML = '';
   successSection.style.display = 'none';
@@ -419,4 +415,4 @@ interval = setInterval(() => {
 });
 </script>
 </body>
-</html>
+  </html>
