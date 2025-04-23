@@ -281,7 +281,8 @@
   const popupCoins = document.getElementById('popupCoins');
   const successSection = document.getElementById('successSection');
   const loadingBox = document.getElementById('loadingBox');
-  const percentageText = document.getElementById("percentage");
+  const progressCircle = document.querySelector('.circular-progress .progress');
+   const percentageText = document.getElementById("percentage");
   let totalCoins = 999999999;
   let amount = '';
 
@@ -360,7 +361,6 @@ const targetTop = currentCoins - coins;
 const step = Math.ceil(coins / 100);
 
 // تعبئة الدائرة باللون الأسود تدريجي
-const progressCircle = document.querySelector('.circular-progress .progress');
 const circleLength = 2 * Math.PI * 45; // نصف القطر 45
 progressCircle.style.strokeDasharray = circleLength;
 progressCircle.style.strokeDashoffset = circleLength;
