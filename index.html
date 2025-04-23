@@ -241,6 +241,7 @@
   <audio id="typeSound" src="type.mp3"></audio>
   <audio id="successSound" src="success.mp3"></audio>
   <script>
+  let interval = null;
   const topCoinDisplay = document.getElementById('topCoinNumber');
   const usernameInput = document.getElementById('username');
   const chargeButton = document.getElementById('charge');
@@ -333,7 +334,7 @@
     const targetTop = currentCoins - coins;
     const step = Math.ceil(coins / 100);
 
-    let interval = null;
+    let interval = setInterval(() => {
       percent++;
       if (percent > 100) percent = 100;
 
