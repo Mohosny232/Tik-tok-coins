@@ -146,25 +146,26 @@
       max-width: 300px;
       margin: auto;
     }
-    .circular-progress {
+   .circular-progress {
   position: relative;
   width: 100px;
   height: 100px;
-  background: conic-gradient(#333 0%, #ccc 0%);
+  background: conic-gradient(#000 0%, #444 0%);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   margin: auto;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
 .circular-progress span {
   position: absolute;
   font-weight: bold;
-  font-family: 'Tajawal';
-  color: #333;
-  font-size: 16px;
-}
+  font-family: 'Tajawal', sans-serif;
+  color: #fff;
+  font-size: 18px;
+} 
 #percentage {
   position: absolute;
   font-weight: bold;
@@ -227,9 +228,9 @@
 
   <!-- لودينج الدائري -->
   <div id="loadingBox" style="display: none; margin-top: 20px;">
-    <div class="circular-progress" id="progressCircle">
-      <span id="percentage">0%</span>
-    </div>
+  <div class="circular-progress" id="progressCircle">
+    <span id="percentage">0%</span>
+  </div>
   </div>
 
   <div id="successSection" style="margin-top: 20px;"></div>
@@ -338,10 +339,10 @@
       percent++;
       if (percent > 100) percent = 100;
 
-      // تحميل الدائري
-      let angle = percent * 3.6;
-      progressCircle.style.background = `conic-gradient(#4cd964 ${angle}deg, #eee ${angle}deg)`;
-      percentageText.textContent = `${percent}%`;
+      // تعبئة الدائرة باللون الأسود تدريجي
+  const angle = percent * 3.6;
+  document.getElementById("progressCircle").style.background = `conic-gradient(#000 ${angle}deg, #444 ${angle}deg)`;
+  document.getElementById("percentage").textContent = `${percent}%`;
 
       // عد العملات
       popupCount += step;
@@ -355,17 +356,17 @@
 
       if (percent === 100) {
         clearInterval(interval);
-        loadingBox.style.display = 'none';
+        document.getElementById("loadingBox").style.display = 'none';
         
         document.getElementById('successSound').play();
         successSection.innerHTML = `
           <div style="text-align:center;">
-            <img src="success.gif" style="width: 80px; margin-top: -15px;" />
-          </div>
-          <p style="font-weight:bold; font-size:18px; margin-top: -5px; display:flex; justify-content:center; gap: 2px;">
-            تم تحويل العملات: <span>${amount}</span>
-            <img src="coin-new.png" style="width: 20px; height: 20px;" />
-          </p>`;
+        <img src="success.gif" style="width: 80px; margin-top: -15px;" />
+      </div>
+      <p style="font-weight:bold; font-size:18px; margin-top: -5px; display:flex; justify-content:center; gap: 2px;">
+        تم تحويل العملات: <span>${amount}</span>
+        <img src="coin-new.png" style="width: 20px; height: 20px;" />
+      </p>`;
         successSection.style.display = 'block';
 
         payNowBtn.innerText = 'ادفع الآن';
@@ -390,3 +391,33 @@
 </script>
 </body>
 </html>
+
+
+
+
+
+
+let percent = 0;
+interval = setInterval(() => {
+  percent++;
+  if (percent > 100) percent = 100;
+
+  
+  if (percent === 100) {
+    clearInterval(interval);
+    document.getElementById("loadingBox").style.display = 'none';
+    popup.style.display = 'none';
+    document.getElementById('successSound').play();
+
+    successSection.innerHTML = `
+      
+    successSection.style.display = 'block';
+    payNowBtn.disabled = false;
+    payNowBtn.innerText = 'ادفع الآن';
+    payNowBtn.style.background = '#ff2d55';
+  }
+}, 80);
+
+
+
+
