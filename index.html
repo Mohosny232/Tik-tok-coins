@@ -376,6 +376,7 @@
   });
 
   cancelBtn.addEventListener('click', () => {
+  clearInterval(interval); // وقف العد بس
     popup.style.display = 'none';
     successSection.innerHTML = '';
     successSection.style.display = 'none';
