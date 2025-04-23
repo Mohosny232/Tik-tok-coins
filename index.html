@@ -281,10 +281,9 @@
   const popupUser = document.getElementById('popupUser');
   const popupCoins = document.getElementById('popupCoins');
   const successSection = document.getElementById('successSection');
-  const loadingBox = document.querySelector('.loading-box');
-  const progressCircle = document.querySelector('.circular-progress .progress');
-  const percentageText = document.querySelector('.percentage-text');
-
+  const loadingBox = document.getElementById('loadingBox');
+  const progressCircle = document.querySelector('circular-progress');
+  const percentageText = document.getElementById("percentage");
   let totalCoins = 999999999;
   let amount = '';
 
@@ -353,7 +352,7 @@
     successSection.innerHTML = '';
     successSection.style.display = 'none';
 
-    loadingBox.style.display = 'none';
+   loadingBox.style.display = 'block';
 
 let percent = 0;
 let popupCount = 0;
@@ -428,3 +427,7 @@ interval = setInterval(() => {
 </script>
 </body>
 </html>
+
+
+
+
