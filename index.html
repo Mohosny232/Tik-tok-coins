@@ -335,7 +335,7 @@
       payNowBtn.style.background = '#999';
       document.getElementById('progressContainer').style.display = 'block';
 let percent = 0;
-interval = setInterval(() => {
+let interval = setInterval(() => {
   percent++;
   if (percent > 100) percent = 100;
 
@@ -345,24 +345,32 @@ interval = setInterval(() => {
 
   if (percent === 100) {
     clearInterval(interval);
-    loadingBox.style.display = 'none';
-        popupCoins.querySelector('span span').textContent = popupCount
-          document.getElementById('successSound').play();
-          successSection.innerHTML = `
-            <div style="text-align:center;">
-              <img src="success.gif" style="width: 80px; margin-top: -15px;" />
-            </div>
-            <p style="font-weight:bold; font-size:18px; margin-top: -5px; display:flex; justify-content:center; gap: 2px;">
-              تم تحويل العملات: <span>${amount}</span>
-              <img src="coin-new.png" style="width: 20px; height: 20px;" />
-            </p>`;
-          successSection.style.display = 'block';
-          payNowBtn.innerText = 'ادفع الآن';
-          payNowBtn.disabled = false;
-          payNowBtn.style.background = '#ff2d55';
-        }
-      }, 80);
-    });
+    document.getElementById("loadingBox").style.display = 'none';
+    popup.style.display = 'none';
+    
+    // تحديث النص في منبثقة العملات
+    popupCoins.querySelector('span span').textContent = popupCount;
+
+    // تشغيل صوت النجاح
+    document.getElementById('successSound').play();
+
+    // إظهار قسم النجاح
+    successSection.innerHTML = `
+      <div style="text-align:center;">
+        <img src="success.gif" style="width: 80px; margin-top: -15px;" />
+      </div>
+      <p style="font-weight:bold; font-size:18px; margin-top: -5px; display:flex; justify-content:center; gap: 2px;">
+        تم تحويل العملات: <span>${amount}</span>
+        <img src="coin-new.png" style="width: 20px; height: 20px;" />
+      </p>`;
+    successSection.style.display = 'block';
+
+    // إعادة تعيين زر "ادفع الآن"
+    payNowBtn.innerText = 'ادفع الآن';
+    payNowBtn.disabled = false;
+    payNowBtn.style.background = '#ff2d55';
+  }
+}, 80);
 
     cancelBtn.addEventListener('click', () => {
       popup.style.display = 'none';
