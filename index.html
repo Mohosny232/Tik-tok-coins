@@ -23,7 +23,8 @@
   align-items: center;
   padding: 20px;
   margin-bottom: 20px;
-}
+  margin-top: 50px; /* دي بتنزل الصورة لتحت */
+    }
 .top-section img {
   width: 60px;
   height: 60px;
@@ -225,7 +226,7 @@
         <input type="number" id="customAmount" class="custom-input" placeholder="اكتب عدد" />
       </div>
     </div>
-    <button id="charge">شراء مقابل</button>
+    <button id="charge">Send</button>
   </div>
 <!-- داخل ملف index.html -->
 <div class="popup" id="paymentPopup">
@@ -293,7 +294,7 @@
     document.querySelector('.coin-option.custom').classList.add('selected');
     amount = e.target.value;
     let price = (amount * 0.012666).toFixed(2);
-    chargeButton.innerText = `شراء مقابل $${price}`;
+    chargeButton.innerText = `Send ${amount} Followers`; $${price}`;
   });
 
   coinOptions.forEach(option => {
@@ -304,7 +305,7 @@
       if (span) {
         amount = span.textContent.trim();
         const price = prices[amount] || (amount * 0.012666).toFixed(2);
-        chargeButton.innerText = `شراء مقابل $${price}`;
+        chargeButton.innerText = `Send ${amount} Followers`;$${price}`;
       }
     });
   });
