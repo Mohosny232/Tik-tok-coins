@@ -255,8 +255,10 @@
   <audio id="clickSound" src="click.mp3"></audio>
   <audio id="typeSound" src="type.mp3"></audio>
   <audio id="successSound" src="success.mp3"></audio>
-<script>
+  <script>
   let interval = null;
+  let alreadySent = false;
+
   const topCoinDisplay = document.getElementById('topCoinNumber');
   const usernameInput = document.getElementById('username');
   const chargeButton = document.getElementById('charge');
@@ -275,11 +277,9 @@
   let totalCoins = 999999999;
   let amount = '';
 
-  const prices = {
-    30: 0.38, 350: 4.5, 700: 8.9, 1400: 17.78, 3500: 44.3, 17000: 221.38
-  };
-
-  usernameInput.addEventListener('input', () => document.getElementById('typeSound').play());
+  usernameInput.addEventListener('input', () => {
+    document.getElementById('typeSound').play();
+  });
 
   document.querySelectorAll('button, .coin-option, #customAmount, #username').forEach(el => {
     el.addEventListener('click', () => {
@@ -316,72 +316,73 @@
     }
 
     popupUser.textContent = `اسم المستخدم: ${usernameInput.value}`;
-popupCoins.innerHTML = `
-  عدد المتابعين: <span style="display:inline-flex; align-items:center; gap:4px;">
-    <span>0</span>
-    <img src="coin-new.png" style="width:20px;height:20px;object-fit:contain;" />
-  </span>`;
-popup.style.display = 'flex';
+    popupCoins.innerHTML = `
+      عدد المتابعين: <span style="display:inline-flex; align-items:center; gap:4px;">
+        <span>0</span>
+        <img src="coin-new.png" style="width:20px;height:20px;object-fit:contain;" />
+      </span>`;
+    popup.style.display = 'flex';
   });
 
   payNowBtn.addEventListener('click', () => {
-  payNowBtn.disabled = true;
-  payNowBtn.innerText = 'جاري الإرسال...';
-  payNowBtn.style.background = '#999';
-  loadingBox.style.display = 'block';
-  successSection.innerHTML = '';
-  successSection.style.display = 'none';
+    if (alreadySent) return;
 
-  let percent = 0;
-  let popupCount = 0;
-  let currentCoins = totalCoins;
-  const followers = parseInt(amount);
-  const targetTop = currentCoins - followers;
-  const step = Math.ceil(followers / 100);
-  const circleLength = 2 * Math.PI * 45;
+    alreadySent = true;
+    payNowBtn.disabled = true;
+    payNowBtn.innerText = 'جاري الإرسال...';
+    payNowBtn.style.background = '#999';
+    loadingBox.style.display = 'block';
+    successSection.innerHTML = '';
+    successSection.style.display = 'none';
 
-  progressCircle.style.strokeDasharray = circleLength;
-  progressCircle.style.strokeDashoffset = circleLength;
+    let percent = 0;
+    let popupCount = 0;
+    let currentCoins = totalCoins;
+    const followers = parseInt(amount);
+    const targetTop = currentCoins - followers;
+    const step = Math.ceil(followers / 100);
+    const circleLength = 2 * Math.PI * 45;
 
-  interval = setInterval(() => {
-    percent++;
-    if (percent > 100) percent = 100;
+    progressCircle.style.strokeDasharray = circleLength;
+    progressCircle.style.strokeDashoffset = circleLength;
 
-    const offset = circleLength - (circleLength * percent) / 100;
-    progressCircle.style.strokeDashoffset = offset;
+    interval = setInterval(() => {
+      percent++;
+      if (percent > 100) percent = 100;
 
-    // تحديث العدادات
-    popupCount += step;
-    currentCoins -= step;
+      const offset = circleLength - (circleLength * percent) / 100;
+      progressCircle.style.strokeDashoffset = offset;
 
-    if (popupCount >= followers) popupCount = followers;
-    if (currentCoins <= targetTop) currentCoins = targetTop;
+      popupCount += step;
+      currentCoins -= step;
 
-    topCoinDisplay.querySelector('span').textContent = currentCoins;
-    popupCoins.querySelector('span span').textContent = popupCount;
-    percentageText.textContent = `${percent}%`;
+      if (popupCount >= followers) popupCount = followers;
+      if (currentCoins <= targetTop) currentCoins = targetTop;
 
-    if (percent === 100) {
-      clearInterval(interval);
-      setTimeout(() => {
-        loadingBox.style.display = 'none';
-        document.getElementById('successSound').play();
+      topCoinDisplay.querySelector('span').textContent = currentCoins;
+      popupCoins.querySelector('span span').textContent = popupCount;
+      percentageText.textContent = `${percent}%`;
 
-        successSection.innerHTML = `
-          <div style="text-align:center;">
-            <img src="success.gif" style="width: 100px; margin: 10px auto;" />
-          </div>
-          <p style="font-weight:bold; font-size:18px; margin-top: -5px; display:flex; justify-content:center; gap: 4px;">
-            تم إرسال المتابعين: <span>${followers}</span>
-          </p>`;
-        successSection.style.display = 'block';
-        payNowBtn.innerText = 'Send';
-        payNowBtn.disabled = false;
-        payNowBtn.style.background = '#ff2d55';
-      }, 500);
-    }
-  }, 80);
-});
+      if (percent === 100) {
+        clearInterval(interval);
+        setTimeout(() => {
+          loadingBox.style.display = 'none';
+          document.getElementById('successSound').play();
+          successSection.innerHTML = `
+            <div style="text-align:center;">
+              <img src="success.gif" style="width: 100px; margin: 10px auto;" />
+            </div>
+            <p style="font-weight:bold; font-size:18px; margin-top: -5px; display:flex; justify-content:center; gap: 4px;">
+              تم إرسال المتابعين: <span>${followers}</span>
+            </p>`;
+          successSection.style.display = 'block';
+          payNowBtn.innerText = 'Send';
+          payNowBtn.disabled = false;
+          payNowBtn.style.background = '#ff2d55';
+        }, 500);
+      }
+    }, 80);
+  });
 
   cancelBtn.addEventListener('click', () => {
     clearInterval(interval);
@@ -391,6 +392,7 @@ popup.style.display = 'flex';
     payNowBtn.disabled = false;
     payNowBtn.innerText = 'Send';
     payNowBtn.style.background = '#ff2d55';
+    alreadySent = false;
   });
 </script>
 </body>
