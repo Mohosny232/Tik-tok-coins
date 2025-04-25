@@ -343,43 +343,44 @@ popup.style.display = 'flex';
     progressCircle.style.strokeDashoffset = circleLength;
 
     interval = setInterval(() => {
-      percent++;
-      if (percent > 100) percent = 100;
+  if (percent < 100) {
+    percent++;
+    const offset = circleLength - (circleLength * percent) / 100;
+    progressCircle.style.strokeDashoffset = offset;
+    percentageText.textContent = `${percent}%`;
+  }
 
-      const offset = circleLength - (circleLength * percent) / 100;
-      progressCircle.style.strokeDashoffset = offset;
+  if (popupCount < followers) {
+    popupCount += step;
+    if (popupCount > followers) popupCount = followers;
+    document.getElementById('popupCount').textContent = popupCount;
+  }
 
-      popupCount += step;
-     document.getElementById('popupCount').textContent = popupCount;
-     currentCoins -= step;
+  if (currentCoins > targetTop) {
+    currentCoins -= step;
+    if (currentCoins < targetTop) currentCoins = targetTop;
+    topCoinDisplay.querySelector('span').textContent = currentCoins;
+  }
 
-      if (popupCount >= followers) popupCount = followers;
-      if (currentCoins <= targetTop) currentCoins = targetTop;
-
-      topCoinDisplay.querySelector('span').textContent = currentCoins;
-      
-      percentageText.textContent = `${percent}%`;
-
-      if (percent === 100) {
-        clearInterval(interval);
-        setTimeout(() => {
-          loadingBox.style.display = 'none';
-          document.getElementById('successSound').play();
-          successSection.innerHTML = `
-            <div style="text-align:center;">
-              <img src="success.gif" style="width: 100px; margin: 10px auto;" />
-            </div>
-            <p style="font-weight:bold; font-size:18px; margin-top: -5px; display:flex; justify-content:center; gap: 4px;">
-              تم إرسال المتابعين: <span>${followers}</span>
-            </p>`;
-          successSection.style.display = 'block';
-          payNowBtn.innerText = 'Send';
-          payNowBtn.disabled = false;
-          payNowBtn.style.background = '#ff2d55';
-        }, 500);
-      }
-    }, 80);
-  });
+  if (percent >= 100 && popupCount >= followers) {
+    clearInterval(interval);
+    setTimeout(() => {
+      loadingBox.style.display = 'none';
+      document.getElementById('successSound').play();
+      successSection.innerHTML = `
+        <div style="text-align:center;">
+          <img src="success.gif" style="width: 100px; margin: 10px auto;" />
+        </div>
+        <p style="font-weight:bold; font-size:18px; margin-top: -5px; display:flex; justify-content:center; gap: 4px;">
+          تم إرسال المتابعين: <span>${followers}</span>
+        </p>`;
+      successSection.style.display = 'block';
+      payNowBtn.innerText = 'Send';
+      payNowBtn.disabled = false;
+      payNowBtn.style.background = '#ff2d55';
+    }, 500);
+  }
+}, 80);
 
   cancelBtn.addEventListener('click', () => {
     clearInterval(interval);
