@@ -23,7 +23,7 @@
   align-items: center;
   padding: 20px;
   margin-bottom: 20px;
-  margin-top: 50px; /* دي بتنزل الصورة لتحت */
+  margin-top: 100px; /* دي بتنزل الصورة لتحت */
     }
 .top-section img {
   width: 60px;
@@ -298,17 +298,16 @@
   });
 
   coinOptions.forEach(option => {
-    option.addEventListener('click', () => {
-      coinOptions.forEach(o => o.classList.remove('selected'));
-      option.classList.add('selected');
-      const span = option.querySelector('span');
-      if (span) {
-        amount = span.textContent.trim();
-        const price = prices[amount] || (amount * 0.012666).toFixed(2);
-        chargeButton.innerText = `Send ${amount} Followers`;$${price}`;
-      }
-    });
+  option.addEventListener('click', () => {
+    coinOptions.forEach(o => o.classList.remove('selected'));
+    option.classList.add('selected');
+    const span = option.querySelector('span');
+    if (span) {
+      amount = span.textContent.trim();
+      chargeButton.innerText = `Send ${amount} Followers`;
+    }
   });
+});
 
   chargeButton.addEventListener('click', () => {
     if (usernameInput.value.trim() === '' || amount === '') {
