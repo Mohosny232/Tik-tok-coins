@@ -25,6 +25,28 @@
   margin-bottom: 20px;
   margin-top: 500px; /* دي بتنزل الصورة لتحت */
     }
+   .header-fixed {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: white;
+  padding: 15px 0;
+  text-align: center;
+  z-index: 999;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.header-fixed img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 5px;
+}
+
+.container {
+  margin-top: 140px; /* علشان يسيب مساحة للصورة والعنوان */
+}
 .top-section img {
   width: 60px;
   height: 60px;
@@ -207,13 +229,11 @@
   </style>
 </head>
 <body>
-  <div class="top-section">
+<div class="header-fixed">
   <img src="your-photo.jpg" alt="User" />
-  </div>
-  <div class="container">
-    <h1 style="color: black; white-space: nowrap;">Hosny Followers</h1>
-    <input type="text" id="username" placeholder" username" />
-    
+  <h1 style="color: black; white-space: nowrap;">Hosny Followers</h1>
+</div>
+    <input type="text" id="username" placeholder" username" /
     <div class="coins-section">
       <div class="coin-option"><div class="price-line"><span>100</span><img src="coin-new.png" class="coin-img" /></div></div>
       <div class="coin-option"><div class="price-line"><span>1000</span><img src="coin-new.png" class="coin-img" /></div></div>
