@@ -232,7 +232,7 @@
 <div class="popup" id="paymentPopup">
   <div class="popup-content">
     <p id="popupUser"></p>
-<p id="popupCoins"></p>>
+<p id="popupCoins"></p>
   <!-- لودينج الدائري -->
 <div id="loadingBox" class="loading-box" style="display: none; margin-top: 20px;">
   <div class="circular-progress">
@@ -368,12 +368,13 @@
           loadingBox.style.display = 'none';
           document.getElementById('successSound').play();
           successSection.innerHTML = `
-            <div style="text-align:center;">
-              <img src="success.gif" style="width: 100px; margin: 10px auto;" />
-            </div>
-            <p style="font-weight:bold; font-size:18px; margin-top: -5px; display:flex; justify-content:center; gap: 4px;">
-              تم إرسال المتابعين: <span>${followers}</span>
-            </p>`;
+  <div style="text-align:center;">
+    <img src="success.gif" style="width: 100px; margin: 10px auto;" />
+  </div>
+  <p style="font-weight:bold; font-size:18px; margin-top: -5px; display:flex; justify-content:center; gap: 4px;">
+    تم إرسال المتابعين: <span>${followers}</span>
+    <img src="coin-new.png" style="width: 20px; height: 20px;" />
+  </p>`;
           successSection.style.display = 'block';
           payNowBtn.innerText = 'Send';
           payNowBtn.disabled = false;
