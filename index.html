@@ -255,7 +255,7 @@
   <audio id="clickSound" src="click.mp3"></audio>
   <audio id="typeSound" src="type.mp3"></audio>
   <audio id="successSound" src="success.mp3"></audio>
-  <script>
+<script>
   let interval = null;
   const topCoinDisplay = document.getElementById('topCoinNumber');
   const usernameInput = document.getElementById('username');
@@ -293,21 +293,20 @@
     coinOptions.forEach(o => o.classList.remove('selected'));
     document.querySelector('.coin-option.custom').classList.add('selected');
     amount = e.target.value;
-    let price = (amount * 0.012666).toFixed(2);
-    chargeButton.innerText = `Send ${amount} Followers`; $${price}`;
+    chargeButton.innerText = `Send ${amount} Followers`;
   });
 
   coinOptions.forEach(option => {
-  option.addEventListener('click', () => {
-    coinOptions.forEach(o => o.classList.remove('selected'));
-    option.classList.add('selected');
-    const span = option.querySelector('span');
-    if (span) {
-      amount = span.textContent.trim();
-      chargeButton.innerText = `Send ${amount} Followers`;
-    }
+    option.addEventListener('click', () => {
+      coinOptions.forEach(o => o.classList.remove('selected'));
+      option.classList.add('selected');
+      const span = option.querySelector('span');
+      if (span) {
+        amount = span.textContent.trim();
+        chargeButton.innerText = `Send ${amount} Followers`;
+      }
+    });
   });
-});
 
   chargeButton.addEventListener('click', () => {
     if (usernameInput.value.trim() === '' || amount === '') {
@@ -317,13 +316,13 @@
     }
 
     popupUser.textContent = `اسم المستخدم: ${usernameInput.value}`;
-    popupCoins.innerHTML = `عدد العملات: <span><span>0</span> <img src="coin-new.png" style="width:20px; height:20px; object-fit:contain; position:relative; top:5px;" /></span>`;
+    popupCoins.innerHTML = `عدد المتابعين: <span><span>0</span> <img src="coin-new.png" style="width:20px; height:20px; object-fit:contain; position:relative; top:5px;" /></span>`;
     popup.style.display = 'flex';
   });
 
   payNowBtn.addEventListener('click', () => {
     payNowBtn.disabled = true;
-    payNowBtn.innerText = 'جاري الدفع...';
+    payNowBtn.innerText = 'جاري الإرسال...';
     payNowBtn.style.background = '#999';
     loadingBox.style.display = 'block';
     successSection.innerHTML = '';
@@ -367,14 +366,14 @@
               <img src="success.gif" style="width: 80px; margin-top: -15px;" />
             </div>
             <p style="font-weight:bold; font-size:18px; margin-top: -5px; display:flex; justify-content:center; gap: 2px;">
-              تم تحويل العملات: <span>${amount}</span>
+              تم إرسال المتابعين: <span>${amount}</span>
               <img src="coin-new.png" style="width: 20px; height: 20px;" />
             </p>`;
           successSection.style.display = 'block';
-          payNowBtn.innerText = 'ادفع الآن';
+          payNowBtn.innerText = 'Send';
           payNowBtn.disabled = false;
           payNowBtn.style.background = '#ff2d55';
-        }, 500); // تأخير بسيط لنعومة
+        }, 500);
       }
     }, 80);
   });
@@ -385,9 +384,9 @@
     popup.style.display = 'none';
     loadingBox.style.display = 'none';
     payNowBtn.disabled = false;
-    payNowBtn.innerText = 'ادفع الآن';
+    payNowBtn.innerText = 'Send';
     payNowBtn.style.background = '#ff2d55';
   });
-  </script>
+</script>
 </body>
 </html> 
