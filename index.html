@@ -316,8 +316,12 @@
     }
 
     popupUser.textContent = `اسم المستخدم: ${usernameInput.value}`;
-    popupCoins.innerHTML = `عدد المتابعين: <span><span>0</span> <img src="coin-new.png" style="width:20px; height:20px; object-fit:contain; position:relative; top:5px;" /></span>`;
-    popup.style.display = 'flex';
+popupCoins.innerHTML = `
+  عدد المتابعين: <span style="display:inline-flex; align-items:center; gap:4px;">
+    <span>0</span>
+    <img src="coin-new.png" style="width:20px;height:20px;object-fit:contain;" />
+  </span>`;
+popup.style.display = 'flex';
   });
 
   payNowBtn.addEventListener('click', () => {
@@ -340,12 +344,15 @@
     progressCircle.style.strokeDashoffset = circleLength;
 
     interval = setInterval(() => {
-      percent++;
-      if (percent > 100) percent = 100;
+  percent++;
+  if (percent > 100) percent = 100;
 
-      const offset = circleLength - (circleLength * percent) / 100;
-      progressCircle.style.strokeDashoffset = offset;
+  const offset = circleLength - (circleLength * percent) / 100;
+  progressCircle.style.strokeDashoffset = offset;
 
+  percentageText.textContent = `${percent}%`; // <<< ده مهم جداً
+
+  // باقي الكود هنا ...
       popupCount += step;
       currentCoins -= step;
 
