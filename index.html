@@ -354,13 +354,14 @@ popup.style.display = 'flex';
       progressCircle.style.strokeDashoffset = offset;
 
       popupCount += step;
-      currentCoins -= step;
+     document.getElementById('popupCount').textContent = popupCount;
+     currentCoins -= step;
 
       if (popupCount >= followers) popupCount = followers;
       if (currentCoins <= targetTop) currentCoins = targetTop;
 
       topCoinDisplay.querySelector('span').textContent = currentCoins;
-      document.getElementById('popupCount').textContent = popupCount;
+      
       percentageText.textContent = `${percent}%`;
 
       if (percent === 100) {
