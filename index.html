@@ -234,29 +234,29 @@
     <h1 style="color: black; white-space: nowrap;">Hosny Followers</h1>
   </div>
 
-  <!-- خانة اسم المستخدم -->
-  <div style="margin: 20px 20px 10px;">
+  <div class="container">
+    <!-- خانة اسم المستخدم -->
     <input
       type="text"
       id="username"
       placeholder="اكتب اسم المستخدم"
-      style="width: 100%; padding: 12px; font-size: 18px; border: 2px solid #ccc; border-radius: 10px; text-align: center;" />
-  </div>
+      style="width: 100%; padding: 12px; font-size: 18px; margin-bottom: 20px; border: 2px solid #ccc; border-radius: 10px; text-align: center;" />
 
-  <!-- باقي الصفحة -->
-  <div class="coins-section" style="margin-top: 20px;">...</div>
-  <div class="coin-option"><div class="price-line"><span>100</span><img src="coin-new.png" class="coin-img" /></div></div>
-  <div class="coin-option"><div class="price-line"><span>500</span><img src="coin-new.png" class="coin-img" /></div></div>
-  <div class="coin-option"><div class="price-line"><span>1000</span><img src="coin-new.png" class="coin-img" /></div></div>
-  <div class="coin-option"><div class="price-line"><span>5000</span><img src="coin-new.png" class="coin-img" /></div></div>
-  <div class="coin-option"><div class="price-line"><span>10000</span><img src="coin-new.png" class="coin-img" /></div></div>
-  <div class="coin-option"><div class="price-line"><span>30000</span><img src="coin-new.png" class="coin-img" /></div></div>
-  <div class="coin-option custom">
-    <div>مخصص</div>
-    <input type="number" id="customAmount" class="custom-input" placeholder="اكتب عدد" />
-  </div>
-</div>
- <button id="charge">Send</button>
+    <!-- خانات المتابعين -->
+    <div class="coins-section">
+      <div class="coin-option"><div class="price-line"><span>100</span><img src="coin-new.png" class="coin-img" /></div></div>
+      <div class="coin-option"><div class="price-line"><span>500</span><img src="coin-new.png" class="coin-img" /></div></div>
+      <div class="coin-option"><div class="price-line"><span>1000</span><img src="coin-new.png" class="coin-img" /></div></div>
+      <div class="coin-option"><div class="price-line"><span>5000</span><img src="coin-new.png" class="coin-img" /></div></div>
+      <div class="coin-option"><div class="price-line"><span>10000</span><img src="coin-new.png" class="coin-img" /></div></div>
+      <div class="coin-option"><div class="price-line"><span>30000</span><img src="coin-new.png" class="coin-img" /></div></div>
+      <div class="coin-option custom">
+        <div>مخصص</div>
+        <input type="number" id="customAmount" class="custom-input" placeholder="اكتب عدد" />
+      </div>
+    </div>
+
+    <button id="charge">Send</button>
   </div>
 <!-- داخل ملف index.html -->
 <div class="popup" id="paymentPopup">
