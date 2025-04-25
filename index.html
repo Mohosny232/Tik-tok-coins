@@ -325,65 +325,63 @@ popup.style.display = 'flex';
   });
 
   payNowBtn.addEventListener('click', () => {
-    payNowBtn.disabled = true;
-    payNowBtn.innerText = 'جاري الإرسال...';
-    payNowBtn.style.background = '#999';
-    loadingBox.style.display = 'block';
-    successSection.innerHTML = '';
-    successSection.style.display = 'none';
+  payNowBtn.disabled = true;
+  payNowBtn.innerText = 'جاري الإرسال...';
+  payNowBtn.style.background = '#999';
+  loadingBox.style.display = 'block';
+  successSection.innerHTML = '';
+  successSection.style.display = 'none';
 
-    let percent = 0;
-    let popupCount = 0;
-    let currentCoins = totalCoins;
-    const coins = parseInt(amount);
-    const targetTop = currentCoins - coins;
-    const step = Math.ceil(coins / 100);
-    const circleLength = 2 * Math.PI * 45;
+  let percent = 0;
+  let popupCount = 0;
+  let currentCoins = totalCoins;
+  const followers = parseInt(amount);
+  const targetTop = currentCoins - followers;
+  const step = Math.ceil(followers / 100);
+  const circleLength = 2 * Math.PI * 45;
 
-    progressCircle.style.strokeDasharray = circleLength;
-    progressCircle.style.strokeDashoffset = circleLength;
+  progressCircle.style.strokeDasharray = circleLength;
+  progressCircle.style.strokeDashoffset = circleLength;
 
-    interval = setInterval(() => {
-  percent++;
-  if (percent > 100) percent = 100;
+  interval = setInterval(() => {
+    percent++;
+    if (percent > 100) percent = 100;
 
-  const offset = circleLength - (circleLength * percent) / 100;
-  progressCircle.style.strokeDashoffset = offset;
+    const offset = circleLength - (circleLength * percent) / 100;
+    progressCircle.style.strokeDashoffset = offset;
 
-  percentageText.textContent = `${percent}%`; // <<< ده مهم جداً
+    // تحديث العدادات
+    popupCount += step;
+    currentCoins -= step;
 
-  // باقي الكود هنا ...
-      popupCount += step;
-      currentCoins -= step;
+    if (popupCount >= followers) popupCount = followers;
+    if (currentCoins <= targetTop) currentCoins = targetTop;
 
-      if (popupCount >= coins) popupCount = coins;
-      if (currentCoins <= targetTop) currentCoins = targetTop;
+    topCoinDisplay.querySelector('span').textContent = currentCoins;
+    popupCoins.querySelector('span span').textContent = popupCount;
+    percentageText.textContent = `${percent}%`;
 
-      topCoinDisplay.querySelector('span').textContent = currentCoins;
-      popupCoins.querySelector('span span').textContent = popupCount;
-      percentageText.textContent = `${percent}%`;
+    if (percent === 100) {
+      clearInterval(interval);
+      setTimeout(() => {
+        loadingBox.style.display = 'none';
+        document.getElementById('successSound').play();
 
-      if (percent === 100) {
-        clearInterval(interval);
-        setTimeout(() => {
-          loadingBox.style.display = 'none';
-          document.getElementById('successSound').play();
-          successSection.innerHTML = `
-            <div style="text-align:center;">
-              <img src="success.gif" style="width: 80px; margin-top: -15px;" />
-            </div>
-            <p style="font-weight:bold; font-size:18px; margin-top: -5px; display:flex; justify-content:center; gap: 2px;">
-              تم إرسال المتابعين: <span>${amount}</span>
-              <img src="coin-new.png" style="width: 20px; height: 20px;" />
-            </p>`;
-          successSection.style.display = 'block';
-          payNowBtn.innerText = 'Send';
-          payNowBtn.disabled = false;
-          payNowBtn.style.background = '#ff2d55';
-        }, 500);
-      }
-    }, 80);
-  });
+        successSection.innerHTML = `
+          <div style="text-align:center;">
+            <img src="success.gif" style="width: 100px; margin: 10px auto;" />
+          </div>
+          <p style="font-weight:bold; font-size:18px; margin-top: -5px; display:flex; justify-content:center; gap: 4px;">
+            تم إرسال المتابعين: <span>${followers}</span>
+          </p>`;
+        successSection.style.display = 'block';
+        payNowBtn.innerText = 'Send';
+        payNowBtn.disabled = false;
+        payNowBtn.style.background = '#ff2d55';
+      }, 500);
+    }
+  }, 80);
+});
 
   cancelBtn.addEventListener('click', () => {
     clearInterval(interval);
