@@ -253,9 +253,10 @@
         <input type="number" id="customAmount" class="custom-input" placeholder="اكتب عدد" />
       </div>
     </div>
-
-    <button id="charge">Send</button>
-  </div>
+<button id="charge">
+  <img src="coin-new.png" style="width:30px; height:30px; vertical-align:middle; margin-left:6px;" />
+  Send Coins
+</button>
 <!-- داخل ملف index.html -->
 <div class="popup" id="paymentPopup">
   <div class="popup-content">
@@ -327,8 +328,7 @@
       const span = option.querySelector('span');
       if (span) {
         amount = span.textContent.trim();
-        chargeButton.innerText = `Send ${amount} Followers`;
-      }
+      chargeButton.innerHTML = `<img src="coin-new.png" style="width:30px; height:30px; vertical-align:middle; margin-left:6px;" /> Send ${amount} Coins`;
     });
   });
 
