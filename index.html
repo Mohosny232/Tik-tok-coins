@@ -262,7 +262,7 @@
 <div class="popup" id="paymentPopup">
   <div class="popup-content">
     <p id="popupUser"></p>
-<p id="popupCoins"></p>
+   <p id="popupCoins"></p>
   <!-- لودينج الدائري -->
 <div id="loadingBox" class="loading-box" style="display: none; margin-top: 20px;">
   <div class="circular-progress">
@@ -343,7 +343,7 @@
       setTimeout(() => usernameInput.classList.remove('shake'), 400);
       return;
     }
-
+document.getElementById("popupUsernameValue").textContent = document.getElementById("username").value;
     popupUser.textContent = `Username: ${usernameInput.value}`;
 popupCoins.innerHTML = `
   Coins to send:
