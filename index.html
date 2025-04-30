@@ -295,7 +295,6 @@
   const popup = document.getElementById('paymentPopup');
   const payNowBtn = document.getElementById('payNow');
   const cancelBtn = document.getElementById('cancelBtn');
-  const popupUser = document.getElementById('popupUser');
   const popupCoins = document.getElementById('popupCoins');
   const successSection = document.getElementById('successSection');
   const loadingBox = document.getElementById('loadingBox');
@@ -354,7 +353,6 @@
 
   // تحديث البيانات في المنبثقة
   document.getElementById("popupUsernameValue").textContent = username;
-  popupUser.textContent = `Username: ${username}`;
   popupCoins.innerHTML = `
     Coins to send:
     <span style="display: inline-flex; align-items: center; position: relative;">
