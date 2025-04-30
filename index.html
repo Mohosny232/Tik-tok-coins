@@ -351,9 +351,8 @@ popupCoins.innerHTML = `
   <img src="coin-new.png" style="width: 40px; height: 40px; object-fit: contain; position: relative; left: 8px;" />
 </span>
   `;
-    popup.style.display = 'flex';
-   document.getElementById("popupUsernameValue").textContent = document.getElementById("username").value;
-
+ document.getElementById("popupUsernameValue").textContent = document.getElementById("username").value;
+popup.style.display = 'flex';
   });
 
   payNowBtn.addEventListener('click', () => {
