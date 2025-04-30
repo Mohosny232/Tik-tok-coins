@@ -355,12 +355,13 @@ popupCoins.innerHTML = `
 </span>
   `;
     popup.style.display = 'flex';
+   document.getElementById("popupUsernameValue").textContent = document.getElementById("username").value;
+
   });
 
   payNowBtn.addEventListener('click', () => {
     if (alreadySent) return;
-   document.getElementById("popupUsernameValue").textContent = document.getElementById("username").value;
-    alreadySent = true;
+     alreadySent = true;
     payNowBtn.disabled = true;
     payNowBtn.innerText = '...Loading';
     payNowBtn.style.background = '#999';
