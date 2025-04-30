@@ -366,16 +366,6 @@
   // إظهار المنبثقة
   popup.style.display = 'flex';
 });
-
-  // تحديث اسم المستخدم داخل البوب أب بعد ظهوره
-  setTimeout(() => {
-    const usernameValueEl = document.getElementById("popupUsernameValue");
-    if (usernameValueEl) {
-      usernameValueEl.textContent = usernameInput.value;
-    }
-  }, 50);
-});
-
   payNowBtn.addEventListener('click', () => {
     if (alreadySent) return;
      alreadySent = true;
