@@ -257,6 +257,7 @@
   <img src="coin-new.png" style="width:30px; height:30px; vertical-align:middle; margin-left:6px;" />
   Send Coins
 </button>
+ </div> 
 <!-- داخل ملف index.html -->
 <div class="popup" id="paymentPopup">
   <div class="popup-content">
@@ -318,7 +319,7 @@
     coinOptions.forEach(o => o.classList.remove('selected'));
     document.querySelector('.coin-option.custom').classList.add('selected');
     amount = e.target.value;
-    chargeButton.innerText = `Send ${amount} Followers`;
+
   });
 
   coinOptions.forEach(option => {
@@ -329,7 +330,8 @@
       if (span) {
         amount = span.textContent.trim();
       chargeButton.innerHTML = `<img src="coin-new.png" style="width:30px; height:30px; vertical-align:middle; margin-left:6px;" /> Send ${amount} Coins`;
-    });
+    }      
+ });
   });
 
   chargeButton.addEventListener('click', () => {
