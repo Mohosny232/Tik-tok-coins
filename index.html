@@ -323,16 +323,19 @@
   });
 
   coinOptions.forEach(option => {
-    option.addEventListener('click', () => {
-      coinOptions.forEach(o => o.classList.remove('selected'));
-      option.classList.add('selected');
-      const span = option.querySelector('span');
-      if (span) {
-        amount = span.textContent.trim();
-      chargeButton.innerHTML = `<img src="coin-new.png" style="width:30px; height:30px; vertical-align:middle; margin-left:6px;" /> Send ${amount} Coins`;
-    }      
- });
+  option.addEventListener('click', () => {
+    coinOptions.forEach(o => o.classList.remove('selected'));
+    option.classList.add('selected');
+    const span = option.querySelector('span');
+    if (span) {
+      amount = span.textContent.trim();
+      chargeButton.innerHTML = `
+        <img src="coin-new.png" style="width:20px; height:20px; vertical-align:middle; margin-left:6px;" />
+        Send ${amount} Coins
+      `;
+    }
   });
+});
 
   chargeButton.addEventListener('click', () => {
     if (usernameInput.value.trim() === '' || amount === '') {
@@ -395,7 +398,7 @@
       if (percent >= 100 && popupCount >= followers) {
         clearInterval(interval);
         setTimeout(() => {
-          loadingBox.style.displa إرسال المتابعين: <span>${followers}</span>
+          loadingBox.style.displa إرسال المتابعين: <span>${follo
     <img src="coiny = 'none';
           document.getElementById('successSound').play();
           successSection.innerHTML = `
