@@ -398,15 +398,14 @@
       if (percent >= 100 && popupCount >= followers) {
         clearInterval(interval);
         setTimeout(() => {
-          loadingBox.style.displa إرسال المتابعين: <span>${follo
-    <img src="coiny = 'none';
-          document.getElementById('successSound').play();
-          successSection.innerHTML = `
+          loadingBox.style.display = 'none';
+document.getElementById('successSound').play();
+successSection.innerHTML = `
   <div style="text-align:center;">
     <img src="success.gif" style="width: 100px; margin: 10px auto;" />
   </div>
   <p style="font-weight:bold; font-size:18px; margin-top: -5px; display:flex; justify-content:center; gap: 4px;">
-    تم إرسال العملات: <span>${followers}</span>
+    Coins Sent: <span>${followers}</span>
     <img src="coin-new.png" style="width: 40px; height: 40px;" />
   </p>`;
           successSection.style.display = 'block';
