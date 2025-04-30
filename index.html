@@ -359,7 +359,7 @@ popupCoins.innerHTML = `
 
   payNowBtn.addEventListener('click', () => {
     if (alreadySent) return;
-
+   document.getElementById("popupUsernameValue").textContent = document.getElementById("username").value;
     alreadySent = true;
     payNowBtn.disabled = true;
     payNowBtn.innerText = '...Loading';
