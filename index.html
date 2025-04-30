@@ -330,7 +330,7 @@
     if (span) {
       amount = span.textContent.trim();
       chargeButton.innerHTML = `
-        <img src="coin-new.png" style="width:20px; height:20px; vertical-align:middle; margin-left:6px;" />
+        <img src="coin-new.png" style="width:30px; height:30px; vertical-align:middle; margin-left:5px;" />
         Send ${amount} Coins
       `;
     }
@@ -344,12 +344,12 @@
       return;
     }
 
-    popupUser.textContent = `اسم المستخدم: ${usernameInput.value}`;
-    popupCoins.innerHTML = `
-    عدد العملات: <span style="display:inline-flex; align-items:center; gap:4px;">
-       <span id="popupCount">0</span>
-        <img src="coin-new.png" style="width:40px;height:40px;object-fit:contain;" />
-      </span>`;
+    popupUser.textContent = `Username: ${usernameInput.value}`;
+popupCoins.innerHTML = `
+  Coins to send: <span style="display:inline-flex; align-items:center; gap:4px;">
+    <span id="popupCount">0</span>
+    <img src="coin-new.png" style="width:40px;height:40px;object-fit:contain;" />
+  </span>`;
     popup.style.display = 'flex';
   });
 
@@ -358,7 +358,7 @@
 
     alreadySent = true;
     payNowBtn.disabled = true;
-    payNowBtn.innerText = 'جاري الإرسال...';
+    payNowBtn.innerText = 'Loading...';
     payNowBtn.style.background = '#999';
     loadingBox.style.display = 'block';
     successSection.innerHTML = '';
