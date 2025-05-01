@@ -354,11 +354,11 @@
   // تحديث البيانات في المنبثقة
   document.getElementById("popupUsernameValue").textContent = username;
 popupCoins.innerHTML = `
-  <div style="display: flex; justify-content: center; align-items: center; font-weight: bold; margin-top: 10px;">
-    <span style="margin-left: 5px;">Coins:</span>
-    <img src="coin-new.png" style="width: 40px; height: 40px; object-fit: contain; margin: 0 5px;" />
-    <span id="popupCount">0</span>
-  </div>
+  <p style="font-weight:bold; font-size:18px; margin-top: -10px; display: flex; justify-content: center; align-items: center; gap: 0px;">
+  Coins
+  <span>${amount}</span>
+  <img src="coin-new.png" style="width: 40px; height: 40px; object-fit: contain;" />
+</p>
 `;
   // إظهار المنبثقة
   popup.style.display = 'flex';
