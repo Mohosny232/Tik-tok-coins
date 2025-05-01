@@ -354,9 +354,12 @@
   // تحديث البيانات في المنبثقة
   document.getElementById("popupUsernameValue").textContent = username;
   popupCoins.innerHTML = `
-  <div style="position: relative; display: inline-block; font-weight: bold; font-size: 18px;">
-    <span id="popupCount" style="position: relative; z-index: 1;">0</span>
-    <img src="coin-new.png" style="width: 40px; height: 40px; object-fit: contain; position: absolute; top: 50%; transform: translateY(-50%); left: 100%; margin-left: -20px;" />
+  <div style="display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 18px;">
+    Coins to send:
+    <div style="display: flex; align-items: center; margin-right: 8px;">
+      <img src="coin-new.png" style="width: 40px; height: 40px; object-fit: contain;" />
+      <span id="popupCount" style="margin-left: 5px;">0</span>
+    </div>
   </div>
 `;
 
