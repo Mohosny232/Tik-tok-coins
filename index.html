@@ -1,94 +1,133 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<!DOCTYPE html><html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>أرباح تيك توك الوهمية</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TikTok Balance</title>
   <style>
     body {
       margin: 0;
       font-family: sans-serif;
-      background-color: #000;
-      position: relative;
+      background-color: #fff;
     }
-
-    .main-screen {
-      width: 100%;
-      height: 100vh;
-      background: url('IMAGE_1_URL') no-repeat center center;
-      background-size: cover;
-      position: relative;
-    }
-
-    .show-button {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      background-color: rgba(255,255,255,0.9);
-      color: #000;
-      padding: 10px 20px;
-      font-weight: bold;
-      border-radius: 10px;
-      cursor: pointer;
-      z-index: 10;
-    }
-
-    .overlay {
-      position: fixed;
-      top: 0; right: 0; bottom: 0; left: 0;
-      background-color: rgba(0,0,0,0.6);
-      display: none;
-      justify-content: center;
+    .header {
+      display: flex;
+      justify-content: space-between;
       align-items: center;
-      z-index: 1000;
+      padding: 10px;
+      font-size: 14px;
+      border-bottom: 1px solid #eee;
     }
-
-    .popup-image {
-      width: 90%;
-      max-width: 400px;
-      border-radius: 20px;
-      box-shadow: 0 0 20px #000;
-      animation: slideUp 0.5s ease;
+    .balance-title {
+      font-size: 22px;
+      font-weight: bold;
+      padding: 15px;
     }
-
-    .close-btn {
-      position: absolute;
-      top: 20px;
-      left: 20px;
-      background: #fff;
-      border: none;
-      font-size: 18px;
-      padding: 5px 10px;
+    .balance-box {
+      background: #111;
+      color: #fff;
+      border-radius: 12px;
+      margin: 0 15px;
+      padding: 15px;
+    }
+    .balance-box .label {
+      color: #aaa;
+      font-size: 12px;
+    }
+    .balance-box .amount {
+      font-size: 28px;
+      font-weight: bold;
+    }
+    .view {
+      float: right;
+      font-size: 12px;
+      color: #aaa;
       cursor: pointer;
-      border-radius: 50%;
     }
-
-    @keyframes slideUp {
-      from { transform: translateY(100px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
+    .coins-section {
+      margin-top: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 14px;
+    }
+    .coins-section span {
+      display: flex;
+      align-items: center;
+    }
+    .red-box {
+      background: #ffe9ef;
+      border-radius: 12px;
+      padding: 10px;
+      margin: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .section-title {
+      font-weight: bold;
+      padding: 0 15px;
+      margin-top: 10px;
+    }
+    .section-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      padding: 0 15px;
+      margin-top: 10px;
+    }
+    .card {
+      background: #f5f5f5;
+      padding: 20px;
+      border-radius: 12px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .services {
+      padding: 0 15px;
+      margin-top: 10px;
+    }
+    .service-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 0;
+      border-bottom: 1px solid #eee;
     }
   </style>
 </head>
 <body>
-
-  <div class="main-screen">
-    <div class="show-button" onclick="showPopup()">عرض</div>
+  <div class="header">
+    <div>&larr;</div>
+    <div>EGP</div>
+  </div>  <div class="balance-title">خَسِييٓ's balance</div>  <div class="balance-box">
+    <div class="label">Estimated balance <span class="view" onclick="alert('عرض التفاصيل')">View</span></div>
+    <div class="amount">EGP 809,829.23</div>
+    <div class="coins-section">
+      <span>Coins: <strong>4,049,146</strong></span>
+      <span style="color: #aaa; font-size: 12px;">Get Coins</span>
+    </div>
+  </div>  <div class="red-box">
+    <div>
+      <div style="font-weight: bold;">LIVE Studio New Stars</div>
+      <div style="font-size: 13px;">Join the campaign and get rewards!</div>
+    </div>
+    <div style="color: #f33; font-weight: bold;">Join now →</div>
+  </div>  <div class="section-title">Monetization</div>
+  <div class="section-grid">
+    <div class="card">💰 LIVE rewards</div>
+    <div class="card">⭐ Campaigns</div>
+  </div>  <div class="section-title">Services</div>
+  <div class="services">
+    <div class="service-item">
+      <span>📄 Transactions</span>
+      <span>›</span>
+    </div>
+    <div class="service-item">
+      <span>🛡️ Identity verification</span>
+      <span style="color: green; font-size: 12px;">Verified</span>
+    </div>
   </div>
-
-  <div class="overlay" id="overlay" onclick="hidePopup()">
-    <button class="close-btn" onclick="hidePopup(event)">×</button>
-    <img class="popup-image" src="IMAGE_2_URL" alt="التفاصيل">
-  </div>
-
-  <script>
-    function showPopup() {
-      document.getElementById('overlay').style.display = 'flex';
-    }
-
-    function hidePopup(e) {
-      if (e) e.stopPropagation();
-      document.getElementById('overlay').style.display = 'none';
-    }
-  </script>
-
 </body>
-</html>
+  </html>
