@@ -11,9 +11,9 @@
       background: #000;
       display: flex;
       justify-content: center;
-      align-items: center;
-      height: 100vh;
-      overflow: hidden;
+      align-items: start;
+      min-height: 100vh;
+      overflow: auto;
       font-family: 'Tajawal', sans-serif;
     }
 
@@ -22,8 +22,6 @@
       width: 1080px;
       height: 1988px;
       max-width: 100%;
-      max-height: 100%;
-      overflow: hidden;
     }
 
     .wrapper img {
@@ -44,7 +42,6 @@
       font-weight: 700;
       background: transparent;
       z-index: 1;
-      /* حدد مكان الرقم اللي جنب USD */
       top: 140px; 
       right: 150px;
     }
@@ -56,29 +53,30 @@
       font-weight: 700;
       background: transparent;
       z-index: 1;
-      /* حدد مكان عدد الكوين */
       top: 230px;
       right: 200px;
-  }
-    .view-button {
-  position: absolute;
-  bottom:10px;
-  left: 30px;
-  color: white;
-  font-size: 20px;
-  font-weight: bold;
-  text-decoration: underline;
-  text-underline-offset: 4px;
-  border: none;
-  background: none;
-  padding: 0;
-  cursor: pointer;
-  z-index: 2;
     }
-.view-button:hover {
-  background: white;
-  color: black;
-}
+
+    .view-button {
+      position: absolute;
+      bottom: 30px;
+      left: 30px;
+      color: white;
+      font-size: 20px;
+      font-weight: bold;
+      text-decoration: underline;
+      text-underline-offset: 4px;
+      border: none;
+      background: none;
+      padding: 0;
+      cursor: pointer;
+      z-index: 2;
+    }
+
+    .view-button:hover {
+      background: white;
+      color: black;
+    }
   </style>
 </head>
 <body>
