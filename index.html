@@ -11,9 +11,9 @@
       background: #000;
       display: flex;
       justify-content: center;
-      align-items: flex-start; /* نخليها من فوق */
+      align-items: flex-start;
       min-height: 100vh;
-      overflow-y: auto; /* نسمح بالتمرير عمودياً */
+      overflow-y: auto;
       font-family: 'Tajawal', sans-serif;
     }
 
@@ -24,30 +24,52 @@
       max-width: 100%;
       max-height: 100%;
       overflow: hidden;
-      border: 1px solid #444; /* للتجربة، ممكن تشيله */
     }
 
     .wrapper img {
       width: 100%;
       height: 100%;
       display: block;
-      object-fit: contain; /* أو جرب cover لو تحب */
+      object-fit: contain;
       position: absolute;
       top: 0;
       left: 0;
       z-index: 0;
     }
 
-    .num {
+    .header-row {
       position: absolute;
+      top: 140px;
+      left: 0;
+      right: 0;
+      z-index: 2;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 40px;
+    }
+
+    .num {
       color: white;
       font-size: 42px;
       font-weight: 700;
       background: transparent;
-      z-index: 1;
-      top: 140px; 
-      right: 150px;
-      font-family: 'Tajawal', sans-serif;
+    }
+
+    .view-button {
+      color: white;
+      font-size: 20px;
+      font-weight: bold;
+      text-decoration: underline;
+      text-underline-offset: 4px;
+      border: none;
+      background: none;
+      cursor: pointer;
+    }
+
+    .view-button:hover {
+      background: white;
+      color: black;
     }
 
     .coins {
@@ -59,37 +81,19 @@
       z-index: 1;
       top: 230px;
       right: 200px;
-      font-family: 'Tajawal', sans-serif;
-    }
-
-    .view-button {
-      position: absolute;
-      bottom: 30px;  /* أنزل الزر تحت شويه */
-      right: 20px;   /* خليه على اليمين */
-      color: white;
-      font-size: 20px;
-      font-weight: bold;
-      text-decoration: underline;
-      text-underline-offset: 4px;
-      border: none;
-      background: none;
-      cursor: pointer;
-      z-index: 2;
-      font-family: 'Tajawal', sans-serif;
-    } 
-
-    .view-button:hover {
-      background: white;
-      color: black;
     }
   </style>
 </head>
 <body>
   <div class="wrapper">
     <img src="hoosny.jpg" alt="الصورة بالحجم الكامل" />
-    <div class="num">827778.67</div>
+    
+    <div class="header-row">
+      <a href="page2.html" class="view-button">View</a>
+      <div class="num">827778.67</div>
+    </div>
+    
     <div class="coins">4138893</div>
-    <a href="page2.html" class="view-button">View</a>
   </div>
 </body>
 </html>
