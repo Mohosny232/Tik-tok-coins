@@ -11,9 +11,8 @@
       background: #000;
       display: flex;
       justify-content: center;
-      align-items: flex-start;
+      align-items: center;
       min-height: 100vh;
-      overflow-y: auto;
       font-family: 'Tajawal', sans-serif;
     }
 
@@ -21,52 +20,46 @@
       position: relative;
       width: 1080px;
       height: 1988px;
-      overflow: hidden;
     }
 
     .wrapper img {
       width: 100%;
       height: 100%;
       display: block;
-      object-fit: contain; /* هنا نرجع زي الأول */
-      position: absolute;
-      top: 0;
-      left: 0;
-      z-index: 0;
     }
 
     .num {
       position: absolute;
-      color: white;
-      font-size: 42px;
-      font-weight: 700;
       top: 140px;
       right: 150px;
-      z-index: 1;
+      color: white;
+      font-size: 42px;
+      font-weight: bold;
+      z-index: 2;
     }
 
     .coins {
       position: absolute;
-      color: white;
-      font-size: 32px;
-      font-weight: 700;
       top: 230px;
       right: 200px;
-      z-index: 1;
+      color: white;
+      font-size: 32px;
+      font-weight: bold;
+      z-index: 2;
     }
 
     .view-button {
       position: absolute;
       top: 140px;
-      left: 40px;
+      left: 50px;
       color: white;
       font-size: 20px;
       font-weight: bold;
+      background: none;
+      border: none;
+      cursor: pointer;
       text-decoration: underline;
       text-underline-offset: 4px;
-      border: none;
-      background: none;
-      cursor: pointer;
       z-index: 2;
     }
 
@@ -78,7 +71,7 @@
 </head>
 <body>
   <div class="wrapper">
-    <img src="hoosny.jpg" alt="الصورة بالحجم الكامل" />
+    <img src="hoosny.jpg" alt="الصورة" />
     <div class="num">827778.67</div>
     <div class="coins">4138893</div>
     <a href="page2.html" class="view-button">View</a>
