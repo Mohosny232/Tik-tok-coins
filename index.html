@@ -11,8 +11,10 @@
       background: #000;
       display: flex;
       justify-content: center;
-      font-family: 'Tajawal', sans-serif;
+      align-items: flex-start;
+      min-height: 100vh;
       overflow-y: auto;
+      font-family: 'Tajawal', sans-serif;
     }
 
     .wrapper {
@@ -26,33 +28,37 @@
       width: 100%;
       height: 100%;
       display: block;
-      object-fit: fill; /* مهم جداً عشان تملى الحجم بالضبط */
+      object-fit: contain; /* هنا نرجع زي الأول */
       position: absolute;
       top: 0;
       left: 0;
       z-index: 0;
     }
 
-    .header-row {
-      position: absolute;
-      top: 140px;
-      left: 0;
-      right: 0;
-      z-index: 2;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0 40px;
-    }
-
     .num {
+      position: absolute;
       color: white;
       font-size: 42px;
       font-weight: 700;
-      background: transparent;
+      top: 140px;
+      right: 150px;
+      z-index: 1;
+    }
+
+    .coins {
+      position: absolute;
+      color: white;
+      font-size: 32px;
+      font-weight: 700;
+      top: 230px;
+      right: 200px;
+      z-index: 1;
     }
 
     .view-button {
+      position: absolute;
+      top: 140px;
+      left: 40px;
       color: white;
       font-size: 20px;
       font-weight: bold;
@@ -61,35 +67,21 @@
       border: none;
       background: none;
       cursor: pointer;
+      z-index: 2;
     }
 
     .view-button:hover {
       background: white;
       color: black;
     }
-
-    .coins {
-      position: absolute;
-      color: white;
-      font-size: 32px;
-      font-weight: 700;
-      background: transparent;
-      z-index: 1;
-      top: 230px;
-      right: 200px;
-    }
   </style>
 </head>
 <body>
   <div class="wrapper">
     <img src="hoosny.jpg" alt="الصورة بالحجم الكامل" />
-    
-    <div class="header-row">
-      <a href="page2.html" class="view-button">View</a>
-      <div class="num">827778.67</div>
-    </div>
-    
+    <div class="num">827778.67</div>
     <div class="coins">4138893</div>
+    <a href="page2.html" class="view-button">View</a>
   </div>
 </body>
 </html>
