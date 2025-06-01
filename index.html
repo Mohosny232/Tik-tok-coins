@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>تطبيق PWA بسيط مع صورة</title>
+  <title>عرض صورة PWA</title>
   <style>
     body {
       margin: 0;
@@ -11,18 +11,16 @@
       justify-content: center;
       align-items: center;
       height: 100vh;
-      background-color: #f5f5f5;
+      background-color: #eee;
     }
-
     img {
-      width: auto;  /* خلي الصورة بالحجم الطبيعي */
+      max-width: 100%;
       height: auto;
-      max-width: 100%; /* عشان ما تكبرش بره الشاشة */
-      object-fit: none; /* ما تغيرش شكل الصورة */
+      object-fit: none;
     }
   </style>
 </head>
 <body>
-  <img src="images/hooosny.jpg" alt="صورة بدون تعديل" />
+  <img src="hoosny.jpg" alt="صورة هوصني" />
 </body>
 </html>
