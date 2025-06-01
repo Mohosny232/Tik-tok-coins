@@ -1,133 +1,109 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="ar">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>TikTok Balance</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: sans-serif;
-      background-color: #fff;
-    }
-    .header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 10px;
-      font-size: 14px;
-      border-bottom: 1px solid #eee;
-    }
-    .balance-title {
-      font-size: 22px;
-      font-weight: bold;
-      padding: 15px;
-    }
-    .balance-box {
-      background: #111;
-      color: #fff;
-      border-radius: 12px;
-      margin: 0 15px;
-      padding: 15px;
-    }
-    .balance-box .label {
-      color: #aaa;
-      font-size: 12px;
-    }
-    .balance-box .amount {
-      font-size: 28px;
-      font-weight: bold;
-    }
-    .view {
-      float: right;
-      font-size: 12px;
-      color: #aaa;
-      cursor: pointer;
-    }
-    .coins-section {
-      margin-top: 10px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 14px;
-    }
-    .coins-section span {
-      display: flex;
-      align-items: center;
-    }
-    .red-box {
-      background: #ffe9ef;
-      border-radius: 12px;
-      padding: 10px;
-      margin: 15px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .section-title {
-      font-weight: bold;
-      padding: 0 15px;
-      margin-top: 10px;
-    }
-    .section-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      padding: 0 15px;
-      margin-top: 10px;
-    }
-    .card {
-      background: #f5f5f5;
-      padding: 20px;
-      border-radius: 12px;
-      font-weight: bold;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .services {
-      padding: 0 15px;
-      margin-top: 10px;
-    }
-    .service-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 12px 0;
-      border-bottom: 1px solid #eee;
-    }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>تطبيق PWA تصميم تيك توك</title>
+<style>
+  body {
+    margin:0; padding:0;
+    background: #111; /* خلفية داكنة */
+    font-family: "Arial", sans-serif;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  .container {
+    background: #000; /* المربع الأسود */
+    width: 320px;
+    height: 180px;
+    border-radius: 15px;
+    position: relative;
+    padding: 20px;
+    box-sizing: border-box;
+    box-shadow: 0 0 15px rgba(255,255,255,0.2);
+  }
+  .view-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: #1db954;
+    border: none;
+    color: white;
+    padding: 8px 15px;
+    font-weight: bold;
+    border-radius: 12px;
+    cursor: pointer;
+    user-select: none;
+  }
+  .usd-row {
+    margin-top: 50px;
+    font-size: 30px;
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 10px;
+  }
+  .usd-row span {
+    font-weight: bold;
+  }
+  .coins-row {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 22px;
+    color: #0f0;
+  }
+</style>
 </head>
 <body>
-  <div class="header">
-    <div>&larr;</div>
-    <div>EGP</div>
-  </div>  <div class="balance-title">خَسِييٓ's balance</div>  <div class="balance-box">
-    <div class="label">Estimated balance <span class="view" onclick="alert('عرض التفاصيل')">View</span></div>
-    <div class="amount">EGP 809,829.23</div>
-    <div class="coins-section">
-      <span>Coins: <strong>4,049,146</strong></span>
-      <span style="color: #aaa; font-size: 12px;">Get Coins</span>
-    </div>
-  </div>  <div class="red-box">
-    <div>
-      <div style="font-weight: bold;">LIVE Studio New Stars</div>
-      <div style="font-size: 13px;">Join the campaign and get rewards!</div>
-    </div>
-    <div style="color: #f33; font-weight: bold;">Join now →</div>
-  </div>  <div class="section-title">Monetization</div>
-  <div class="section-grid">
-    <div class="card">💰 LIVE rewards</div>
-    <div class="card">⭐ Campaigns</div>
-  </div>  <div class="section-title">Services</div>
-  <div class="services">
-    <div class="service-item">
-      <span>📄 Transactions</span>
-      <span>›</span>
-    </div>
-    <div class="service-item">
-      <span>🛡️ Identity verification</span>
-      <span style="color: green; font-size: 12px;">Verified</span>
-    </div>
+
+<div class="container">
+  <button class="view-btn" id="viewBtn">View</button>
+  <div class="usd-row">
+    <span id="amount">0.00</span>
+    <span>USD</span>
   </div>
+  <div class="coins-row" id="coinsCount">0 Coins</div>
+</div>
+
+<script>
+  const viewBtn = document.getElementById("viewBtn");
+  const amountEl = document.getElementById("amount");
+  const coinsCountEl = document.getElementById("coinsCount");
+
+  let amount = 0;
+  let intervalId = null;
+  let running = false;
+
+  // دالة لتحديث قيمة amount و coins
+  function updateValues() {
+    amount += 5.5; // قيمة تزداد (تقدر تغيرها)
+    amount = Math.min(amount, 1000); // سقف 1000 USD مثلاً
+    amountEl.textContent = amount.toFixed(2);
+
+    // حساب الكوينز: مثلاً كل 0.5 USD = 1 Coin
+    const coins = Math.floor(amount / 0.5);
+    coinsCountEl.textContent = `${coins} Coins`;
+
+    if (amount >= 1000) {
+      clearInterval(intervalId);
+      running = false;
+      viewBtn.disabled = false;
+    }
+  }
+
+  viewBtn.addEventListener("click", () => {
+    if (running) return; // لو شغالة بالفعل
+    running = true;
+    viewBtn.disabled = true;
+    amount = 0;
+    amountEl.textContent = amount.toFixed(2);
+    coinsCountEl.textContent = `0 Coins`;
+    intervalId = setInterval(updateValues, 100);
+  });
+</script>
+
 </body>
-  </html>
+</html>
