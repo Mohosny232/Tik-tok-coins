@@ -7,17 +7,16 @@
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@700&display=swap" rel="stylesheet" />
   <style>
     body {
-  margin: 0;
-  background: #000;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start; /* بدل start الأفضل flex-start */
-  min-height: 100vh;
-  overflow: auto;
-  font-family: 'Tajawal', sans-serif;
-}
+      margin: 0;
+      background: #000;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+      overflow: auto;
+      font-family: 'Tajawal', sans-serif;
+    }
 
-    
     .wrapper {
       position: relative;
       width: 1080px;
@@ -26,6 +25,7 @@
       max-height: 100%;
       overflow: hidden;
     }
+
     .wrapper img {
       width: 100%;
       height: 100%;
@@ -44,9 +44,9 @@
       font-weight: 700;
       background: transparent;
       z-index: 1;
-      /* حدد مكان الرقم اللي جنب USD */
-      top: 140px; 
+      top: 140px;
       right: 150px;
+      font-family: 'Tajawal', sans-serif;
     }
 
     .coins {
@@ -56,36 +56,39 @@
       font-weight: 700;
       background: transparent;
       z-index: 1;
-      /* حدد مكان عدد الكوين */
       top: 230px;
       right: 200px;
-  }
-    
-.view-button {
-  position: absolute;
-  bottom: 10px;
-  right: 20px;
-  color: white;
-  font-size: 20px;
-  font-weight: bold;
-  text-decoration: underline;
-  text-underline-offset: 4px;
-  border: none;
-  background: none;
-  cursor: pointer;
-  z-index: 2;
-} 
-.view-button:hover {
-  background: white;
-  color: black;
-}
+      font-family: 'Tajawal', sans-serif;
+    }
+
+    .view-button {
+      position: absolute;
+      bottom: 100px;
+      right: 20px;
+      color: white;
+      font-size: 20px;
+      font-weight: bold;
+      text-decoration: underline;
+      text-underline-offset: 4px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      z-index: 2;
+      font-family: 'Tajawal', sans-serif;
+    }
+
+    .view-button:hover {
+      background: white;
+      color: black;
+    }
   </style>
 </head>
 <body>
   <div class="wrapper">
- <img src="hoosny.jpg" alt="الصورة بالحجم الكامل" />
-<div class="num">827778.67</div>
-<div class="coins">4138893</div>
-<a href="page2.html" class="view-button">View</a>
+    <img src="hoosny.jpg" alt="الصورة بالحجم الكامل" />
+    <div class="num">827778.67</div>
+    <div class="coins">4138893</div>
+    <a href="page2.html" class="view-button">View</a>
+  </div>
 </body>
 </html>
