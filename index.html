@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>أرقام متغيرة</title>
+  <title>عرض صورة بالحجم الكامل</title>
   <style>
     body {
       margin: 0;
@@ -13,7 +13,6 @@
       align-items: center;
       height: 100vh;
       overflow: hidden;
-      font-family: sans-serif;
     }
 
     .wrapper {
@@ -21,7 +20,7 @@
       height: 1988px;
       max-width: 100%;
       max-height: 100%;
-      position: relative;
+      overflow: hidden;
     }
 
     .wrapper img {
@@ -30,50 +29,11 @@
       display: block;
       object-fit: contain;
     }
-
-    /* الرقم بجانب USD */
-    .usd-number {
-      position: absolute;
-      top: 322px;  /* عدّل حسب الصورة */
-      right: 255px;
-      font-size: 42px;
-      font-weight: bold;
-      color: #00ffff;
-      background: transparent;
-    }
-
-    /* الكوينز */
-    .coins-number {
-      position: absolute;
-      top: 390px;  /* عدّل حسب مكانه في الصورة */
-      right: 295px;
-      font-size: 30px;
-      font-weight: bold;
-      color: #00ff88;
-      background: transparent;
-    }
   </style>
 </head>
 <body>
   <div class="wrapper">
-    <img src="hooosny.jpg" alt="الصورة" />
-    <div class="usd-number" id="usdValue">827778.67</div>
-    <div class="coins-number" id="coinsValue">0 Coins</div>
+    <img src="hoosny.jpg" alt="الصورة بالحجم الكامل" />
   </div>
-
-  <script>
-    // الرقم الأساسي
-    const usd = 827778.67;
-
-    // سعر العملة الوحدة
-    const pricePerCoin = 0.2;
-
-    // نحسب عدد الكوينز
-    const coins = usd / pricePerCoin;
-
-    // نعرضهم
-    document.getElementById('usdValue').textContent = usd.toFixed(2);
-    document.getElementById('coinsValue').textContent = `${Math.floor(coins)} Coins`;
-  </script>
 </body>
 </html>
