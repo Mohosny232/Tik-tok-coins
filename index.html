@@ -1,121 +1,39 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>تصميم صورة ثابتة</title>
-<style>
-  body {
-    background: #121212;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    margin: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: white;
-  }
-
-  .container {
-    position: relative;
-    width: 360px; /* تقدر تصغر العرض علشان يناسب الموبايل */
-    height: calc(360px * (1988 / 1080)); /* نستخدم نفس النسبة */
-  }
-
-  .container img {
-    width: 100%;
-    height: 100%;
-    display: block;
-    border-radius: 14px;
-    object-fit: cover;
-  }
-
-  /* زر View */
-  #viewBtn {
-    position: absolute;
-    top: 25px;
-    left: 25px;
-    background: #2ecc71;
-    border: none;
-    color: white;
-    padding: 7px 15px;
-    border-radius: 14px;
-    cursor: pointer;
-    font-weight: bold;
-    font-size: 14px;
-  }
-
-  /* رقم USD */
-  .usd-row {
-    position: absolute;
-    top: 150px;
-    right: 80px;
-    font-weight: 700;
-    font-size: 38px;
-    color: #f5f5f5;
-    display: flex;
-    align-items: baseline;
-    gap: 10px;
-  }
-
-  .usd-row .symbol {
-    font-size: 24px;
-    color: #00ffea;
-  }
-
-  /* عداد الكوين */
-  #coinsCount {
-    position: absolute;
-    top: 220px;
-    right: 110px;
-    font-weight: 600;
-    font-size: 22px;
-    color: #00ffa5;
-  }
-</style>
-</head>
-<body>
-  <div class="container">
-    <img src="hooosny.jpg" alt="الصورة الأصلية" />
-    <button id="viewBtn">View</button>
-    <div class="usd-row">
-      <span id="amount" class="symbol">$0.00</span>
-      <span>USD</span>
-    </div>
-    <div id="coinsCount">0 Coins</div>
-  </div>
-
-  <script>
-    const viewBtn = document.getElementById('viewBtn');
-    const amountEl = document.getElementById('amount');
-    const coinsCountEl = document.getElementById('coinsCount');
-
-    let amount = 0;
-    let intervalId = null;
-    let running = false;
-
-    function updateValues() {
-      amount += 7.3;
-      if (amount > 500) {
-        amount = 500;
-        clearInterval(intervalId);
-        running = false;
-        viewBtn.disabled = false;
-      }
-      amountEl.textContent = `$${amount.toFixed(2)}`;
-      const coins = Math.floor(amount / 0.25);
-      coinsCountEl.textContent = `${coins} Coins`;
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>عرض صورة بالحجم الكامل</title>
+  <style>
+    body {
+      margin: 0;
+      background: #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
     }
 
-    viewBtn.addEventListener('click', () => {
-      if (running) return;
-      running = true;
-      viewBtn.disabled = true;
-      amount = 0;
-      amountEl.textContent = `$0.00`;
-      coinsCountEl.textContent = `0 Coins`;
-      intervalId = setInterval(updateValues, 100);
-    });
-  </script>
+    .wrapper {
+      width: 1080px;
+      height: 1988px;
+      max-width: 100%;
+      max-height: 100%;
+      overflow: hidden;
+    }
+
+    .wrapper img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: contain;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <img src="hooosny.jpg" alt="الصورة بالحجم الكامل" />
+  </div>
 </body>
 </html>
