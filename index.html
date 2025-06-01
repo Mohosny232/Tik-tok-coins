@@ -1,93 +1,81 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>تصميم طبق الأصل</title>
-  <style>
-    /* Reset */
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      user-select: none;
-    }
-    body {
-      background: #121212;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      color: white;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    .container {
-      width: 350px;
-      height: 190px;
-      background: #000000;
-      border-radius: 18px;
-      box-shadow: 0 0 30px rgba(255,255,255,0.1);
-      position: relative;
-      padding: 20px 30px 30px 30px;
-    }
-    /* زر View */
-    #viewBtn {
-      position: absolute;
-      top: 18px;
-      left: 20px; /* لأن الصفحة RTL والزر في اليمين في التصميم */
-      background: #2ecc71;
-      border: none;
-      color: white;
-      font-weight: bold;
-      font-size: 14px;
-      padding: 8px 16px;
-      border-radius: 14px;
-      cursor: pointer;
-      transition: background 0.3s ease;
-    }
-    #viewBtn:hover:not(:disabled) {
-      background: #27ae60;
-    }
-    #viewBtn:disabled {
-      opacity: 0.6;
-      cursor: not-allowed;
-    }
-    /* صف USD والرقم */
-    .usd-row {
-      margin-top: 45px;
-      display: flex;
-      justify-content: center;
-      align-items: baseline;
-      gap: 12px;
-      font-weight: 700;
-      font-size: 38px;
-      letter-spacing: 1px;
-      font-family: 'Arial Black', Arial, sans-serif;
-      color: #f5f5f5;
-    }
-    .usd-row span.symbol {
-      font-size: 24px;
-      color: #00ffea;
-    }
-    /* عداد الكوين */
-    .coins-row {
-      margin-top: 15px;
-      text-align: center;
-      font-weight: 600;
-      font-size: 22px;
-      color: #00ffa5;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>تصميم مع صورة</title>
+<style>
+  body {
+    background: #121212;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: white;
+  }
+  .container {
+    position: relative;
+    width: 350px; /* حجم الصورة تقريبا */
+    height: 190px; /* حجم الصورة تقريبا */
+  }
+  .container img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    border-radius: 18px;
+  }
+  /* العناصر فوق الصورة */
+  #viewBtn {
+    position: absolute;
+    top: 15px;
+    left: 20px; /* في التصميم RTL معناها في يمين الصورة */
+    background: #2ecc71;
+    border: none;
+    color: white;
+    padding: 7px 15px;
+    border-radius: 14px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 14px;
+    user-select: none;
+  }
+  .usd-row {
+    position: absolute;
+    top: 70px; /* ضبّط حسب مكان الرقم في الصورة */
+    right: 90px; /* ضبّط حسب مكان النص في الصورة */
+    font-weight: 700;
+    font-size: 38px;
+    color: #f5f5f5;
+    font-family: 'Arial Black', Arial, sans-serif;
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+  }
+  .usd-row .symbol {
+    font-size: 24px;
+    color: #00ffea;
+  }
+  #coinsCount {
+    position: absolute;
+    top: 125px; /* مكان عداد الكوين */
+    right: 120px; /* ضبّط حسب الصورة */
+    font-weight: 600;
+    font-size: 22px;
+    color: #00ffa5;
+  }
+</style>
 </head>
 <body>
   <div class="container">
+    <img src="https://drive.google.com/uc?export=view&id=17S-Epeb9F7u1BTvCxvuvV6DDfYfazYMw" alt="الصندوق الأسود" />
     <button id="viewBtn">View</button>
     <div class="usd-row">
       <span id="amount" class="symbol">$0.00</span>
       <span>USD</span>
     </div>
-    <div id="coinsCount" class="coins-row">0 Coins</div>
+    <div id="coinsCount">0 Coins</div>
   </div>
 
   <script>
@@ -100,15 +88,15 @@
     let running = false;
 
     function updateValues() {
-      amount += 7.3; // قيمة تزداد تدريجياً
-      if (amount > 500) { // سقف للعدد
+      amount += 7.3;
+      if (amount > 500) {
         amount = 500;
         clearInterval(intervalId);
         running = false;
         viewBtn.disabled = false;
       }
       amountEl.textContent = `$${amount.toFixed(2)}`;
-      const coins = Math.floor(amount / 0.25); // 1 coin لكل 0.25 USD
+      const coins = Math.floor(amount / 0.25);
       coinsCountEl.textContent = `${coins} Coins`;
     }
 
