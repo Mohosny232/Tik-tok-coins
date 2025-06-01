@@ -59,12 +59,33 @@
       /* حدد مكان عدد الكوين */
       top: 230px;
       right: 200px;
-    }
+  }
+    .view-button {
+  position: absolute;
+  top: 30px;
+  left: 30px;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  border: 2px solid white;
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-size: 20px;
+  font-weight: bold;
+  text-decoration: none;
+  z-index: 2;
+  transition: 0.3s;
+}
+
+.view-button:hover {
+  background: white;
+  color: black;
+}
   </style>
 </head>
 <body>
   <div class="wrapper">
     <img src="hoosny.jpg" alt="الصورة بالحجم الكامل" />
+    <a href="page2.html" class="view-button">View</a>
     <div class="num">827778.67</div>
     <div class="coins">4138893</div>
   </div>
