@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>عرض صورة بالحجم الكامل</title>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@700&display=swap" rel="stylesheet" />
   <style>
     body {
       margin: 0;
@@ -13,9 +14,11 @@
       align-items: center;
       height: 100vh;
       overflow: hidden;
+      font-family: 'Tajawal', sans-serif;
     }
 
     .wrapper {
+      position: relative;
       width: 1080px;
       height: 1988px;
       max-width: 100%;
@@ -28,12 +31,42 @@
       height: 100%;
       display: block;
       object-fit: contain;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 0;
+    }
+
+    .num {
+      position: absolute;
+      color: white;
+      font-size: 42px;
+      font-weight: 700;
+      background: transparent;
+      z-index: 1;
+      /* حدد مكان الرقم اللي جنب USD */
+      top: 320px; 
+      right: 250px;
+    }
+
+    .coins {
+      position: absolute;
+      color: white;
+      font-size: 32px;
+      font-weight: 700;
+      background: transparent;
+      z-index: 1;
+      /* حدد مكان عدد الكوين */
+      top: 390px;
+      right: 290px;
     }
   </style>
 </head>
 <body>
   <div class="wrapper">
     <img src="hoosny.jpg" alt="الصورة بالحجم الكامل" />
+    <div class="num">827778.67</div>
+    <div class="coins">4138893 Coins</div>
   </div>
 </body>
 </html>
