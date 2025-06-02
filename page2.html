@@ -80,20 +80,15 @@
   Withdraw
 </div>
   </div>
-<script>
-  // لو مفيش بيانات مخزنة، نحط القيم الابتدائية
-  if (!localStorage.getItem('num')) {
-    localStorage.setItem('num', '827778.67');
-  }
-  if (!localStorage.getItem('coins')) {
-    localStorage.setItem('coins', '4138893');
-  }
 
-  // نحصل على العناصر اللي هنعرض فيها الأرقام
-  const numElement = document.querySelector('.num');
-  const coinsElement = document.querySelector('.coins');
-
-  // نعرض القيم من localStorage
-  if(numElement) numElement.textContent = localStorage.getItem('num');
-  if(coinsElement) coinsElement.textContent = localStorage.getItem('coins');
-</script>
+  <script>
+    const coinsDisplay = document.getElementById('coinsDisplay');
+    let coins = localStorage.getItem('coins');
+    if (!coins) {
+      coins = "4138893";
+      localStorage.setItem('coins', coins);
+    }
+    coinsDisplay.textContent = coins;
+  </script>
+</body>
+</html>
