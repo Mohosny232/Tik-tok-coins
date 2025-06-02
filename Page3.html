@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>صفحة التحويل</title>
+  <style>
+    body {
+      margin: 0;
+      background: #fff;
+      font-family: 'Tajawal', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      direction: rtl;
+    }
+    .container {
+      width: 360px;
+      background: #fff;
+      padding: 20px;
+      box-sizing: border-box;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .field-group {
+      margin-bottom: 20px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start; /* عشان العناصر تكون على اليمين */
+      gap: 10px;
+    }
+    input[type="text"], input[type="number"] {
+      flex: 1;
+      padding: 10px 15px;
+      font-size: 18px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      outline: none;
+      direction: rtl;
+    }
+    .icon {
+      width: 30px;
+      height: 30px;
+      background-image: url('brain_icon.png'); /* حط اسم صورة الدماغ هنا */
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+    .usd-label {
+      font-weight: 700;
+      font-size: 20px;
+      color: #333;
+      margin-left: 8px;
+      white-space: nowrap;
+    }
+    .trans-btn {
+      width: 100%;
+      background-color: #e74c3c; /* أحمر */
+      border: none;
+      padding: 15px 0;
+      font-size: 22px;
+      font-weight: 700;
+      color: white;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    .trans-btn:hover {
+      background-color: #c0392b;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="field-group">
+      <input type="text" placeholder="اسم المستخدم" />
+      <div class="icon" title="دماغ"></div>
+    </div>
+    <div class="field-group">
+      <input type="number" placeholder="المبلغ" />
+      <div class="usd-label">USD</div>
+    </div>
+    <button class="trans-btn">trans</button>
+  </div>
+</body>
+</html>
