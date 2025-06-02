@@ -31,25 +31,26 @@
       justify-content: flex-start; /* عشان العناصر تكون على اليمين */
       gap: 10px;
     }
-    input {
+    .input-column {
+  display: flex;
+  flex-direction: column;
+  gap: 15px; /* مسافة بين الخانات */
+  width: 100%;
+  max-width: 400px; /* تقدر تعدل العرض المناسب */
+  margin: auto;
+}
+
+.input-column input {
   text-align: center;
   font-size: 18px;
-  padding: 10px;
-  width: 100%;
+  padding: 10px 15px;
   height: 50px;
-  line-height: 50px;  /* مهم للتوسيط العمودي */
+  border: 1px solid #ccc;
   border-radius: 8px;
   box-sizing: border-box;
-    }
-    input[type="text"], input[type="number"] {
-      flex: 1;
-      padding: 10px 15px;
-      font-size: 18px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      outline: none;
-      direction: rtl;
-    }
+  outline: none;
+  direction: rtl;
+}
   .brain-img {
   width: 28px; /* أو أي حجم تريده */
   height: auto; /* يحافظ على النسبة */
