@@ -56,8 +56,7 @@
 <div id="transferredDisplay" class="amount-display">0.00</div>
 <script>
   const transferredDisplay = document.getElementById('transferredDisplay');
-  let transferredAmount = localStorage.getItem('transferredAmount');
-  if (!transferredAmount) transferredAmount = "0.00";
+  const transferredAmount = localStorage.getItem('transferredAmount') || "0.00";
   transferredDisplay.textContent = transferredAmount;
 </script>
 </body>
