@@ -1,49 +1,45 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>الصفحة الرابعة</title>
-  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@700&display=swap" rel="stylesheet" />
-  <style>
-    body {
-      margin: 0;
-      background: #000; /* خلفية سوداء */
-      display: flex;
-      justify-content: center;
-      align-items: flex-start; /* من فوق */
-      min-height: 100vh;
-      overflow-y: auto;
-      font-family: 'Tajawal', sans-serif;
-    }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>الصفحة الرابعة</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@700&display=swap" rel="stylesheet" />
+<style>
+  body {
+    margin: 0;
+    background: #000; /* أو غيرها حسب الصورة */
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* عشان الصورة تبدأ من فوق بدون فراغ */
+    min-height: 100vh;
+    overflow: hidden; /* لمنع أي تمرير وفجوات */
+    font-family: 'Tajawal', sans-serif;
+  }
 
-    .wrapper {
-      position: relative;
-      width: 1080px;
-      height: 1988px;
-      max-width: 100%;
-      max-height: 100%;
-      overflow: hidden;
-    }
+  .wrapper {
+    position: relative;
+    width: 1080px;
+    height: 1988px;
+    max-width: 100%;
+    max-height: 100%;
+    overflow: hidden;
+  }
 
-    .wrapper img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      display: block;
-      position: absolute;
-      top: 0;
-      left: 0;
-      z-index: 0;
-    }
-    
-    /* أضف أي محتوى ثابت هنا، مثل الأرقام أو أزرار إن لزم */
-
-  </style>
+  .wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+  }
+</style>
 </head>
 <body>
   <div class="wrapper">
-    <img src="hoosny4.jpg" alt="الصورة الرابعة" />
+    <img src="hoosny4.jpg" alt="الصفحة الرابعة" />
   </div>
 </body>
 </html>
