@@ -115,37 +115,43 @@
   </button>
   <script>
   const numElement = document.querySelector('.num');
-  const coinsElement = document.querySelector('.coins');
+const coinsElement = document.querySelector('.coins');
 
-  // نحاول نقرأ القيم من localStorage، وإذا مش موجودة نستخدم القيم الافتراضية
-  let num = parseFloat(localStorage.getItem('num')) || 827778.67;
-  let coins = parseFloat(localStorage.getItem('coins')) || 4138893;
+let num = parseFloat(localStorage.getItem('num')) || 827778.67;
+let coins = parseFloat(localStorage.getItem('coins')) || 4138893;
 
-  numElement.textContent = num.toFixed(2);
-  coinsElement.textContent = coins.toFixed(0);
-  
-  const trigger = document.getElementById('secret-trigger');
-  const resetBtn = document.getElementById('reset-btn');
-  let pressTimer;
+numElement.textContent = num.toFixed(2);
+coinsElement.textContent = coins.toFixed(0);
 
-  // ضغط مطوّل لعرض الزر
-  trigger.addEventListener('mousedown', () => {
-    pressTimer = setTimeout(() => {
-      resetBtn.style.display = 'block';
-    }, 2000); // 2 ثواني ضغط
-  });
+const trigger = document.getElementById('secret-trigger');
+const resetBtn = document.getElementById('reset-btn');
+let pressTimer;
 
-  trigger.addEventListener('mouseup', () => clearTimeout(pressTimer));
-  trigger.addEventListener('mouseleave', () => clearTimeout(pressTimer));
+trigger.addEventListener('mousedown', () => {
+  console.log('mousedown detected');
+  pressTimer = setTimeout(() => {
+    console.log('Showing reset button');
+    resetBtn.style.display = 'block';
+  }, 2000);
+});
 
-  // لما نضغط إعادة القيم
-  resetBtn.addEventListener('click', () => {
-    localStorage.setItem('num', '827778.67');
-    localStorage.setItem('coins', '4138893');
-    localStorage.removeItem('transferredAmount');
-    alert('تمت إعادة القيم إلى الوضع الافتراضي ✅');
-    location.reload(); // إعادة تحميل الصفحة
-  });
+trigger.addEventListener('mouseup', () => {
+  console.log('mouseup detected');
+  clearTimeout(pressTimer);
+});
+trigger.addEventListener('mouseleave', () => {
+  console.log('mouseleave detected');
+  clearTimeout(pressTimer);
+});
+
+resetBtn.addEventListener('click', () => {
+  console.log('reset button clicked');
+  localStorage.setItem('num', '827778.67');
+  localStorage.setItem('coins', '4138893');
+  localStorage.removeItem('transferredAmount');
+  alert('تمت إعادة القيم إلى الوضع الافتراضي ✅');
+  location.reload();
+});
 </script>
 </body>
 </html>
