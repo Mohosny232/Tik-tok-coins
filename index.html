@@ -68,7 +68,31 @@
     .view-button:hover {
       background: white;
       color: black;
-    }
+   }
+    #secret-trigger {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  width: 30px;
+  height: 30px;
+  background: transparent;
+  z-index: 9999;
+}
+
+#reset-btn {
+  position: fixed;
+  bottom: 50px;
+  right: 10px;
+  padding: 10px 15px;
+  background: #e74c3c;
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  display: none;
+  z-index: 9999;
+}
   </style>
 </head>
 <body>
@@ -78,7 +102,11 @@
     <div class="coins">4138893</div>
     <a href="page2.html" class="view-button">View</a>
   </div>
- 
+ <!-- زر سري مخفي -->
+<div id="secret-trigger"></div>
+
+<!-- زر إعادة القيم (يظهر بعد الضغط الطويل) -->
+<button id="reset-btn" style="display:none;">إعادة القيم</button>
   <script>
   const numElement = document.querySelector('.num');
   const coinsElement = document.querySelector('.coins');
@@ -89,6 +117,29 @@
 
   numElement.textContent = num.toFixed(2);
   coinsElement.textContent = coins.toFixed(0);
+ const trigger = document.getElementById('secret-trigger');
+  const resetBtn = document.getElementById('reset-btn');
+  let pressTimer;
+
+  // ضغط مطوّل لعرض الزر
+  trigger.addEventListener('mousedown', () => {
+    pressTimer = setTimeout(() => {
+      resetBtn.style.display = 'block';
+    }, 2000); // 2 ثواني ضغط
+  });
+
+  trigger.addEventListener('mouseup', () => clearTimeout(pressTimer));
+  trigger.addEventListener('mouseleave', () => clearTimeout(pressTimer));
+
+  // لما نضغط إعادة القيم
+  resetBtn.addEventListener('click', () => {
+    localStorage.setItem('num', '827778.67');
+    localStorage.setItem('coins', '4138893');
+    localStorage.removeItem('transferredAmount');
+    alert('تمت إعادة القيم إلى الوضع الافتراضي ✅');
+    location.reload(); // إعادة تحميل الصفحة
+  });
   </script>
 </body>
 </html>
+
