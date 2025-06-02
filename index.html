@@ -113,46 +113,32 @@
   <button id="reset-btn" style="display: none; position: fixed; bottom: 60px; right: 20px; background: gray; color: white; border: none; padding: 10px 15px; border-radius: 8px; cursor: pointer; z-index: 9999;">
     إعادة القيم
   </button>
-  <script>
+<script>
   const numElement = document.querySelector('.num');
-const coinsElement = document.querySelector('.coins');
+  const coinsElement = document.querySelector('.coins');
 
-let num = parseFloat(localStorage.getItem('num')) || 827778.67;
-let coins = parseFloat(localStorage.getItem('coins')) || 4138893;
+  let num = parseFloat(localStorage.getItem('num')) || 827778.67;
+  let coins = parseFloat(localStorage.getItem('coins')) || 4138893;
 
-numElement.textContent = num.toFixed(2);
-coinsElement.textContent = coins.toFixed(0);
+  numElement.textContent = num.toFixed(2);
+  coinsElement.textContent = coins.toFixed(0);
 
-const trigger = document.getElementById('secret-trigger');
-const resetBtn = document.getElementById('reset-btn');
-let pressTimer;
+  const trigger = document.getElementById('secret-trigger');
+  const resetBtn = document.getElementById('reset-btn');
 
-trigger.addEventListener('mousedown', () => {
-  console.log('mousedown detected');
-  pressTimer = setTimeout(() => {
-    console.log('Showing reset button');
+  // بدل الضغط المطول، نستخدم ضغطة واحدة
+  trigger.addEventListener('click', () => {
     resetBtn.style.display = 'block';
-  }, 2000);
-});
+  });
 
-trigger.addEventListener('mouseup', () => {
-  console.log('mouseup detected');
-  clearTimeout(pressTimer);
-});
-trigger.addEventListener('mouseleave', () => {
-  console.log('mouseleave detected');
-  clearTimeout(pressTimer);
-});
-
-resetBtn.addEventListener('click', () => {
-  console.log('reset button clicked');
-  localStorage.setItem('num', '827778.67');
-  localStorage.setItem('coins', '4138893');
-  localStorage.removeItem('transferredAmount');
-  alert('تمت إعادة القيم إلى الوضع الافتراضي ✅');
-  location.reload();
-});
-</script>
+  resetBtn.addEventListener('click', () => {
+    localStorage.setItem('num', '827778.67');
+    localStorage.setItem('coins', '4138893');
+    localStorage.removeItem('transferredAmount');
+    alert('تمت إعادة القيم إلى الوضع الافتراضي ✅');
+    location.reload(); // إعادة تحميل الصفحة
+  });
+    </script>
 </body>
 </html>
 
