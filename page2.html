@@ -34,11 +34,38 @@
       position: relative;
       z-index: 0;
     }
+
+    /* الرقم المتغير */
+    .num {
+      position: absolute;
+      color: black; /* هنا غيرنا اللون للأسود */
+      font-size: 42px;
+      font-weight: 700;
+      background: transparent;
+      z-index: 1;
+      top: 140px; 
+      right: 150px;
+      font-family: 'Tajawal', sans-serif;
+    }
   </style>
 </head>
 <body>
   <div class="wrapper">
     <img src="Hoosny2.jpg" alt="الصورة الثانية" />
+    <div class="num" id="num">827778.67</div>
   </div>
+
+  <script>
+    // لو عايز الرقم يتغير برمجياً تقدر تعدل هنا
+    // مثال بسيط لتحديث الرقم كل 3 ثواني:
+    const numbers = [827778.67, 900000.12, 123456.78];
+    let index = 0;
+    const numEl = document.getElementById('num');
+
+    setInterval(() => {
+      index = (index + 1) % numbers.length;
+      numEl.textContent = numbers[index];
+    }, 3000);
+  </script>
 </body>
 </html>
