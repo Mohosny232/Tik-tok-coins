@@ -83,6 +83,7 @@
 
   <script>
     const coinsDisplay = document.getElementById('coinsDisplay');
+   document.getElementById('numDisplay').textContent = num;
     let coins = localStorage.getItem('coins');
     if (!coins) {
       coins = "4138893";
