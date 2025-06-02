@@ -19,7 +19,7 @@
 .withdraw-btn {
   position: absolute;
   top: 37%;           /* نص ارتفاع الصورة */
-  left: 50px;        /* 10 بيكسل من اليمين */
+  left: 50px;         /* 50 بيكسل من الشمال */
   transform: translateY(-50%);  /* عشان تكون بالضبط في المنتصف عمودياً */
   color: black;
   font-size: 20px;
@@ -27,15 +27,18 @@
   cursor: pointer;
   z-index: 5;
   user-select: none;
-  text-decoration: underline;
-  text-underline-offset: 4px;
+  text-decoration: none; /* شيل الخط التحت */
+  background-color: #FFEBEBEB; /* الخلفية اللي طلبتها */
+  padding: 5px 10px;
+  border-radius: 5px;
 }
+
 .withdraw-btn:hover {
   color: black;
   background: white;
   transition: 0.3s;
-  padding: 2px 5px;
-  border-radius: 3px;
+  padding: 5px 10px; /* خلي البادينج ثابت */
+  border-radius: 5px;
 }
     .wrapper {
       position: relative;
