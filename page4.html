@@ -45,5 +45,11 @@
   <div class="wrapper">
     <img src="hoosny4.jpg" alt="الصفحة الرابعة" />
   </div>
+  <script>
+    const transferredDisplay = document.getElementById('transferredDisplay');
+    let transferredAmount = localStorage.getItem('transferredAmount');
+    if (!transferredAmount) transferredAmount = "0.00";
+    transferredDisplay.textContent = transferredAmount;
+  </script>
 </body>
 </html>
