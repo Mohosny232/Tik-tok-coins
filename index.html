@@ -104,11 +104,15 @@
     <div class="coins">4138893</div>
     <a href="page2.html" class="view-button">View</a>
   </div>
- <!-- زر سري مخفي -->
-<div id="secret-trigger"></div>
 
-<!-- زر إعادة القيم (يظهر بعد الضغط الطويل) -->
-<button id="reset-btn" style="display:none;">إعادة القيم</button>
+  <!-- محتوى الصفحة كله -->
+
+  <!-- الزر السري والزر المخفي -->
+  <div id="secret-trigger" style="position: fixed; bottom: 20px; right: 20px; width: 30px; height: 30px; background: gray; border-radius: 50%; cursor: pointer; z-index: 9999;"></div>
+
+  <button id="reset-btn" style="display: none; position: fixed; bottom: 60px; right: 20px; background: gray; color: white; border: none; padding: 10px 15px; border-radius: 8px; cursor: pointer; z-index: 9999;">
+    إعادة القيم
+  </button>
   <script>
   const numElement = document.querySelector('.num');
   const coinsElement = document.querySelector('.coins');
