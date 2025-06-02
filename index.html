@@ -78,10 +78,11 @@
     <div class="coins">4138893</div>
     <a href="page2.html" class="view-button">View</a>
   </div>
-
+ 
   <script>
     // جلب القيمة من localStorage أو تعيين القيمة الافتراضية
     const numDisplay = document.getElementById('numDisplay');
+    document.getElementById('numDisplay').textContent = num;
     let num = localStorage.getItem('num');
     if (!num) {
       num = "827778.67";
