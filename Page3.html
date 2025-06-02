@@ -91,40 +91,41 @@
     </div>
     <button class="trans-btn" id="transBtn">trans</button>
   </div>
-  <script>
-    const transBtn = document.getElementById('transBtn');
-    transBtn.addEventListener('click', () => {
-      const amountInput = document.getElementById('amount');
-      const amount = parseFloat(amountInput.value);
-      if (isNaN(amount) || amount <= 0) {
-        alert('من فضلك أدخل مبلغ صحيح أكبر من صفر.');
-        return;
-      }
+<script>
+  const transBtn = document.getElementById('transBtn');
+  transBtn.addEventListener('click', () => {
+    const amountInput = document.getElementById('amount');
+    const amount = parseFloat(amountInput.value);
+    if (isNaN(amount) || amount <= 0) {
+      alert('من فضلك أدخل مبلغ صحيح أكبر من صفر.');
+      return;
+    }
 
-      // جلب القيم من localStorage
-      let num = parseFloat(localStorage.getItem('num')) || 827778.67;
-      let coins = parseFloat(localStorage.getItem('coins')) || 4138893;
+    // جلب الأرقام من localStorage
+    let num = parseFloat(localStorage.getItem('num')) || 827778.67;
+    let coins = parseFloat(localStorage.getItem('coins')) || 4138893;
 
-      // التحقق من الرصيد الكافي
-      if (amount > num || amount > coins) {
-        alert('الرصيد غير كافي للتحويل.');
-        return;
-      }
+    // التأكد إن فيه رصيد كافي
+    if (amount > num || amount > coins) {
+      alert('الرصيد غير كافي.');
+      return;
+    }
 
-      // خصم المبلغ من num و coins
-      num -= amount;
-      coins -= amount;
+    // خصم القيمة
+    num -= amount;
+    coins -= amount;
 
-      // حفظ القيم الجديدة
-      localStorage.setItem('num', num.toFixed(2));
-      localStorage.setItem('coins', coins.toFixed(0));
+    // تخزين القيم الجديدة
+    localStorage.setItem('num', num.toFixed(2));
+    localStorage.setItem('coins', coins.toFixed(0));
 
-      // حفظ المبلغ المحول للصفحة الرابعة
-      localStorage.setItem('transferredAmount', amount.toFixed(2));
+    // حفظ المبلغ المحول للعرض في الصفحة الرابعة
+    localStorage.setItem('transferredAmount', amount.toFixed(2));
 
-      // الانتقال للصفحة الرابعة
-      window.location.href = "page4.html";
-    });
+    // الانتقال للصفحة الرابعة
+    window.location.href = "page4.html";
+  });
+</script>
   </script>
 </body>
 </html>
