@@ -80,15 +80,15 @@
   </div>
  
   <script>
-    // جلب القيمة من localStorage أو تعيين القيمة الافتراضية
-    const numDisplay = document.getElementById('numDisplay');
-    document.getElementById('numDisplay').textContent = num;
-    let num = localStorage.getItem('num');
-    if (!num) {
-      num = "827778.67";
-      localStorage.setItem('num', num);
-    }
-    numDisplay.textContent = num;
+  const numElement = document.querySelector('.num');
+  const coinsElement = document.querySelector('.coins');
+
+  // نحاول نقرأ القيم من localStorage، وإذا مش موجودة نستخدم القيم الافتراضية
+  let num = parseFloat(localStorage.getItem('num')) || 827778.67;
+  let coins = parseFloat(localStorage.getItem('coins')) || 4138893;
+
+  numElement.textContent = num.toFixed(2);
+  coinsElement.textContent = coins.toFixed(0);
   </script>
 </body>
 </html>
