@@ -32,24 +32,36 @@
       gap: 10px;
     }
     .input-column {
+.input-column {
   display: flex;
   flex-direction: column;
   gap: 20px;
-  width: 100%;
-  max-width: 500px; /* زوّد العرض */
-  margin: 50px auto; /* وسط الصفحة */
+  width: 300px; /* عرض مناسب */
+  margin: 0 auto; /* لتوسيط الكل */
 }
 
 .input-column input {
+  font-size: 22px;
+  height: 60px;
   text-align: center;
-  font-size: 22px; /* كبر الخط */
-  padding: 14px 20px;
-  height: 65px; /* كبر ارتفاع الخانة */
-  border: 1px solid #ccc;
   border-radius: 10px;
-  box-sizing: border-box;
+  border: 1px solid #ccc;
   outline: none;
-  direction: rtl;
+  box-sizing: border-box;
+
+  /* لضبط التوسيط العمودي */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+}
+
+/* إزالة أزرار الرقم في بعض المتصفحات */
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none;
+  margin: 0; 
 }
   .brain-img {
   width: 28px; /* أو أي حجم تريده */
