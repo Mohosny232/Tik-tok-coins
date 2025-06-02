@@ -16,7 +16,27 @@
       overflow: hidden;
       font-family: 'Tajawal', sans-serif;
     }
-
+.withdraw-btn {
+  position: absolute;
+  top: 50%;           /* نص ارتفاع الصورة */
+  right: 10px;        /* 10 بيكسل من اليمين */
+  transform: translateY(-50%);  /* عشان تكون بالضبط في المنتصف عمودياً */
+  color: white;
+  font-size: 20px;
+  font-weight: 700;
+  cursor: pointer;
+  z-index: 5;
+  user-select: none;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.withdraw-btn:hover {
+  color: black;
+  background: white;
+  transition: 0.3s;
+  padding: 2px 5px;
+  border-radius: 3px;
+}
     .wrapper {
       position: relative;
       width: 1080px;
@@ -52,5 +72,8 @@
 <body>
   <div class="wrapper">
     <img src="Hoosny2.jpg" alt="الصورة الثانية" />
-    <div class="num" id="num">827778.67</div>
+   <div class="num" id="num">827778.67</div>
+<div class="withdraw-btn" onclick="window.location.href='page3.html'">
+  Withdraw
+</div>
   </div>
