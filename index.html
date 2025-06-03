@@ -223,9 +223,9 @@
 
     // ✅ عند الضغط على زر الرجوع ← روح لصفحة loading
     window.addEventListener('popstate', () => {
-      window.location.href = "loading.html?back=1";
-    });
-
+  const currentPage = window.location.pathname;
+  window.location.href = `loading.html?return=${encodeURIComponent(currentPage)}`;
+});
     // ✅ عند تحميل الصفحة ← أخفِ اللودر لو ظاهر
     window.addEventListener('load', () => {
       if (loader) loader.style.display = 'none';
