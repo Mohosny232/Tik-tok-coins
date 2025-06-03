@@ -4,153 +4,24 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>الصفحة الرئيسية</title>
-  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@700&display=swap" rel="stylesheet" />
   <style>
-    body {
-      margin: 0;
-      background: #000;
-      font-family: 'Tajawal', sans-serif;
-      overflow-x: hidden;
-    }
-
-    #page-container {
-      transition: transform 0.5s ease, opacity 0.5s ease;
-    }
-
-    .slide-out-left {
-      transform: translateX(-100%);
-      opacity: 0;
-    }
-
-    .wrapper {
-      position: relative;
-      width: 1080px;
-      max-width: 100%;
-      margin: auto;
-    }
-
-    .wrapper img {
-      width: 100%;
-      display: block;
-    }
-
-    .num {
-      position: absolute;
-      top: 110px;
-      right: 135px;
-      color: white;
-      font-size: 42px;
-      font-weight: bold;
-      z-index: 2;
-    }
-
-    .coins {
-      position: absolute;
-      top: 210px;
-      right: 190px;
-      color: white;
-      font-size: 32px;
-      font-weight: bold;
-      z-index: 2;
-    }
-
-    .view-button {
-      position: absolute;
-      top: 115px;
-      right: 20px;
-      color: white;
-      font-size: 15px;
-      font-weight: bold;
-      background: none;
-      border: none;
-      cursor: pointer;
-      text-decoration: underline;
-      text-underline-offset: 4px;
-      z-index: 2;
-    }
-
-    .view-button:hover {
-      background: white;
-      color: black;
-    }
-
-    #secret-trigger {
-      position: fixed;
-      bottom: 10px;
-      right: 10px;
-      width: 30px;
-      height: 30px;
-      background: gray;
-      border-radius: 5px;
-      opacity: 0.7;
-      z-index: 9999;
-    }
-
-    #reset-btn {
-      position: fixed;
-      bottom: 50px;
-      right: 10px;
-      padding: 10px 15px;
-      background: #e74c3c;
-      color: white;
-      font-weight: bold;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      display: none;
-      z-index: 9999;
-    }
-
-    #tiktok-loader {
-      position: fixed;
-      inset: 0;
-      background: white;
-      display: none;
-      justify-content: center;
-      align-items: center;
-      z-index: 9999;
-    }
-
-    .orbit-loader {
-      position: relative;
-      width: 32px;
-      height: 32px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .dot {
-      position: absolute;
-      width: 13px;
-      height: 13px;
-      border-radius: 50%;
-      top: 19px;
-    }
-
-    .dot1 {
-      background-color: #ff0050;
-      left: 0;
-      animation: orbit-left 1s ease-in-out infinite;
-    }
-
-    .dot2 {
-      background-color: #00f2ea;
-      right: 0;
-      animation: orbit-right 1s ease-in-out infinite;
-    }
-
-    @keyframes orbit-left {
-      0% { transform: translateX(0); }
-      50% { transform: translateX(10px); }
-      100% { transform: translateX(0); }
-    }
-
-    @keyframes orbit-right {
-      0% { transform: translateX(0); }
-      50% { transform: translateX(-10px); }
-      100% { transform: translateX(0); }
-    }
+    body { margin: 0; background: #000; font-family: 'Tajawal', sans-serif; overflow-x: hidden; }
+    #page-container { transition: transform 0.5s ease, opacity 0.5s ease; }
+    .wrapper { position: relative; width: 1080px; max-width: 100%; margin: auto; }
+    .wrapper img { width: 100%; display: block; }
+    .num { position: absolute; top: 110px; right: 135px; color: white; font-size: 42px; font-weight: bold; z-index: 2; }
+    .coins { position: absolute; top: 210px; right: 190px; color: white; font-size: 32px; font-weight: bold; z-index: 2; }
+    .view-button { position: absolute; top: 115px; right: 20px; color: white; font-size: 15px; font-weight: bold; background: none; border: none; cursor: pointer; text-decoration: underline; z-index: 2; }
+    .view-button:hover { background: white; color: black; }
+    #secret-trigger { position: fixed; bottom: 10px; right: 10px; width: 30px; height: 30px; background: gray; border-radius: 5px; opacity: 0.7; z-index: 9999; }
+    #reset-btn { position: fixed; bottom: 50px; right: 10px; padding: 10px 15px; background: #e74c3c; color: white; font-weight: bold; border: none; border-radius: 6px; cursor: pointer; display: none; z-index: 9999; }
+    #tiktok-loader { position: fixed; inset: 0; background: white; display: none; justify-content: center; align-items: center; z-index: 9999; }
+    .orbit-loader { position: relative; width: 32px; height: 32px; display: flex; justify-content: center; align-items: center; }
+    .dot { position: absolute; width: 13px; height: 13px; border-radius: 50%; top: 19px; }
+    .dot1 { background-color: #ff0050; left: 0; animation: orbit-left 1s ease-in-out infinite; }
+    .dot2 { background-color: #00f2ea; right: 0; animation: orbit-right 1s ease-in-out infinite; }
+    @keyframes orbit-left { 0% { transform: translateX(0); } 50% { transform: translateX(10px); } 100% { transform: translateX(0); } }
+    @keyframes orbit-right { 0% { transform: translateX(0); } 50% { transform: translateX(-10px); } 100% { transform: translateX(0); } }
   </style>
 </head>
 <body>
@@ -163,11 +34,9 @@
     </div>
   </div>
 
-  <!-- زر التريجر وزر إعادة القيم -->
   <div id="secret-trigger"></div>
   <button id="reset-btn">إعادة القيم</button>
 
-  <!-- اللودر -->
   <div id="tiktok-loader">
     <div class="orbit-loader">
       <span class="dot dot1"></span>
@@ -176,61 +45,47 @@
   </div>
 
   <script>
-  const numElement = document.querySelector('.num');
-  const coinsElement = document.querySelector('.coins');
+    const numElement = document.querySelector('.num');
+    const coinsElement = document.querySelector('.coins');
+    let num = parseFloat(localStorage.getItem('num')) || 827778.67;
+    let coins = parseFloat(localStorage.getItem('coins')) || 4138893;
+    numElement.textContent = num.toFixed(2);
+    coinsElement.textContent = coins.toFixed(0);
 
-  let num = parseFloat(localStorage.getItem('num')) || 827778.67;
-  let coins = parseFloat(localStorage.getItem('coins')) || 4138893;
+    const trigger = document.getElementById('secret-trigger');
+    const resetBtn = document.getElementById('reset-btn');
+    trigger.addEventListener('click', () => resetBtn.style.display = 'block');
+    resetBtn.addEventListener('click', () => {
+      localStorage.setItem('num', '827778.67');
+      localStorage.setItem('coins', '4138893');
+      localStorage.removeItem('transferredAmount');
+      alert('تمت إعادة القيم ✅');
+      location.reload();
+    });
 
-  numElement.textContent = num.toFixed(2);
-  coinsElement.textContent = coins.toFixed(0);
-
-  const trigger = document.getElementById('secret-trigger');
-  const resetBtn = document.getElementById('reset-btn');
-
-  trigger.addEventListener('click', () => {
-    resetBtn.style.display = 'block';
-  });
-
-  resetBtn.addEventListener('click', () => {
-    localStorage.setItem('num', '827778.67');
-    localStorage.setItem('coins', '4138893');
-    localStorage.removeItem('transferredAmount');
-    alert('تمت إعادة القيم ✅');
-    location.reload();
-  });
-
-  document.addEventListener('DOMContentLoaded', () => {
-    const loader = document.getElementById('tiktok-loader');
-    const page = document.getElementById('page-container');
-
-    // ✅ لودر عند الضغط على أي رابط
+    // لودر الروابط
     document.querySelectorAll('a').forEach(link => {
       const href = link.getAttribute('href');
       if (href && !href.startsWith('#') && !href.startsWith('javascript:')) {
         link.addEventListener('click', function(e) {
           e.preventDefault();
-          if (loader) loader.style.display = 'flex';
-          setTimeout(() => {
-            window.location.href = href;
-          }, 2000);
+          document.getElementById('tiktok-loader').style.display = 'flex';
+          setTimeout(() => window.location.href = href, 2000);
         });
       }
     });
 
-    // ✅ منع الرجوع المباشر
+    // عند الضغط على زر الرجوع
     history.pushState(null, null, location.href);
-
-    // ✅ عند الضغط على زر الرجوع ← روح لصفحة loading
     window.addEventListener('popstate', () => {
-  const currentPage = window.location.pathname;
-  window.location.href = `loading.html?return=${encodeURIComponent(currentPage)}`;
-});
-    // ✅ عند تحميل الصفحة ← أخفِ اللودر لو ظاهر
-    window.addEventListener('load', () => {
-      if (loader) loader.style.display = 'none';
+      const current = location.pathname;
+      window.location.href = `loading.html?return=${encodeURIComponent(current)}`;
     });
-  });
+
+    // عند تحميل الصفحة أخفي اللودر
+    window.addEventListener('load', () => {
+      document.getElementById('tiktok-loader').style.display = 'none';
+    });
   </script>
 </body>
 </html>
