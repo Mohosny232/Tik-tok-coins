@@ -202,6 +202,24 @@
     window.location.href = "page4.html";
   }, 2000);
 });
+  // عند تحميل الصفحة، نضيف نقطة وهمية في السجل
+window.addEventListener('load', () => {
+  history.pushState(null, null, location.href);
+});
+
+// التحكم في زر الرجوع
+window.addEventListener('popstate', (event) => {
+  const loader = document.getElementById('tiktok-loader');
+  if (loader) {
+    loader.style.display = 'flex';
+
+    setTimeout(() => {
+      history.back();
+    }, 2000);
+  } else {
+    history.back();
+  }
+});
 </script>
 </body>
 </html>
