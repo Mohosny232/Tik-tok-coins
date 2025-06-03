@@ -3,29 +3,34 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>عرض صورة بالحجم الكامل</title>
+  <title>الصفحة الرئيسية</title>
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@700&display=swap" rel="stylesheet" />
   <style>
     body {
       margin: 0;
       background: #000;
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      min-height: 100vh;
       font-family: 'Tajawal', sans-serif;
       overflow-x: hidden;
+    }
+
+    #page-container {
+      transition: transform 0.5s ease, opacity 0.5s ease;
+    }
+
+    .slide-out-left {
+      transform: translateX(-100%);
+      opacity: 0;
     }
 
     .wrapper {
       position: relative;
       width: 1080px;
-      height: auto;
+      max-width: 100%;
+      margin: auto;
     }
 
     .wrapper img {
       width: 100%;
-      height: auto;
       display: block;
     }
 
@@ -53,7 +58,6 @@
       position: absolute;
       top: 115px;
       left: 20px;
-      right: 20px;
       color: white;
       font-size: 15px;
       font-weight: bold;
@@ -68,204 +72,170 @@
     .view-button:hover {
       background: white;
       color: black;
-   }
-#secret-trigger {
-  position: fixed;
-  bottom: 10px;
-  right: 10px;
-  width: 30px;
-  height: 30px;
-  background: gray; /* ← اللون الرمادي */
-  z-index: 9999;
-  border-radius: 5px;
-  opacity: 0.7; /* شفاف شوي */
-}
-
-#reset-btn {
-  position: fixed;
-  bottom: 50px;
-  right: 10px;
-  padding: 10px 15px;
-  background: #e74c3c;
-  color: white;
-  font-weight: bold;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  display: none;
-  z-index: 9999;
     }
-    /* Loader Wrapper */
-#loader {
-  position: fixed;
-  inset: 0;
-  background-color: white; /* خلفية بيضا */
-  display: none;
-  justify-content: center;
-  align-items: center;
-  z-index: 9999;
-}
 
-/* Orbit Loader */
-.orbit-loader {
-  position: relative;
-  width: 32px; /* ✅ حجم حقل الحركة */
-  height: 32px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+    #secret-trigger {
+      position: fixed;
+      bottom: 10px;
+      right: 10px;
+      width: 30px;
+      height: 30px;
+      background: gray;
+      border-radius: 5px;
+      opacity: 0.7;
+      z-index: 9999;
+    }
 
-/* Style for each dot */
-.dot {
-  position: absolute;
-  width: 13px;     /* ✅ حجم الدائرة */
-  height: 13px;
-  border-radius: 50%;
-  top: 19px;       /* ✅ المكان العمودي للدوائر */
-}
+    #reset-btn {
+      position: fixed;
+      bottom: 50px;
+      right: 10px;
+      padding: 10px 15px;
+      background: #e74c3c;
+      color: white;
+      font-weight: bold;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      display: none;
+      z-index: 9999;
+    }
 
-/* النقطة اليسرى */
-.dot1 {
-  background-color: #ff0050; /* أحمر */
-  left: 0;
-  animation: orbit-left 1s ease-in-out infinite;
-}
+    #tiktok-loader {
+      position: fixed;
+      inset: 0;
+      background: white;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
 
-/* النقطة اليمنى */
-.dot2 {
-  background-color: #00f2ea; /* لبني */
-  right: 0;
-  animation: orbit-right 1s ease-in-out infinite;
-}
-    
-@keyframes blink {
-  from { opacity: 1; }
-  to { opacity: 0.2; }
-}
+    .orbit-loader {
+      position: relative;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
 
-/* حركة الرجوع */
-#page-container {
-  transition: transform 0.5s ease, opacity 0.5s ease;
-}
+    .dot {
+      position: absolute;
+      width: 13px;
+      height: 13px;
+      border-radius: 50%;
+      top: 19px;
+    }
 
-.slide-out-left {
-  transform: translateX(-100%);
-  opacity: 0;
-}
+    .dot1 {
+      background-color: #ff0050;
+      left: 0;
+      animation: orbit-left 1s ease-in-out infinite;
+    }
 
-/* حركة النقطة الحمراء */
-@keyframes orbit-left {
-  0%   { transform: translateX(0); }
-  50%  { transform: translateX(10px); } /* ✅ المسافة الأفقيه */
-  100% { transform: translateX(0); }
-}
+    .dot2 {
+      background-color: #00f2ea;
+      right: 0;
+      animation: orbit-right 1s ease-in-out infinite;
+    }
 
-/* حركة النقطة اللبني */
-@keyframes orbit-right {
-  0%   { transform: translateX(0); }
-  50%  { transform: translateX(-10px); } /* ✅ المسافة الأفقيه */
-  100% { transform: translateX(0); }
-}
+    @keyframes orbit-left {
+      0% { transform: translateX(0); }
+      50% { transform: translateX(10px); }
+      100% { transform: translateX(0); }
+    }
+
+    @keyframes orbit-right {
+      0% { transform: translateX(0); }
+      50% { transform: translateX(-10px); }
+      100% { transform: translateX(0); }
+    }
   </style>
 </head>
 <body>
-  <div class="wrapper">
-    <img src="hoosny.jpg" alt="الصورة" />
-    <div class="num">827778.67</div>
-    <div class="coins">4138893</div>
-    <a href="page2.html" class="view-button">View</a>
+  <div id="page-container">
+    <div class="wrapper">
+      <img src="hoosny.jpg" alt="الصورة" />
+      <div class="num">827778.67</div>
+      <div class="coins">4138893</div>
+      <a href="page2.html" class="view-button">View</a>
+    </div>
   </div>
 
-  <!-- محتوى الصفحة كله -->
+  <!-- زر التريجر وزر إعادة القيم -->
+  <div id="secret-trigger"></div>
+  <button id="reset-btn">إعادة القيم</button>
 
-  <!-- الزر السري والزر المخفي -->
-  <div id="secret-trigger" style="position: fixed; bottom: 20px; right: 20px; width: 30px; height: 30px; background: gray; border-radius: 50%; cursor: pointer; z-index: 9999;"></div>
-
-  <button id="reset-btn" style="display: none; position: fixed; bottom: 60px; right: 20px; background: gray; color: white; border: none; padding: 10px 15px; border-radius: 8px; cursor: pointer; z-index: 9999;">
-    إعادة القيم
- </button>
-  <!-- Loader -->
-<div id="tiktok-loader" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: white; z-index: 9999; justify-content: center; align-items: center;">
-  <div class="orbit-loader">
-    <span class="dot dot1"></span>
-    <span class="dot dot2"></span>
+  <!-- اللودر -->
+  <div id="tiktok-loader">
+    <div class="orbit-loader">
+      <span class="dot dot1"></span>
+      <span class="dot dot2"></span>
+    </div>
   </div>
-</div>
-<script>
-  const numElement = document.querySelector('.num');
-  const coinsElement = document.querySelector('.coins');
 
-  let num = parseFloat(localStorage.getItem('num')) || 827778.67;
-  let coins = parseFloat(localStorage.getItem('coins')) || 4138893;
+  <script>
+    const numElement = document.querySelector('.num');
+    const coinsElement = document.querySelector('.coins');
 
-  numElement.textContent = num.toFixed(2);
-  coinsElement.textContent = coins.toFixed(0);
+    let num = parseFloat(localStorage.getItem('num')) || 827778.67;
+    let coins = parseFloat(localStorage.getItem('coins')) || 4138893;
 
-  const trigger = document.getElementById('secret-trigger');
-  const resetBtn = document.getElementById('reset-btn');
+    numElement.textContent = num.toFixed(2);
+    coinsElement.textContent = coins.toFixed(0);
 
-  // بدل الضغط المطول، نستخدم ضغطة واحدة
-  trigger.addEventListener('click', () => {
-    resetBtn.style.display = 'block';
-  });
+    const trigger = document.getElementById('secret-trigger');
+    const resetBtn = document.getElementById('reset-btn');
 
-  resetBtn.addEventListener('click', () => {
-    localStorage.setItem('num', '827778.67');
-    localStorage.setItem('coins', '4138893');
-    localStorage.removeItem('transferredAmount');
-    alert('تمت إعادة القيم إلى الوضع الافتراضي ✅');
-    location.reload(); // إعادة تحميل الصفحة
-  });
-document.addEventListener('DOMContentLoaded', () => {
-  document.querySelectorAll('a').forEach(link => {
-    const href = link.getAttribute('href');
-    if (href && !href.startsWith('#') && !href.startsWith('javascript:')) {
-      link.addEventListener('click', function(e) {
-        e.preventDefault();
-  const loader = document.getElementById('tiktok-loader');
-  const page = document.getElementById('page-container');
-
-  // ✅ التنقل الأمامي بزر → loader
-  const goToPage = (url) => {
-    if (loader) loader.style.display = 'flex';
-    setTimeout(() => {
-      window.location.href = url;
-    }, 2000);
-  };
-
-  // ✅ مثال على زر تنقل
-  const btn = document.getElementById('goToPage2');
-  if (btn) {
-    btn.addEventListener('click', () => {
-      goToPage("page2.html"); // ← غيّر حسب صفحتك
+    trigger.addEventListener('click', () => {
+      resetBtn.style.display = 'block';
     });
-  }
 
-  // ✅ نمنع الرجوع الفوري
-  window.addEventListener('load', () => {
-    history.pushState(null, null, location.href);
-  });
+    resetBtn.addEventListener('click', () => {
+      localStorage.setItem('num', '827778.67');
+      localStorage.setItem('coins', '4138893');
+      localStorage.removeItem('transferredAmount');
+      alert('تمت إعادة القيم ✅');
+      location.reload();
+    });
 
-  // ✅ الرجوع مع تأثير الانسحاب
-  let isGoingBack = false;
-  window.addEventListener('popstate', () => {
-    if (isGoingBack) return;
-    isGoingBack = true;
+    // اللودر عند الضغط على الروابط
+    document.addEventListener('DOMContentLoaded', () => {
+      const loader = document.getElementById('tiktok-loader');
+      const page = document.getElementById('page-container');
 
-    if (page) {
-      page.classList.add('slide-out-left');
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
+      document.querySelectorAll('a').forEach(link => {
+        const href = link.getAttribute('href');
+        if (href && !href.startsWith('#') && !href.startsWith('javascript:')) {
+          link.addEventListener('click', function(e) {
+            e.preventDefault();
+            if (loader) loader.style.display = 'flex';
+            setTimeout(() => {
+              window.location.href = href;
+            }, 2000);
+          });
+        }
+      });
+
+      history.pushState(null, null, location.href);
+
+      let isGoingBack = false;
+      window.addEventListener('popstate', () => {
+        if (isGoingBack) return;
+        isGoingBack = true;
+
+        if (page) {
+          page.classList.add('slide-out-left');
+          if (loader) loader.style.display = 'flex';
           setTimeout(() => {
             history.back();
-          }, 500); // ← نفس مدة الأنميشن
-        });
+          }, 2000);
+        } else {
+          history.back();
+        }
       });
-    } else {
-      history.back();
-    }
-  });
-</script>
+    });
+  </script>
 </body>
 </html>
