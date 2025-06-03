@@ -241,9 +241,7 @@ window.addEventListener('load', () => {
   history.pushState(null, null, location.href);
 });
   });  
-  
-  // عند تحميل الصفحة، نخفي اللودينج لو كان ظاهر
-  window.addEventListener('load', () => {
+ // عند تحميل الصفحة، نخفي اللودينج لو كان ظاهر
     const loader = document.getElementById('tiktok-loader');
     if (loader) loader.style.display = 'none';
   });
