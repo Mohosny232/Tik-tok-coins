@@ -119,8 +119,8 @@
 /* Style for each dot */
 .dot {
   position: absolute;
-  width: 9px;     /* ✅ حجم الدائرة */
-  height: 9px;
+  width: 13px;     /* ✅ حجم الدائرة */
+  height: 13px;
   border-radius: 50%;
   top: 19px;       /* ✅ المكان العمودي للدوائر */
 }
@@ -142,14 +142,14 @@
 /* حركة النقطة الحمراء */
 @keyframes orbit-left {
   0%   { transform: translateX(0); }
-  50%  { transform: translateX(15px); } /* ✅ المسافة الأفقيه */
+  50%  { transform: translateX(10px); } /* ✅ المسافة الأفقيه */
   100% { transform: translateX(0); }
 }
 
 /* حركة النقطة اللبني */
 @keyframes orbit-right {
   0%   { transform: translateX(0); }
-  50%  { transform: translateX(-15px); } /* ✅ المسافة الأفقيه */
+  50%  { transform: translateX(-10px); } /* ✅ المسافة الأفقيه */
   100% { transform: translateX(0); }
 }
   </style>
