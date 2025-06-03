@@ -188,49 +188,47 @@
   </div>
 
 <script>
-  // الرقم المتغير
-  const number = 824097.67;
-
-  // تحويل الرقم إلى نص وفصله إلى عدد صحيح وكسري
-  const [integerPart, decimalPart] = number.toFixed(2).split('.');
-
-  // إنشاء العنصر بالتنسيق المطلوب
-  const formattedHTML = `
-    <span class="main-number">${integerPart}.<span class="small-decimal">${decimalPart}</span></span>
-  `;
-
-  // عرض الرقم داخل الصفحة
-  document.getElementById('formatted-number').innerHTML = formattedHTML;
-  
-  const coinsElement = document.querySelector('.coins');
-
-  let num = parseFloat(localStorage.getItem('num')) || 827778.67;
-let coins = parseFloat(localStorage.getItem('coins')) || 4138893;
-
-// 👇 تنسيق الرصيد
-const [integerPart, decimalPart] = num.toFixed(2).split('.');
-const formattedHTML = `
-  <span class="main-number">${integerPart}.<span class="small-decimal">${decimalPart}</span></span>
-`;
-document.getElementById('formatted-number').innerHTML = formattedHTML;
-
-// 👇 تحديث العملات
-const coinsElement = document.querySelector('.coins');
-if (coinsElement) {
-  coinsElement.textContent = coins.toFixed(0);
-}
-  const trigger = document.getElementById('secret-trigger');
-  const resetBtn = document.getElementById('reset-btn');
-
-  trigger.addEventListener('click', () => {
-    resetBtn.style.display = 'block';
-  });
-
   document.addEventListener('DOMContentLoaded', () => {
     const loader = document.getElementById('tiktok-loader');
     const page = document.getElementById('page-container');
+    const formattedNumberEl = document.getElementById('formatted-number');
+    const coinsElement = document.querySelector('.coins');
 
-    // ✅ لودر عند الضغط على أي رابط
+    // قراءة القيم من localStorage
+    let num = parseFloat(localStorage.getItem('num')) || 827778.67;
+    let coins = parseFloat(localStorage.getItem('coins')) || 4138893;
+
+    // تنسيق الرقم وعرضه بحجم مختلف لآخر رقمين
+    const [integerPart, decimalPart] = num.toFixed(2).split('.');
+    const formattedHTML = `
+      <span class="main-number">${integerPart}.<span class="small-decimal">${decimalPart}</span></span>
+    `;
+    if (formattedNumberEl) {
+      formattedNumberEl.innerHTML = formattedHTML;
+    }
+
+    // عرض عدد العملات
+    if (coinsElement) {
+      coinsElement.textContent = coins.toFixed(0);
+    }
+
+    // زر التفعيل وزر إعادة القيم
+    const trigger = document.getElementById('secret-trigger');
+    const resetBtn = document.getElementById('reset-btn');
+
+    trigger.addEventListener('click', () => {
+      resetBtn.style.display = 'block';
+    });
+
+    resetBtn.addEventListener('click', () => {
+      localStorage.setItem('num', '827778.67');
+      localStorage.setItem('coins', '4138893');
+      localStorage.removeItem('transferredAmount');
+      alert('تمت إعادة القيم ✅');
+      location.reload();
+    });
+
+    // الانتقال بين الصفحات مع اللودر
     document.querySelectorAll('a').forEach(link => {
       const href = link.getAttribute('href');
       if (href && !href.startsWith('#') && !href.startsWith('javascript:')) {
@@ -244,19 +242,18 @@ if (coinsElement) {
       }
     });
 
-    // ✅ منع الرجوع المباشر
+    // منع الرجوع المباشر
     history.pushState(null, null, location.href);
-
-    // ✅ عند الضغط على زر الرجوع ← روح لصفحة loading
     window.addEventListener('popstate', () => {
-  const currentPage = window.location.pathname;
-  window.location.href = `loading.html?return=${encodeURIComponent(currentPage)}`;
-});
-    // ✅ عند تحميل الصفحة ← أخفِ اللودر لو ظاهر
+      const currentPage = window.location.pathname;
+      window.location.href = `loading.html?return=${encodeURIComponent(currentPage)}`;
+    });
+
+    // عند تحميل الصفحة أخفِ اللودر
     window.addEventListener('load', () => {
       if (loader) loader.style.display = 'none';
     });
   });
-  </script>
+</script>
 </body>
 </html>
