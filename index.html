@@ -109,8 +109,8 @@
 /* Orbit Loader */
 .orbit-loader {
   position: relative;
-  width: 45px; /* ✅ حجم حقل الحركة */
-  height: 45px;
+  width: 40px; /* ✅ حجم حقل الحركة */
+  height: 40px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -142,14 +142,14 @@
 /* حركة النقطة الحمراء */
 @keyframes orbit-left {
   0%   { transform: translateX(0); }
-  50%  { transform: translateX(28px); } /* ✅ المسافة الأفقيه */
+  50%  { transform: translateX(24px); } /* ✅ المسافة الأفقيه */
   100% { transform: translateX(0); }
 }
 
 /* حركة النقطة اللبني */
 @keyframes orbit-right {
   0%   { transform: translateX(0); }
-  50%  { transform: translateX(-28px); } /* ✅ المسافة الأفقيه */
+  50%  { transform: translateX(-24px); } /* ✅ المسافة الأفقيه */
   100% { transform: translateX(0); }
 }
   </style>
