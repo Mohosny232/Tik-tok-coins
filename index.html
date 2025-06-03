@@ -207,8 +207,8 @@
   let num = parseFloat(localStorage.getItem('num')) || 827778.67;
   let coins = parseFloat(localStorage.getItem('coins')) || 4138893;
 
-
-  coinsElement.textContent = coins.toFixed(0);
+console.log('coins element:', coinsElement);
+coinsElement.textContent = coins.toFixed(0);
 
   const trigger = document.getElementById('secret-trigger');
   const resetBtn = document.getElementById('reset-btn');
