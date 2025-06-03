@@ -1,66 +1,67 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>الصفحة الرابعة</title>
-  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@700&display=swap" rel="stylesheet" />
-  <style>
-    html, body {
-      height: 100%;
-      margin: 0;
-      padding: 0;
-      background: #fff;
-      overflow: hidden;
-      font-family: 'Tajawal', sans-serif;
-    }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>الصفحة الرابعة</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@700&display=swap" rel="stylesheet" />
+<style>
+  html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background: #fff; /* خلفية بيضاء */
+    overflow: hidden;
+    font-family: 'Tajawal', sans-serif;
+  }
 
-    body {
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-    }
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* نبدأ من فوق */
+  }
 
-    .amount-display {
-      position: absolute;
-      top: 17%;
-      left: 65%;
-      transform: translate(-50%, -50%);
-      font-size: 40px;
-      font-weight: bold;
-      color: black;
-      z-index: 2;
-    }
+  .amount-display {
+    position: absolute;
+    top: 17%;
+    left: 65%;
+    transform: translate(-50%, -50%);
+    font-size: 40px;
+    font-weight: bold;
+    color: black;
+    z-index: 2;
+  }
 
-    .wrapper {
-      position: relative;
-      width: 1080px;
-      height: 1988px;
-      max-width: 100%;
-      max-height: 100%;
-      overflow: hidden;
-    }
+  .wrapper {
+    position: relative;
+    width: 1080px;
+    height: 1988px;
+    max-width: 100%;
+    max-height: 100%;
+    overflow: hidden;
+  }
 
-    .wrapper img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      position: absolute;
-      top: 0;
-      left: 0;
-      z-index: 0;
-    }
+  .wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+  }
 
-    /* مؤثر الرجوع — انسحاب من الشمال */
-    #page-container {
-      transition: transform 0.5s ease, opacity 0.5s ease;
-    }
+  /* نغلف الصفحة في div له أنميشن */
+  #page-container {
+    transition: transform 0.5s ease, opacity 0.5s ease;
+  }
 
-    .slide-out-left {
-      transform: translateX(-100%);
-      opacity: 0;
-    }
-  </style>
+  /* مؤثر الرجوع — انسحاب من الشمال */
+  .slide-out-left {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+</style>
 </head>
 <body>
   <div id="page-container">
@@ -70,31 +71,31 @@
     </div>
   </div>
 
-  <script>
-    // ✅ عرض المبلغ من localStorage
-    const transferredDisplay = document.getElementById('transferredDisplay');
-    const transferredAmount = localStorage.getItem('transferredAmount') || "0.00";
-    transferredDisplay.textContent = transferredAmount;
+<script>
+  // ✅ عرض القيمة من localStorage
+  const transferredDisplay = document.getElementById('transferredDisplay');
+  const transferredAmount = localStorage.getItem('transferredAmount') || "0.00";
+  transferredDisplay.textContent = transferredAmount;
 
-    // ✅ منع الرجوع مباشرة
-    window.addEventListener('load', () => {
-      history.pushState(null, null, location.href);
-    });
+  // ✅ منع الرجوع مباشرة
+  window.addEventListener('load', () => {
+    history.pushState(null, null, location.href);
+  });
 
-    let isGoingBack = false;
+  let isGoingBack = false;
 
-    // ✅ عند الضغط على زر الرجوع
-    window.addEventListener('popstate', () => {
-      if (isGoingBack) return;
-      isGoingBack = true;
+  // ✅ عند الضغط على زر الرجوع
+  window.addEventListener('popstate', () => {
+    if (isGoingBack) return;
+    isGoingBack = true;
 
-      const page = document.getElementById('page-container');
-      page.classList.add('slide-out-left');
+    const page = document.getElementById('page-container');
+    page.classList.add('slide-out-left'); // شغل الحركة
 
-      setTimeout(() => {
-        history.back();
-      }, 500);
-    });
-  </script>
+    setTimeout(() => {
+      history.back(); // يرجع فعليًا بعد الحركة
+    }, 500); // نفس مدة الأنميشن
+  });
+</script>
 </body>
 </html>
