@@ -78,9 +78,8 @@
     // عند الضغط على زر الرجوع
     history.pushState(null, null, location.href);
     window.addEventListener('popstate', () => {
-      const current = location.pathname;
-      window.location.href = `loading.html?return=${encodeURIComponent(current)}`;
-    });
+  window.location.href = "loading.html?return=page2.html";
+});
 
     window.addEventListener('load', () => {
   const fromLoading = document.referrer.includes('loading.html');
