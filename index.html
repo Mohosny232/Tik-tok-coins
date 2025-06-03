@@ -94,46 +94,62 @@
   cursor: pointer;
   display: none;
   z-index: 9999;
+    }
+    /* Loader Wrapper */
+#loader {
+  position: fixed;
+  inset: 0;
+  background-color: white; /* خلفية بيضا */
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
 }
-    .orbit-loader {
+
+/* Orbit Loader */
+.orbit-loader {
   position: relative;
-  width: 60px;
-  height: 60px;
-  animation: rotate 1s linear infinite;
+  width: 50px; /* ✅ حجم حقل الحركة */
+  height: 50px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
+/* Style for each dot */
 .dot {
   position: absolute;
-  width: 16px;
-  height: 16px;
+  width: 12px;     /* ✅ حجم الدائرة */
+  height: 12px;
   border-radius: 50%;
-  top: 22px;
+  top: 19px;       /* ✅ المكان العمودي للدوائر */
 }
 
+/* النقطة اليسرى */
 .dot1 {
   background-color: #ff0050; /* أحمر */
   left: 0;
   animation: orbit-left 1s ease-in-out infinite;
 }
 
+/* النقطة اليمنى */
 .dot2 {
   background-color: #00f2ea; /* لبني */
   right: 0;
   animation: orbit-right 1s ease-in-out infinite;
 }
 
+/* حركة النقطة الحمراء */
 @keyframes orbit-left {
   0%   { transform: translateX(0); }
-  50%  { transform: translateX(40px); }
+  50%  { transform: translateX(35px); } /* ✅ المسافة الأفقيه */
   100% { transform: translateX(0); }
 }
 
+/* حركة النقطة اللبني */
 @keyframes orbit-right {
   0%   { transform: translateX(0); }
-  50%  { transform: translateX(-40px); }
+  50%  { transform: translateX(-35px); } /* ✅ المسافة الأفقيه */
   100% { transform: translateX(0); }
 }
   </style>
@@ -186,22 +202,29 @@
     alert('تمت إعادة القيم إلى الوضع الافتراضي ✅');
     location.reload(); // إعادة تحميل الصفحة
   });
-document.querySelectorAll('a').forEach(link => {
-  link.addEventListener('click', function (e) {
-    const href = this.getAttribute('href');
-    
-    // تأكد إنه رابط داخل الموقع (مش anchor أو #)
-    if (href && !href.startsWith('#') && !href.startsWith('javascript:')) {
+window.addEventListener("DOMContentLoaded", function () {
+  document.querySelectorAll('a, .withdraw-btn').forEach(link => {
+    link.addEventListener('click', function (e) {
+      const href = link.getAttribute('href') || link.getAttribute('onclick');
+      if (
+        link.target === "_blank" ||
+        href?.startsWith("javascript:") ||
+        href === "#" ||
+        !href
+      ) return;
+
       e.preventDefault();
+      const loader = document.getElementById('loader');
+      if (loader) loader.style.display = 'flex';
 
-      // عرض اللودر
-      document.getElementById('tiktok-loader').style.display = 'flex';
-
-      // بعد ثانيتين ننتقل للرابط
       setTimeout(() => {
-        window.location.href = href;
+        if (link.getAttribute('href')) {
+          window.location.href = link.getAttribute('href');
+        } else {
+          eval(link.getAttribute('onclick'));
+        }
       }, 2000);
-    }
+    });
   });
 });
 </script> 
