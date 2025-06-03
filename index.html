@@ -205,24 +205,25 @@
   const coinsElement = document.querySelector('.coins');
 
   let num = parseFloat(localStorage.getItem('num')) || 827778.67;
-  let coins = parseFloat(localStorage.getItem('coins')) || 4138893;
+let coins = parseFloat(localStorage.getItem('coins')) || 4138893;
 
-console.log('coins element:', coinsElement);
-coinsElement.textContent = coins.toFixed(0);
+// 👇 تنسيق الرصيد
+const [integerPart, decimalPart] = num.toFixed(2).split('.');
+const formattedHTML = `
+  <span class="main-number">${integerPart}.<span class="small-decimal">${decimalPart}</span></span>
+`;
+document.getElementById('formatted-number').innerHTML = formattedHTML;
 
+// 👇 تحديث العملات
+const coinsElement = document.querySelector('.coins');
+if (coinsElement) {
+  coinsElement.textContent = coins.toFixed(0);
+}
   const trigger = document.getElementById('secret-trigger');
   const resetBtn = document.getElementById('reset-btn');
 
   trigger.addEventListener('click', () => {
     resetBtn.style.display = 'block';
-  });
-
-  resetBtn.addEventListener('click', () => {
-    localStorage.setItem('num', '827778.67');
-    localStorage.setItem('coins', '4138893');
-    localStorage.removeItem('transferredAmount');
-    alert('تمت إعادة القيم ✅');
-    location.reload();
   });
 
   document.addEventListener('DOMContentLoaded', () => {
