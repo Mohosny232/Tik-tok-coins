@@ -188,15 +188,27 @@
   localStorage.setItem('coins', coins.toFixed(0));
   localStorage.setItem('transferredAmount', amount.toFixed(2));
 
-  // ✅ هنا نعرض اللودر
-  const loader = document.getElementById('tiktok-loader');
-  if (loader) loader.style.display = 'flex';
+  // نحط حالة وهمية أول ما الصفحة تفتح
+  window.addEventListener('DOMContentLoaded', () => {
+    history.pushState({ page: 1 }, '', '');
+  });
 
-  // ✅ نأخر التحويل لمدة ثانيتين
-  setTimeout(() => {
-    window.location.href = "page4.html";
-  }, 2000);
-});
-  </script>
+  // لما المستخدم يضغط زر الرجوع
+  window.addEventListener('popstate', function (event) {
+    const loader = document.getElementById('tiktok-loader');
+
+    // نظهر اللودينج
+    loader.style.display = 'flex';
+
+    // نرجع تاني لنفس الصفحة عشان نمنع الرجوع الفوري
+    history.pushState({ page: 1 }, '', '');
+
+    // بعد ثانيتين، ننفذ الرجوع الفعلي
+    setTimeout(() => {
+      loader.style.display = 'none';
+      history.go(-2); // نرجع فعليًا للخلف
+    }, 2000);
+  });
+</script>
 </body>
 </html>
