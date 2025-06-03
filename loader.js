@@ -1,30 +1,14 @@
-// loader.js
-document.addEventListener("DOMContentLoaded", () => {
-  // إنشاء عنصر اللودر وإضافته للصفحة
-  const overlay = document.createElement("div");
-  overlay.className = "loading-overlay";
-  overlay.innerHTML = `
-    <div class="loader">
-      <div class="dot red"></div>
-      <div class="dot blue"></div>
-    </div>
-  `;
-  document.body.appendChild(overlay);
+document.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', function (e) {
+    // تجاهل الروابط التي تفتح تبويب جديد أو ليست روابط داخلية
+    if (link.target === "_blank" || link.href.startsWith("javascript:")) return;
 
-  // استهداف كل الروابط في الصفحة
-  const links = document.querySelectorAll('a[href]');
-  links.forEach(link => {
-    // تجاهل الروابط اللي بتبدأ بـ # أو جافاسكربت
-    const href = link.getAttribute('href');
-    if (href.startsWith('#') || href.startsWith('javascript')) return;
+    e.preventDefault();
+    document.getElementById('loader').style.display = 'flex';
 
-    link.addEventListener('click', function (e) {
-      e.preventDefault();
-      overlay.classList.add("show");
-      const url = this.href;
-      setTimeout(() => {
-        window.location.href = url;
-      }, 2000);
-    });
+    const url = this.href;
+    setTimeout(() => {
+      window.location.href = url;
+    }, 2000);
   });
 });
