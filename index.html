@@ -82,10 +82,10 @@
 });
 
     window.addEventListener('load', () => {
-  const fromLoading = document.referrer.includes('loading.html');
-  if (fromLoading) {
-    // جاي من صفحة الرجوع، متعرضش اللودر
-    document.getElementById('tiktok-loader').style.display = 'none';
+  const loader = document.getElementById('tiktok-loader');
+  const fromLoaderPage = document.referrer.includes('loading.html');
+  if (fromLoaderPage && loader) {
+    loader.style.display = 'none'; // لا تظهر اللودر مرة أخرى
   }
 });
   </script>
