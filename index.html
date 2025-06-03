@@ -200,51 +200,46 @@
       location.reload();
     });
 
-    // اللودر عند الضغط على الروابط
-    document.addEventListener('DOMContentLoaded', () => {
-      const loader = document.getElementById('tiktok-loader');
-      const page = document.getElementById('page-container');
-
-      document.querySelectorAll('a').forEach(link => {
-        const href = link.getAttribute('href');
-        if (href && !href.startsWith('#') && !href.startsWith('javascript:')) {
-          link.addEventListener('click', function(e) {
-            e.preventDefault();
-            if (loader) loader.style.display = 'flex';
-            setTimeout(() => {
-              window.location.href = href;
-            }, 2000);
-          });
-        }
-      });
-
-      history.pushState(null, null, location.href);
-
-      let isGoingBack = false;
-
-window.addEventListener('popstate', (event) => {
-  if (isGoingBack) return;
-  isGoingBack = true;
-
-  if (loader) loader.style.display = 'flex';
-  if (page) page.classList.add('slide-out-left');
-
-  // نمنع الرجوع اللحظي ونعيده بعد 2 ثانية
-  setTimeout(() => {
-    // نستبدل back بـ go(-1) عشان يشتغل حتى لو كان نفس الـ URL
-    history.go(-1);
-  }, 2000);
-});
-
-// نمنع الرجوع التلقائي ونحجز نسخة في الهيستوري
-window.addEventListener('load', () => {
-  history.pushState(null, null, location.href);
-});
-  });  
- // عند تحميل الصفحة، نخفي اللودينج لو كان ظاهر
+  document.addEventListener('DOMContentLoaded', () => {
     const loader = document.getElementById('tiktok-loader');
-    if (loader) loader.style.display = 'none';
+    const page = document.getElementById('page-container');
+    let isGoingBack = false;
+
+    // ✅ عرض اللودر عند الضغط على أي رابط
+    document.querySelectorAll('a').forEach(link => {
+      const href = link.getAttribute('href');
+      if (href && !href.startsWith('#') && !href.startsWith('javascript:')) {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          if (loader) loader.style.display = 'flex';
+          setTimeout(() => {
+            window.location.href = href;
+          }, 2000);
+        });
+      }
+    });
+
+    // ✅ منع الرجوع المباشر
+    history.pushState(null, null, location.href);
+
+    // ✅ عند الرجوع ← شغل اللودر والحركة وانتظر 2 ثانية
+    window.addEventListener('popstate', () => {
+      if (isGoingBack) return;
+      isGoingBack = true;
+
+      if (loader) loader.style.display = 'flex';
+      if (page) page.classList.add('slide-out-left');
+
+      setTimeout(() => {
+        history.go(-1); // ← الرجوع بعد 2 ثانية
+      }, 2000);
+    });
+
+    // ✅ عند تحميل الصفحة ← أخفِ اللودر لو ظاهر
+    window.addEventListener('load', () => {
+      if (loader) loader.style.display = 'none';
+    });
   });
-  </script>
+</script>
 </body>
 </html>
