@@ -1,11 +1,8 @@
 /* loader.css */
 #loader {
   position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background-color: #fff; /* خلفية بيضاء */
+  inset: 0;
+  background-color: white; /* ✅ الخلفية بيضا */
   display: none;
   justify-content: center;
   align-items: center;
@@ -13,37 +10,37 @@
 }
 
 .loader {
-  position: relative;
   width: 60px;
   height: 60px;
+  position: relative;
 }
 
 .loader .dot {
-  position: absolute;
   width: 15px;
   height: 15px;
   border-radius: 50%;
+  position: absolute;
   top: 0;
   left: 50%;
   transform: translateX(-50%);
+  animation: rotate 1s linear infinite;
+  transform-origin: 0 30px;
 }
 
 .loader .red {
   background-color: red;
-  animation: rotate-red 1s linear infinite;
 }
 
 .loader .blue {
   background-color: #00bfff;
-  animation: rotate-blue 1s linear infinite;
+  animation-delay: 0.3s;
 }
 
-@keyframes rotate-red {
-  0% { transform: rotate(0deg) translateX(20px) rotate(0deg); }
-  100% { transform: rotate(360deg) translateX(20px) rotate(-360deg); }
-}
-
-@keyframes rotate-blue {
-  0% { transform: rotate(180deg) translateX(20px) rotate(-180deg); }
-  100% { transform: rotate(540deg) translateX(20px) rotate(-540deg); }
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg) translateX(20px) rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg) translateX(20px) rotate(-360deg);
+  }
 }
