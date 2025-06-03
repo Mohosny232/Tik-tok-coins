@@ -48,51 +48,7 @@
     left: 0;
     z-index: 0;
   }
-  .orbit-loader {
-  position: relative;
-  width: 32px;
-  height: 32px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.dot {
-  position: absolute;
-  width: 13px;
-  height: 13px;
-  border-radius: 50%;
-  top: 19px;
-}
-.dot1 {
-  background-color: #ff0050;
-  left: 0;
-  animation: orbit-left 1s ease-in-out infinite;
-}
-.dot2 {
-  background-color: #00f2ea;
-  right: 0;
-  animation: orbit-right 1s ease-in-out infinite;
-}
-@keyframes orbit-left {
-  0% { transform: translateX(0); }
-  50% { transform: translateX(10px); }
-  100% { transform: translateX(0); }
-}
-@keyframes orbit-right {
-  0% { transform: translateX(0); }
-  50% { transform: translateX(-10px); }
-  100% { transform: translateX(0); }
-}
-  /* نغلف الصفحة في div له أنميشن */
-#page-container {
-  transition: transform 0.5s ease, opacity 0.5s ease;
-}
-
-/* مؤثر الرجوع — انسحاب من الشمال */
-.slide-out-left {
-  transform: translateX(-100%);
-  opacity: 0;
-}
+  
 </style>
 </head>
 <body>
@@ -100,39 +56,33 @@
     <img src="hoosny4.jpg" alt="الصفحة الرابعة" />
 <div id="transferredDisplay" class="amount-display">0.00</div>
 <!-- TikTok Loader -->
-<div id="tiktok-loader" style="display: none; position: fixed; inset: 0; background: white; z-index: 9999; justify-content: center; align-items: center;">
-  <div class="orbit-loader">
-    <span class="dot dot1"></span>
-    <span class="dot dot2"></span>
-  </div>
-</div>
+
   <div id="page-container">
     <!-- كل المحتوى بتاع الصفحة هنا -->
   </div>
 
 <script>
-  // عرض المبلغ المحول
-  const transferredDisplay = document.getElementById('transferredDisplay');
-  const transferredAmount = localStorage.getItem('transferredAmount') || "0.00";
-  transferredDisplay.textContent = transferredAmount;
 
-  // نضيف نقطة وهمية في السجل
-  window.addEventListener('load', () => {
-    history.pushState(null, null, location.href);
-  });
+    // ✅ منع الرجوع مباشرة
+    window.addEventListener('load', () => {
+      history.pushState(null, null, location.href);
+    });
 
-  // عند الرجوع (باك)
-  window.addEventListener('popstate', () => {
-    const page = document.getElementById('page-container');
-    if (page) {
-      page.classList.add('slide-out-left');
+    let isGoingBack = false;
+
+    // ✅ عند الضغط على زر الرجوع
+    window.addEventListener('popstate', () => {
+      if (isGoingBack) return;
+      isGoingBack = true;
+
+      const page = document.getElementById('page-container');
+      page.classList.add('slide-out-left'); // شغل الحركة
+
       setTimeout(() => {
-        history.back(); // يرجع فعلياً بعد الأنميشن
-      }, 500); // نفس وقت الأنميشن
-    } else {
-      history.back();
-    }
-  });
-</script>
+        history.back(); // يرجع فعليًا بعد الحركة
+      }, 500); // نفس مدة الأنميشن
+    });
+  </script>
 </body>
 </html>
+
