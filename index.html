@@ -221,12 +221,10 @@
 
     // ✅ منع الرجوع المباشر
     history.pushState(null, null, location.href);
-
-    // ✅ عند الرجوع ← شغل اللودر والحركة وانتظر 2 ثانية
-    window.addEventListener('popstate', () => {
-      if (isGoingBack) return;
-      isGoingBack = true;
-
+window.addEventListener('popstate', () => {
+  window.location.href = "loading.html?back=1";
+});
+    
       if (loader) loader.style.display = 'flex';
       if (page) page.classList.add('slide-out-left');
 
