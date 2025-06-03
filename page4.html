@@ -1,76 +1,80 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>الصفحة الرابعة</title>
-<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@700&display=swap" rel="stylesheet" />
-<style>
-  html, body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    background: #fff; /* خلفية بيضاء */
-    overflow: hidden;
-    font-family: 'Tajawal', sans-serif;
-  }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>الصفحة الرابعة</title>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@700&display=swap" rel="stylesheet" />
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      background: #fff;
+      overflow: hidden;
+      font-family: 'Tajawal', sans-serif;
+    }
 
-  body {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start; /* نبدأ من فوق */
-  }
-.amount-display {
-  position: absolute;
-  top: 17%;
-  left: 65%;
-  transform: translate(-50%, -50%);
-  font-size: 40px;
-  font-weight: bold;
-  color: black;
-  z-index: 2;
-}
-  .wrapper {
-    position: relative;
-    width: 1080px;
-    height: 1988px;
-    max-width: 100%;
-    max-height: 100%;
-    overflow: hidden;
-  }
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+    }
 
-  .wrapper img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 0;
-}
-  /* نغلف الصفحة في div له أنميشن */
-#page-container {
-  transition: transform 0.5s ease, opacity 0.5s ease;
-}
+    .amount-display {
+      position: absolute;
+      top: 17%;
+      left: 65%;
+      transform: translate(-50%, -50%);
+      font-size: 40px;
+      font-weight: bold;
+      color: black;
+      z-index: 2;
+    }
 
-/* مؤثر الرجوع — انسحاب من الشمال */
-.slide-out-left {
-  transform: translateX(-100%);
-  opacity: 0;
-  }
-</style>
+    .wrapper {
+      position: relative;
+      width: 1080px;
+      height: 1988px;
+      max-width: 100%;
+      max-height: 100%;
+      overflow: hidden;
+    }
+
+    .wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 0;
+    }
+
+    /* مؤثر الرجوع — انسحاب من الشمال */
+    #page-container {
+      transition: transform 0.5s ease, opacity 0.5s ease;
+    }
+
+    .slide-out-left {
+      transform: translateX(-100%);
+      opacity: 0;
+    }
+  </style>
 </head>
 <body>
-  <div class="wrapper">
-    <img src="hoosny4.jpg" alt="الصفحة الرابعة" />
-<div id="transferredDisplay" class="amount-display">0.00</div>
-<!-- TikTok Loader -->
-
   <div id="page-container">
-    <!-- كل المحتوى بتاع الصفحة هنا -->
+    <div class="wrapper">
+      <img src="hoosny4.jpg" alt="الصفحة الرابعة" />
+      <div id="transferredDisplay" class="amount-display">0.00</div>
+    </div>
   </div>
 
-<script>
+  <script>
+    // ✅ عرض المبلغ من localStorage
+    const transferredDisplay = document.getElementById('transferredDisplay');
+    const transferredAmount = localStorage.getItem('transferredAmount') || "0.00";
+    transferredDisplay.textContent = transferredAmount;
 
     // ✅ منع الرجوع مباشرة
     window.addEventListener('load', () => {
@@ -85,13 +89,12 @@
       isGoingBack = true;
 
       const page = document.getElementById('page-container');
-      page.classList.add('slide-out-left'); // شغل الحركة
+      page.classList.add('slide-out-left');
 
       setTimeout(() => {
-        history.back(); // يرجع فعليًا بعد الحركة
-      }, 500); // نفس مدة الأنميشن
+        history.back();
+      }, 500);
     });
   </script>
 </body>
 </html>
-
