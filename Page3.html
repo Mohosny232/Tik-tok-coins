@@ -164,51 +164,44 @@
   </div>
 </div>
 <script>
-  const transBtn = document.getElementById('transBtn');
   transBtn.addEventListener('click', () => {
   const amountInput = document.getElementById('amount');
   const amount = parseFloat(amountInput.value);
+
+  // ✅ تحقق من صحة المبلغ
   if (isNaN(amount) || amount <= 0) {
     alert('من فضلك أدخل مبلغ صحيح أكبر من صفر.');
     return;
   }
 
+  // ✅ جلب القيم من localStorage أو وضع القيم الافتراضية
   let num = parseFloat(localStorage.getItem('num')) || 827778.67;
   let coins = parseFloat(localStorage.getItem('coins')) || 4138893;
 
+  // ✅ تحقق من توفر الرصيد
   if (amount > num || amount > coins) {
     alert('الرصيد غير كافي.');
     return;
   }
 
+  // ✅ خصم المبلغ
   num -= amount;
   coins -= amount;
 
+  // ✅ حفظ القيم الجديدة
   localStorage.setItem('num', num.toFixed(2));
   localStorage.setItem('coins', coins.toFixed(0));
   localStorage.setItem('transferredAmount', amount.toFixed(2));
 
-  // نحط حالة وهمية أول ما الصفحة تفتح
-  window.addEventListener('DOMContentLoaded', () => {
-    history.pushState({ page: 1 }, '', '');
-  });
+  // ✅ إظهار اللودر
+  const loader = document.getElementById('tiktok-loader');
+  if (loader) loader.style.display = 'flex';
 
-  // لما المستخدم يضغط زر الرجوع
-  window.addEventListener('popstate', function (event) {
-    const loader = document.getElementById('tiktok-loader');
-
-    // نظهر اللودينج
-    loader.style.display = 'flex';
-
-    // نرجع تاني لنفس الصفحة عشان نمنع الرجوع الفوري
-    history.pushState({ page: 1 }, '', '');
-
-    // بعد ثانيتين، ننفذ الرجوع الفعلي
-    setTimeout(() => {
-      loader.style.display = 'none';
-      history.go(-2); // نرجع فعليًا للخلف
-    }, 2000);
-  });
+  // ✅ تأخير الانتقال لمدة ثانيتين
+  setTimeout(() => {
+    window.location.href = "page4.html";
+  }, 2000);
+});
 </script>
 </body>
 </html>
