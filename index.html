@@ -221,21 +221,26 @@
       history.pushState(null, null, location.href);
 
       let isGoingBack = false;
-      window.addEventListener('popstate', () => {
-        if (isGoingBack) return;
-        isGoingBack = true;
 
-        if (page) {
-          page.classList.add('slide-out-left');
-          if (loader) loader.style.display = 'flex';
-          setTimeout(() => {
-            history.back();
-          }, 2000);
-        } else {
-          history.back();
-        }
-      });
-    });
+window.addEventListener('popstate', (event) => {
+  if (isGoingBack) return;
+  isGoingBack = true;
+
+  if (loader) loader.style.display = 'flex';
+  if (page) page.classList.add('slide-out-left');
+
+  // نمنع الرجوع اللحظي ونعيده بعد 2 ثانية
+  setTimeout(() => {
+    // نستبدل back بـ go(-1) عشان يشتغل حتى لو كان نفس الـ URL
+    history.go(-1);
+  }, 2000);
+});
+
+// نمنع الرجوع التلقائي ونحجز نسخة في الهيستوري
+window.addEventListener('load', () => {
+  history.pushState(null, null, location.href);
+});
+  });    
   </script>
 </body>
 </html>
