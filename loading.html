@@ -47,16 +47,16 @@
   </style>
 </head>
 <body>
+<div id="tiktok-loader" style="display: flex; justify-content: center; align-items: center; position: fixed; inset: 0; background: white; z-index: 9999;">
   <div class="orbit-loader">
-    <span class="dot dot1"></span>
-    <span class="dot dot2"></span>
+    <span class="dot dot1" style="width: 13px; height: 13px; border-radius: 50%; background-color: #ff0050; animation: orbit-left 1s ease-in-out infinite; position: absolute; left: 0;"></span>
+    <span class="dot dot2" style="width: 13px; height: 13px; border-radius: 50%; background-color: #00f2ea; animation: orbit-right 1s ease-in-out infinite; position: absolute; right: 0;"></span>
   </div>
+</div>
 
-  <script>
-    // بعد ثانيتين نرجع خطوة فعليًا
-    setTimeout(() => {
-      history.go(-1);
-    }, 2000);
-  </script>
-</body>
-</html>
+<script>
+  // نرجع للصفحة السابقة بعد ثانيتين
+  setTimeout(() => {
+    history.back();
+  }, 2000);
+</script>
