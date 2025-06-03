@@ -186,24 +186,24 @@
     alert('تمت إعادة القيم إلى الوضع الافتراضي ✅');
     location.reload(); // إعادة تحميل الصفحة
   });
-  document.addEventListener('DOMContentLoaded', () => {
-    // استهدف كل الروابط داخل الصفحة
-    document.querySelectorAll('a').forEach(link => {
-      const href = link.getAttribute('href');
+document.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', function (e) {
+    const href = this.getAttribute('href');
+    
+    // تأكد إنه رابط داخل الموقع (مش anchor أو #)
+    if (href && !href.startsWith('#') && !href.startsWith('javascript:')) {
+      e.preventDefault();
 
-      if (href && !href.startsWith('#') && !href.startsWith('javascript:')) {
-        link.addEventListener('click', function(e) {
-          e.preventDefault();
-          const loader = document.getElementById('tiktok-loader');
-          loader.style.display = 'flex';
+      // عرض اللودر
+      document.getElementById('tiktok-loader').style.display = 'flex';
 
-          setTimeout(() => {
-            window.location.href = this.href;
-          }, 2000); // بعد ثانيتين يروح للصفحة
-        });
-      }
-    });
+      // بعد ثانيتين ننتقل للرابط
+      setTimeout(() => {
+        window.location.href = href;
+      }, 2000);
+    }
   });
+});
 </script> 
 </body>
 </html>
