@@ -33,23 +33,21 @@
   }
 
   .wrapper {
-    position: relative;
-    width: 1080px;
-    height: 1988px;
-    max-width: 100%;
-    max-height: 100%;
-    overflow: hidden;
-  }
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
 
-  .wrapper img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 0;
-  }
+.wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* غيّرنا من contain إلى cover */
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+}
 
   /* نغلف الصفحة في div له أنميشن */
   #page-container {
