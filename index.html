@@ -82,10 +82,13 @@
       window.location.href = `loading.html?return=${encodeURIComponent(current)}`;
     });
 
-    // عند تحميل الصفحة أخفي اللودر
     window.addEventListener('load', () => {
-      document.getElementById('tiktok-loader').style.display = 'none';
-    });
+  const fromLoading = document.referrer.includes('loading.html');
+  if (fromLoading) {
+    // جاي من صفحة الرجوع، متعرضش اللودر
+    document.getElementById('tiktok-loader').style.display = 'none';
+  }
+});
   </script>
 </body>
 </html>
