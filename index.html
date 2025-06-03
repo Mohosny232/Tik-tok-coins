@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>الصفحة الرئيسية</title>
+  <link rel="stylesheet" href="style.css">
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@700&display=swap" rel="stylesheet" />
   <style>
     body {
@@ -54,6 +55,14 @@
       z-index: 2;
     }
 
+   .main-number {
+  font-size: 24px;
+  direction: ltr;
+}
+
+.small-decimal {
+  font-size: 14px;
+}
     .view-button {
       position: absolute;
       top: 115px;
@@ -157,6 +166,10 @@
   <div id="page-container">
     <div class="wrapper">
       <img src="hoosny.jpg" alt="الصورة" />
+  <!-- باقي الصفحة -->
+  <div style="margin-top: 20px;">
+ <div id="formatted-number"></div>
+  </div>
       <div class="num">827778.67</div>
       <div class="coins">4138893</div>
       <a href="page2.html" class="view-button">View</a>
@@ -175,7 +188,20 @@
     </div>
   </div>
 
-  <script>
+<script>
+  // الرقم المتغير
+  const number = 824097.67;
+
+  // تحويل الرقم إلى نص وفصله إلى عدد صحيح وكسري
+  const [integerPart, decimalPart] = number.toFixed(2).split('.');
+
+  // إنشاء العنصر بالتنسيق المطلوب
+  const formattedHTML = `
+    <span class="main-number">${integerPart}.<span class="small-decimal">${decimalPart}</span></span>
+  `;
+
+  // عرض الرقم داخل الصفحة
+  document.getElementById('formatted-number').innerHTML = formattedHTML;
   const numElement = document.querySelector('.num');
   const coinsElement = document.querySelector('.coins');
 
