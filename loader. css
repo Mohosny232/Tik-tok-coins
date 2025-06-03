@@ -1,0 +1,56 @@
+
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.85);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.loading-overlay.show {
+  visibility: visible;
+  opacity: 1;
+}
+
+.loader {
+  position: relative;
+  width: 80px;
+  height: 30px;
+}
+
+.loader .dot {
+  position: absolute;
+  top: 0;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  animation: move 1s infinite ease-in-out;
+}
+
+.loader .dot.red {
+  background-color: red;
+  left: 0;
+}
+
+.loader .dot.blue {
+  background-color: deepskyblue;
+  right: 0;
+  animation-delay: 0.5s;
+}
+
+@keyframes move {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(15px);
+  }
+}
