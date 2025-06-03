@@ -83,6 +83,16 @@
   50% { transform: translateX(-10px); }
   100% { transform: translateX(0); }
 }
+  /* نغلف الصفحة في div له أنميشن */
+#page-container {
+  transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+/* مؤثر الرجوع — انسحاب من الشمال */
+.slide-out-left {
+  transform: translateX(-100%);
+  opacity: 0;
+}
 </style>
 </head>
 <body>
@@ -96,6 +106,9 @@
     <span class="dot dot2"></span>
   </div>
 </div>
+  <div id="page-container">
+    <!-- كل المحتوى بتاع الصفحة هنا -->
+  </div>
 <script>
 const transferredDisplay = document.getElementById('transferredDisplay');
   const transferredAmount = localStorage.getItem('transferredAmount') || "0.00";
@@ -120,6 +133,24 @@ const transferredDisplay = document.getElementById('transferredDisplay');
       setTimeout(() => {
         history.back(); // ← بعد ثانيتين، يرجع فعليًا لـ page3.html
       }, 2000);
+    } else {
+      history.back();
+    }
+  });
+
+  // نضيف نقطة وهمية في سجل التاريخ
+  window.addEventListener('load', () => {
+    history.pushState(null, null, location.href);
+  });
+
+  // عند الرجوع (back)
+  window.addEventListener('popstate', () => {
+    const page = document.getElementById('page-container');
+    if (page) {
+      page.classList.add('slide-out-left'); // نشغل الحركة
+      setTimeout(() => {
+        history.back(); // نرجع فعليًا بعد الأنميشن
+      }, 500); // نفس وقت الأنميشن
     } else {
       history.back();
     }
