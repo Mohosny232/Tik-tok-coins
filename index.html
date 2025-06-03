@@ -168,10 +168,9 @@
       <img src="hoosny.jpg" alt="الصورة" />
   <!-- باقي الصفحة -->
   <div style="margin-top: 20px;">
- <div id="formatted-number"></div>
+ <div class="num" id="formatted-number"></div>
   </div>
-      <span class="main-number">824097.<span class="small-decimal">67</span></span>
-      <div class="coins">4138893</div>
+      
       <a href="page2.html" class="view-button">View</a>
     </div>
   </div>
@@ -202,13 +201,13 @@
 
   // عرض الرقم داخل الصفحة
   document.getElementById('formatted-number').innerHTML = formattedHTML;
-  const numElement = document.querySelector('.num');
+  
   const coinsElement = document.querySelector('.coins');
 
   let num = parseFloat(localStorage.getItem('num')) || 827778.67;
   let coins = parseFloat(localStorage.getItem('coins')) || 4138893;
 
-  numElement.textContent = num.toFixed(2);
+
   coinsElement.textContent = coins.toFixed(0);
 
   const trigger = document.getElementById('secret-trigger');
