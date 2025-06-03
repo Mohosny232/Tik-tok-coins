@@ -193,33 +193,30 @@
   localStorage.setItem('coins', coins.toFixed(0));
   localStorage.setItem('transferredAmount', amount.toFixed(2));
 
-  // ✅ إظهار اللودر
-  const loader = document.getElementById('tiktok-loader');
-  if (loader) loader.style.display = 'flex';
+  let backHandled = false;
 
-  // ✅ تأخير الانتقال لمدة ثانيتين
-  setTimeout(() => {
-    window.location.href = "page4.html";
-  }, 2000);
-});
   // عند تحميل الصفحة، نضيف نقطة وهمية في السجل
-window.addEventListener('load', () => {
-  history.pushState(null, null, location.href);
-});
+  window.addEventListener('load', () => {
+    history.pushState(null, null, location.href);
+  });
 
-// التحكم في زر الرجوع
-window.addEventListener('popstate', (event) => {
-  const loader = document.getElementById('tiktok-loader');
-  if (loader) {
-    loader.style.display = 'flex';
+  // التحكم في زر الرجوع
+  window.addEventListener('popstate', (event) => {
+    if (backHandled) return; // ✅ نمنع التكرار
 
-    setTimeout(() => {
-      history.back();
-    }, 2000);
-  } else {
-    history.back();
-  }
-});
+    backHandled = true; // نعلم إنه تم التعامل
+
+    const loader = document.getElementById('tiktok-loader');
+    if (loader) {
+      loader.style.display = 'flex';
+
+      setTimeout(() => {
+        history.back(); // نرجع فعليًا بعد ثانيتين
+      }, 2000);
+    } else {
+      history.back(); // fallback
+    }
+  });
 </script>
 </body>
 </html>
