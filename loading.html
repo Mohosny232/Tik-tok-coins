@@ -54,12 +54,16 @@
   </div>
 </div>
 
-
   <script>
+    const params = new URLSearchParams(window.location.search);
+    const returnTo = params.get('return') || 'index.html'; // اسم الصفحة اللي جينا منها
+
     setTimeout(() => {
-      history.back();
+      window.location.href = returnTo;
     }, 2000);
   </script>
 </body>
 </html>
+
+
 
