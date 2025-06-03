@@ -166,55 +166,36 @@
 <script>
   const transBtn = document.getElementById('transBtn');
   transBtn.addEventListener('click', () => {
-    const amountInput = document.getElementById('amount');
-    const amount = parseFloat(amountInput.value);
-    if (isNaN(amount) || amount <= 0) {
-      alert('من فضلك أدخل مبلغ صحيح أكبر من صفر.');
-      return;
-    }
+  const amountInput = document.getElementById('amount');
+  const amount = parseFloat(amountInput.value);
+  if (isNaN(amount) || amount <= 0) {
+    alert('من فضلك أدخل مبلغ صحيح أكبر من صفر.');
+    return;
+  }
 
-    // جلب الأرقام من localStorage
-    let num = parseFloat(localStorage.getItem('num')) || 827778.67;
-    let coins = parseFloat(localStorage.getItem('coins')) || 4138893;
+  let num = parseFloat(localStorage.getItem('num')) || 827778.67;
+  let coins = parseFloat(localStorage.getItem('coins')) || 4138893;
 
-    // التأكد إن فيه رصيد كافي
-    if (amount > num || amount > coins) {
-      alert('الرصيد غير كافي.');
-      return;
-    }
+  if (amount > num || amount > coins) {
+    alert('الرصيد غير كافي.');
+    return;
+  }
 
-    // خصم القيمة
-    num -= amount;
-    coins -= amount;
+  num -= amount;
+  coins -= amount;
 
-    // تخزين القيم الجديدة
-    localStorage.setItem('num', num.toFixed(2));
-    localStorage.setItem('coins', coins.toFixed(0));
+  localStorage.setItem('num', num.toFixed(2));
+  localStorage.setItem('coins', coins.toFixed(0));
+  localStorage.setItem('transferredAmount', amount.toFixed(2));
 
-    // حفظ المبلغ المحول للعرض في الصفحة الرابعة
-    localStorage.setItem('transferredAmount', amount.toFixed(2));
+  // ✅ هنا نعرض اللودر
+  const loader = document.getElementById('tiktok-loader');
+  if (loader) loader.style.display = 'flex';
 
-    // الانتقال للصفحة الرابعة
+  // ✅ نأخر التحويل لمدة ثانيتين
+  setTimeout(() => {
     window.location.href = "page4.html";
-  });
-  document.addEventListener('DOMContentLoaded', () => {
-  document.querySelectorAll('a').forEach(link => {
-    const href = link.getAttribute('href');
-    if (href && !href.startsWith('#') && !href.startsWith('javascript:')) {
-      link.addEventListener('click', function(e) {
-        e.preventDefault();
-        const loader = document.getElementById('tiktok-loader');
-        if (loader) {
-          loader.style.display = 'flex';
-          setTimeout(() => {
-            window.location.href = this.href;
-          }, 2000);
-        } else {
-          window.location.href = this.href; // fallback لو مفيش لودر
-        }
-      });
-    }
-  });
+  }, 2000);
 });
   </script>
 </body>
