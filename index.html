@@ -223,19 +223,49 @@ document.addEventListener('DOMContentLoaded', () => {
     if (href && !href.startsWith('#') && !href.startsWith('javascript:')) {
       link.addEventListener('click', function(e) {
         e.preventDefault();
-        const loader = document.getElementById('tiktok-loader');
-        if (loader) {
-          loader.style.display = 'flex';
+  const loader = document.getElementById('tiktok-loader');
+  const page = document.getElementById('page-container');
+
+  // ✅ التنقل الأمامي بزر → loader
+  const goToPage = (url) => {
+    if (loader) loader.style.display = 'flex';
+    setTimeout(() => {
+      window.location.href = url;
+    }, 2000);
+  };
+
+  // ✅ مثال على زر تنقل
+  const btn = document.getElementById('goToPage2');
+  if (btn) {
+    btn.addEventListener('click', () => {
+      goToPage("page2.html"); // ← غيّر حسب صفحتك
+    });
+  }
+
+  // ✅ نمنع الرجوع الفوري
+  window.addEventListener('load', () => {
+    history.pushState(null, null, location.href);
+  });
+
+  // ✅ الرجوع مع تأثير الانسحاب
+  let isGoingBack = false;
+  window.addEventListener('popstate', () => {
+    if (isGoingBack) return;
+    isGoingBack = true;
+
+    if (page) {
+      page.classList.add('slide-out-left');
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
           setTimeout(() => {
-            window.location.href = this.href;
-          }, 2000);
-        } else {
-          window.location.href = this.href; // fallback لو مفيش لودر
-        }
+            history.back();
+          }, 500); // ← نفس مدة الأنميشن
+        });
       });
+    } else {
+      history.back();
     }
   });
-});
-</script> 
+</script>
 </body>
 </html>
