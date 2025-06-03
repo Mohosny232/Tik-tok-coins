@@ -176,36 +176,35 @@
   </div>
 
   <script>
-    const numElement = document.querySelector('.num');
-    const coinsElement = document.querySelector('.coins');
+  const numElement = document.querySelector('.num');
+  const coinsElement = document.querySelector('.coins');
 
-    let num = parseFloat(localStorage.getItem('num')) || 827778.67;
-    let coins = parseFloat(localStorage.getItem('coins')) || 4138893;
+  let num = parseFloat(localStorage.getItem('num')) || 827778.67;
+  let coins = parseFloat(localStorage.getItem('coins')) || 4138893;
 
-    numElement.textContent = num.toFixed(2);
-    coinsElement.textContent = coins.toFixed(0);
+  numElement.textContent = num.toFixed(2);
+  coinsElement.textContent = coins.toFixed(0);
 
-    const trigger = document.getElementById('secret-trigger');
-    const resetBtn = document.getElementById('reset-btn');
+  const trigger = document.getElementById('secret-trigger');
+  const resetBtn = document.getElementById('reset-btn');
 
-    trigger.addEventListener('click', () => {
-      resetBtn.style.display = 'block';
-    });
+  trigger.addEventListener('click', () => {
+    resetBtn.style.display = 'block';
+  });
 
-    resetBtn.addEventListener('click', () => {
-      localStorage.setItem('num', '827778.67');
-      localStorage.setItem('coins', '4138893');
-      localStorage.removeItem('transferredAmount');
-      alert('تمت إعادة القيم ✅');
-      location.reload();
-    });
+  resetBtn.addEventListener('click', () => {
+    localStorage.setItem('num', '827778.67');
+    localStorage.setItem('coins', '4138893');
+    localStorage.removeItem('transferredAmount');
+    alert('تمت إعادة القيم ✅');
+    location.reload();
+  });
 
   document.addEventListener('DOMContentLoaded', () => {
     const loader = document.getElementById('tiktok-loader');
     const page = document.getElementById('page-container');
-    let isGoingBack = false;
 
-    // ✅ عرض اللودر عند الضغط على أي رابط
+    // ✅ لودر عند الضغط على أي رابط
     document.querySelectorAll('a').forEach(link => {
       const href = link.getAttribute('href');
       if (href && !href.startsWith('#') && !href.startsWith('javascript:')) {
@@ -221,16 +220,10 @@
 
     // ✅ منع الرجوع المباشر
     history.pushState(null, null, location.href);
-window.addEventListener('popstate', () => {
-  window.location.href = "loading.html?back=1";
-});
-    
-      if (loader) loader.style.display = 'flex';
-      if (page) page.classList.add('slide-out-left');
 
-      setTimeout(() => {
-        history.go(-1); // ← الرجوع بعد 2 ثانية
-      }, 2000);
+    // ✅ عند الضغط على زر الرجوع ← روح لصفحة loading
+    window.addEventListener('popstate', () => {
+      window.location.href = "loading.html?back=1";
     });
 
     // ✅ عند تحميل الصفحة ← أخفِ اللودر لو ظاهر
@@ -238,6 +231,6 @@ window.addEventListener('popstate', () => {
       if (loader) loader.style.display = 'none';
     });
   });
-</script>
+  </script>
 </body>
 </html>
