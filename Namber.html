@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>تصغير الكسور</title>
+  <style>
+    .main-number {
+      font-size: 24px;
+    }
+    .small-decimal {
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+
+<div id="formatted-number"></div>
+
+<script>
+  // الرقم المتغير
+  const number = 824097.67;
+
+  // تحويل الرقم إلى نص وفصله إلى عدد صحيح وكسري
+  const [integerPart, decimalPart] = number.toFixed(2).split('.');
+
+  // إنشاء العنصر بالتنسيق المطلوب
+  const formattedHTML = `
+    <span class="main-number">${integerPart}.<span class="small-decimal">${decimalPart}</span></span>
+  `;
+
+  // وضعه في العنصر على الصفحة
+  document.getElementById('formatted-number').innerHTML = formattedHTML;
+</script>
+
+</body>
+</html>
