@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <title>جارٍ الرجوع...</title>
+  <style>
+    body {
+      margin: 0;
+      background: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .orbit-loader {
+      position: relative;
+      width: 32px;
+      height: 32px;
+    }
+    .dot {
+      position: absolute;
+      width: 13px;
+      height: 13px;
+      border-radius: 50%;
+      top: 10px;
+    }
+    .dot1 {
+      background-color: #ff0050;
+      left: 0;
+      animation: orbit-left 1s ease-in-out infinite;
+    }
+    .dot2 {
+      background-color: #00f2ea;
+      right: 0;
+      animation: orbit-right 1s ease-in-out infinite;
+    }
+    @keyframes orbit-left {
+      0% { transform: translateX(0); }
+      50% { transform: translateX(10px); }
+      100% { transform: translateX(0); }
+    }
+    @keyframes orbit-right {
+      0% { transform: translateX(0); }
+      50% { transform: translateX(-10px); }
+      100% { transform: translateX(0); }
+    }
+  </style>
+</head>
+<body>
+  <div class="orbit-loader">
+    <span class="dot dot1"></span>
+    <span class="dot dot2"></span>
+  </div>
+
+  <script>
+    // بعد ثانيتين نرجع خطوة فعليًا
+    setTimeout(() => {
+      history.go(-1);
+    }, 2000);
+  </script>
+</body>
+</html>
