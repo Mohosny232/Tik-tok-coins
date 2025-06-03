@@ -109,47 +109,25 @@
   <div id="page-container">
     <!-- كل المحتوى بتاع الصفحة هنا -->
   </div>
+
 <script>
-const transferredDisplay = document.getElementById('transferredDisplay');
+  // عرض المبلغ المحول
+  const transferredDisplay = document.getElementById('transferredDisplay');
   const transferredAmount = localStorage.getItem('transferredAmount') || "0.00";
   transferredDisplay.textContent = transferredAmount;
-  // نضيف نقطة وهمية في السجل لما الصفحة تفتح
+
+  // نضيف نقطة وهمية في السجل
   window.addEventListener('load', () => {
     history.pushState(null, null, location.href);
   });
 
-  // متغير علشان نمنع التكرار
-  let isGoingBack = false;
-
-  // لما يضغط زر الرجوع
-  window.addEventListener('popstate', () => {
-    if (isGoingBack) return;
-    isGoingBack = true;
-
-    const loader = document.getElementById('tiktok-loader');
-    if (loader) {
-      loader.style.display = 'flex';
-
-      setTimeout(() => {
-        history.back(); // ← بعد ثانيتين، يرجع فعليًا لـ page3.html
-      }, 2000);
-    } else {
-      history.back();
-    }
-  });
-
-  // نضيف نقطة وهمية في سجل التاريخ
-  window.addEventListener('load', () => {
-    history.pushState(null, null, location.href);
-  });
-
-  // عند الرجوع (back)
+  // عند الرجوع (باك)
   window.addEventListener('popstate', () => {
     const page = document.getElementById('page-container');
     if (page) {
-      page.classList.add('slide-out-left'); // نشغل الحركة
+      page.classList.add('slide-out-left');
       setTimeout(() => {
-        history.back(); // نرجع فعليًا بعد الأنميشن
+        history.back(); // يرجع فعلياً بعد الأنميشن
       }, 500); // نفس وقت الأنميشن
     } else {
       history.back();
