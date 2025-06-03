@@ -150,8 +150,17 @@
   </div>
 </div>
 
-  <script>
-document.addEventListener('DOMContentLoaded', () => {
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const numElement = document.querySelector('.num');
+    const num = parseFloat(localStorage.getItem('num')) || 827778.67;
+
+    if (numElement) {
+      numElement.textContent = num.toFixed(2);
+    }
+  });
+    document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('a').forEach(link => {
     const href = link.getAttribute('href');
     if (href && !href.startsWith('#') && !href.startsWith('javascript:')) {
