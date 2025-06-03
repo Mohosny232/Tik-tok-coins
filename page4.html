@@ -47,8 +47,17 @@
     top: 0;
     left: 0;
     z-index: 0;
+}
+  /* نغلف الصفحة في div له أنميشن */
+#page-container {
+  transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+/* مؤثر الرجوع — انسحاب من الشمال */
+.slide-out-left {
+  transform: translateX(-100%);
+  opacity: 0;
   }
-  
 </style>
 </head>
 <body>
