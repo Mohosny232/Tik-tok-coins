@@ -85,37 +85,28 @@
       <div id="transferredDisplay" class="amount-display">0.00</div>
     </div>
   </div>
-<div style="
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin-top: 30px;
+<!-- ✅ قسم التاريخ المعدل -->
+<div id="datetime-info" style="
+  position: absolute;
+  top: 35%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
   font-family: 'Tajawal', sans-serif;
   font-size: 16px;
   color: #333;
-  gap: 10px;
+  z-index: 10;
+  line-height: 1.8;
 ">
-  <div style="
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin-top: 30px;
-  font-family: 'Tajawal', sans-serif;
-  font-size: 16px;
-  color: #333;
-  gap: 10px;
-">
-  <div style="text-align: center;">
+  <div>
     <strong>Created</strong><br />
     <span id="created-time">--</span>
   </div>
-  <div style="text-align: center;">
+  <div style="margin-top: 15px;">
     <strong>Updated</strong><br />
     <span id="updated-time">--</span>
   </div>
-  </div>
+</div>
 <!-- زرالرجوع -->
 <!-- زر الرجوع أسفل يمين -->
 <button id="back-btn" style="
