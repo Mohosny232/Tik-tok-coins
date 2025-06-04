@@ -171,28 +171,46 @@
 </button>
 
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const numElement = document.querySelector('.num');
-    const num = parseFloat(localStorage.getItem('num')) || 827778.67;
+document.addEventListener('DOMContentLoaded', () => {
+  // تحديث الرصيد
+  const numElement = document.querySelector('.num');
+  const num = parseFloat(localStorage.getItem('num')) || 827778.67;
+  if (numElement) {
+    numElement.textContent = num.toFixed(2);
+  }
 
-    if (numElement) {
-      numElement.textContent = num.toFixed(2);
-    }
-  });
-    document.addEventListener('DOMContentLoaded', () => {
+  // زر الرجوع ← يظهر لودر ثم يرجع للصفحة الأولى
+  const backBtn = document.getElementById('back-btn');
+  if (backBtn) {
+    backBtn.addEventListener('click', () => {
+      const loader = document.getElementById('tiktok-loader');
+      if (loader) loader.style.display = 'flex';
+
+      setTimeout(() => {
+        window.location.href = 'page1.html'; // ← عدلها حسب اسم صفحتك
+      }, 2000);
+    });
+  }
+
+  // لودر عند الضغط على الروابط
   document.querySelectorAll('a').forEach(link => {
     const href = link.getAttribute('href');
     if (href && !href.startsWith('#') && !href.startsWith('javascript:')) {
       link.addEventListener('click', function(e) {
         e.preventDefault();
-          document.getElementById('back-btn').addEventListener('click', () => {
-  const loader = document.getElementById('tiktok-loader');
-  if (loader) loader.style.display = 'flex';
-
-  setTimeout(() => {
-    window.location.href = 'index.html'; // ← عدلها لاسم الصفحة اللي ترجع ليها
-  }, 2000);
+        const loader = document.getElementById('tiktok-loader');
+        if (loader) {
+          loader.style.display = 'flex';
+          setTimeout(() => {
+            window.location.href = this.href;
+          }, 2000);
+        } else {
+          window.location.href = this.href;
+        }
+      });
+    }
+  });
 });
-  </script>
+</script>
 </body>
 </html>
