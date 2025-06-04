@@ -81,17 +81,29 @@
 #back-btn:hover {
   background: rgba(255, 255, 255, 0.1);
 }
-    .num {
-      position: absolute;
-      color: black;
-      font-size: 42px;
-      font-weight: 700;
-      background: transparent;
-      z-index: 1;
-      top: 160px;
-      right: 50px;
-      font-family: 'Tajawal', sans-serif;
-    }
+    .amount-display {
+  position: absolute;
+  top: 18%;
+  left: 64%;
+  transform: translate(-50%, -50%);
+  font-size: 40px;
+  font-family: 'Tajawal', sans-serif;
+  font-weight: 700;
+  color: black;
+  background-color: white; /* خلفية بيضاء */
+  padding: 10px 20px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  z-index: 2;
+}
+
+.currency-label {
+  font-weight: 200;
+  font-size: 22px;
+  margin-right: 8px; /* مسافة بسيطة بين الرقم وUSD */
+}
 
     /* loader.css */
 #loader {
@@ -155,7 +167,10 @@
 <body>
   <div class="wrapper">
     <img src="Hoosny2.jpg" alt="الصورة الثانية" />
-    <div class="num" id="num">827778.67</div>
+<div class="amount-display">
+  <span id="transferredDisplay">0.00</span>
+  <span class="currency-label">USD</span>
+</div>
     <a href="page3.html" class="withdraw-btn">Withdraw</a>
   </div>
 
