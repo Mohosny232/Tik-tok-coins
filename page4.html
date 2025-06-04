@@ -125,8 +125,10 @@
   <script>
   // ✅ عرض القيمة من localStorage
   const transferredDisplay = document.getElementById('transferredDisplay');
-  const transferredAmount = localStorage.getItem('transferredAmount') || "0.00";
-  transferredDisplay.textContent = transferredAmount;
+ const transferredAmount = localStorage.getItem('transferredAmount') || "0.00";
+const now = new Date();
+localStorage.setItem('transferTimestamp', now.toISOString());
+    transferredDisplay.textContent = transferredAmount;
 
   // ✅ منع الرجوع مباشرة
   window.addEventListener('load', () => {
@@ -177,9 +179,20 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   const now = new Date();
+localStorage.setItem('transferTimestamp', now.toISOString());
+const timestamp = localStorage.getItem('transferTimestamp');
+if (timestamp) {
+  const date = new Date(timestamp);
+  const formatted = formatDateTime(date);
+  document.getElementById('created-time').textContent = formatted;
+  document.getElementById('updated-time').textContent = formatted;
+} else {
+  // لو مفيش تاريخ محفوظ
+  const now = new Date();
   const formatted = formatDateTime(now);
   document.getElementById('created-time').textContent = formatted;
   document.getElementById('updated-time').textContent = formatted;
-</script>
+}
+  </script>
 </body>
 </html>
