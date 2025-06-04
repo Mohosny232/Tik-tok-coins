@@ -22,15 +22,28 @@
   }
 
   .amount-display {
-    position: absolute;
-    top: 18%;
-    left: 64%;
-    transform: translate(-50%, -50%);
-    font-size: 40px;
-    font-weight: bold;
-    color: black;
-    z-index: 2;
-  }
+  position: absolute;
+  top: 18%;
+  left: 64%;
+  transform: translate(-50%, -50%);
+  font-size: 40px;
+  font-family: 'Tajawal', sans-serif;
+  font-weight: 200;
+  color: black;
+  background-color: white; /* خلفية بيضاء */
+  padding: 10px 20px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  z-index: 2;
+}
+
+.currency-label {
+  font-weight: 200;
+  font-size: 22px;
+  margin-right: 8px; /* مسافة بسيطة بين الرقم وUSD */
+}
 .timestamp-labels, .timestamp-values {
   position: fixed;
   bottom: 150px;
@@ -106,7 +119,10 @@
   <div id="page-container">
     <div class="wrapper">
       <img src="hoosny4.jpg" alt="الصفحة الرابعة" />
-      <div id="transferredDisplay" class="amount-display">0.00</div>
+      <div class="amount-display">
+  <span id="transferredDisplay">0.00</span>
+  <span class="currency-label">USD</span>
+</div>
     </div>
   </div>
 <!-- النصوص على اليسار -->
