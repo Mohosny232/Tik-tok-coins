@@ -64,6 +64,23 @@
       object-fit: contain;
     }
 
+    #back-btn {
+  position: fixed;
+  top: 15px;
+  left: 15px; /* ← لو RTL وخليت يسار، غيرها لـ right لو عايز */
+  background: none;
+  color: black;
+  font-size: 24px;
+  border: none;
+  cursor: pointer;
+  z-index: 9999;
+  padding: 5px 10px;
+  border-radius: 8px;
+  transition: background 0.3s;
+}
+#back-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
     .num {
       position: absolute;
       color: black;
@@ -149,7 +166,9 @@
     <span class="dot dot2"></span>
   </div>
 </div>
-
+<button id="back-btn" aria-label="رجوع">
+  ←
+</button>
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
@@ -166,18 +185,13 @@
     if (href && !href.startsWith('#') && !href.startsWith('javascript:')) {
       link.addEventListener('click', function(e) {
         e.preventDefault();
-        const loader = document.getElementById('tiktok-loader');
-        if (loader) {
-          loader.style.display = 'flex';
-          setTimeout(() => {
-            window.location.href = this.href;
-          }, 2000);
-        } else {
-          window.location.href = this.href; // fallback لو مفيش لودر
-        }
-      });
-    }
-  });
+          document.getElementById('back-btn').addEventListener('click', () => {
+  const loader = document.getElementById('tiktok-loader');
+  if (loader) loader.style.display = 'flex';
+
+  setTimeout(() => {
+    window.location.href = 'index.html'; // ← عدلها لاسم الصفحة اللي ترجع ليها
+  }, 2000);
 });
   </script>
 </body>
