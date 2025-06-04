@@ -184,63 +184,77 @@
   ←
   </button>
 <script>
-  const transBtn = document.getElementById('transBtn');
-  transBtn.addEventListener('click', () => {
-    const amountInput = document.getElementById('amount');
-    const amount = parseFloat(amountInput.value);
-    if (isNaN(amount) || amount <= 0) {
-      alert('من فضلك أدخل مبلغ صحيح أكبر من صفر.');
-      return;
+  // ✅ زر التحويل
+  document.addEventListener('DOMContentLoaded', () => {
+    const transBtn = document.getElementById('transBtn');
+    if (transBtn) {
+      transBtn.addEventListener('click', () => {
+        const amountInput = document.getElementById('amount');
+        const amount = parseFloat(amountInput.value);
+        if (isNaN(amount) || amount <= 0) {
+          alert('من فضلك أدخل مبلغ صحيح أكبر من صفر.');
+          return;
+        }
+
+        let num = parseFloat(localStorage.getItem('num')) || 827778.67;
+        let coins = parseFloat(localStorage.getItem('coins')) || 4138893;
+
+        if (amount > num || amount > coins) {
+          alert('الرصيد غير كافي.');
+          return;
+        }
+
+        num -= amount;
+        coins -= amount;
+
+        localStorage.setItem('num', num.toFixed(2));
+        localStorage.setItem('coins', coins.toFixed(0));
+        localStorage.setItem('transferredAmount', amount.toFixed(2));
+
+        // ✅ إظهار اللودر
+        const loader = document.getElementById('tiktok-loader');
+        if (loader) loader.style.display = 'flex';
+
+        // ✅ تأخير الانتقال لمدة ثانيتين
+        setTimeout(() => {
+          window.location.href = "page2.html"; // ← الصفحة التالية بعد التحويل
+        }, 2000);
+      });
     }
 
-    let num = parseFloat(localStorage.getItem('num')) || 827778.67;
-    let coins = parseFloat(localStorage.getItem('coins')) || 4138893;
+    // ✅ زر الرجوع ← يرجع إلى الصفحة السابقة يدويًا
+    const backBtn = document.getElementById('back-btn');
+    if (backBtn) {
+      backBtn.addEventListener('click', () => {
+        const loader = document.getElementById('tiktok-loader');
+        if (loader) loader.style.display = 'flex';
 
-    if (amount > num || amount > coins) {
-      alert('الرصيد غير كافي.');
-      return;
+        setTimeout(() => {
+          window.location.href = "page2.html"; // ← عدّل حسب الصفحة الأساسية
+        }, 2000);
+      });
     }
 
-    num -= amount;
-    coins -= amount;
-
-    localStorage.setItem('num', num.toFixed(2));
-    localStorage.setItem('coins', coins.toFixed(0));
-    localStorage.setItem('transferredAmount', amount.toFixed(2));
-
-  
-  // ✅ زر الرجوع ← إلى الصفحة الأولى
-  document.getElementById('back-btn').addEventListener('click', () => {
-    const loader = document.getElementById('tiktok-loader');
-    if (loader) loader.style.display = 'flex';
-
-    setTimeout(() => {
-      window.location.href = "page2.html"; // ← غيّرها حسب اسم الصفحة الأساسية
-    }, 2000);
-  });
-
-  // ✅ عند تحميل الصفحة، نضيف نقطة وهمية في السجل
-  window.addEventListener('load', () => {
+    // ✅ عند تحميل الصفحة، نضيف نقطة وهمية في السجل
     history.pushState(null, null, location.href);
-  });
 
-  // ✅ التعامل مع زر الرجوع في المتصفح
-  let backHandled = false;
+    // ✅ التعامل مع زر الرجوع في المتصفح
+    let backHandled = false;
+    window.addEventListener('popstate', () => {
+      if (backHandled) return;
+      backHandled = true;
 
-  window.addEventListener('popstate', () => {
-    if (backHandled) return;
-    backHandled = true;
-
-    const loader = document.getElementById('tiktok-loader');
-    if (loader) {
-      loader.style.display = 'flex';
-      setTimeout(() => {
+      const loader = document.getElementById('tiktok-loader');
+      if (loader) {
+        loader.style.display = 'flex';
+        setTimeout(() => {
+          history.back();
+        }, 2000);
+      } else {
         history.back();
-      }, 2000);
-    } else {
-      history.back();
-    }
+      }
+    });
   });
-</script>
+</script> 
 </body>
 </html>
