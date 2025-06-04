@@ -85,15 +85,26 @@
       <div id="transferredDisplay" class="amount-display">0.00</div>
     </div>
   </div>
-  <div style="margin-top: 20px; font-family: sans-serif; font-size: 16px; color: #333;">
-  <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+<div style="
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 30px;
+  font-family: 'Tajawal', sans-serif;
+  font-size: 16px;
+  color: #333;
+  gap: 10px;
+">
+  <div style="display: flex; justify-content: space-between; width: 260px;">
     <span>Created</span>
     <span id="created-time">--</span>
   </div>
-  <div style="display: flex; justify-content: space-between;">
+  <div style="display: flex; justify-content: space-between; width: 260px;">
     <span>Updated</span>
     <span id="updated-time">--</span>
   </div>
+</div>
   </div>
 <!-- زرالرجوع -->
 <!-- زر الرجوع أسفل يمين -->
@@ -149,6 +160,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 });
+  
   function formatDateTime(date) {
     const pad = (n) => (n < 10 ? '0' + n : n);
     const hours = date.getHours();
@@ -156,7 +168,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const formattedHours = pad((hours % 12) || 12);
     const minutes = pad(date.getMinutes());
     const seconds = pad(date.getSeconds());
-    const ampm = isPM ? 'PM' : 'AM';
+    const ampm = isPM ? 'AM' : 'PM';
     const month = pad(date.getMonth() + 1);
     const day = pad(date.getDate());
     const year = date.getFullYear();
@@ -164,10 +176,9 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   const now = new Date();
-  const created = formatDateTime(now);
-
-  document.getElementById('created-time').textContent = created;
-  document.getElementById('updated-time').textContent = created;
+  const formatted = formatDateTime(now);
+  document.getElementById('created-time').textContent = formatted;
+  document.getElementById('updated-time').textContent = formatted;
 </script>
 </body>
 </html>
