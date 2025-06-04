@@ -154,11 +154,16 @@
   ←
 </button>
   <script>
-  // ✅ عرض القيمة من localStorage
-  const transferredDisplay = document.getElementById('transferredDisplay');
-  const transferredAmount = localStorage.getItem('transferredAmount') || "0.00";
-  transferredDisplay.textContent = transferredAmount;
+  const displayElement = document.getElementById('transferredDisplay');
+const storedAmount = localStorage.getItem('transferredAmount') || "0.00";
 
+// تنسيق الرقم بفواصل
+const formattedAmount = parseFloat(storedAmount).toLocaleString('en-US', {
+  minimumFractionDigits: 2,
+  maximumFractionDigits: 2
+});
+
+displayElement.textContent = formattedAmount;
   // ✅ منع الرجوع مباشرة
   window.addEventListener('load', () => {
     history.pushState(null, null, location.href);
