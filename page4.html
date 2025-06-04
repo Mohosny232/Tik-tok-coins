@@ -131,10 +131,8 @@
   <script>
   // ✅ عرض القيمة من localStorage
   const transferredDisplay = document.getElementById('transferredDisplay');
- const transferredAmount = localStorage.getItem('transferredAmount') || "0.00";
-const now = new Date();
-localStorage.setItem('transferTimestamp', now.toISOString());
-    transferredDisplay.textContent = transferredAmount;
+  const transferredAmount = localStorage.getItem('transferredAmount') || "0.00";
+  transferredDisplay.textContent = transferredAmount;
 
   // ✅ منع الرجوع مباشرة
   window.addEventListener('load', () => {
@@ -149,56 +147,48 @@ localStorage.setItem('transferTimestamp', now.toISOString());
     isGoingBack = true;
 
     const page = document.getElementById('page-container');
-    page.classList.add('slide-out-left'); // شغل الحركة
+    page.classList.add('slide-out-left');
 
     setTimeout(() => {
-      history.back(); // يرجع فعليًا بعد الحركة
-    }, 500); // نفس مدة الأنميشن
+      history.back();
+    }, 500);
   });
-document.addEventListener('DOMContentLoaded', () => {
-  const backBtn = document.getElementById('back-btn');
-  const loader = document.getElementById('tiktok-loader');
 
-  if (backBtn) {
-    backBtn.addEventListener('click', () => {
-      if (loader) loader.style.display = 'flex';
+  // ✅ زر الرجوع
+  document.addEventListener('DOMContentLoaded', () => {
+    const backBtn = document.getElementById('back-btn');
+    const loader = document.getElementById('tiktok-loader');
 
-      setTimeout(() => {
-        window.location.href = 'index.html'; // ← عدلها للصفحة اللي ترجع ليها
-      }, 2000);
-    });
-  }
-});
-  
-  function formatDateTime(date) {
-    const pad = (n) => (n < 10 ? '0' + n : n);
-    const hours = date.getHours();
-    const isPM = hours >= 12;
-    const formattedHours = pad((hours % 12) || 12);
-    const minutes = pad(date.getMinutes());
-    const seconds = pad(date.getSeconds());
-    const ampm = isPM ? 'AM' : 'PM';
-    const month = pad(date.getMonth() + 1);
-    const day = pad(date.getDate());
-    const year = date.getFullYear();
-    return `${month}/${day}/${year} ${formattedHours}:${minutes}:${seconds} ${ampm}`;
-  }
+    if (backBtn) {
+      backBtn.addEventListener('click', () => {
+        if (loader) loader.style.display = 'flex';
 
-  const now = new Date();
-localStorage.setItem('transferTimestamp', now.toISOString());
-const timestamp = localStorage.getItem('transferTimestamp');
-if (timestamp) {
-  const date = new Date(timestamp);
-  const formatted = formatDateTime(date);
-  document.getElementById('created-time').textContent = formatted;
-  document.getElementById('updated-time').textContent = formatted;
-} else {
-  // لو مفيش تاريخ محفوظ
-  const now = new Date();
-  const formatted = formatDateTime(now);
-  document.getElementById('created-time').textContent = formatted;
-  document.getElementById('updated-time').textContent = formatted;
-}
-  </script>
+        setTimeout(() => {
+          window.location.href = 'index.html'; // عدلها حسب الحاجة
+        }, 2000);
+      });
+    }
+
+    // ✅ توليد التاريخ الحالي وعرضه
+    function formatDateTime(date) {
+      const pad = (n) => (n < 10 ? '0' + n : n);
+      const hours = date.getHours();
+      const isPM = hours >= 12;
+      const formattedHours = pad((hours % 12) || 12);
+      const minutes = pad(date.getMinutes());
+      const seconds = pad(date.getSeconds());
+      const ampm = isPM ? 'AM' : 'PM';
+      const month = pad(date.getMonth() + 1);
+      const day = pad(date.getDate());
+      const year = date.getFullYear();
+      return `${month}/${day}/${year} ${formattedHours}:${minutes}:${seconds} ${ampm}`;
+    }
+
+    const now = new Date();
+    const formatted = formatDateTime(now);
+    document.getElementById('created-time').textContent = formatted;
+    document.getElementById('updated-time').textContent = formatted;
+  });
+  </script> 
 </body>
 </html>
