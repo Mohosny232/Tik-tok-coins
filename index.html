@@ -200,9 +200,10 @@
 
     // تنسيق الرقم وعرضه بحجم مختلف لآخر رقمين
     const [integerPart, decimalPart] = num.toFixed(2).split('.');
-    const formattedHTML = `
-      <span class="main-number">${integerPart}.<span class="small-decimal">${decimalPart}</span></span>
-    `;
+const formattedInteger = parseInt(integerPart).toLocaleString('en-US');
+const formattedHTML = `
+  <span class="main-number">${formattedInteger}.<span class="small-decimal">${decimalPart}</span></span>
+`;
     if (formattedNumberEl) {
       formattedNumberEl.innerHTML = formattedHTML;
     }
