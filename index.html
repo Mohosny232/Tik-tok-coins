@@ -224,16 +224,6 @@ const formattedHTML = `
     trigger.addEventListener('click', () => {
       resetBtn.style.display = 'block';
     });
-
-    const num = 1872003.24;
-
-// كل 1 دولار = 100 عملة
-const coins = Math.floor(num * 100);
-
-// تخزين القيم في localStorage
-localStorage.setItem('num', num.toFixed(2));
-localStorage.setItem('coins', coins.toString());
-
     // الانتقال بين الصفحات مع اللودر
     document.querySelectorAll('a').forEach(link => {
       const href = link.getAttribute('href');
