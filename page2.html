@@ -235,7 +235,8 @@ const formattedAmount = parseFloat(storedAmount).toLocaleString('en-US', {
   minimumFractionDigits: 2,
   maximumFractionDigits: 2
 });
-
+// حفظ القيمة في localStorage للصفحة الثانية
+localStorage.setItem('transferredAmount', num.toFixed(2));
 displayElement.textContent = formattedAmount;
 </script>
 </body>
