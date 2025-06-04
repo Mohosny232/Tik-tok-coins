@@ -85,8 +85,21 @@
       <div id="transferredDisplay" class="amount-display">0.00</div>
     </div>
   </div>
-<button id="back-btn" aria-label="رجوع">←</button>
-<script>
+<!-- زر الرجوع -->
+<button id="back-btn" style="
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: none;
+  border: none;
+  color: black;
+  font-size: 24px;
+  cursor: pointer;
+  z-index: 9999;
+">
+  ←
+</button>
+  <script>
   // ✅ عرض القيمة من localStorage
   const transferredDisplay = document.getElementById('transferredDisplay');
   const transferredAmount = localStorage.getItem('transferredAmount') || "0.00";
