@@ -59,6 +59,23 @@
     transform: translateX(-100%);
     opacity: 0;
   }
+  #back-btn {
+  position: fixed;
+  top: 15px;
+  left: 15px; /* لو RTL غيرها لـ right */
+  background: none;
+  color: black;
+  font-size: 24px;
+  border: none;
+  cursor: pointer;
+  z-index: 9999;
+  padding: 5px 10px;
+  border-radius: 8px;
+  transition: background 0.3s;
+}
+#back-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
 </style>
 </head>
 <body>
@@ -68,7 +85,7 @@
       <div id="transferredDisplay" class="amount-display">0.00</div>
     </div>
   </div>
-
+<button id="back-btn" aria-label="رجوع">←</button>
 <script>
   // ✅ عرض القيمة من localStorage
   const transferredDisplay = document.getElementById('transferredDisplay');
@@ -94,6 +111,20 @@
       history.back(); // يرجع فعليًا بعد الحركة
     }, 500); // نفس مدة الأنميشن
   });
+document.addEventListener('DOMContentLoaded', () => {
+  const backBtn = document.getElementById('back-btn');
+  const loader = document.getElementById('tiktok-loader');
+
+  if (backBtn) {
+    backBtn.addEventListener('click', () => {
+      if (loader) loader.style.display = 'flex';
+
+      setTimeout(() => {
+        window.location.href = 'page1.html'; // ← عدلها للصفحة اللي ترجع ليها
+      }, 2000);
+    });
+  }
+});
 </script>
 </body>
 </html>
