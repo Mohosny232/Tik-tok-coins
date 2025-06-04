@@ -31,24 +31,29 @@
     color: black;
     z-index: 2;
   }
-.time-container {
+.timestamp-labels, .timestamp-values {
   position: fixed;
-  bottom: 10px;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  padding: 0 20px;
-  box-sizing: border-box;
+  bottom: 20px;
+  background-color: #ffffff; /* خلفية */
+  padding: 10px;
+  border-radius: 10px;
   font-family: 'Tajawal', sans-serif;
+  font-size: 16px;
+  color: #000;
+  line-height: 1.8;
+  z-index: 10;
 }
 
-.time-box {
-  background-color: #ffffffaa; /* نفس اللون #FFFFFFFF بشفافية بسيطة */
-  padding: 8px 12px;
-  border-radius: 10px;
-  font-size: 14px;
-  text-align: center;
-  line-height: 1.6;
+/* النصوص: Created + Updated */
+.timestamp-labels {
+  left: 20px;
+  text-align: left;
+}
+
+/* القيم: التواريخ */
+.timestamp-values {
+  right: 20px;
+  text-align: right;
 }
   .wrapper {
   position: relative;
@@ -103,15 +108,16 @@
       <div id="transferredDisplay" class="amount-display">0.00</div>
     </div>
   </div>
-<div class="time-container">
-  <div class="time-box">
-    Updated<br>
-    <span id="updated-time">--</span>
-  </div>
-  <div class="time-box">
-    Created<br>
-    <span id="created-time">--</span>
-  </div>
+<!-- النصوص على اليسار -->
+<div class="timestamp-labels">
+  <div>Created</div>
+  <div>Updated</div>
+</div>
+
+<!-- التواريخ على اليمين -->
+<div class="timestamp-values">
+  <div id="created-time">--</div>
+  <div id="updated-time">--</div>
 </div>
 <!-- زرالرجوع -->
 <!-- زر الرجوع أسفل يمين -->
