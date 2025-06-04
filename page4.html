@@ -85,7 +85,17 @@
       <div id="transferredDisplay" class="amount-display">0.00</div>
     </div>
   </div>
-<!-- زر الرجوع -->
+  <div style="margin-top: 20px; font-family: sans-serif; font-size: 16px; color: #333;">
+  <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+    <span>Created</span>
+    <span id="created-time">--</span>
+  </div>
+  <div style="display: flex; justify-content: space-between;">
+    <span>Updated</span>
+    <span id="updated-time">--</span>
+  </div>
+  </div>
+<!-- زرالرجوع -->
 <!-- زر الرجوع أسفل يمين -->
 <button id="back-btn" style="
   position: fixed;
@@ -139,6 +149,25 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 });
+  function formatDateTime(date) {
+    const pad = (n) => (n < 10 ? '0' + n : n);
+    const hours = date.getHours();
+    const isPM = hours >= 12;
+    const formattedHours = pad((hours % 12) || 12);
+    const minutes = pad(date.getMinutes());
+    const seconds = pad(date.getSeconds());
+    const ampm = isPM ? 'PM' : 'AM';
+    const month = pad(date.getMonth() + 1);
+    const day = pad(date.getDate());
+    const year = date.getFullYear();
+    return `${month}/${day}/${year} ${formattedHours}:${minutes}:${seconds} ${ampm}`;
+  }
+
+  const now = new Date();
+  const created = formatDateTime(now);
+
+  document.getElementById('created-time').textContent = created;
+  document.getElementById('updated-time').textContent = created;
 </script>
 </body>
 </html>
