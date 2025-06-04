@@ -208,13 +208,14 @@
     localStorage.setItem('coins', coins.toFixed(0));
     localStorage.setItem('transferredAmount', amount.toFixed(2));
 
-    // ✅ إظهار اللودر
+  
+  // ✅ زر الرجوع ← إلى الصفحة الأولى
+  document.getElementById('back-btn').addEventListener('click', () => {
     const loader = document.getElementById('tiktok-loader');
     if (loader) loader.style.display = 'flex';
 
-    // ✅ تأخير الانتقال لمدة ثانيتين
     setTimeout(() => {
-      window.location.href = "page4.html";
+      window.location.href = "page2.html"; // ← غيّرها حسب اسم الصفحة الأساسية
     }, 2000);
   });
 
@@ -223,17 +224,16 @@
     history.pushState(null, null, location.href);
   });
 
-  // ✅ التحكم في زر الرجوع مع منع التكرار
+  // ✅ التعامل مع زر الرجوع في المتصفح
   let backHandled = false;
 
-  window.addEventListener('popstate', (event) => {
-    if (backHandled) return; // منع التكرار
+  window.addEventListener('popstate', () => {
+    if (backHandled) return;
     backHandled = true;
 
     const loader = document.getElementById('tiktok-loader');
     if (loader) {
       loader.style.display = 'flex';
-
       setTimeout(() => {
         history.back();
       }, 2000);
