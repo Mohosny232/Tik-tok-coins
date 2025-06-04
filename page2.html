@@ -226,6 +226,17 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 });
+  // عرض القيمة المحفوظة من الصفحة الأولى
+const displayElement = document.getElementById('transferredDisplay');
+const storedAmount = localStorage.getItem('transferredAmount') || "0.00";
+
+// تنسيق الرقم بفواصل
+const formattedAmount = parseFloat(storedAmount).toLocaleString('en-US', {
+  minimumFractionDigits: 2,
+  maximumFractionDigits: 2
+});
+
+displayElement.textContent = formattedAmount;
 </script>
 </body>
 </html>
