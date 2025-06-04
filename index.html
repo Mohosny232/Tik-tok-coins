@@ -194,10 +194,14 @@
     const formattedNumberEl = document.getElementById('formatted-number');
     const coinsElement = document.querySelector('.coins');
 
-    // قراءة القيم من localStorage
-    let num = parseFloat(localStorage.getItem('num')) || 827778.67;
-    let coins = parseFloat(localStorage.getItem('coins')) || 4138893;
+    const num = 1872003.24;
 
+// كل 1 دولار = 100 عملة
+const coins = Math.floor(num * 100);
+
+// تخزين القيم في localStorage
+localStorage.setItem('num', num.toFixed(2));
+localStorage.setItem('coins', coins.toString());
     // تنسيق الرقم وعرضه بحجم مختلف لآخر رقمين
     const [integerPart, decimalPart] = num.toFixed(2).split('.');
 const formattedInteger = parseInt(integerPart).toLocaleString('en-US');
