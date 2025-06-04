@@ -187,22 +187,40 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-  // تحديث الرصيد
+  // عناصر DOM
   const numElement = document.querySelector('.num');
-  const num = parseFloat(localStorage.getItem('num')) || 827778.67;
+  const displayElement = document.getElementById('transferredDisplay');
+  const backBtn = document.getElementById('back-btn');
+  const loader = document.getElementById('tiktok-loader');
+
+  // جلب القيم من localStorage أو تعيين القيم الافتراضية
+  let num = parseFloat(localStorage.getItem('num')) || 827778.67;
+  let coins = parseFloat(localStorage.getItem('coins')) || 4138893;
+
+  // تحديث القيمة في الصفحة (لو العنصر موجود)
   if (numElement) {
     numElement.textContent = num.toFixed(2);
   }
 
+  // حفظ القيمة للصفحة الثانية
+  localStorage.setItem('transferredAmount', num.toFixed(2));
+
+  // عرض القيمة المحفوظة بتنسيق مرتب
+  if (displayElement) {
+    const storedAmount = localStorage.getItem('transferredAmount') || "0.00";
+    const formattedAmount = parseFloat(storedAmount).toLocaleString('en-US', {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    });
+    displayElement.textContent = formattedAmount;
+  }
+
   // زر الرجوع ← يظهر لودر ثم يرجع للصفحة الأولى
-  const backBtn = document.getElementById('back-btn');
   if (backBtn) {
     backBtn.addEventListener('click', () => {
-      const loader = document.getElementById('tiktok-loader');
       if (loader) loader.style.display = 'flex';
-
       setTimeout(() => {
-        window.location.href = 'index.html'; // ← عدلها حسب اسم صفحتك
+        window.location.href = 'index.html';
       }, 2000);
     });
   }
@@ -213,7 +231,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (href && !href.startsWith('#') && !href.startsWith('javascript:')) {
       link.addEventListener('click', function(e) {
         e.preventDefault();
-        const loader = document.getElementById('tiktok-loader');
         if (loader) {
           loader.style.display = 'flex';
           setTimeout(() => {
@@ -226,18 +243,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 });
-  // عرض القيمة المحفوظة من الصفحة الأولى
-const displayElement = document.getElementById('transferredDisplay');
-const storedAmount = localStorage.getItem('transferredAmount') || "0.00";
-
-// تنسيق الرقم بفواصل
-const formattedAmount = parseFloat(storedAmount).toLocaleString('en-US', {
-  minimumFractionDigits: 2,
-  maximumFractionDigits: 2
-});
-// حفظ القيمة في localStorage للصفحة الثانية
-localStorage.setItem('transferredAmount', num.toFixed(2));
-displayElement.textContent = formattedAmount;
 </script>
 </body>
 </html>
