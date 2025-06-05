@@ -46,29 +46,28 @@
   position: relative;
   top: 5px;                 /* نزول الكلمة تحت الرقم */
 }
-.timestamp-labels, .timestamp-values {
+.timestamp-values {
   position: fixed;
-  bottom: 163px;
-  background-color: #ffffff; /* خلفية */
-  padding: 10px;
+  bottom: 40px; /* بدلاً من 163px */
+  background-color: #ffffff;
+  padding: 8px 12px;
   border-radius: 10px;
   font-family: 'Tajawal', sans-serif;
-  font-weight: 400; /* أو 500 حسب التجربة */
-  font-size: 16px;
+  font-weight: 400;
+  font-size: 14px;
   color: #000;
-  line-height: 1.8;
-  z-index: 10;
+  line-height: 1.6;
+  z-index: 9999; /* يضمن الظهور فوق كل العناصر */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15); /* تحسين بصري */
 }
 
-/* النصوص: Created + Updated */
 .timestamp-labels {
-  left: 2px;
+  left: 10px;
   text-align: left;
 }
 
-/* القيم: التواريخ */
 .timestamp-values {
-  right: 2px;
+  right: 10px;
   text-align: right;
 }
   .wrapper {
