@@ -193,11 +193,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const coinsElement = document.querySelector('.coins');
 
   // قراءة الرصيد من localStorage أو استخدام القيمة الافتراضية
-  let num = parseFloat(localStorage.getItem('num'));
-if (isNaN(num)) {
-  num = 1872003.24;
-}
-const [integerPart, decimalPart] = num.toFixed(2).split('.');
+  
+    // قراءة الرصيد من localStorage أو استخدام القيمة الافتراضية
+    let num = parseFloat(localStorage.getItem('num'));
+    if (isNaN(num)) {
+      num = 1872003.24;
+    }
 
   // حساب الكوينز (1 دولار = 100 عملة)
   const coins = Math.floor(num * 100);
