@@ -191,58 +191,6 @@
     const formattedNumberEl = document.getElementById('formatted-number');
     const coinsElement = document.querySelector('.coins');
 
-    // قراءة الرصيد من localStorage أو استخدام القيمة الافتراضية
-    let num = parseFloat(localStorage.getItem('num'));
-    if (isNaN(num)) {
-      num = 1872003.24;
-    }
-
-    // حساب الكوينز (1 دولار = 100 عملة)
-    const coins = Math.floor(num * 100);
-    localStorage.setItem('coins', coins.toString());
-
-    // تنسيق الرصيد بفواصل وأجزاء عشرية صغيرة
-    const [integerPart, decimalPart] = num.toFixed(2).split('.');
-    const formattedInteger = parseInt(integerPart).toLocaleString('en-US');
-    const formattedHTML = `
-      <span class="main-number">${formattedInteger}.<span class="small-decimal">${decimalPart}</span></span>
-    `;
-    if (formattedNumberEl) {
-      formattedNumberEl.innerHTML = formattedHTML;
-    }
-
-    // عرض الكوينز
-    if (coinsElement) {
-      coinsElement.textContent = coins.toLocaleString('en-US');
-    }
-
-    // زر التفعيل وزر إعادة القيم الافتراضية
-    const trigger = document.getElementById('secret-trigger');
-    const resetBtn = document.getElementById('reset-btn');
-
-    if (trigger && resetBtn) {
-      trigger.addEventListener('click', () => {
-        resetBtn.style.display = 'block';
-      });
-
-      resetBtn.addEventListener('click', () => {
-        const defaultNum = 1872003.24;
-        const defaultCoins = Math.floor(defaultNum * 100);
-
-        localStorage.setItem('num', defaultNum.toFixed(2));
-        localStorage.setItem('coins', defaultCoins.toString());
-        localStorage.removeItem('transferredAmount');
-
-        alert('✅ تمت إعادة القيم الأصلية');
-        location.reload();
-      });
-    }
-  });
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const formattedNumberEl = document.getElementById('formatted-number');
-    const coinsElement = document.querySelector('.coins');
-
     // قراءة الرصيد الحالي من localStorage أو القيمة الافتراضية
     let storedNum = parseFloat(localStorage.getItem('num'));
     if (isNaN(storedNum)) {
