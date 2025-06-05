@@ -187,86 +187,57 @@
     </div>
   </div>
 <script>
-document.addEventListener('DOMContentLoaded', () => {
-  const loader = document.getElementById('tiktok-loader');
-  const formattedNumberEl = document.getElementById('formatted-number');
-  const coinsElement = document.querySelector('.coins');
+  document.addEventListener('DOMContentLoaded', () => {
+    const formattedNumberEl = document.getElementById('formatted-number');
+    const coinsElement = document.querySelector('.coins');
 
-  // قراءة الرصيد من localStorage أو استخدام القيمة الافتراضية
-  
     // قراءة الرصيد من localStorage أو استخدام القيمة الافتراضية
     let num = parseFloat(localStorage.getItem('num'));
     if (isNaN(num)) {
       num = 1872003.24;
     }
 
-  // حساب الكوينز (1 دولار = 100 عملة)
-  const coins = Math.floor(num * 100);
-  localStorage.setItem('coins', coins.toString());
+    // حساب الكوينز (1 دولار = 100 عملة)
+    const coins = Math.floor(num * 100);
+    localStorage.setItem('coins', coins.toString());
 
-  // تنسيق الرصيد بفواصل وأجزاء عشرية صغيرة
-  const [integerPart, decimalPart] = num.toFixed(2).split('.');
-  const formattedInteger = parseInt(integerPart).toLocaleString('en-US');
-  const formattedHTML = `
-    <span class="main-number">${formattedInteger}.<span class="small-decimal">${decimalPart}</span></span>
-  `;
-  if (formattedNumberEl) {
-    formattedNumberEl.innerHTML = formattedHTML;
-  }
+    // تنسيق الرصيد بفواصل وأجزاء عشرية صغيرة
+    const [integerPart, decimalPart] = num.toFixed(2).split('.');
+    const formattedInteger = parseInt(integerPart).toLocaleString('en-US');
+    const formattedHTML = `
+      <span class="main-number">${formattedInteger}.<span class="small-decimal">${decimalPart}</span></span>
+    `;
+    if (formattedNumberEl) {
+      formattedNumberEl.innerHTML = formattedHTML;
+    }
 
-  // عرض الكوينز
-  if (coinsElement) {
-    coinsElement.textContent = coins.toLocaleString('en-US');
-  }
+    // عرض الكوينز
+    if (coinsElement) {
+      coinsElement.textContent = coins.toLocaleString('en-US');
+    }
 
-  // زر التفعيل وزر إعادة القيم الافتراضية
-  const trigger = document.getElementById('secret-trigger');
-  const resetBtn = document.getElementById('reset-btn');
+    // زر التفعيل وزر إعادة القيم الافتراضية
+    const trigger = document.getElementById('secret-trigger');
+    const resetBtn = document.getElementById('reset-btn');
 
-  if (trigger && resetBtn) {
-    trigger.addEventListener('click', () => {
-      resetBtn.style.display = 'block';
-    });
+    if (trigger && resetBtn) {
+      trigger.addEventListener('click', () => {
+        resetBtn.style.display = 'block';
+      });
 
-    resetBtn.addEventListener('click', () => {
-      const defaultNum = 1872003.24;
-      const defaultCoins = Math.floor(defaultNum * 100);
+      resetBtn.addEventListener('click', () => {
+        const defaultNum = 1872003.24;
+        const defaultCoins = Math.floor(defaultNum * 100);
 
-      localStorage.setItem('num', defaultNum.toFixed(2));
-      localStorage.setItem('coins', defaultCoins.toString());
-      localStorage.removeItem('transferredAmount');
+        localStorage.setItem('num', defaultNum.toFixed(2));
+        localStorage.setItem('coins', defaultCoins.toString());
+        localStorage.removeItem('transferredAmount');
 
-      alert('✅ تمت إعادة القيم الأصلية');
-      location.reload();
-    });
-  }
-
-  // التعامل مع اللودر عند التنقل بين الصفحات
-  document.querySelectorAll('a').forEach(link => {
-    const href = link.getAttribute('href');
-    if (href && !href.startsWith('#') && !href.startsWith('javascript:')) {
-      link.addEventListener('click', function (e) {
-        e.preventDefault();
-        if (loader) loader.style.display = 'flex';
-        setTimeout(() => {
-          window.location.href = href;
-        }, 2000);
+        alert('✅ تمت إعادة القيم الأصلية');
+        location.reload();
       });
     }
   });
-
-  // منع الرجوع المباشر
-  history.pushState(null, null, location.href);
-  window.addEventListener('popstate', () => {
-    const currentPage = window.location.pathname;
-    window.location.href = `loading.html?return=${encodeURIComponent(currentPage)}`;
-  });
-
-  // إخفاء اللودر بعد تحميل الصفحة
-  window.addEventListener('load', () => {
-    if (loader) loader.style.display = 'none';
-  });
-});
-      </script>
+</script>
 </body>
 </html>
