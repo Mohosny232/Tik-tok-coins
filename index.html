@@ -238,6 +238,58 @@
       });
     }
   });
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const formattedNumberEl = document.getElementById('formatted-number');
+    const coinsElement = document.querySelector('.coins');
+
+    // قراءة الرصيد الحالي من localStorage أو القيمة الافتراضية
+    let storedNum = parseFloat(localStorage.getItem('num'));
+    if (isNaN(storedNum)) {
+      storedNum = 1872003.24;
+    }
+
+    // حساب الكوينز: 1 دولار = 100 عملة
+    const coins = Math.floor(storedNum * 100);
+    localStorage.setItem('coins', coins.toString());
+
+    // تنسيق الرقم بفواصل والعشري بشكل منفصل
+    const [integerPart, decimalPart] = storedNum.toFixed(2).split('.');
+    const formattedInteger = parseInt(integerPart).toLocaleString('en-US');
+    const formattedHTML = `
+      <span class="main-number">${formattedInteger}.<span class="small-decimal">${decimalPart}</span></span>
+    `;
+    if (formattedNumberEl) {
+      formattedNumberEl.innerHTML = formattedHTML;
+    }
+
+    // عرض الكوينز
+    if (coinsElement) {
+      coinsElement.textContent = coins.toLocaleString('en-US');
+    }
+
+    // أزرار التفعيل وإعادة القيم
+    const trigger = document.getElementById('secret-trigger');
+    const resetBtn = document.getElementById('reset-btn');
+
+    if (trigger && resetBtn) {
+      trigger.addEventListener('click', () => {
+        resetBtn.style.display = 'block';
+      });
+
+      resetBtn.addEventListener('click', () => {
+        const defaultNum = 1872003.24;
+        const defaultCoins = Math.floor(defaultNum * 100);
+
+        localStorage.setItem('num', defaultNum.toFixed(2));
+        localStorage.setItem('coins', defaultCoins.toString());
+        localStorage.removeItem('transferredAmount');
+
+        alert('✅ تمت إعادة القيم الأصلية');
+        location.reload();
+      });
+    }
+  });
 </script>
 </body>
 </html>
