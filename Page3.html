@@ -111,58 +111,60 @@
     }
 
     #tiktok-loader {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: white;
-      z-index: 9999;
-      justify-content: center;
-      align-items: center;
-    }
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: white;
+  z-index: 9999;
+  justify-content: center;
+  align-items: center;
+}
 
-    .orbit-loader {
-      position: relative;
-      width: 32px;
-      height: 32px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
+.orbit-loader {
+  position: relative;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-    .dot {
-      position: absolute;
-      width: 13px;
-      height: 13px;
-      border-radius: 50%;
-      top: 19px;
-    }
+.dot {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  top: 50%;
+  transform: translateY(-50%);
+  box-shadow: 0 0 0 transparent;
+}
 
-    .dot1 {
-      background-color: #ff0050;
-      left: 0;
-      animation: orbit-left 1s ease-in-out infinite;
-    }
+.dot1 {
+  background-color: #ff0050;
+  left: 0;
+  animation: orbit-left 1s ease-in-out infinite;
+}
 
-    .dot2 {
-      background-color: #00f2ea;
-      right: 0;
-      animation: orbit-right 1s ease-in-out infinite;
-    }
+.dot2 {
+  background-color: #00f2ea;
+  right: 0;
+  animation: orbit-right 1s ease-in-out infinite;
+}
 
-    @keyframes orbit-left {
-      0% { transform: translateX(0); }
-      50% { transform: translateX(10px); }
-      100% { transform: translateX(0); }
-    }
+@keyframes orbit-left {
+  0%   { transform: translate(0, -50%); box-shadow: 0 0 0 transparent; }
+  50%  { transform: translate(10px, -60%); box-shadow: 0 0 12px rgba(255, 0, 80, 0.6); }
+  100% { transform: translate(0, -50%); box-shadow: 0 0 0 transparent; }
+}
 
-    @keyframes orbit-right {
-      0% { transform: translateX(0); }
-      50% { transform: translateX(-10px); }
-      100% { transform: translateX(0); }
-    }
+@keyframes orbit-right {
+  0%   { transform: translate(0, -50%); box-shadow: 0 0 0 transparent; }
+  50%  { transform: translate(-10px, -60%); box-shadow: 0 0 12px rgba(0, 242, 234, 0.6); }
+  100% { transform: translate(0, -50%); box-shadow: 0 0 0 transparent; }
+}
   </style>
 </head>
 <body>
