@@ -79,18 +79,17 @@
 .info-box {
   position: fixed;
   top: 230px;
-  right: 0; /* ← هذا هو الأساس */
-  background: none; /* ← بدون خلفية تماماً */
-  padding: 12px;
-  border-radius: 0 12px 12px 0; /* ← شكل ناعم للطرف الأيسر فقط */
+  right: 0;
+  background: none; /* شفاف */
+  padding: 0 10px; /* شوية padding على اليمين */
   font-family: 'Tajawal', sans-serif;
   font-size: 14px;
   line-height: 2;
-  z-index: 9999; /* ← تأكد إنها أعلى من أي عناصر تانية */
+  z-index: 9999;
   display: flex;
-  gap: 20px;
-  align-items: flex-start;
-} 
+  flex-direction: column; /* عناصر فوق بعض */
+  align-items: flex-end; /* يمين */
+}
   /* نغلف الصفحة في div له أنميشن */
   #page-container {
     transition: transform 0.5s ease, opacity 0.5s ease;
