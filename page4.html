@@ -206,9 +206,9 @@
     const arrivalDate = arrival.toLocaleDateString('en-GB') + ' ' + now.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
     document.getElementById('arrival-time').textContent = arrivalDate;
 // ✅ رقم المعاملة العشوائي — رقم فقط
-const randomId = Math.floor(10000000000000000000 + Math.random() * 90000000000000000000).toString();
-document.getElementById('transaction-id').textContent = randomId;
-  
+    const randomId = Math.floor(10000000000000000 + Math.random() * 90000000000000000).toString();
+    document.getElementById('transaction-id').textContent = randomId;
+  }); // ← دي بتقفل DOMContentLoaded
 </script>
 </body>
       </html>
