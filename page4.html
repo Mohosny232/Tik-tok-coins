@@ -46,30 +46,19 @@
   position: relative;
   top: 5px;                 /* نزول الكلمة تحت الرقم */
 }
-.timestamp-labels, .timestamp-values {
+.transaction-values {
   position: fixed;
-  bottom: 163px;
-  background-color: #ffffff; /* خلفية */
-  padding: 10px;
-  border-radius: 10px;
+  top: 150px;
+  right: 10px;
+  background-color: #ffffff;
+  padding: 15px;
+  border-radius: 12px;
   font-family: 'Tajawal', sans-serif;
-  font-weight: 400; /* أو 500 حسب التجربة */
-  font-size: 16px;
+  font-size: 15px;
   color: #000;
-  line-height: 1.8;
-  z-index: 10;
-}
-
-/* النصوص: Created + Updated */
-.timestamp-labels {
-  left: 2px;
-  text-align: left;
-}
-
-/* القيم: التواريخ */
-.timestamp-values {
-  right: 2px;
   text-align: right;
+  line-height: 2;
+  z-index: 1000;
 }
   .wrapper {
   position: relative;
