@@ -34,15 +34,7 @@
       gap: 10px;
     }
 
-    #username {
-      text-align: center;
-      font-size: 20px;
-      padding: 10px;
-      width: 100%;
-      border-radius: 8px;
-    }
-
-    input {
+    #username, input[type="number"] {
       text-align: center;
       font-size: 20px;
       padding: 10px;
@@ -109,84 +101,80 @@
     #back-btn:hover {
       background: rgba(0, 0, 0, 0.05);
     }
-#tiktok-loader {
-  display: flex;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: white;
-  z-index: 9999;
-  justify-content: center;
-  align-items: center;
-}
 
-.orbit-loader {
-  position: relative;
-  width: 32px;
-  height: 32px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+    #tiktok-loader {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: white;
+      z-index: 9999;
+      justify-content: center;
+      align-items: center;
+    }
 
-.dot {
-  position: absolute;
-  width: 13px;
-  height: 13px;
-  border-radius: 50%;
-  top: 19px;
-}
+    .orbit-loader {
+      position: relative;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
 
-.dot1 {
-  background-color: #ff0050;
-  left: 0;
-  z-index: 1;
-  animation: orbit-left 1s ease-in-out infinite;
-}
+    .dot {
+      position: absolute;
+      width: 13px;
+      height: 13px;
+      border-radius: 50%;
+      top: 19px;
+    }
 
-.dot2 {
-  background-color: #00f2ea;
-  right: 0;
-  z-index: 2;
-  animation: orbit-right 1s ease-in-out infinite;
-}
+    .dot1 {
+      background-color: #ff0050;
+      left: 0;
+      animation: orbit-left 1s ease-in-out infinite;
+    }
 
-/* النقطة السوداء داخل السماوي */
-.dot2::before {
-  content: "";
-  position: absolute;
-  width: 5px;
-  height: 5px;
-  background-color: black;
-  border-radius: 50%;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  opacity: 0;
-  animation: dot-shadow-blink 1s ease-in-out infinite;
-}
+    .dot2 {
+      background-color: #00f2ea;
+      right: 0;
+      animation: orbit-right 1s ease-in-out infinite;
+    }
 
-/* حركات */
-@keyframes orbit-left {
-  0% { transform: translateX(0); }
-  50% { transform: translateX(10px); }
-  100% { transform: translateX(0); }
-}
+    .dot2::before {
+      content: "";
+      position: absolute;
+      width: 5px;
+      height: 5px;
+      background-color: black;
+      border-radius: 50%;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      opacity: 0;
+      animation: dot-shadow-blink 1s ease-in-out infinite;
+    }
 
-@keyframes orbit-right {
-  0% { transform: translateX(0); }
-  50% { transform: translateX(-10px); }
-  100% { transform: translateX(0); }
-}
+    @keyframes orbit-left {
+      0% { transform: translateX(0); }
+      50% { transform: translateX(10px); }
+      100% { transform: translateX(0); }
+    }
 
-@keyframes dot-shadow-blink {
-  0%, 40% { opacity: 0; }
-  45%, 55% { opacity: 1; }
-  60%, 100% { opacity: 0; }
-}
+    @keyframes orbit-right {
+      0% { transform: translateX(0); }
+      50% { transform: translateX(-10px); }
+      100% { transform: translateX(0); }
+    }
 
+    @keyframes dot-shadow-blink {
+      0%, 40% { opacity: 0; }
+      45%, 55% { opacity: 1; }
+      60%, 100% { opacity: 0; }
+    }
   </style>
 </head>
 <body>
@@ -219,88 +207,54 @@
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const transBtn = document.getElementById('transBtn');
-      if (transBtn) {
-        transBtn.addEventListener('click', () => {
-          const amountInput = document.getElementById('amount');
-          const nameInput = document.getElementById('username');
+      const backBtn = document.getElementById('back-btn');
+      const loader = document.getElementById('tiktok-loader');
 
-          const amount = parseFloat(amountInput.value);
-          const name = nameInput.value.trim();
+      transBtn.addEventListener('click', () => {
+        const amountInput = document.getElementById('amount');
+        const nameInput = document.getElementById('username');
 
-          if (!name) {
-            alert('من فضلك أدخل اسم الشخص الذي تريد التحويل له.');
-            return;
-          }
+        const amount = parseFloat(amountInput.value);
+        const name = nameInput.value.trim();
 
-          if (isNaN(amount) || amount <= 0) {
-            alert('من فضلك أدخل مبلغ صحيح أكبر من صفر.');
-            return;
-          }
+        if (!name) {
+          alert('من فضلك أدخل اسم الشخص الذي تريد التحويل له.');
+          return;
+        }
 
-          let num = parseFloat(localStorage.getItem('num')) || 827778.67;
-          let coins = parseFloat(localStorage.getItem('coins')) || 4138893;
+        if (isNaN(amount) || amount <= 0) {
+          alert('من فضلك أدخل مبلغ صحيح أكبر من صفر.');
+          return;
+        }
 
-          if (amount > num || amount > coins) {
-            alert('الرصيد غير كافي.');
-            return;
-          }
+        let num = parseFloat(localStorage.getItem('num')) || 827778.67;
+        let coins = parseFloat(localStorage.getItem('coins')) || 4138893;
 
-          // تحديث الرصيد
-          num -= amount;
-          coins -= amount;
+        if (amount > num || amount > coins) {
+          alert('الرصيد غير كافي.');
+          return;
+        }
 
-          localStorage.setItem('num', num.toFixed(2));
-          localStorage.setItem('coins', coins.toFixed(0));
-          localStorage.setItem('transferredAmount', amount.toFixed(2));
-          localStorage.setItem('receiverName', name);
+        // تحديث الرصيد
+        num -= amount;
+        coins -= amount;
 
-          // إظهار اللودر
-          const loader = document.getElementById('tiktok-loader');
-          if (loader) loader.style.display = 'flex';
+        localStorage.setItem('num', num.toFixed(2));
+        localStorage.setItem('coins', coins.toFixed(0));
+        localStorage.setItem('transferredAmount', amount.toFixed(2));
+        localStorage.setItem('receiverName', name);
 
-          // الانتقال بعد 2 ثانية
-          setTimeout(() => {
-            window.location.href = "page4.html";
-          }, 2000);
-        });
-      }
+        loader.style.display = 'flex';
 
-      // زر الرجوع
-      document.getElementById('back-btn').addEventListener('click', () => {
+        setTimeout(() => {
+          window.location.href = "page4.html";
+        }, 2000);
+      });
+
+      backBtn.addEventListener('click', () => {
         window.history.back();
       });
     });
-  
-  const dot1 = document.querySelector('.dot1');
-  const dot2 = document.querySelector('.dot2');
-
-  function checkDistance() {
-    const rect1 = dot1.getBoundingClientRect();
-    const rect2 = dot2.getBoundingClientRect();
-
-    const dx = rect1.left - rect2.left;
-    const dy = rect1.top - rect2.top;
-    const distance = Math.sqrt(dx * dx + dy * dy);
-
-    if (distance < 14) {
-      dot1.classList.add('show-shadow');
-    } else {
-      dot1.classList.remove('show-shadow');
-    }
-
-    requestAnimationFrame(checkDistance);
-  }
-
-  // لما نحط الكلاس ده، يبان الظل
-  const style = document.createElement("style");
-  style.innerHTML = `.dot1.show-shadow::after { opacity: 1 !important; }`;
-  document.head.appendChild(style);
-
-  // نبدأ المتابعة
-    requestAnimationFrame(checkDistance);
-   }); 
-    });
-    
   </script>
 </body>
 </html>
