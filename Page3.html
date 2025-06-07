@@ -248,7 +248,8 @@
         }, 2000);
       });
     }
-
+const name = document.getElementById('name-input').value; // مثال على إدخال الاسم
+localStorage.setItem('receiverName', name);
     // ✅ عند تحميل الصفحة، نضيف نقطة وهمية في السجل
     history.pushState(null, null, location.href);
 
