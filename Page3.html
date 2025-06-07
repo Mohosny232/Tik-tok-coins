@@ -139,20 +139,21 @@
       top: 19px;
     }
 
-    .dot1 {
+.dot1 {
   background-color: #ff0050;
   left: 0;
   animation: orbit-left 1s ease-in-out infinite;
-  z-index: 1;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.4); /* ظل ناعم داخلي */
+  z-index: 2;
 }
 
 .dot2 {
   background-color: #00f2ea;
   right: 0;
   animation: orbit-right 1s ease-in-out infinite;
-  z-index: 2;
-  box-shadow: inset -4px 4px 8px rgba(0, 0, 0, 0.5); /* ← ظل داخلي أسود */
-      }
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.4); /* نفس الظل */
+  z-index: 1;
+}
 
     @keyframes orbit-left {
       0% { transform: translateX(0); }
