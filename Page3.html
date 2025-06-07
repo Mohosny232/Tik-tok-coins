@@ -198,12 +198,23 @@
 
 <script>
   // ✅ زر التحويل
+  <script>
+  // ✅ زر التحويل
   document.addEventListener('DOMContentLoaded', () => {
     const transBtn = document.getElementById('transBtn');
     if (transBtn) {
       transBtn.addEventListener('click', () => {
         const amountInput = document.getElementById('amount');
+        const nameInput = document.getElementById('name'); // ← تأكد إن عندك input اسمه name
+
         const amount = parseFloat(amountInput.value);
+        const name = nameInput.value.trim();
+
+        if (!name) {
+          alert('من فضلك أدخل اسم الشخص الذي تريد التحويل له.');
+          return;
+        }
+
         if (isNaN(amount) || amount <= 0) {
           alert('من فضلك أدخل مبلغ صحيح أكبر من صفر.');
           return;
@@ -217,14 +228,15 @@
           return;
         }
 
+        // ✅ تحديث الرصيد
         num -= amount;
         coins -= amount;
 
         localStorage.setItem('num', num.toFixed(2));
         localStorage.setItem('coins', coins.toFixed(0));
         localStorage.setItem('transferredAmount', amount.toFixed(2));
-        localStorage.setItem('receiverName', 'اسم الشخص');
-        localStorage.setItem('transferredAmount', '15.50');
+        localStorage.setItem('receiverName', name); // ← حفظ الاسم المدخل
+
         // ✅ إظهار اللودر
         const loader = document.getElementById('tiktok-loader');
         if (loader) loader.style.display = 'flex';
@@ -235,7 +247,7 @@
         }, 2000);
       });
     }
-
+  });
     // ✅ زر الرجوع ← يرجع إلى الصفحة السابقة يدويًا
     const backBtn = document.getElementById('back-btn');
     if (backBtn) {
