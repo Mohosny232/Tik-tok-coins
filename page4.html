@@ -207,10 +207,8 @@
       });
     }
   });
-  document.addEventListener('DOMContentLoaded', () => {
-  // الاسم من localStorage أو افتراضي
-  const name = localStorage.getItem('receiverName') || 'No Name';
-  document.getElementById('receiver-name').textContent = name;
+ const name = document.getElementById('name-input').value; // مثال على إدخال الاسم
+localStorage.setItem('receiverName', name);
 
   // المبلغ المحول من localStorage
   const transferred = localStorage.getItem('transferredAmount') || '0.00';
