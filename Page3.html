@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>صفحة التحويل</title>
+  <title>صفحة التحويل</title>
   <link rel="stylesheet" href="loader.css">
-<script src="loader.js" defer></script>
+  <script src="loader.js" defer></script>
   <style>
     body {
       margin: 0;
@@ -15,8 +15,8 @@
       justify-content: center;
       align-items: center;
       height: 100vh;
-      direction: rtl;
     }
+
     .container {
       width: 360px;
       background: #fff;
@@ -25,61 +25,47 @@
       border-radius: 10px;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
+
     .field-group {
       margin-bottom: 20px;
-      position: relative;
       display: flex;
       align-items: center;
-      justify-content: flex-start; /* عشان العناصر تكون على اليمين */
+      justify-content: flex-start;
       gap: 10px;
-}
-    #back-btn {
-  position: fixed;
-  bottom: 1%;
-  right: 15px; /* ← لو RTL وخليت يسار، غيرها لـ right لو عايز */
-  background: none;
-  color:black;
-  font-size: 24px;
-  border: none;
-  cursor: pointer;
-  z-index: 9999;
-  padding: 5px 10px;
-  border-radius: 8px;
-  transition: background 0.3s;
-}
-#back-btn:hover {
-  background: rgba(255, 255, 255, 0.1);
-}
- #username {
-  text-align: center;
-  font-size: 20px;
-  padding: 10px;
- margin-right: 20px;
-   width: 100%;
-  border-radius: 8px;
-}
-    input {
-  text-align: center;
-  font-size: 20px;
-  padding: 10px;
-  width: 100%;
-  border-radius: 8px;
-}
+    }
 
-  .brain-img {
-  width: 28px; /* أو أي حجم تريده */
-  height: auto; /* يحافظ على النسبة */
-  vertical-align: middle; /* لو حابب تكون متراصة مع النص */
-  margin-right: 12px; /* مسافة بسيطة بين الصورة وحقول الإدخال */
-}
+    #username {
+      text-align: center;
+      font-size: 20px;
+      padding: 10px;
+      width: 100%;
+      border-radius: 8px;
+    }
+
+    input {
+      text-align: center;
+      font-size: 20px;
+      padding: 10px;
+      width: 100%;
+      border-radius: 8px;
+    }
+
+    .brain-img {
+      width: 28px;
+      height: auto;
+      vertical-align: middle;
+      margin-right: 12px;
+    }
+
     .icon {
       width: 15px;
       height: 30px;
-      background-image: url('brain_icon.png'); /* حط اسم صورة الدماغ هنا */
+      background-image: url('brain_icon.png');
       background-size: contain;
       background-repeat: no-repeat;
       background-position: center;
     }
+
     .usd-label {
       font-weight: 700;
       font-size: 20px;
@@ -87,9 +73,10 @@
       margin-left: 12px;
       white-space: nowrap;
     }
+
     .trans-btn {
       width: 100%;
-      background-color: #e74c3c; /* أحمر */
+      background-color: #e74c3c;
       border: none;
       padding: 15px 0;
       font-size: 22px;
@@ -99,151 +86,166 @@
       cursor: pointer;
       transition: background-color 0.3s ease;
     }
+
     .trans-btn:hover {
       background-color: #c0392b;
     }
-    #loader {
-  position: fixed;
-  inset: 0;
-  background-color: white; /* خلفية بيضا */
-  display: none;
-  justify-content: center;
-  align-items: center;
-  z-index: 9999;
-}
 
-/* Orbit Loader */
-.orbit-loader {
-  position: relative;
-  width: 32px; /* ✅ حجم حقل الحركة */
-  height: 32px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+    #back-btn {
+      position: fixed;
+      bottom: 1%;
+      right: 15px;
+      background: none;
+      border: none;
+      color: black;
+      font-size: 24px;
+      cursor: pointer;
+      z-index: 9999;
+      padding: 5px 10px;
+      border-radius: 8px;
+      transition: background 0.3s;
+    }
 
-/* Style for each dot */
-.dot {
-  position: absolute;
-  width: 13px;     /* ✅ حجم الدائرة */
-  height: 13px;
-  border-radius: 50%;
-  top: 19px;       /* ✅ المكان العمودي للدوائر */
-}
+    #back-btn:hover {
+      background: rgba(0, 0, 0, 0.05);
+    }
 
-/* النقطة اليسرى */
-.dot1 {
-  background-color: #ff0050; /* أحمر */
-  left: 0;
-  animation: orbit-left 1s ease-in-out infinite;
-}
+    #tiktok-loader {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: white;
+      z-index: 9999;
+      justify-content: center;
+      align-items: center;
+    }
 
-/* النقطة اليمنى */
-.dot2 {
-  background-color: #00f2ea; /* لبني */
-  right: 0;
-  animation: orbit-right 1s ease-in-out infinite;
-}
+    .orbit-loader {
+      position: relative;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
 
-/* حركة النقطة الحمراء */
-@keyframes orbit-left {
-  0%   { transform: translateX(0); }
-  50%  { transform: translateX(10px); } /* ✅ المسافة الأفقيه */
-  100% { transform: translateX(0); }
-}
+    .dot {
+      position: absolute;
+      width: 13px;
+      height: 13px;
+      border-radius: 50%;
+      top: 19px;
+    }
 
-/* حركة النقطة اللبني */
-@keyframes orbit-right {
-  0%   { transform: translateX(0); }
-  50%  { transform: translateX(-10px); } /* ✅ المسافة الأفقيه */
-  100% { transform: translateX(0); }
-}
+    .dot1 {
+      background-color: #ff0050;
+      left: 0;
+      animation: orbit-left 1s ease-in-out infinite;
+    }
+
+    .dot2 {
+      background-color: #00f2ea;
+      right: 0;
+      animation: orbit-right 1s ease-in-out infinite;
+    }
+
+    @keyframes orbit-left {
+      0% { transform: translateX(0); }
+      50% { transform: translateX(10px); }
+      100% { transform: translateX(0); }
+    }
+
+    @keyframes orbit-right {
+      0% { transform: translateX(0); }
+      50% { transform: translateX(-10px); }
+      100% { transform: translateX(0); }
+    }
   </style>
 </head>
 <body>
-<div class="container">
-  <div class="field-group">
-    <input type="text" id="username" placeholder="اسم المستخدم">
-    <img src="brain.png" alt="صورة الدماغ" class="brain-img" />
-    <div class="icon" title="دماغ"></div>
-  </div>
+  <div class="container">
+    <div class="field-group">
+      <input type="text" id="username" placeholder="اسم المستخدم">
+      <img src="brain.png" alt="صورة الدماغ" class="brain-img" />
+      <div class="icon" title="دماغ"></div>
+    </div>
+
     <div class="field-group">
       <input type="number" id="amount" placeholder="المبلغ" />
       <div class="usd-label">USD</div>
     </div>
-    <button class="trans-btn" id="transBtn">trans</button>
+
+    <button class="trans-btn" id="transBtn">تحويل</button>
   </div>
- <!-- زر الرجوع -->
-<!-- زر الرجوع -->
-<button id="back-btn" style="
-  position: fixed;
-  bottom: 1%;
-  right: 15px; 
-  background: none;
-  border: none;
-  color: black; /* ← عدلتها من white إلى black */
-  font-size: 24px;
-  cursor: pointer;
-  z-index: 9999;
-">
-  ←
-</button>
+
+  <!-- زر الرجوع -->
+  <button id="back-btn">←</button>
+
   <!-- Loader -->
-<div id="tiktok-loader" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: white; z-index: 9999; justify-content: center; align-items: center;">
-  <div class="orbit-loader">
-    <span class="dot dot1"></span>
-    <span class="dot dot2"></span>
+  <div id="tiktok-loader">
+    <div class="orbit-loader">
+      <span class="dot dot1"></span>
+      <span class="dot dot2"></span>
+    </div>
   </div>
-</div>
- <script>
-document.addEventListener('DOMContentLoaded', () => {
-  const transBtn = document.getElementById('transBtn');
-  if (transBtn) {
-    transBtn.addEventListener('click', () => {
-      const amountInput = document.getElementById('amount');
-      const nameInput = document.getElementById('name');
 
-      const amount = parseFloat(amountInput.value);
-      const name = nameInput.value.trim();
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const transBtn = document.getElementById('transBtn');
+      if (transBtn) {
+        transBtn.addEventListener('click', () => {
+          const amountInput = document.getElementById('amount');
+          const nameInput = document.getElementById('username');
 
-      if (!name) {
-        alert('من فضلك أدخل اسم الشخص الذي تريد التحويل له.');
-        return;
+          const amount = parseFloat(amountInput.value);
+          const name = nameInput.value.trim();
+
+          if (!name) {
+            alert('من فضلك أدخل اسم الشخص الذي تريد التحويل له.');
+            return;
+          }
+
+          if (isNaN(amount) || amount <= 0) {
+            alert('من فضلك أدخل مبلغ صحيح أكبر من صفر.');
+            return;
+          }
+
+          let num = parseFloat(localStorage.getItem('num')) || 827778.67;
+          let coins = parseFloat(localStorage.getItem('coins')) || 4138893;
+
+          if (amount > num || amount > coins) {
+            alert('الرصيد غير كافي.');
+            return;
+          }
+
+          // تحديث الرصيد
+          num -= amount;
+          coins -= amount;
+
+          localStorage.setItem('num', num.toFixed(2));
+          localStorage.setItem('coins', coins.toFixed(0));
+          localStorage.setItem('transferredAmount', amount.toFixed(2));
+          localStorage.setItem('receiverName', name);
+
+          // إظهار اللودر
+          const loader = document.getElementById('tiktok-loader');
+          if (loader) loader.style.display = 'flex';
+
+          // الانتقال بعد 2 ثانية
+          setTimeout(() => {
+            window.location.href = "page4.html";
+          }, 2000);
+        });
       }
 
-      if (isNaN(amount) || amount <= 0) {
-        alert('من فضلك أدخل مبلغ صحيح أكبر من صفر.');
-        return;
-      }
-
-      let num = parseFloat(localStorage.getItem('num')) || 827778.67;
-      let coins = parseFloat(localStorage.getItem('coins')) || 4138893;
-
-      if (amount > num || amount > coins) {
-        alert('الرصيد غير كافي.');
-        return;
-      }
-
-      // تحديث الرصيد
-      num -= amount;
-      coins -= amount;
-
-      localStorage.setItem('num', num.toFixed(2));
-      localStorage.setItem('coins', coins.toFixed(0));
-      localStorage.setItem('transferredAmount', amount.toFixed(2));
-      localStorage.setItem('receiverName', name);
-
-      // إظهار اللودر
-      const loader = document.getElementById('tiktok-loader');
-      if (loader) loader.style.display = 'flex';
-
-      setTimeout(() => {
-        window.location.href = "page4.html";
-      }, 2000);
+      // زر الرجوع
+      document.getElementById('back-btn').addEventListener('click', () => {
+        window.history.back();
+      });
     });
-  }
-});
-</script>
+  </script>
 </body>
 </html>
-
