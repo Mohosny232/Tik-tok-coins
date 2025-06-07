@@ -195,17 +195,14 @@
     <span class="dot dot2"></span>
   </div>
 </div>
-
-<script>
-  // ✅ زر التحويل
-
-  // ✅ زر التحويل
+ <script>
   document.addEventListener('DOMContentLoaded', () => {
+    // ✅ زر التحويل
     const transBtn = document.getElementById('transBtn');
     if (transBtn) {
       transBtn.addEventListener('click', () => {
         const amountInput = document.getElementById('amount');
-        const nameInput = document.getElementById('name'); // ← تأكد إن عندك input اسمه name
+        const nameInput = document.getElementById('name'); // تأكد أن input عنده id="name"
 
         const amount = parseFloat(amountInput.value);
         const name = nameInput.value.trim();
@@ -235,20 +232,20 @@
         localStorage.setItem('num', num.toFixed(2));
         localStorage.setItem('coins', coins.toFixed(0));
         localStorage.setItem('transferredAmount', amount.toFixed(2));
-        localStorage.setItem('receiverName', name); // ← حفظ الاسم المدخل
+        localStorage.setItem('receiverName', name); // ← حفظ الاسم
 
         // ✅ إظهار اللودر
         const loader = document.getElementById('tiktok-loader');
         if (loader) loader.style.display = 'flex';
 
-        // ✅ تأخير الانتقال لمدة ثانيتين
+        // ✅ الانتقال بعد ثانيتين
         setTimeout(() => {
-          window.location.href = "page4.html"; // ← الصفحة التالية بعد التحويل
+          window.location.href = "page4.html"; // ← وجهة التحويل
         }, 2000);
-      }
-    });
-  });
-    // ✅ زر الرجوع ← يرجع إلى الصفحة السابقة يدويًا
+      });
+    }
+
+    // ✅ زر الرجوع
     const backBtn = document.getElementById('back-btn');
     if (backBtn) {
       backBtn.addEventListener('click', () => {
@@ -256,16 +253,13 @@
         if (loader) loader.style.display = 'flex';
 
         setTimeout(() => {
-          window.location.href = "page2.html"; // ← عدّل حسب الصفحة الأساسية
+          window.location.href = "page2.html"; // ← عدّل حسب الصفحة المطلوبة
         }, 2000);
       });
     }
-const name = document.getElementById('name-input').value; // مثال على إدخال الاسم
-localStorage.setItem('receiverName', name);
-    // ✅ عند تحميل الصفحة، نضيف نقطة وهمية في السجل
-    history.pushState(null, null, location.href);
 
-    // ✅ التعامل مع زر الرجوع في المتصفح
+    // ✅ زر الرجوع من المتصفح
+    history.pushState(null, null, location.href);
     let backHandled = false;
     window.addEventListener('popstate', () => {
       if (backHandled) return;
@@ -282,6 +276,6 @@ localStorage.setItem('receiverName', name);
       }
     });
   });
-</script> 
+</script>
 </body>
-</html>
+</html> 
