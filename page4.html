@@ -79,8 +79,8 @@
 .info-box {
   position: fixed;
   top: 230px;
-  right: -10px;
-  background: white;
+  right: 0; /* ← تلزق على طرف الشاشة */
+  background: transparent; /* ← إزالة الخلفية البيضاء */
   border-radius: 12px;
   padding: 12px;
   font-family: 'Tajawal', sans-serif;
@@ -93,9 +93,7 @@
 
 .info-labels {
   text-align: left;
-}
-
-
+  }
   /* نغلف الصفحة في div له أنميشن */
   #page-container {
     transition: transform 0.5s ease, opacity 0.5s ease;
