@@ -150,18 +150,26 @@
   z-index: 1;
 }
 
-/* ✨ الظل الأسود داخل dot1 */
-.dot1::after {
+.dot2::before {
   content: "";
   position: absolute;
-  width: 100%;
-  height: 100%;
+  width: 5px;
+  height: 5px;
+  background-color: black;
   border-radius: 50%;
-  background: radial-gradient(circle at center, rgba(0, 0, 0, 0.85), transparent 100%);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
   opacity: 0;
-  transition: opacity 0.1s ease-in-out;
+  animation: dot-shadow-blink 1s ease-in-out infinite;
 }
-
+@keyframes dot-shadow-blink {
+  0% { opacity: 0; }
+  45% { opacity: 1; }  /* تبدأ تظهر عند نص التقاطع */
+  55% { opacity: 1; }  /* وتفضل شويه */
+  100% { opacity: 0; }
+}
     @keyframes orbit-left {
       0% { transform: translateX(0); }
       50% { transform: translateX(10px); }
