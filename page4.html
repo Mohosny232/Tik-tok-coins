@@ -77,19 +77,16 @@
   z-index: 0;
 }
 .info-box {
+.info-box {
   position: fixed;
   top: 230px;
-  right: 0;
-  background: transparent; /* بدون خلفية */
-  padding: 0 12px; /* padding بسيط يمين وشمال */
+  right: 10px; /* لاصق في الشاشة */
   font-family: 'Tajawal', sans-serif;
   font-size: 14px;
-  color: #000; /* أو gray لو محتاج ناعم */
-  line-height: 2;
-  z-index: 9999;
-  display: flex;
-  flex-direction: column;
+  color: #000;
   text-align: right;
+  line-height: 1.8; /* ← المسافة بين الأسطر */
+  z-index: 9999;
 }
   /* نغلف الصفحة في div له أنميشن */
   #page-container {
