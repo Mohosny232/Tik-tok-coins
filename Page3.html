@@ -143,15 +143,16 @@
   background-color: #ff0050;
   left: 0;
   animation: orbit-left 1s ease-in-out infinite;
-  box-shadow: 0 0 8px rgba(255, 0, 80, 0.6);
+  z-index: 1;
 }
 
 .dot2 {
   background-color: #00f2ea;
   right: 0;
   animation: orbit-right 1s ease-in-out infinite;
-  mix-blend-mode: lighten; /* ← يسمح للنقطة الحمراء بالظهور من تحت */
-}
+  z-index: 2;
+  box-shadow: inset -4px 4px 8px rgba(0, 0, 0, 0.5); /* ← ظل داخلي أسود */
+      }
 
     @keyframes orbit-left {
       0% { transform: translateX(0); }
