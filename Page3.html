@@ -110,24 +110,22 @@
       background: rgba(0, 0, 0, 0.05);
     }
 #tiktok-loader {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: white;
-      z-index: 9999;
-      justify-content: center;
-      align-items: center;
-    }
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: white;
+  z-index: 9999;
+  justify-content: center;
+  align-items: center;
+}
+
 .orbit-loader {
   position: relative;
   width: 32px;
   height: 32px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .dot {
@@ -135,7 +133,7 @@
   width: 13px;
   height: 13px;
   border-radius: 50%;
-  top: 19px;
+  top: 9px;
 }
 
 .dot1 {
@@ -152,24 +150,17 @@
   z-index: 1;
 }
 
-/* هنا نضيف ظل داخلي للنقطة اللي قدام */
+/* ✨ الظل الأسود داخل dot1 */
 .dot1::after {
-  content: '';
+  content: "";
   position: absolute;
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  background: radial-gradient(circle at center, rgba(0,0,0,0.35), transparent 70%);
+  background: radial-gradient(circle at center, rgba(0, 0, 0, 0.35), transparent 70%);
   opacity: 0;
-  transition: opacity 0.2s;
-  pointer-events: none;
+  transition: opacity 0.1s ease-in-out;
 }
-
-/* لما يكونوا قريبين من بعض، نظهر الظل */
-.orbit-loader:hover .dot1::after {
-  opacity: 1;
-  }
-    
 
     @keyframes orbit-left {
       0% { transform: translateX(0); }
@@ -266,6 +257,34 @@
         window.history.back();
       });
     });
+  
+  const dot1 = document.querySelector('.dot1');
+  const dot2 = document.querySelector('.dot2');
+
+  function checkDistance() {
+    const rect1 = dot1.getBoundingClientRect();
+    const rect2 = dot2.getBoundingClientRect();
+
+    const dx = rect1.left - rect2.left;
+    const dy = rect1.top - rect2.top;
+    const distance = Math.sqrt(dx * dx + dy * dy);
+
+    if (distance < 14) {
+      dot1.classList.add('show-shadow');
+    } else {
+      dot1.classList.remove('show-shadow');
+    }
+
+    requestAnimationFrame(checkDistance);
+  }
+
+  // لما نحط الكلاس ده، يبان الظل
+  const style = document.createElement("style");
+  style.innerHTML = `.dot1.show-shadow::after { opacity: 1 !important; }`;
+  document.head.appendChild(style);
+
+  // نبدأ المتابعة
+  requestAnimationFrame(checkDistance);
   </script>
 </body>
 </html>
