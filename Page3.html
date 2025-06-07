@@ -121,29 +121,27 @@
       justify-content: center;
       align-items: center;
     }
+.orbit-loader {
+  position: relative;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-    .orbit-loader {
-      position: relative;
-      width: 32px;
-      height: 32px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .dot {
-      position: absolute;
-      width: 13px;
-      height: 13px;
-      border-radius: 50%;
-      top: 19px;
-    }
+.dot {
+  position: absolute;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  top: 19px;
+}
 
 .dot1 {
   background-color: #ff0050;
   left: 0;
   animation: orbit-left 1s ease-in-out infinite;
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.4); /* ظل ناعم داخلي */
   z-index: 2;
 }
 
@@ -151,9 +149,27 @@
   background-color: #00f2ea;
   right: 0;
   animation: orbit-right 1s ease-in-out infinite;
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.4); /* نفس الظل */
   z-index: 1;
 }
+
+/* هنا نضيف ظل داخلي للنقطة اللي قدام */
+.dot1::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: radial-gradient(circle at center, rgba(0,0,0,0.35), transparent 70%);
+  opacity: 0;
+  transition: opacity 0.2s;
+  pointer-events: none;
+}
+
+/* لما يكونوا قريبين من بعض، نظهر الظل */
+.orbit-loader:hover .dot1::after {
+  opacity: 1;
+  }
+    
 
     @keyframes orbit-left {
       0% { transform: translateX(0); }
