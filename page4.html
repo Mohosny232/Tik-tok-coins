@@ -209,9 +209,10 @@
       });
     }
 
-    // ✅ عرض الاسم المحفوظ من localStorage
-    const name = localStorage.getItem('receiverName') || 'No Name';
-    document.getElementById('receiver-name').textContent = name;
+
+  // استرجاع الاسم من localStorage
+  const receiverName = localStorage.getItem('receiverName') || 'غير معروف';
+  document.getElementById('receiver-name').textContent = receiverName;
 
     // ✅ عرض المبلغ المحول
     const transferred = localStorage.getItem('transferredAmount') || '0.00';
