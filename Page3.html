@@ -110,7 +110,7 @@
       background: rgba(0, 0, 0, 0.05);
     }
 #tiktok-loader {
-  display: none;
+  display: flex;
   position: fixed;
   top: 0;
   left: 0;
@@ -126,6 +126,9 @@
   position: relative;
   width: 32px;
   height: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .dot {
@@ -133,23 +136,24 @@
   width: 13px;
   height: 13px;
   border-radius: 50%;
-  top: 9px;
+  top: 19px;
 }
 
 .dot1 {
   background-color: #ff0050;
   left: 0;
+  z-index: 1;
   animation: orbit-left 1s ease-in-out infinite;
-  z-index: 2;
 }
 
 .dot2 {
   background-color: #00f2ea;
   right: 0;
+  z-index: 2;
   animation: orbit-right 1s ease-in-out infinite;
-  z-index: 1;
 }
 
+/* النقطة السوداء داخل السماوي */
 .dot2::before {
   content: "";
   position: absolute;
@@ -160,27 +164,28 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 2;
   opacity: 0;
   animation: dot-shadow-blink 1s ease-in-out infinite;
 }
-@keyframes dot-shadow-blink {
-  0% { opacity: 0; }
-  45% { opacity: 1; }  /* تبدأ تظهر عند نص التقاطع */
-  55% { opacity: 1; }  /* وتفضل شويه */
-  100% { opacity: 0; }
-}
-    @keyframes orbit-left {
-      0% { transform: translateX(0); }
-      50% { transform: translateX(10px); }
-      100% { transform: translateX(0); }
-    }
 
-    @keyframes orbit-right {
-      0% { transform: translateX(0); }
-      50% { transform: translateX(-10px); }
-      100% { transform: translateX(0); }
-    }
+/* حركات */
+@keyframes orbit-left {
+  0% { transform: translateX(0); }
+  50% { transform: translateX(10px); }
+  100% { transform: translateX(0); }
+}
+
+@keyframes orbit-right {
+  0% { transform: translateX(0); }
+  50% { transform: translateX(-10px); }
+  100% { transform: translateX(0); }
+}
+
+@keyframes dot-shadow-blink {
+  0%, 40% { opacity: 0; }
+  45%, 55% { opacity: 1; }
+  60%, 100% { opacity: 0; }
+}
 
   </style>
 </head>
