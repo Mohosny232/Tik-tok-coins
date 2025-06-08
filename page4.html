@@ -43,9 +43,7 @@ html, body {
   z-index: 2;
 }
 
-  .page-content {
-    visibility: hidden;
-  }
+
 img {
   max-width: 100%;
   height: auto;
@@ -118,7 +116,9 @@ img {
   line-height: 3.3; /* ← المسافة بين الأسطر */
   z-index: 9999;
 }
-
+body {
+  visibility: hidden; /* نخفي الصفحة مؤقتًا */
+  }
 
   /* مؤثر الرجوع — انسحاب من الشمال */
   .slide-out-left {
@@ -170,9 +170,7 @@ img {
     if (page) {
       page.classList.add('slide-out-left');
     }
-window.onload = () => {
-  document.querySelector(".page-wrapper").style.visibility = "visible";
-};
+
     setTimeout(() => {
       history.back();
     }, 500);
@@ -218,17 +216,11 @@ document.documentElement.scrollTop = 0;
     const randomId = Math.floor(10000000000000000 + Math.random() * 90000000000000000).toString();
     document.getElementById('transaction-id').textContent = randomId;
   }); 
-  window.scrollTo(0, 0);
+  
   const image = document.querySelector('.wrapper img');
-  image.addEventListener('load', () => {
-    document.getElementById('page-container').style.visibility = 'visible';
-  });
-  window.addEventListener("load", function () {
-    setTimeout(function () {
-      document.querySelector(".page-content").style.visibility = "visible";
-    }, 100); // تأخير بسيط جداً يكفي لتهيئة العناصر
-  });
-// تمنع أي حركة أو نزول تلقائي
+image.addEventListener('load', () => {
+  document.body.style.visibility = 'visible'; // ← دا هو الحل السليم
+});
 </script>
 </body>
       </html>
