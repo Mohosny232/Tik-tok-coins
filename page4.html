@@ -110,13 +110,9 @@ html, body {
   line-height: 3.3; /* ← المسافة بين الأسطر */
   z-index: 9999;
 }
-.info-box,
-.amount-display {
+
+  /#page-container {
   visibility: hidden;
-}
-  /* نغلف الصفحة في div له أنميشن */
-  #page-container {
-    transition: transform 0.5s ease, opacity 0.5s ease;
   }
 
   /* مؤثر الرجوع — انسحاب من الشمال */
@@ -223,7 +219,11 @@ html, body {
     document.getElementById('transaction-id').textContent = randomId;
   }); 
   
-  
+  const image = document.querySelector('.wrapper img');
+  image.addEventListener('load', () => {
+    document.getElementById('page-container').style.visibility = 'visible';
+  });
+
 </script>
 </body>
       </html>
