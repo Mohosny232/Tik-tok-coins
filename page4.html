@@ -43,6 +43,14 @@ html, body {
   z-index: 2;
 }
 
+  .page-content {
+    visibility: hidden;
+  }
+img {
+  max-width: 100%;
+  height: auto;
+}
+
 .currency-label {
           /* خط تخين */
   font-size: 16px;
@@ -222,7 +230,12 @@ document.documentElement.scrollTop = 0;
   image.addEventListener('load', () => {
     document.getElementById('page-container').style.visibility = 'visible';
   });
- // تمنع أي حركة أو نزول تلقائي
+  window.addEventListener("load", function () {
+    setTimeout(function () {
+      document.querySelector(".page-content").style.visibility = "visible";
+    }, 100); // تأخير بسيط جداً يكفي لتهيئة العناصر
+  });
+// تمنع أي حركة أو نزول تلقائي
 </script>
 </body>
       </html>
