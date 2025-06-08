@@ -151,15 +151,11 @@ img {
 <!-- زرالرجوع -->
 <!-- زر الرجوع أسفل يمين -->
   <button id="back-btn">←</button>
-<script>
-  // ✅ عرض المبلغ المحول
-  const displayElement = document.getElementById('transferredDisplay');
-  const storedAmount = localStorage.getItem('transferredAmount') || "0.00";
 
-  const formattedAmount = parseFloat(storedAmount).toLocaleString('en-US', {
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2
-  });
+<script>
+  window.onload = function () {
+    document.body.style.visibility = 'visible';
+  };
 
   displayElement.textContent = formattedAmount;
 
@@ -179,7 +175,9 @@ img {
     if (page) {
       page.classList.add('slide-out-left');
     }
-
+window.onload = () => {
+  document.querySelector(".page-wrapper").style.visibility = "visible";
+};
     setTimeout(() => {
       history.back();
     }, 500);
