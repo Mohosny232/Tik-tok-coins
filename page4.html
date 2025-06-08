@@ -4,20 +4,21 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
 <title>الصفحة الرابعة</title>
-<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet" />
 <style>
 html, body {
   height: 100%;
   margin: 0;
   padding: 0;
   overflow: hidden; /* منع التحرك */
+  visibility: hidden; /* نخفي الصفحة مؤقتًا */
 }
 
-  body {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start; /* نبدأ من فوق */
-  }
+body {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* نبدأ من فوق */
+}
 
 #page-container {
   transform: scale(0.96);
@@ -25,13 +26,14 @@ html, body {
   transition: transform 0.5s ease, opacity 0.5s ease;
   opacity: 1; /* ← خليها موجودة */
 }
-  .amount-display {
+
+.amount-display {
   position: absolute;
   top: 18%;
   left: 55%;
   transform: translate(-50%, -50%);
   font-size: 50px;
-  font-weight: 700;  
+  font-weight: 700;
   font-family: 'Tajawal', sans-serif;
   color: black;
   background-color: white; /* خلفية بيضاء */
@@ -43,19 +45,19 @@ html, body {
   z-index: 2;
 }
 
-
 img {
   max-width: 100%;
   height: auto;
+  display: block;
 }
 
 .currency-label {
-          /* خط تخين */
   font-size: 16px;
   margin-right: 3px;
   position: relative;
-  top: 5px;                 /* نزول الكلمة تحت الرقم */
+  top: 5px; /* نزول الكلمة تحت الرقم */
 }
+
 .transaction-values {
   position: fixed;
   top: 150px;
@@ -70,7 +72,8 @@ img {
   line-height: 2;
   z-index: 1000;
 }
-  #back-btn {
+
+#back-btn {
   position: fixed;
   bottom: 20px; /* ← هنا التعديل المهم */
   right: 15px;
@@ -84,8 +87,9 @@ img {
   padding: 5px 10px;
   border-radius: 8px;
   transition: background 0.3s;
-  }
-  .wrapper {
+}
+
+.wrapper {
   position: relative;
   width: 100vw;
   height: 100vh;
@@ -95,132 +99,142 @@ img {
 .wrapper img {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* غيّرنا من contain إلى cover */
+  object-fit: cover;
   position: absolute;
   top: 0;
   left: 0;
   z-index: 0;
 }
-  img {
-  display: block;
-  }
+
 .info-box {
   position: fixed;
   top: 283px;
-  right: 23px; /* لاصق في الشاشة */
+  right: 23px;
   font-family: 'Tajawal', sans-serif;
   font-size: 14px;
   color: #000;
-  font-weight: 550;          /* ← خليناه عريض */           /* ← مسافة بين السطور */
+  font-weight: 600; /* بدل 550 */
   text-align: right;
-  line-height: 3.3; /* ← المسافة بين الأسطر */
+  line-height: 3.3;
   z-index: 9999;
 }
-body {
-  visibility: hidden; /* نخفي الصفحة مؤقتًا */
-  }
 
-  /* مؤثر الرجوع — انسحاب من الشمال */
-  .slide-out-left {
-    transform: translateX(-100%);
-    opacity: 0;
-  }  
+/* مؤثر الرجوع — انسحاب من الشمال */
+.slide-out-left {
+  transform: translateX(-100%);
+  opacity: 0;
+}
+
+/* مثال للودر */
+#tiktok-loader {
+  display: none;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background: rgba(255,255,255,0.8);
+  justify-content: center;
+  align-items: center;
+  z-index: 99999;
+  font-family: 'Tajawal', sans-serif;
+  font-size: 20px;
+  color: black;
+}
 </style>
 </head>
 <body>
-  <div id="page-container">
-    <div class="wrapper">
-      <img src="hoosny4.jpg" alt="الصفحة الرابعة" />
-<div class="amount-display">
-  <span id="transferredDisplay">0.00</span>
-  <span class="currency-label">USD</span>
-</div> <!-- ← دا مكان نهاية الـ amount-display الصح -->
+<div id="tiktok-loader">...جارٍ التحميل</div>
 
-<!-- الآن نضع info-box هنا -->
-<div class="info-box">
-  <div class="info-values">
-    <div id="receiver-name" class="text-right text-lg font-semibold">اسم الشخص هنا</div>
-    <div>PayPal</div> 
-    <div>USD 0.02</div>
-    <div id="amount-received">--</div>
-    <div id="withdrawal-time">--</div>
-    <div id="arrival-time">--</div>
-    <div id="transaction-id">--</div>
+<div id="page-container">
+  <div class="wrapper">
+    <img src="hoosny4.jpg" alt="الصفحة الرابعة" />
+    <div class="amount-display">
+      <span id="transferredDisplay">0.00</span>
+      <span class="currency-label">USD</span>
+    </div>
+
+    <div class="info-box">
+      <div class="info-values">
+        <div id="receiver-name" class="text-right text-lg font-semibold">اسم الشخص هنا</div>
+        <div>PayPal</div>
+        <div>USD 0.02</div>
+        <div id="amount-received">--</div>
+        <div id="withdrawal-time">--</div>
+        <div id="arrival-time">--</div>
+        <div id="transaction-id">--</div>
+      </div>
+    </div>
   </div>
 </div>
-<!-- زرالرجوع -->
-<!-- زر الرجوع أسفل يمين -->
-  <button id="back-btn">←</button>
+
+<button id="back-btn">←</button>
 
 <script>
+window.addEventListener('load', () => {
+  history.pushState(null, null, location.href);
+  window.scrollTo(0, 0);
+  document.body.scrollTop = 0;
+  document.documentElement.scrollTop = 0;
+});
 
-  // ✅ منع الرجوع مباشرة
-  window.addEventListener('load', () => {
-    history.pushState(null, null, location.href);
-  });
+let isGoingBack = false;
 
-  let isGoingBack = false;
+window.addEventListener('popstate', () => {
+  if (isGoingBack) return;
+  isGoingBack = true;
 
-  // ✅ عند الضغط على زر الرجوع
-  window.addEventListener('popstate', () => {
-    if (isGoingBack) return;
-    isGoingBack = true;
+  const page = document.getElementById('page-container');
+  if (page) {
+    page.classList.add('slide-out-left');
+  }
 
-    const page = document.getElementById('page-container');
-    if (page) {
-      page.classList.add('slide-out-left');
-    }
+  setTimeout(() => {
+    // بدل history.back() لتجنب حلقة
+    window.location.href = 'index.html'; 
+  }, 500);
+});
 
-    setTimeout(() => {
-      history.back();
-    }, 500);
-  });
-window.scrollTo(0, 0);
-document.body.scrollTop = 0;
-document.documentElement.scrollTop = 0;
-  // ✅ زر الرجوع مع اللودر
-  document.addEventListener('DOMContentLoaded', () => {
-    const backBtn = document.getElementById('back-btn');
-    const loader = document.getElementById('tiktok-loader');
+document.addEventListener('DOMContentLoaded', () => {
+  const backBtn = document.getElementById('back-btn');
+  const loader = document.getElementById('tiktok-loader');
 
-    if (backBtn) {
-      backBtn.addEventListener('click', () => {
-        if (loader) loader.style.display = 'flex';
+  if (backBtn) {
+    backBtn.addEventListener('click', () => {
+      if (loader) loader.style.display = 'flex';
 
-        setTimeout(() => {
-          window.location.href = 'index.html'; // عدل الرابط حسب الحاجة
-        }, 2000);
-      });
-    }
-
+      setTimeout(() => {
+        window.location.href = 'index.html'; // عدل حسب الحاجة
+      }, 2000);
+    });
+  }
 
   // استرجاع الاسم من localStorage
   const receiverName = localStorage.getItem('receiverName') || 'غير معروف';
   document.getElementById('receiver-name').textContent = receiverName;
 
-    // ✅ عرض المبلغ المحول
-    const transferred = localStorage.getItem('transferredAmount') || '0.00';
-    document.getElementById('amount-received').textContent = `USD ${parseFloat(transferred).toFixed(2)}`;
+  // عرض المبلغ المحول
+  const transferred = localStorage.getItem('transferredAmount') || '0.00';
+  document.getElementById('amount-received').textContent = `USD ${parseFloat(transferred).toFixed(2)}`;
 
-    // ✅ وقت السحب (التاريخ الحالي + الوقت)
-    const now = new Date();
-    const withdrawalDate = now.toLocaleDateString('en-GB') + ' ' + now.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
-    document.getElementById('withdrawal-time').textContent = withdrawalDate;
+  // وقت السحب (التاريخ الحالي + الوقت)
+  const now = new Date();
+  const withdrawalDate = now.toLocaleDateString('en-GB') + ' ' + now.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
+  document.getElementById('withdrawal-time').textContent = withdrawalDate;
 
-    // ✅ وقت الوصول (اليوم التالي بنفس الوقت)
-    const arrival = new Date(now);
-    arrival.setDate(now.getDate() + 1);
-    const arrivalDate = arrival.toLocaleDateString('en-GB') + ' ' + now.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
-    document.getElementById('arrival-time').textContent = arrivalDate;
-// ✅ رقم المعاملة العشوائي — رقم فقط
-    const randomId = Math.floor(10000000000000000 + Math.random() * 90000000000000000).toString();
-    document.getElementById('transaction-id').textContent = randomId;
-  }); 
-  
-  const image = document.querySelector('.wrapper img');
+  // وقت الوصول (اليوم التالي بنفس الوقت)
+  const arrival = new Date(now);
+  arrival.setDate(now.getDate() + 1);
+  const arrivalDate = arrival.toLocaleDateString('en-GB') + ' ' + now.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
+  document.getElementById('arrival-time').textContent = arrivalDate;
+
+  // رقم المعاملة العشوائي — رقم فقط
+  const randomId = Math.floor(10000000000000000 + Math.random() * 90000000000000000).toString();
+  document.getElementById('transaction-id').textContent = randomId;
+});
+
+const image = document.querySelector('.wrapper img');
 image.addEventListener('load', () => {
-  document.body.style.visibility = 'visible'; // ← دا هو الحل السليم
+  document.body.style.visibility = 'visible'; // إظهار الصفحة عند تحميل الصورة
 });
 </script>
 </body>
-      </html>
+</html>
