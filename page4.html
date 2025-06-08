@@ -23,6 +23,7 @@ html, body {
   transform: scale(0.95);
   transform-origin: top center;
   transition: transform 0.5s ease, opacity 0.5s ease;
+  opacity: 1; /* ← خليها موجودة */
 }
   .amount-display {
   position: absolute;
@@ -214,7 +215,17 @@ html, body {
 // ✅ رقم المعاملة العشوائي — رقم فقط
     const randomId = Math.floor(10000000000000000 + Math.random() * 90000000000000000).toString();
     document.getElementById('transaction-id').textContent = randomId;
-  }); // ← دي بتقفل DOMContentLoaded
+  }); 
+  window.addEventListener('load', () => {
+  // نؤجل تطبيق التكبير والظهور لحظة بعد التحميل
+  const page = document.getElementById('page-container');
+  page.style.opacity = '0';
+  setTimeout(() => {
+    page.style.opacity = '1';
+    page.style.transform = 'scale(0.85)';
+  }, 50);
+});
+
 </script>
 </body>
       </html>
