@@ -144,7 +144,10 @@ html, body {
   <button id="back-btn">←</button>
 
 <script>
-
+document.addEventListener('DOMContentLoaded', () => {
+  const transferred = localStorage.getItem('transferredAmount') || '0.00';
+  document.getElementById('amount-received').textContent = `USD ${parseFloat(transferred).toFixed(2)}`;
+});
   // ✅ منع الرجوع مباشرة
   window.addEventListener('load', () => {
     history.pushState(null, null, location.href);
@@ -166,9 +169,6 @@ html, body {
       history.back();
     }, 500);
   });
-window.scrollTo(0, 0);
-document.body.scrollTop = 0;
-document.documentElement.scrollTop = 0;
   // ✅ زر الرجوع مع اللودر
   document.addEventListener('DOMContentLoaded', () => {
     const backBtn = document.getElementById('back-btn');
@@ -190,10 +190,7 @@ document.documentElement.scrollTop = 0;
   document.getElementById('receiver-name').textContent = receiverName;
 
     // ✅ عرض المبلغ المحول
-    document.addEventListener('DOMContentLoaded', () => {
-  const transferred = localStorage.getItem('transferredAmount') || '0.00';
-  document.getElementById('amount-received').textContent = `USD ${parseFloat(transferred).toFixed(2)}`;
-});
+    
     // ✅ وقت السحب (التاريخ الحالي + الوقت)
     const now = new Date();
     const withdrawalDate = now.toLocaleDateString('en-GB') + ' ' + now.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
