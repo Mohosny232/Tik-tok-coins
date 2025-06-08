@@ -42,7 +42,13 @@ html, body {
   gap: 5px;
   z-index: 2;
 }
+.amount-display {
+  top: 18% !important;
+}
 
+.info-box {
+  top: 283px !important;
+}
 .currency-label {
           /* خط تخين */
   font-size: 16px;
@@ -223,12 +229,12 @@ html, body {
     const randomId = Math.floor(10000000000000000 + Math.random() * 90000000000000000).toString();
     document.getElementById('transaction-id').textContent = randomId;
   }); 
-  
+  window.scrollTo(0, 0);
   const image = document.querySelector('.wrapper img');
   image.addEventListener('load', () => {
     document.getElementById('page-container').style.visibility = 'visible';
   });
-
+ // تمنع أي حركة أو نزول تلقائي
 </script>
 </body>
       </html>
