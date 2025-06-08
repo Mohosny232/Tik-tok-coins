@@ -7,16 +7,15 @@
   <link rel="stylesheet" href="loader.css">
   <script src="loader.js" defer></script>
   <style>
-    body {
-      margin: 0;
-      background: #fff;
-      font-family: 'Tajawal', sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
-
+ body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  background: #fff;
+  font-family: 'Tajawal', sans-serif;
+  overflow: hidden; /* ✅ يمنع التحريك */
+}
     .container {
       width: 360px;
       background: #fff;
