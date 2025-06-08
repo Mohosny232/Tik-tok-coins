@@ -20,7 +20,7 @@ html, body {
   }
 
 #page-container {
-  transform: scale(0.95);
+  transform: scale(1);
   transform-origin: top center;
   transition: transform 0.5s ease, opacity 0.5s ease;
   opacity: 1; /* ← خليها موجودة */
@@ -216,16 +216,21 @@ html, body {
     const randomId = Math.floor(10000000000000000 + Math.random() * 90000000000000000).toString();
     document.getElementById('transaction-id').textContent = randomId;
   }); 
-  window.addEventListener('load', () => {
-  // نؤجل تطبيق التكبير والظهور لحظة بعد التحميل
-  const page = document.getElementById('page-container');
-  page.style.opacity = '0';
-  setTimeout(() => {
-    page.style.opacity = '1';
-    page.style.transform = 'scale(0.85)';
-  }, 50);
-});
+  
+  const bgImage = document.querySelector('.wrapper img');
+  const infoBox = document.querySelector('.info-box');
+  const amountDisplay = document.querySelector('.amount-display');
 
+  // نخفي العناصر أولاً
+  infoBox.style.visibility = 'hidden';
+  amountDisplay.style.visibility = 'hidden';
+
+  bgImage.onload = () => {
+    // نعرضهم بعد تحميل الصورة
+    infoBox.style.visibility = 'visible';
+    amountDisplay.style.visibility = 'visible';
+  };
+  });
 </script>
 </body>
       </html>
