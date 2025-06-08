@@ -190,7 +190,7 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('receiver-name').textContent = receiverName;
 
     // ✅ عرض المبلغ المحول
-    
+    document.getElementById('transferredDisplay').textContent = parseFloat(transferred).toFixed(2);
     // ✅ وقت السحب (التاريخ الحالي + الوقت)
     const now = new Date();
     const withdrawalDate = now.toLocaleDateString('en-GB') + ' ' + now.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
