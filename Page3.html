@@ -58,26 +58,27 @@ margin: 0;
   border-radius: 6px;
   }
 
-  .input-wrapper {
-  display: flex;
-  align-items: center; /* مركزنا العلامة والرقم عمودياً */
+.input-wrapper {
   position: relative;
+  display: inline-block;
+}
+
+#amountInput {
+  padding-right: 30px; /* مساحة لعلامة الدولار */
+  font-size: 20px;
+  color: black;
+  width: 150px;
 }
 
 .dollar-sign {
-  font-size: 18px;
-  margin-right: 5px; /* المسافة بين الدولار والرقم */
-  transition: all 0.3s ease; /* نضيف transition عشان الحركة تبقى سلسة */
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 20px;
+  color: black;
+  display: none; /* تبدأ مخفية */
 }
-
-#amount {
-  width: auto; /* عشان يغير الحجم حسب الرقم */
-  padding-left: 10px; /* لو حابب تزود المسافة بين الرقم والدولار */
-  font-size: 18px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  padding-right: 5px;
-      }
 
     .brain-img {
       width: 28px;
@@ -222,11 +223,10 @@ margin: 0;
       <div class="icon" title="دماغ"></div>
     </div>
 
-    <div class="field-group">
-  <div class="input-wrapper">
-      <span class="dollar-sign" id="dollarSign">$</span>
-      <input type="number" id="amount" placeholder="Amount" />
-  </div>
+    <div class="input-wrapper">
+  <input type="number" id="amountInput" placeholder="Amount" />
+  <span class="dollar-sign" id="dollarSign">$</span>
+    </div>
  
   <div class="usd-label">USD</div>
     </div>
@@ -297,17 +297,18 @@ margin: 0;
       });
     });
   
-function formatAmount() {
-  const input = document.getElementById("amount");
-  let value = input.value.replace(/[^0-9.]/g, ""); // نمنع أي شيء غير أرقام ونقطة
 
-  if (value) {
-    input.value = value + "$";
+const amountInput = document.getElementById("amountInput");
+const dollarSign = document.getElementById("dollarSign");
+
+amountInput.addEventListener("input", () => {
+  if (amountInput.value.trim() !== "") {
+    dollarSign.style.display = "block";
   } else {
-    input.value = "";
+    dollarSign.style.display = "none";
   }
-}
 });
+
   </script>
 </body>
 </html>
