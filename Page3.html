@@ -49,35 +49,18 @@ margin: 0;
 }
 
 
-}
-#amount {
-  width: 80%;      /* ← عرض أصغر للخانة */
-  height: 35px;      /* ← ارتفاع مضبوط */
-  font-size: 16px;   /* ← حجم الخط جوه الخانة */
-  padding: 5px 10px;
-  border-radius: 6px;
-  }
 
 .input-wrapper {
-  position: relative;
   display: inline-block;
 }
 
 #amountInput {
-  padding-right: 30px; /* مساحة لعلامة الدولار */
   font-size: 20px;
   color: black;
+  padding: 10px;
   width: 150px;
-}
-
-.dollar-sign {
-  position: absolute;
-  right: 10px;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 20px;
-  color: black;
-  display: none; /* تبدأ مخفية */
+  border: 1px solid #ccc;
+  border-radius: 8px;
 }
 
     .brain-img {
@@ -223,10 +206,9 @@ margin: 0;
       <div class="icon" title="دماغ"></div>
     </div>
 
-    <div class="input-wrapper">
-  <input type="number" id="amountInput" placeholder="Amount" />
-  <span class="dollar-sign" id="dollarSign">$</span>
-    </div>
+<div class="input-wrapper">
+  <input type="text" id="amountInput" placeholder="Amount" />
+</div>
  
   <div class="usd-label">USD</div>
     </div>
@@ -297,17 +279,17 @@ margin: 0;
       });
     });
   
+const input = document.getElementById("amountInput");
 
-const amountInput = document.getElementById("amountInput");
-const dollarSign = document.getElementById("dollarSign");
-
-amountInput.addEventListener("input", () => {
-  if (amountInput.value.trim() !== "") {
-    dollarSign.style.display = "block";
+input.addEventListener("input", () => {
+  let value = input.value.replace(/[^\d.]/g, ""); // يسمح بالأرقام والنقطة فقط
+  if (value) {
+    input.value = value + "$";
   } else {
-    dollarSign.style.display = "none";
+    input.value = "";
   }
 });
+
 
   </script>
 </body>
