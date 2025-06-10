@@ -51,17 +51,29 @@ margin: 0;
 
 
 .input-wrapper {
+  position: relative;
   display: inline-block;
 }
 
 #amountInput {
   font-size: 20px;
   color: black;
-  padding: 10px;
+  padding: 10px 35px 10px 10px; /* padding يمين لعلامة الدولار */
   width: 150px;
   border: 1px solid #ccc;
   border-radius: 8px;
 }
+
+.dollar-sign {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 20px;
+  color: black;
+  display: none;
+  pointer-events: none;
+  }
 
     .brain-img {
       width: 28px;
@@ -207,7 +219,8 @@ margin: 0;
     </div>
 
 <div class="input-wrapper">
-  <input type="text" id="amountInput" placeholder="Amount" />
+  <input type="number" id="amountInput" placeholder="Amount" />
+  <span class="dollar-sign" id="dollarSign">$</span>
 </div>
  
   <div class="usd-label">USD</div>
@@ -278,19 +291,16 @@ margin: 0;
         window.history.back();
       });
     });
-  
-const input = document.getElementById("amountInput");
+  const amountInput = document.getElementById("amountInput");
+const dollarSign = document.getElementById("dollarSign");
 
-input.addEventListener("input", () => {
-  let value = input.value.replace(/[^\d.]/g, ""); // يسمح بالأرقام والنقطة فقط
-  if (value) {
-    input.value = value + "$";
+amountInput.addEventListener("input", () => {
+  if (amountInput.value.trim() !== "") {
+    dollarSign.style.display = "block";
   } else {
-    input.value = "";
+    dollarSign.style.display = "none";
   }
 });
-
-
   </script>
 </body>
 </html>
