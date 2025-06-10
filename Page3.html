@@ -41,6 +41,27 @@ margin: 0;
       border-radius: 8px;
     }
 
+.input-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+#amountInput {
+  padding-right: 30px; /* مساحة لعلامة الدولار */
+  font-size: 20px;
+  color: black;
+}
+
+.dollar-sign {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 20px;
+  color: black;
+  display: none; /* مخفية في البداية */
+}
+
     .brain-img {
       width: 28px;
       height: auto;
@@ -185,7 +206,10 @@ margin: 0;
     </div>
 
     <div class="field-group">
+  <div class="input-wrapper">
       <input type="number" id="amount" placeholder="Amount" />
+     <span class="dollar-sign" id="dollarSign">$</span>
+    </div>
       <div class="usd-label">USD</div>
     </div>
 
@@ -254,6 +278,17 @@ margin: 0;
         window.history.back();
       });
     });
+    
+const input = document.getElementById("amountInput");
+const dollar = document.getElementById("dollarSign");
+
+input.addEventListener("input", () => {
+  if (input.value.trim() !== "") {
+    dollar.style.display = "block";
+  } else {
+    dollar.style.display = "none";
+  }
+});
   </script>
 </body>
 </html>
