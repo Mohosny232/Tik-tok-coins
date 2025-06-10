@@ -51,7 +51,7 @@
   position: relative;
 }
 .brain-img {
-  width: 24px; /* تصغير الصورة */
+  width: 28px; /* تصغير الصورة */
   height: auto;
   vertical-align: middle;
   margin-right: 0;
@@ -204,25 +204,27 @@
   </style>
 </head>
 <body>
-  <div class="container">
-    <div class="field-group">
-      <input type="text" id="username" placeholder="UserName">
+<div class="container">
+  <div class="field-group">
+    <input type="text" id="username" placeholder="UserName">
+    <div style="text-align: center;">
       <img src="brain.png" alt="صورة الدماغ" class="brain-img" />
-      <div class="icon" title="دماغ"></div>
-    </div><div class="form-container">
-  <div class="input-group">
-    <label for="amount">Amount</label>
-    <div class="input-wrapper">
-      <input type="number" id="amount" placeholder="Enter amount" />
-      <span class="dollar-sign" id="dollarSign">$</span>
+      <div class="usd-label">USD</div> <!-- USD تحت الصورة -->
     </div>
+    <div class="icon" title="دماغ"></div>
   </div>
-  <div class="usd-label">USD</div>
+
+  <div class="form-container">
+    <div class="input-group">
+
+      <div class="input-wrapper">
+        <input type="number" id="amount" placeholder="Enter amount" />
+        <span class="dollar-sign" id="dollarSign">$</span>
+      </div>
+    </div>
+
   <button class="trans-btn" id="transBtn">Trans</button>
 </div>
-
-  </div>  <!-- زر الرجوع --><button id="back-btn">←</button>
-
   <!-- Loader -->  <div id="tiktok-loader">
     <div class="orbit-loader">
       <span class="dot dot1"></span>
