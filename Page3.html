@@ -58,13 +58,27 @@ margin: 0;
   border-radius: 6px;
   }
 
-  input {
-  width: 130px;
+  .input-wrapper {
+  display: flex;
+  align-items: center; /* مركزنا العلامة والرقم عمودياً */
+  position: relative;
+}
+
+.dollar-sign {
   font-size: 18px;
-  padding: 8px 10px;
-  text-align: left;
-  font-weight: bold;
-  }
+  margin-right: 5px; /* المسافة بين الدولار والرقم */
+  transition: all 0.3s ease; /* نضيف transition عشان الحركة تبقى سلسة */
+}
+
+#amount {
+  width: auto; /* عشان يغير الحجم حسب الرقم */
+  padding-left: 10px; /* لو حابب تزود المسافة بين الرقم والدولار */
+  font-size: 18px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding-right: 5px;
+      }
+
     .brain-img {
       width: 28px;
       height: auto;
@@ -209,8 +223,11 @@ margin: 0;
     </div>
 
     <div class="field-group">
-  <input type="text" id="amount" placeholder="Amount" oninput="formatAmount()" />
-    </div>
+  <div class="input-wrapper">
+      <span class="dollar-sign" id="dollarSign">$</span>
+      <input type="number" id="amount" placeholder="Amount" />
+  </div>
+ 
   <div class="usd-label">USD</div>
     </div>
      
