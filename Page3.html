@@ -48,23 +48,25 @@ margin: 0;
   gap: 10px;
 }
 
-    #amount {
-  width: 80%;      /* ← عرض أصغر للخانة */
-  height: 35px;      /* ← ارتفاع مضبوط */
-  font-size: 16px;   /* ← حجم الخط جوه الخانة */
-  padding: 5px 10px;
-  border-radius: 6px;
-    }
-.input-wrapper {
-  position: relative;
-  display: inline-block;
+    .form-container {
+  width: 90%;
+  max-width: 300px;
+  margin: 30px auto;
+  font-family: 'Tajawal', sans-serif;
 }
 
-#amountInput {
-  font-size: 20px;
-  color: black;
-  padding: 10px 35px 10px 10px; /* padding يمين لعلامة الدولار */
-  width: 150px;
+.input-group {
+  margin-bottom: 20px;
+}
+
+.input-wrapper {
+  position: relative;
+}
+
+#amount {
+  width: 100%;
+  padding: 10px 35px 10px 10px;
+  font-size: 16px;
   border: 1px solid #ccc;
   border-radius: 8px;
 }
@@ -74,11 +76,21 @@ margin: 0;
   right: 10px;
   top: 50%;
   transform: translateY(-50%);
-  font-size: 20px;
+  font-size: 18px;
   color: black;
   display: none;
   pointer-events: none;
 }
+
+#method {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+
 
     .brain-img {
       width: 28px;
@@ -223,11 +235,18 @@ margin: 0;
       <div class="icon" title="دماغ"></div>
     </div>
 
-<div class="field-group">
-  <div class="input-wrapper">
-    <input type="number" id="amount" placeholder="Amount" />
-    <span class="dollar-sign" id="dollarSign">$</span>
+<div class="form-container">
+  <div class="input-group">
+    <label for="amount">Amount</label>
+    <div class="input-wrapper">
+      <input type="number" id="amount" placeholder="Enter amount" />
+      <span class="dollar-sign" id="dollarSign">$</span>
+    </div>
   </div>
+
+
+  <button id="transferBtn">Transfer</button>
+</div>
 
  
   <div class="usd-label">USD</div>
@@ -298,7 +317,7 @@ margin: 0;
         window.history.back();
       });
     });
-  const amountInput = document.getElementById("amountInput");
+  const amountInput = document.getElementById("amount");
 const dollarSign = document.getElementById("dollarSign");
 
 amountInput.addEventListener("input", () => {
