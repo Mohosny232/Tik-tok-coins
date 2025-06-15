@@ -15,14 +15,19 @@
       background: #000;
       font-family: 'Tajawal', sans-serif;
       overflow-x: hidden;
-      zoom: 30%;
-    }
+    } 
     
 
     #page-container {
       transition: transform 0.5s ease, opacity 0.5s ease;
     }
-    
+   .wrapper {
+  transform: scale(0.85); /* يصغر الصفحة بنسبة 85% */
+  transform-origin: top center; /* يحافظ على التوسيط والموضع */
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+   } 
 
     .slide-out-left {
       transform: translateX(-100%);
@@ -169,6 +174,9 @@
   </style>
 </head>
 <body>
+  <div class="wrapper">
+    <!-- كل عناصر مشروعك هنا -->
+  </div>
   <div id="page-container">
     <div class="wrapper">
       <img src="hoosny.jpg" alt="الصورة" />
