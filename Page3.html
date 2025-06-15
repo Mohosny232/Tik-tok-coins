@@ -38,7 +38,12 @@ input[type="number"] {
   gap: 10px;
   margin-bottom: 20px;
     }
-
+.zoom-container {
+  transform: scale(0.50); /* نسبة التصغير */
+  transform-origin: top center; /* يبدأ التصغير من الأعلى */
+  width: fit-content;
+  margin: auto;
+}
 #username, input[type="number"] {
   text-align: center;
   font-size: 20px;
@@ -212,6 +217,10 @@ input[type="number"] {
     <input type="text" id="username" placeholder="UserName">
     <img src="brain.png" alt="صورة الدماغ" class="brain-img" />
     <div class="icon" title="دماغ"></div>
+  </div>
+  <div class="zoom-container">
+    <div class="container">
+    </div>
   </div>
 
     <div class="input-group">
