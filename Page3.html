@@ -14,73 +14,55 @@
       justify-content: center;
       align-items: center;
       height: 100vh;
-    }.container {
-  width: 360px;
+
+.container {
+  width: 450px; /* أوسع شويه لشاشة لابتوب */
   background: #fff;
   padding: 20px;
   box-sizing: border-box;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
-input[type="text"],
-input[type="number"] {
-  text-align: center;
-  font-size: 20px;
-  padding: 10px;
-  width: 100%;
-  border-radius: 8px;
-  border: 2px solid black; /* نفس الخط الأسود لكل الخانات */
-  color: black;
-    }
+
 .field-group {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+  display: block; /* نخلي العناصر تحت بعض */
   margin-bottom: 20px;
-    }
-
-#username, input[type="number"] {
   text-align: center;
-  font-size: 20px;
-  padding: 10px;
+}
+
+input[type="text"],
+input[type="number"],
+#username,
+#amount {
   width: 100%;
+  font-size: 18px;
+  padding: 10px;
   border-radius: 8px;
+  border: 2px solid black;
+  color: black;
+  margin-bottom: 10px;
+  box-sizing: border-box;
 }
 
-.form-container {
-  margin: 20px 0;
+.brain-img {
+  width: 24px;
+  height: auto;
+  display: block;
+  margin: 0 auto 10px auto;
 }
 
-.input-group {
-  margin-bottom: 20px;
+.usd-label {
+  display: block;
+  font-weight: 700;
+  font-size: 18px;
+  text-align: center;
+  margin-bottom: 10px;
 }
 
 .input-wrapper {
   position: relative;
 }
-.brain-img {
-  width: 28px; /* تصغير الصورة */
-  height: auto;
-  vertical-align: middle;
-  margin-right: 0;
-  margin-bottom: 5px;
-}
 
-#amount {
-  width: 83%;
-  padding: 10px 35px 10px 10px;
-  font-size: 20px;
-  border: 2px solid black; /* خلي الخط أسود وواضح */
-  border-radius: 8px;
-  outline: none; /* شيل الخط الأزرق عند التركيز */
-  color: black;
-}
-.usd-label {
-  font-weight: 700;
-  font-size: 20px;
-  color: #333;
-  white-space: nowrap;
-    }
 .dollar-sign {
   position: absolute;
   right: 10px;
@@ -88,25 +70,22 @@ input[type="number"] {
   transform: translateY(-50%);
   font-size: 20px;
   color: black;
-  display: none;
   pointer-events: none;
+  display: none;
 }
-
-
 
 .trans-btn {
   width: 100%;
-  background-color: #e74c3c;
-  border: none;
-  padding: 15px 0;
-  font-size: 22px;
+  padding: 14px 0;
+  font-size: 20px;
   font-weight: 700;
   color: white;
+  background-color: #e74c3c;
+  border: none;
   border-radius: 10px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  margin-top: 10px;
 }
-
 .trans-btn:hover {
   background-color: #c0392b;
 }
@@ -211,23 +190,14 @@ input[type="number"] {
   <div class="field-group">
     <input type="text" id="username" placeholder="UserName">
     <img src="brain.png" alt="صورة الدماغ" class="brain-img" />
-    <div class="icon" title="دماغ"></div>
-  </div>
-  
-    </div>
   </div>
 
-    <div class="input-group">
-  
   <div class="field-group">
-  <div style="flex: 1;">
-    
     <div class="input-wrapper">
       <input type="number" id="amount" placeholder="Amount" />
       <span class="dollar-sign" id="dollarSign">$</span>
     </div>
-  </div>
-  <div class="usd-label">USD</div>
+    <div class="usd-label">USD</div>
   </div>
 
   <button class="trans-btn" id="transBtn">Trans</button>
