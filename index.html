@@ -200,9 +200,12 @@ document.addEventListener('DOMContentLoaded', () => {
     localStorage.setItem('num', storedNum.toFixed(2));
   }
 
-  // حساب الكوينز بناءً على الرصيد (1 دولار = 100 كوين)
-  let coins = Math.floor(storedNum * 100);
+// قراءة الكوينز من localStorage أو حسابها إذا مش موجودة
+let coins = parseInt(localStorage.getItem('coins'));
+if (isNaN(coins)) {
+  coins = Math.floor(storedNum * 100);
   localStorage.setItem('coins', coins.toString());
+}
 
   // تحديث العرض في الصفحة
   function updateDisplay() {
