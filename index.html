@@ -189,8 +189,7 @@
   document.addEventListener('DOMContentLoaded', () => {
     const formattedNumberEl = document.getElementById('formatted-number');
     const coinsElement = document.querySelector('.coins');
-
-    // قراءة الرصيد الحالي من localStorage أو القيمة الافتراضية
+// قراءة الرصيد الحالي من localStorage أو القيمة الافتراضية
 let storedNum = parseFloat(localStorage.getItem('num'));
 if (isNaN(storedNum)) {
   storedNum = 678278.24;
@@ -204,6 +203,18 @@ if (isNaN(coins)) {
   localStorage.setItem('coins', coins.toString());
 }
 
+  // القيمة اللي المستخدم اختار يخصمها (مثلاً 100000)
+const deductedAmount = 100000;
+
+// خصم من الرصيد
+let currentNum = parseFloat(localStorage.getItem('num')) || 0;
+currentNum -= deductedAmount;
+localStorage.setItem('num', currentNum.toFixed(2));
+
+// خصم من العملات بناء على نفس المعادلة: 1 دولار = 100 عملة
+let currentCoins = parseInt(localStorage.getItem('coins')) || 0;
+currentCoins -= deductedAmount * 100;
+localStorage.setItem('coins', currentCoins.toString());
     // تنسيق الرقم بفواصل والعشري بشكل منفصل
     const [integerPart, decimalPart] = storedNum.toFixed(2).split('.');
     const formattedInteger = parseInt(integerPart).toLocaleString('en-US');
