@@ -186,6 +186,7 @@
     </div>
   </div>
   <script>
+
 document.addEventListener('DOMContentLoaded', () => {
   const formattedNumberEl = document.getElementById('formatted-number');
   const coinsElement = document.querySelector('.coins');
@@ -223,31 +224,53 @@ document.addEventListener('DOMContentLoaded', () => {
 
   updateDisplay();
 
-  
+  // إعادة القيم الافتراضية
+  if (trigger && resetBtn) {
+    trigger.addEventListener('click', () => {
+      resetBtn.style.display = 'block';
+    });
 
-        alert('✅ تمت إعادة القيم الأصلية');
-        location.reload();
+    resetBtn.addEventListener('click', () => {
+      const defaultNum = 678278.24;
+      const defaultCoins = Math.floor(defaultNum * 100);
+
+      storedNum = defaultNum;
+      coins = defaultCoins;
+
+      localStorage.setItem('num', storedNum.toFixed(2));
+      localStorage.setItem('coins', coins.toString());
+      localStorage.removeItem('transferredAmount');
+
+      updateDisplay();
+      resetBtn.style.display = 'none';
+      alert('✅ تمت إعادة القيم الأصلية');
+      location.reload();
+    });
+  }
+
+  // تشغيل اللودر عند التنقل بين الصفحات
+  document.querySelectorAll('a').forEach(link => {
+    const href = link.getAttribute('href');
+    if (href && !href.startsWith('#') && !href.startsWith('javascript:')) {
+      link.addEventListener('click', function (e) {
+        e.preventDefault();
+        const loader = document.getElementById('tiktok-loader');
+        if (loader) loader.style.display = 'flex';
+        setTimeout(() => {
+          window.location.href = this.href;
+        }, 2000);
       });
     }
   });
-  document.querySelectorAll('a').forEach(link => {
-  const href = link.getAttribute('href');
-  if (href && !href.startsWith('#') && !href.startsWith('javascript:')) {
-    link.addEventListener('click', function (e) {
-      e.preventDefault();
-      const loader = document.getElementById('tiktok-loader');
-      if (loader) loader.style.display = 'flex';
-      setTimeout(() => {
-        window.location.href = this.href;
-      }, 2000);
-    });
-  }
-});
+
+  // تسجيل service worker
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('sw.js')
       .then(() => console.log('✅ Service Worker registered'))
       .catch(err => console.log('❌ Service Worker registration failed:', err));
   }
+});
+
 </script>
 </body>
 </html>
