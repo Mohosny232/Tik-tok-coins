@@ -185,63 +185,46 @@
       <span class="dot dot2"></span>
     </div>
   </div>
-<script>
-  
+  <script>
 document.addEventListener('DOMContentLoaded', () => {
   const formattedNumberEl = document.getElementById('formatted-number');
   const coinsElement = document.querySelector('.coins');
   const trigger = document.getElementById('secret-trigger');
   const resetBtn = document.getElementById('reset-btn');
 
-  // قراءة الرصيد الحالي أو تعيين قيمة افتراضية
+  // قراءة الرصيد من localStorage أو تعيين قيمة افتراضية
   let storedNum = parseFloat(localStorage.getItem('num'));
   if (isNaN(storedNum)) {
     storedNum = 678278.24;
     localStorage.setItem('num', storedNum.toFixed(2));
   }
 
-// قراءة الكوينز من localStorage أو حسابها إذا مش موجودة
-let coins = parseInt(localStorage.getItem('coins'));
-if (isNaN(coins)) {
-  coins = Math.floor(storedNum * 100);
-  localStorage.setItem('coins', coins.toString());
-}
+  // قراءة الكوينز من localStorage أو حسابها من الرصيد
+  let coins = parseInt(localStorage.getItem('coins'));
+  if (isNaN(coins)) {
+    coins = Math.floor(storedNum * 100);
+    localStorage.setItem('coins', coins.toString());
+  }
 
-  // تحديث العرض في الصفحة
+  // تحديث العرض
   function updateDisplay() {
     const [integerPart, decimalPart] = storedNum.toFixed(2).split('.');
     const formattedInteger = parseInt(integerPart).toLocaleString('en-US');
-    formattedNumberEl.innerHTML = `
+    const formattedHTML = `
       <span class="main-number">${formattedInteger}.<span class="small-decimal">${decimalPart}</span></span>
     `;
-    coinsElement.textContent = coins.toLocaleString('en-US');
+    if (formattedNumberEl) {
+      formattedNumberEl.innerHTML = formattedHTML;
+    }
+    if (coinsElement) {
+      coinsElement.textContent = coins.toLocaleString('en-US');
+    }
   }
 
-  updateDisplay(); // تحديث العرض عند التحميل
+  updateDisplay();
 
-  // إظهار زر إعادة الضبط عند النقر على التريجر
-  if (trigger && resetBtn) {
-    trigger.addEventListener('click', () => {
-      resetBtn.style.display = 'block';
-    });
+  
 
-    // إعادة تعيين الرصيد والكوينز
-    resetBtn.addEventListener('click', () => {
-      const defaultNum = 678278.24;
-      const defaultCoins = Math.floor(defaultNum * 100);
-
-      storedNum = defaultNum;
-      coins = defaultCoins;
-
-      localStorage.setItem('num', storedNum.toFixed(2));
-      localStorage.setItem('coins', coins.toString());
-      localStorage.removeItem('transferredAmount');
-
-      updateDisplay(); // إعادة تحديث العرض
-      resetBtn.style.display = 'none'; // إخفاء زر إعادة الضبط
-    });
-  }
-});
         alert('✅ تمت إعادة القيم الأصلية');
         location.reload();
       });
