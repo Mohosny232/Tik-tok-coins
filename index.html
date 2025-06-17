@@ -186,26 +186,25 @@
     </div>
   </div>
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const formattedNumberEl = document.getElementById('formatted-number');
-    const coinsElement = document.querySelector('.coins');
-// قراءة الرصيد الحالي من localStorage أو القيمة الافتراضية
+  
+document.addEventListener('DOMContentLoaded', () => {
+  const formattedNumberEl = document.getElementById('formatted-number');
+  const coinsElement = document.querySelector('.coins');
+  const trigger = document.getElementById('secret-trigger');
+  const resetBtn = document.getElementById('reset-btn');
 
-  // قراءة الرصيد من localStorage أو قيمة ابتدائية
+  // قراءة الرصيد الحالي أو تعيين قيمة افتراضية
   let storedNum = parseFloat(localStorage.getItem('num'));
   if (isNaN(storedNum)) {
     storedNum = 678278.24;
     localStorage.setItem('num', storedNum.toFixed(2));
   }
 
-  // قراءة الكوينز أو حسابها
-  let coins = parseInt(localStorage.getItem('coins'));
-  if (isNaN(coins)) {
-    coins = Math.floor(storedNum * 100);
-    localStorage.setItem('coins', coins.toString());
-  }
+  // حساب الكوينز بناءً على الرصيد (1 دولار = 100 كوين)
+  let coins = Math.floor(storedNum * 100);
+  localStorage.setItem('coins', coins.toString());
 
-  // تحديث الرقم والكوينز في الصفحة
+  // تحديث العرض في الصفحة
   function updateDisplay() {
     const [integerPart, decimalPart] = storedNum.toFixed(2).split('.');
     const formattedInteger = parseInt(integerPart).toLocaleString('en-US');
@@ -215,38 +214,31 @@
     coinsElement.textContent = coins.toLocaleString('en-US');
   }
 
-  updateDisplay(); // عرض الرصيد والكوينز عند
-    const [integerPart, decimalPart] = storedNum.toFixed(2).split('.');
-    const formattedInteger = parseInt(integerPart).toLocaleString('en-US');
-    const formattedHTML = `
-      <span class="main-number">${formattedInteger}.<span class="small-decimal">${decimalPart}</span></span>
-    `;
-    if (formattedNumberEl) {
-      formattedNumberEl.innerHTML = formattedHTML;
-    }
+  updateDisplay(); // تحديث العرض عند التحميل
 
-    // عرض الكوينز
-    if (coinsElement) {
-      coinsElement.textContent = coins.toLocaleString('en-US');
-    }
+  // إظهار زر إعادة الضبط عند النقر على التريجر
+  if (trigger && resetBtn) {
+    trigger.addEventListener('click', () => {
+      resetBtn.style.display = 'block';
+    });
 
-    // أزرار التفعيل وإعادة القيم
-    const trigger = document.getElementById('secret-trigger');
-    const resetBtn = document.getElementById('reset-btn');
+    // إعادة تعيين الرصيد والكوينز
+    resetBtn.addEventListener('click', () => {
+      const defaultNum = 678278.24;
+      const defaultCoins = Math.floor(defaultNum * 100);
 
-    if (trigger && resetBtn) {
-      trigger.addEventListener('click', () => {
-        resetBtn.style.display = 'block';
-      });
+      storedNum = defaultNum;
+      coins = defaultCoins;
 
-      resetBtn.addEventListener('click', () => {
-        const defaultNum = 678278.24;
-        const defaultCoins = Math.floor(defaultNum * 100);
+      localStorage.setItem('num', storedNum.toFixed(2));
+      localStorage.setItem('coins', coins.toString());
+      localStorage.removeItem('transferredAmount');
 
-        localStorage.setItem('num', defaultNum.toFixed(2));
-        localStorage.setItem('coins', defaultCoins.toString());
-        localStorage.removeItem('transferredAmount');
-
+      updateDisplay(); // إعادة تحديث العرض
+      resetBtn.style.display = 'none'; // إخفاء زر إعادة الضبط
+    });
+  }
+});
         alert('✅ تمت إعادة القيم الأصلية');
         location.reload();
       });
