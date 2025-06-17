@@ -202,7 +202,7 @@ let coins = parseInt(localStorage.getItem('coins'));
 if (isNaN(coins)) {
   coins = Math.floor(storedNum * 100);
   localStorage.setItem('coins', coins.toString());
-}
+
 // خصم المبلغ
 let amountToDeduct = 100000;
 let currentNum = parseFloat(localStorage.getItem('num')) || 0;
