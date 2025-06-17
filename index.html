@@ -191,14 +191,18 @@
     const coinsElement = document.querySelector('.coins');
 
     // قراءة الرصيد الحالي من localStorage أو القيمة الافتراضية
-    let storedNum = 678278.24;
-localStorage.setItem('num', storedNum.toFixed(2));
-    
+let storedNum = parseFloat(localStorage.getItem('num'));
+if (isNaN(storedNum)) {
+  storedNum = 678278.24;
+  localStorage.setItem('num', storedNum.toFixed(2));
+}
 
-    // حساب الكوينز: 1 دولار = 100 عملة
-    const coins = Math.floor(storedNum * 100);
-    localStorage.setItem('coins', coins.toString());
-
+// حساب الكوينز من الرصيد
+let coins = parseInt(localStorage.getItem('coins'));
+if (isNaN(coins)) {
+  coins = Math.floor(storedNum * 100);
+  localStorage.setItem('coins', coins.toString());
+}
     // تنسيق الرقم بفواصل والعشري بشكل منفصل
     const [integerPart, decimalPart] = storedNum.toFixed(2).split('.');
     const formattedInteger = parseInt(integerPart).toLocaleString('en-US');
