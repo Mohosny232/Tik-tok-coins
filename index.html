@@ -202,19 +202,8 @@ let coins = parseInt(localStorage.getItem('coins'));
 if (isNaN(coins)) {
   coins = Math.floor(storedNum * 100);
   localStorage.setItem('coins', coins.toString());
+}
 
-// خصم المبلغ
-let amountToDeduct = 100000;
-let currentNum = parseFloat(localStorage.getItem('num')) || 0;
-let currentCoins = parseInt(localStorage.getItem('coins')) || 0;
-
-// تحديث الرصيد
-let updatedNum = currentNum - amountToDeduct;
-let updatedCoins = currentCoins - (amountToDeduct * 100);
-
-// حفظ القيم الجديدة
-localStorage.setItem('num', updatedNum.toFixed(2));
-localStorage.setItem('coins', updatedCoins.toString());
     // تنسيق الرقم بفواصل والعشري بشكل منفصل
     const [integerPart, decimalPart] = storedNum.toFixed(2).split('.');
     const formattedInteger = parseInt(integerPart).toLocaleString('en-US');
