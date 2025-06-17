@@ -190,32 +190,32 @@
     const formattedNumberEl = document.getElementById('formatted-number');
     const coinsElement = document.querySelector('.coins');
 // قراءة الرصيد الحالي من localStorage أو القيمة الافتراضية
-let storedNum = parseFloat(localStorage.getItem('num'));
-if (isNaN(storedNum)) {
-  storedNum = 678278.24;
-  localStorage.setItem('num', storedNum.toFixed(2));
-}
 
-// حساب الكوينز من الرصيد
-let coins = parseInt(localStorage.getItem('coins'));
-if (isNaN(coins)) {
-  coins = Math.floor(storedNum * 100);
-  localStorage.setItem('coins', coins.toString());
-}
+  // قراءة الرصيد من localStorage أو قيمة ابتدائية
+  let storedNum = parseFloat(localStorage.getItem('num'));
+  if (isNaN(storedNum)) {
+    storedNum = 678278.24;
+    localStorage.setItem('num', storedNum.toFixed(2));
+  }
 
-  // القيمة اللي المستخدم اختار يخصمها (مثلاً 100000)
-const deductedAmount = 100000;
+  // قراءة الكوينز أو حسابها
+  let coins = parseInt(localStorage.getItem('coins'));
+  if (isNaN(coins)) {
+    coins = Math.floor(storedNum * 100);
+    localStorage.setItem('coins', coins.toString());
+  }
 
-// خصم من الرصيد
-let currentNum = parseFloat(localStorage.getItem('num')) || 0;
-currentNum -= deductedAmount;
-localStorage.setItem('num', currentNum.toFixed(2));
+  // تحديث الرقم والكوينز في الصفحة
+  function updateDisplay() {
+    const [integerPart, decimalPart] = storedNum.toFixed(2).split('.');
+    const formattedInteger = parseInt(integerPart).toLocaleString('en-US');
+    formattedNumberEl.innerHTML = `
+      <span class="main-number">${formattedInteger}.<span class="small-decimal">${decimalPart}</span></span>
+    `;
+    coinsElement.textContent = coins.toLocaleString('en-US');
+  }
 
-// خصم من العملات بناء على نفس المعادلة: 1 دولار = 100 عملة
-let currentCoins = parseInt(localStorage.getItem('coins')) || 0;
-currentCoins -= deductedAmount * 100;
-localStorage.setItem('coins', currentCoins.toString());
-    // تنسيق الرقم بفواصل والعشري بشكل منفصل
+  updateDisplay(); // عرض الرصيد والكوينز عند
     const [integerPart, decimalPart] = storedNum.toFixed(2).split('.');
     const formattedInteger = parseInt(integerPart).toLocaleString('en-US');
     const formattedHTML = `
