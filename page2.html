@@ -188,27 +188,35 @@
 <script>
 document.addEventListener('DOMContentLoaded', () => {
   // عناصر DOM
-  const numElement = document.querySelector('.num');
-  const displayElement = document.getElementById('transferredDisplay');
+  const numElement = document.querySelector('.num'); // لعرض رقم الدولار
+  const coinsElement = document.querySelector('.coins'); // لعرض العملات
+  const displayElement = document.getElementById('transferredDisplay'); // لعرض القيمة المحوّلة
   const backBtn = document.getElementById('back-btn');
   const loader = document.getElementById('tiktok-loader');
 
   // جلب القيم من localStorage أو تعيين القيم الافتراضية
   let num = parseFloat(localStorage.getItem('num')) || 827778.67;
-  let coins = parseFloat(localStorage.getItem('coins')) || 4138893;
+  let coins = Math.floor(num * 100); // 1 دولار = 100 عملة
 
-  // تحديث القيمة في الصفحة (لو العنصر موجود)
+  // حفظ القيم مرة أخرى (لتحديثها)
+  localStorage.setItem('num', num.toFixed(2));
+  localStorage.setItem('coins', coins.toString());
+
+  // تحديث القيمة في الصفحة
   if (numElement) {
-    numElement.textContent = num.toFixed(2);
+    const [intPart, decPart] = num.toFixed(2).split('.');
+    const formattedNum = `${parseInt(intPart).toLocaleString('en-US')}.<span class="small-decimal">${decPart}</span>`;
+    numElement.innerHTML = `<span class="main-number">${formattedNum}</span>`;
   }
 
-  // حفظ القيمة للصفحة الثانية
-  localStorage.setItem('transferredAmount', num.toFixed(2));
+  // عرض العملات
+  if (coinsElement) {
+    coinsElement.textContent = coins.toLocaleString('en-US');
+  }
 
-  // عرض القيمة المحفوظة بتنسيق مرتب
+  // عرض القيمة المحفوظة للعرض فقط
   if (displayElement) {
-    const storedAmount = localStorage.getItem('transferredAmount') || "0.00";
-    const formattedAmount = parseFloat(storedAmount).toLocaleString('en-US', {
+    const formattedAmount = num.toLocaleString('en-US', {
       minimumFractionDigits: 2,
       maximumFractionDigits: 2
     });
@@ -225,20 +233,16 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // لودر عند الضغط على الروابط
+  // تفعيل اللودر عند الضغط على أي رابط
   document.querySelectorAll('a').forEach(link => {
     const href = link.getAttribute('href');
     if (href && !href.startsWith('#') && !href.startsWith('javascript:')) {
       link.addEventListener('click', function(e) {
         e.preventDefault();
-        if (loader) {
-          loader.style.display = 'flex';
-          setTimeout(() => {
-            window.location.href = this.href;
-          }, 2000);
-        } else {
+        if (loader) loader.style.display = 'flex';
+        setTimeout(() => {
           window.location.href = this.href;
-        }
+        }, 2000);
       });
     }
   });
