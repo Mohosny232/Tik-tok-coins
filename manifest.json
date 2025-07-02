@@ -1,6 +1,6 @@
 {
-  "name": "TikTok Style App",
-  "short_name": "TikTokApp",
+  "name": "TikTook Style App",
+  "short_name": "TikTookApp",
   "start_url": "index.html",
   "display": "standalone",
   "background_color": "#000000",
