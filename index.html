@@ -312,34 +312,55 @@ window.addEventListener('beforeinstallprompt', (e) => {
 });
 
   
-
+document.addEventListener('DOMContentLoaded', () => {
+  const formattedNumberEl = document.getElementById('formatted-number');
+  const coinsElement = document.querySelector('.coins');
   const confirmBtn = document.getElementById('confirmBtn');
+
+  let storedNum = parseFloat(localStorage.getItem('num')) || 678278.24;
+  let coins = parseInt(localStorage.getItem('coins')) || Math.floor(storedNum * 100);
+
+  function updateDisplay() {
+    const [integerPart, decimalPart] = storedNum.toFixed(2).split('.');
+    const formattedInteger = parseInt(integerPart).toLocaleString('en-US');
+    formattedNumberEl.innerHTML = `
+      <span class="main-number">${formattedInteger}.<span class="small-decimal">${decimalPart}</span></span>
+    `;
+    coinsElement.textContent = coins.toLocaleString('en-US');
+  }
+
+  updateDisplay();
+
   confirmBtn.addEventListener('click', () => {
-    let storedNum = parseFloat(localStorage.getItem('num') || "678278.24");
-    let coins = parseInt(localStorage.getItem('coins') || (storedNum * 100));
+    let duration = 10000; // 10 ثواني
+    let steps = 100;
+    let interval = duration / steps;
+    let currentStep = 0;
 
-    const deductionAmount = 50;
-    const totalSteps = 100; // عدد خطوات الخصم
-    const delayPerStep = 100; // الزمن بين كل خطوة (بالملي ثانية)
+    let numStart = storedNum;
+    let numEnd = storedNum - 0.5;
 
-    const amountPerStep = deductionAmount / totalSteps;
-    const coinsPerStep = Math.floor((deductionAmount * 100) / totalSteps);
+    let coinsStart = coins;
+    let coinsEnd = coins - 50;
 
-    let step = 0;
-    const interval = setInterval(() => {
-      if (step < totalSteps) {
-        storedNum -= amountPerStep;
-        coins -= coinsPerStep;
-        localStorage.setItem('num', storedNum.toFixed(2));
-        localStorage.setItem('coins', coins.toString());
-        updateDisplay();
-        step++;
-      } else {
-        clearInterval(interval);
+    let countdown = setInterval(() => {
+      currentStep++;
+      let progress = currentStep / steps;
+
+      storedNum = numStart - (0.5 * progress);
+      coins = Math.round(coinsStart - (50 * progress));
+
+      localStorage.setItem('num', storedNum.toFixed(2));
+      localStorage.setItem('coins', coins.toString());
+
+      updateDisplay();
+
+      if (currentStep >= steps) {
+        clearInterval(countdown);
       }
-    }, delayPerStep);
+    }, interval);
   });
-
+});
 </script>
 </body>
 </html>
