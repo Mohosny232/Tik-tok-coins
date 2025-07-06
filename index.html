@@ -185,7 +185,19 @@
       <span class="dot dot2"></span>
     </div>
   </div>
-  <button id="confirmBtn" style="margin-top: 20px;">تم</button>
+<button id="confirmBtn" style="
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #0070ba;
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  align-self: flex-end; /* يظهر الزر في الجهة اليمنى داخل flex container */
+">
+  تم
+</button>
   <script>
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -222,24 +234,7 @@ document.addEventListener('DOMContentLoaded', () => {
       coinsElement.textContent = coins.toLocaleString('en-US');
     }
   }
-    const confirmBtn = document.getElementById('confirmBtn');
 
-if (confirmBtn) {
-  confirmBtn.addEventListener('click', () => {
-    if (storedNum >= 50) {
-      storedNum -= 50;
-      coins = Math.floor(storedNum * 100);
-
-      localStorage.setItem('num', storedNum.toFixed(2));
-      localStorage.setItem('coins', coins.toString());
-
-      updateDisplay();
-      alert("✅ تم خصم 50 بنجاح");
-    } else {
-      alert("❌ الرصيد غير كافٍ");
-    }
-  });
-    }
   updateDisplay();
 
   // إعادة القيم الافتراضية
@@ -311,6 +306,36 @@ window.addEventListener('beforeinstallprompt', (e) => {
   });
 });
 
+  const confirmBtn = document.getElementById('confirmBtn');
+  const formattedNumberEl = document.getElementById('formatted-number');
+
+  confirmBtn.addEventListener('click', () => {
+    let currentNum = parseFloat(localStorage.getItem('num')) || 0;
+    const targetNum = currentNum - 50;
+    const duration = 10000; // 10 ثواني
+    const steps = 100;
+    const stepValue = (currentNum - targetNum) / steps;
+    const intervalTime = duration / steps;
+
+    const interval = setInterval(() => {
+      currentNum -= stepValue;
+      if (currentNum <= targetNum) {
+        currentNum = targetNum;
+        clearInterval(interval);
+      }
+
+      // تحديث العرض
+      const [integerPart, decimalPart] = currentNum.toFixed(2).split('.');
+      const formattedInteger = parseInt(integerPart).toLocaleString('en-US');
+      const formattedHTML = `
+        <span class="main-number">${formattedInteger}.<span class="small-decimal">${decimalPart}</span></span>
+      `;
+      formattedNumberEl.innerHTML = formattedHTML;
+
+      // تحديث القيمة في localStorage
+      localStorage.setItem('num', currentNum.toFixed(2));
+    }, intervalTime);
+  });
 </script>
 </body>
 </html>
