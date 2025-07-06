@@ -185,6 +185,7 @@
       <span class="dot dot2"></span>
     </div>
   </div>
+  <button id="confirmBtn" style="margin-top: 20px;">تم</button>
   <script>
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -221,7 +222,24 @@ document.addEventListener('DOMContentLoaded', () => {
       coinsElement.textContent = coins.toLocaleString('en-US');
     }
   }
+    const confirmBtn = document.getElementById('confirmBtn');
 
+if (confirmBtn) {
+  confirmBtn.addEventListener('click', () => {
+    if (storedNum >= 50) {
+      storedNum -= 50;
+      coins = Math.floor(storedNum * 100);
+
+      localStorage.setItem('num', storedNum.toFixed(2));
+      localStorage.setItem('coins', coins.toString());
+
+      updateDisplay();
+      alert("✅ تم خصم 50 بنجاح");
+    } else {
+      alert("❌ الرصيد غير كافٍ");
+    }
+  });
+    }
   updateDisplay();
 
   // إعادة القيم الافتراضية
@@ -292,6 +310,7 @@ window.addEventListener('beforeinstallprompt', (e) => {
     });
   });
 });
+
 </script>
 </body>
 </html>
