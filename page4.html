@@ -135,52 +135,58 @@
     </div>
 
   <script>
-    window.addEventListener('load', () => {
-      history.pushState(null, null, location.href);
-    });
+  window.addEventListener('load', () => {
+    history.pushState(null, null, location.href);
+  });
 
-    let isGoingBack = false;
+  let isGoingBack = false;
 
-    window.addEventListener('popstate', () => {
-      if (isGoingBack) return;
-      isGoingBack = true;
-      const page = document.getElementById('page-container');
-      if (page) {
-        page.classList.add('slide-out-left');
-      }
-      setTimeout(() => {
-        history.back();
-      }, 500);
-    });
+  window.addEventListener('popstate', () => {
+    if (isGoingBack) return;
+    isGoingBack = true;
+    const page = document.getElementById('page-container');
+    if (page) {
+      page.classList.add('slide-out-left');
+    }
+    setTimeout(() => {
+      history.back();
+    }, 500);
+  });
 
-    document.addEventListener('DOMContentLoaded', () => {
-      const backBtn = document.getElementById('back-button');
-      if (backBtn) {
-        backBtn.addEventListener('click', () => {
-          window.location.href = 'index.html';
-        });
-      }
+  document.addEventListener('DOMContentLoaded', () => {
+    const backBtn = document.getElementById('back-button');
+    if (backBtn) {
+      backBtn.addEventListener('click', () => {
+        window.location.href = 'index.html';
+      });
+    }
 
-      const receiverName = localStorage.getItem('receiverName') || 'غير معروف';
-      document.getElementById('receiver-name').textContent = receiverName;
+    const receiverName = localStorage.getItem('receiverName') || 'غير معروف';
+    document.getElementById('receiver-name').textContent = receiverName;
 
-      const transferred = localStorage.getItem('transferredAmount') || '0.00';
-      document.getElementById('amount-received').textContent = `USD ${parseFloat(transferred).toFixed(2)}`;
-      document.getElementById('transferredDisplay').textContent = parseFloat(transferred).toFixed(2);
-      document.getElementById('coinAmount').textContent = parseFloat(transferred).toFixed(2);
+    const transferred = localStorage.getItem('transferredAmount');
+    const amount = transferred ? parseFloat(transferred).toFixed(2) : '0.00';
 
-      const now = new Date();
-      const withdrawalDate = now.toLocaleDateString('en-GB') + ' ' + now.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
-      document.getElementById('withdrawal-time').textContent = withdrawalDate;
+    document.getElementById('amount-received').textContent = `USD ${amount}`;
+    document.getElementById('transferredDisplay').textContent = amount;
 
-      const arrival = new Date(now);
-      arrival.setDate(now.getDate() + 1);
-      const arrivalDate = arrival.toLocaleDateString('en-GB') + ' ' + now.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
-      document.getElementById('arrival-time').textContent = arrivalDate;
+    const coinAmountEl = document.getElementById('coinAmount');
+    if (coinAmountEl) {
+      coinAmountEl.textContent = amount;
+    }
 
-      const randomId = Math.floor(10000000000000000 + Math.random() * 90000000000000000).toString();
-      document.getElementById('transaction-id').textContent = randomId;
-    });
-  </script>
+    const now = new Date();
+    const withdrawalDate = now.toLocaleDateString('en-GB') + ' ' + now.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
+    document.getElementById('withdrawal-time').textContent = withdrawalDate;
+
+    const arrival = new Date(now);
+    arrival.setDate(now.getDate() + 1);
+    const arrivalDate = arrival.toLocaleDateString('en-GB') + ' ' + now.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
+    document.getElementById('arrival-time').textContent = arrivalDate;
+
+    const randomId = Math.floor(10000000000000000 + Math.random() * 90000000000000000).toString();
+    document.getElementById('transaction-id').textContent = randomId;
+  });
+      </script>
 </body>
 </html>
