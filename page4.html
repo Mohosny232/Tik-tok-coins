@@ -189,15 +189,11 @@
   });
     
 document.addEventListener('DOMContentLoaded', () => {
-  const transferred = localStorage.getItem('transferredAmount');
+  const transferred = localStorage.getItem('transferredAmount') || '0.00';
+const transferredCoins = parseFloat(transferred) * 100;
 
-  // تحقق إن القيمة موجودة وصحيحة
-  if (transferred && !isNaN(parseFloat(transferred))) {
-    const amount = Math.floor(parseFloat(transferred)); // ← رقم صحيح فقط
-    document.getElementById('coinAmount').textContent = amount;
-  } else {
-    document.getElementById('coinAmount').textContent = '--';
-  }
+document.getElementById('coinAmount').textContent = parseInt(transferredCoins); // ← يظهر كوينز حقيقي
+}
 });
   </script>
 </body>
