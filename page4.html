@@ -187,6 +187,18 @@
     const randomId = Math.floor(10000000000000000 + Math.random() * 90000000000000000).toString();
     document.getElementById('transaction-id').textContent = randomId;
   });
-      </script>
+    
+document.addEventListener('DOMContentLoaded', () => {
+  const transferred = localStorage.getItem('transferredAmount');
+
+  // تحقق إن القيمة موجودة وصحيحة
+  if (transferred && !isNaN(parseFloat(transferred))) {
+    const amount = parseFloat(transferred).toFixed(2);
+    document.getElementById('coinAmount').textContent = amount;
+  } else {
+    document.getElementById('coinAmount').textContent = '--';
+  }
+});
+  </script>
 </body>
 </html>
