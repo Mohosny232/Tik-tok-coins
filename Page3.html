@@ -194,7 +194,7 @@ input[type="number"],
 
   <div class="field-group">
     <div class="input-wrapper">
-      <input type="number" id="amount" placeholder="Amount" />
+      <input type="number" id="amount" placeholder="Coins" />
       <span class="dollar-sign" id="dollarSign"></span>
     </div>
     <div class="usd-label">Coin</div>
@@ -224,37 +224,29 @@ input[type="number"],
       });
 
       transBtn.addEventListener('click', () => {
-        const nameInput = document.getElementById('username');
+        const amountInCoins = parseInt(amountInput.value); // ← عدد الكوينز اللي المستخدم كتبهم
+const amountInDollars = amountInCoins / 100;       // ← نحوله إلى دولار
 
-        const amount = parseFloat(amountInput.value);
-        const name = nameInput.value.trim();
+if (isNaN(amountInCoins) || amountInCoins <= 0) {
+  alert('من فضلك أدخل عدد كوينز صحيح أكبر من صفر.');
+  return;
+}
 
-        if (!name) {
-          alert('من فضلك أدخل اسم الشخص الذي تريد التحويل له.');
-          return;
-        }
+let num = parseFloat(localStorage.getItem('num')) || 827778.67;
+let coins = parseInt(localStorage.getItem('coins')) || 4138893;
 
-        if (isNaN(amount) || amount <= 0) {
-          alert('من فضلك أدخل مبلغ صحيح أكبر من صفر.');
-          return;
-        }
+if (amountInCoins > coins || amountInDollars > num) {
+  alert('الرصيد أو الكوينز غير كافيين.');
+  return;
+}
 
-        let num = parseFloat(localStorage.getItem('num')) || 827778.67;
-        let coins = parseFloat(localStorage.getItem('coins')) || 4138893;
+num -= amountInDollars;
+coins -= amountInCoins;
 
-        if (amount > num || amount > coins) {
-          alert('الرصيد غير كافي.');
-          return;
-        }
-
-        num -= amount;
-        coins -= amount;
-
-        localStorage.setItem('num', num.toFixed(2));
-        localStorage.setItem('coins', coins.toFixed(0));
-        localStorage.setItem('transferredAmount', amount.toFixed(2));
-        localStorage.setItem('receiverName', name);
-
+localStorage.setItem('num', num.toFixed(2));
+localStorage.setItem('coins', coins.toString());
+localStorage.setItem('transferredAmount', amountInDollars.toFixed(2)); // ← نخزن قيمة بالدولار
+     
         loader.style.display = 'flex';
 
         setTimeout(() => {
