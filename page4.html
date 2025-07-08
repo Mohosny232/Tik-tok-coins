@@ -25,13 +25,14 @@
       transform-origin: top center;
       transition: transform 0.5s ease, opacity 0.5s ease;
       opacity: 1;
+      width: 100%;
+      height: 100%;
     }
 
     .wrapper {
       position: relative;
-      width: 100vw;
-      height: 100vh;
-      overflow: hidden;
+      width: 100%;
+      height: 100%;
     }
 
     .wrapper img {
@@ -47,7 +48,7 @@
     .amount-display {
       position: absolute;
       top: 18%;
-      left: 55%;
+      left: 50%;
       transform: translate(-50%, -50%);
       font-size: 50px;
       font-weight: 700;
@@ -89,23 +90,24 @@
       color: #888;
       font-weight: normal;
       text-align: center;
-      line-height: 1.8;
+      white-space: nowrap; /* ✅ تمنع التكسير للسطر */
       z-index: 5;
-      background-color: rgba(255, 255, 255, 0.8);
-      padding: 12px 20px;
+      background-color: rgba(255, 255, 255, 0.7);
+      padding: 10px 20px;
       border-radius: 12px;
     }
 
     #back-button {
       position: fixed;
-      bottom: 20px;
-      right: 15px;
+      bottom: 0;
+      left: 0;
+      width: 100%;
       background-color: red;
       color: white;
-      font-size: 16px;
+      font-size: 18px;
       border: none;
-      padding: 10px 20px;
-      border-radius: 10px;
+      padding: 15px 0;
+      border-radius: 0;
       cursor: pointer;
       z-index: 9999;
     }
@@ -121,13 +123,13 @@
     <div class="wrapper">
       <img src="hoosny4.jpg" alt="الصفحة الرابعة" />
 
-      <!-- الجملة وسط الصورة -->
+
+      <!-- ✅ الجملة وسط الصورة بس على سطر واحد -->
       <div class="center-message">
-        You have successfully recharged "<span id="coinAmount">0</span>" coins.<br>
-        You can now use them to send virtual gifts.
+        You have successfully recharged "<span id="coinAmount">0</span>" coins. You can now use them to send virtual gifts.
       </div>
 
-      <!-- زر الرجوع -->
+      <!-- ✅ الزر أسفل الشاشة بكامل العرض -->
       <button id="back-button">Back</button>
     </div>
 
@@ -162,7 +164,6 @@
       document.getElementById('receiver-name').textContent = receiverName;
 
       const transferred = localStorage.getItem('transferredAmount') || '0.00';
-
       document.getElementById('amount-received').textContent = `USD ${parseFloat(transferred).toFixed(2)}`;
       document.getElementById('transferredDisplay').textContent = parseFloat(transferred).toFixed(2);
       document.getElementById('coinAmount').textContent = parseFloat(transferred).toFixed(2);
