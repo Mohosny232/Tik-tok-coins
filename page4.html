@@ -193,7 +193,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // تحقق إن القيمة موجودة وصحيحة
   if (transferred && !isNaN(parseFloat(transferred))) {
-    const amount = parseFloat(transferred).toFixed(2);
+    const amount = Math.floor(parseFloat(transferred)); // ← رقم صحيح فقط
     document.getElementById('coinAmount').textContent = amount;
   } else {
     document.getElementById('coinAmount').textContent = '--';
