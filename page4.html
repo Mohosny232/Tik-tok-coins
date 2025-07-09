@@ -128,7 +128,9 @@
 
 
 <div class="center-message" style="text-align: center; font-size: 16px; color: #555555; font-weight: normal; margin-top: -70px;">
-  You have recharged <span id="coinAmount">0</span> coins.<br>
+  <span style="color: #000;" id="username">Hossny</span> have recharged 
+  <span style="color: #000;" id="coinAmount">0</span> 
+  <span style="color: #000;">coins</span>.<br>
   You can use the coins to send virtual gifts.
 </div>
 
@@ -194,6 +196,15 @@ document.addEventListener('DOMContentLoaded', () => {
   const transferredCoins = localStorage.getItem('transferredCoins') || '0';
   document.getElementById('coinAmount').textContent = parseInt(transferredCoins).toLocaleString('en-US');
 });
+    
+  document.addEventListener('DOMContentLoaded', () => {
+    const username = localStorage.getItem('receiverName') || 'You';
+    document.getElementById('username').textContent = username;
+
+    const transferredCoins = localStorage.getItem('transferredCoins') || '0';
+    document.getElementById('coinAmount').textContent = transferredCoins;
+  });
+
   </script>
 </body>
 </html>
