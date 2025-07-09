@@ -213,44 +213,44 @@ input[type="number"],
 
     const COIN_VALUE = 0.01274;
 
+    // إظهار رمز الدولار لما المستخدم يكتب
     amountInput.addEventListener('input', () => {
       dollarSign.style.display = amountInput.value.trim() !== '' ? 'block' : 'none';
     });
 
     transBtn.addEventListener('click', () => {
-      const amountInCoins = parseInt(amountInput.value); // عدد الكوينز المُدخل
+      const amountInCoins = parseInt(amountInput.value);
 
       if (isNaN(amountInCoins) || amountInCoins <= 0) {
         alert('من فضلك أدخل عدد كوينز صحيح أكبر من صفر.');
         return;
       }
 
-      // قراءة القيم الحالية
+      // قراءة القيم الحالية من localStorage
       let coins = parseInt(localStorage.getItem('coins'));
       let num = parseFloat(localStorage.getItem('num'));
 
-      // التحقق من القيم الأساسية
-      if (isNaN(coins)) coins = 2432852;
-      if (isNaN(num)) num = coins * COIN_VALUE;
+      if (isNaN(coins)) coins = 2432852; // ← قيمة افتراضية للكويـنز
+      if (isNaN(num)) num = coins * COIN_VALUE; // ← حساب الرصيد لو مش موجود
 
       const amountInDollars = amountInCoins * COIN_VALUE;
 
-      // التحقق من الرصيد الكافي
       if (amountInCoins > coins || amountInDollars > num) {
         alert('الرصيد أو الكوينز غير كافيين.');
         return;
       }
 
-      // خصم المبلغ
+      // الخصم من الكوينز والرّصيد
       coins -= amountInCoins;
-     num -= amountInCoins * 0.01274; // ← خصم فعلي
-      // حفظ البيانات
+      num -= amountInDollars;
+
+      // حفظ القيم الجديدة
       localStorage.setItem('coins', coins.toString());
       localStorage.setItem('num', num.toFixed(2));
       localStorage.setItem('transferredCoins', amountInCoins.toString());
       localStorage.setItem('transferredAmount', amountInDollars.toFixed(2));
 
-      // عرض اللودر ثم الانتقال
+      // اللودر والانتقال للصفحة الرابعة
       loader.style.display = 'flex';
       setTimeout(() => {
         window.location.href = "page4.html";
