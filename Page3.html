@@ -211,38 +211,36 @@ input[type="number"],
     const amountInput = document.getElementById('amount');
     const dollarSign = document.getElementById('dollarSign');
 
-    const COIN_VALUE = 0.01274; // ← كل عملة تساوي 0.01274 دولار
+    const COIN_VALUE = 0.01274;
 
     amountInput.addEventListener('input', () => {
       dollarSign.style.display = amountInput.value.trim() !== '' ? 'block' : 'none';
     });
 
     transBtn.addEventListener('click', () => {
-      const amountInCoins = parseInt(amountInput.value);
-      const amountInDollars = amountInCoins * COIN_VALUE;
-
+      const amountInCoins = parseInt(amountInput.value); // عدد الكوينز المُدخل
       if (isNaN(amountInCoins) || amountInCoins <= 0) {
         alert('من فضلك أدخل عدد كوينز صحيح أكبر من صفر.');
         return;
       }
 
-      let num = parseFloat(localStorage.getItem('num')) || 827778.67;
-      let coins = parseInt(localStorage.getItem('coins')) || 4138893;
+      let coins = parseInt(localStorage.getItem('coins')) || 2432852;
+      let num = parseFloat(localStorage.getItem('num')) || (coins * COIN_VALUE);
+      const amountInDollars = amountInCoins * COIN_VALUE;
 
-      if (amountInCoins > coins || amountInDollars > num) {
-        alert('الرصيد أو الكوينز غير كافيين.');
+      if (amountInCoins > coins) {
+        alert('رصيد الكوينز غير كافي.');
         return;
       }
 
-      // خصم القيم
-      num -= amountInDollars;
       coins -= amountInCoins;
+      num = coins * COIN_VALUE;
 
-      // حفظ القيم الجديدة
-      localStorage.setItem('num', num.toFixed(2));
       localStorage.setItem('coins', coins.toString());
+      localStorage.setItem('num', num.toFixed(2));
+      localStorage.setItem('transferredCoins', amountInCoins.toString());
       localStorage.setItem('transferredAmount', amountInDollars.toFixed(2));
-      localStorage.setItem('transferredCoins', amountInCoins.toString()); // ← احفظ عدد الكوينز كمان
+
       loader.style.display = 'flex';
 
       setTimeout(() => {
@@ -250,7 +248,7 @@ input[type="number"],
       }, 1000);
     });
 
-    backBtn.addEventListener('click', () => {
+    backBtn?.addEventListener('click', () => {
       window.history.back();
     });
   });
