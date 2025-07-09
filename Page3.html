@@ -242,8 +242,7 @@ input[type="number"],
       localStorage.setItem('num', num.toFixed(2));
       localStorage.setItem('coins', coins.toString());
       localStorage.setItem('transferredAmount', amountInDollars.toFixed(2));
-      localStorage.setItem('transferredCoins', amountInCoins.toString());
-
+      localStorage.setItem('transferredCoins', amountInCoins.toString()); // ← احفظ عدد الكوينز كمان
       loader.style.display = 'flex';
 
       setTimeout(() => {
