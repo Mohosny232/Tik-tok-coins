@@ -315,46 +315,36 @@ window.addEventListener('beforeinstallprompt', (e) => {
 document.addEventListener('DOMContentLoaded', () => {
   const formattedNumberEl = document.getElementById('formatted-number');
   const coinsElement = document.querySelector('.coins');
-  const confirmBtn = document.getElementById('confirmBtn');
+  const trigger = document.getElementById('secret-trigger');
+  const resetBtn = document.getElementById('reset-btn');
 
-  let storedNum = parseFloat(localStorage.getItem('num')) || 15426.24;
-  let coins = parseInt(localStorage.getItem('coins')) || Math.floor(storedNum * 100);
+  let coins = parseInt(localStorage.getItem('coins'));
+  if (isNaN(coins)) {
+    coins = 2432852; // ← عدد الكوينز الافتراضي
+    localStorage.setItem('coins', coins.toString());
+  }
+
+  let storedNum = coins * 0.01274;
+  localStorage.setItem('num', storedNum.toFixed(2)); // ← يتم تخزينه لحساب الخصومات وغيره
 
   function updateDisplay() {
     const [integerPart, decimalPart] = storedNum.toFixed(2).split('.');
     const formattedInteger = parseInt(integerPart).toLocaleString('en-US');
-    formattedNumberEl.innerHTML = `
+    const formattedHTML = `
       <span class="main-number">${formattedInteger}.<span class="small-decimal">${decimalPart}</span></span>
     `;
-    coinsElement.textContent = coins.toLocaleString('en-US');
+    if (formattedNumberEl) {
+      formattedNumberEl.innerHTML = formattedHTML;
+    }
+    if (coinsElement) {
+      coinsElement.textContent = coins.toLocaleString('en-US');
+    }
   }
 
   updateDisplay();
 
-  confirmBtn.addEventListener('click', () => {
-    let duration = 3000; // 10 ثواني
-    let steps = 100;
-    let interval = duration / steps;
-    let currentStep = 0;
-
-    let numStart = storedNum;
-    let numEnd = storedNum - 0.5;
-
-    let coinsStart = coins;
-    let coinsEnd = coins - 50;
-
-    let countdown = setInterval(() => {
-      currentStep++;
-      let progress = currentStep / steps;
-
-      storedNum = numStart - (0.5 * progress);
-      coins = Math.round(coinsStart - (50 * progress));
-
-      localStorage.setItem('num', storedNum.toFixed(2));
-      localStorage.setItem('coins', coins.toString());
-
-      updateDisplay();
-
+  // باقي الأكواد كما هي مثل reset و loader...
+});
       if (currentStep >= steps) {
         clearInterval(countdown);
       }
