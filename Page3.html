@@ -249,7 +249,7 @@ input[type="number"],
       localStorage.setItem('num', num.toFixed(2));
       localStorage.setItem('transferredCoins', amountInCoins.toString());
       localStorage.setItem('transferredAmount', amountInDollars.toFixed(2));
-
+      localStorage.setItem('receiverName', username);
       // اللودر والانتقال للصفحة الرابعة
       loader.style.display = 'flex';
       setTimeout(() => {
