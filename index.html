@@ -213,34 +213,33 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const COIN_VALUE = 0.01274;
 
-  // قراءة الكوينز من localStorage أو تعيين قيمة افتراضية
+  // قراءة الكوينز
   let coins = parseInt(localStorage.getItem('coins'));
   if (isNaN(coins)) {
-    coins = 2432852; // عدد الكوينز الابتدائي
+    coins = 2432852;
     localStorage.setItem('coins', coins.toString());
   }
 
-  let storedNum = coins * COIN_VALUE;
-  localStorage.setItem('num', storedNum.toFixed(2));
+  // قراءة الرصيد أو حسابه مرة واحدة فقط إذا مش موجود
+  let storedNum = parseFloat(localStorage.getItem('num'));
+  if (isNaN(storedNum)) {
+    storedNum = coins * COIN_VALUE;
+    localStorage.setItem('num', storedNum.toFixed(2));
+  }
 
   function updateDisplay() {
-    storedNum = coins * COIN_VALUE;
     const [integerPart, decimalPart] = storedNum.toFixed(2).split('.');
     const formattedInteger = parseInt(integerPart).toLocaleString('en-US');
     const formattedHTML = `
       <span class="main-number">${formattedInteger}.<span class="small-decimal">${decimalPart}</span></span>
     `;
-    if (formattedNumberEl) {
-      formattedNumberEl.innerHTML = formattedHTML;
-    }
-    if (coinsElement) {
-      coinsElement.textContent = coins.toLocaleString('en-US');
-    }
+    if (formattedNumberEl) formattedNumberEl.innerHTML = formattedHTML;
+    if (coinsElement) coinsElement.textContent = coins.toLocaleString('en-US');
   }
 
   updateDisplay();
 
-  // إعادة القيم الافتراضية
+  // Reset
   if (trigger && resetBtn) {
     trigger.addEventListener('click', () => {
       resetBtn.style.display = 'block';
@@ -252,7 +251,6 @@ document.addEventListener('DOMContentLoaded', () => {
       localStorage.setItem('coins', coins.toString());
       localStorage.setItem('num', storedNum.toFixed(2));
       localStorage.removeItem('transferredAmount');
-
       updateDisplay();
       resetBtn.style.display = 'none';
       alert('✅ تمت إعادة القيم الأصلية');
@@ -260,7 +258,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // زر الخصم الديناميكي
+  // خصم عند الضغط على Confirm
   if (confirmBtn) {
     confirmBtn.addEventListener('click', () => {
       let duration = 3000;
@@ -269,14 +267,18 @@ document.addEventListener('DOMContentLoaded', () => {
       let currentStep = 0;
 
       const coinsStart = coins;
-      const coinsEnd = coins - 50;
+      const coinsToDeduct = 50;
+      const coinsEnd = coins - coinsToDeduct;
+      const dollarsToDeduct = coinsToDeduct * COIN_VALUE;
+      const numStart = storedNum;
+      const numEnd = numStart - dollarsToDeduct;
 
       let countdown = setInterval(() => {
         currentStep++;
         const progress = currentStep / steps;
 
-        coins = Math.round(coinsStart - (50 * progress));
-        storedNum = coins * COIN_VALUE;
+        coins = Math.round(coinsStart - (coinsToDeduct * progress));
+        storedNum = numStart - (dollarsToDeduct * progress);
 
         localStorage.setItem('coins', coins.toString());
         localStorage.setItem('num', storedNum.toFixed(2));
@@ -290,7 +292,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // loader عند التنقل بين الصفحات
+  // Loader
   document.querySelectorAll('a').forEach(link => {
     const href = link.getAttribute('href');
     if (href && !href.startsWith('#') && !href.startsWith('javascript:')) {
@@ -311,27 +313,6 @@ document.addEventListener('DOMContentLoaded', () => {
       .then(() => console.log('✅ Service Worker registered'))
       .catch(err => console.log('❌ Service Worker registration failed:', err));
   }
-});
-
-// تثبيت PWA
-let deferredPrompt;
-window.addEventListener('beforeinstallprompt', (e) => {
-  e.preventDefault();
-  deferredPrompt = e;
-
-  document.getElementById('installBtn').style.display = 'block';
-
-  document.getElementById('installBtn').addEventListener('click', () => {
-    deferredPrompt.prompt();
-    deferredPrompt.userChoice.then((choiceResult) => {
-      if (choiceResult.outcome === 'accepted') {
-        console.log('User accepted the install prompt');
-      } else {
-        console.log('User dismissed the install prompt');
-      }
-      deferredPrompt = null;
-    });
-  });
 });
 </script>
 </body>
