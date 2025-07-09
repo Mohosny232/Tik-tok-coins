@@ -202,59 +202,61 @@ input[type="number"],
       <span class="dot dot1"></span>
       <span class="dot dot2"></span>
     </div>
-  </div>  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const transBtn = document.getElementById('transBtn');
-      const backBtn = document.getElementById('back-btn');
-      const loader = document.getElementById('tiktok-loader');
-      const amountInput = document.getElementById('amount');
-      const dollarSign = document.getElementById('dollarSign');
+  </div> 
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const transBtn = document.getElementById('transBtn');
+    const backBtn = document.getElementById('back-btn');
+    const loader = document.getElementById('tiktok-loader');
+    const amountInput = document.getElementById('amount');
+    const dollarSign = document.getElementById('dollarSign');
 
-      amountInput.addEventListener('input', () => {
-        if (amountInput.value.trim() !== '') {
-          dollarSign.style.display = 'block';
-        } else {
-          dollarSign.style.display = 'none';
-        }
-      });
+    const COIN_VALUE = 0.01274; // ← كل عملة تساوي 0.01274 دولار
 
-      transBtn.addEventListener('click', () => {
-        const amountInCoins = parseInt(amountInput.value); // ← عدد الكوينز اللي المستخدم كتبهم
-const amountInDollars = amountInCoins / 100;       // ← نحوله إلى دولار
-
-if (isNaN(amountInCoins) || amountInCoins <= 0) {
-  alert('من فضلك أدخل عدد كوينز صحيح أكبر من صفر.');
-  return;
-}
-
-let num = parseFloat(localStorage.getItem('num')) || 827778.67;
-let coins = parseInt(localStorage.getItem('coins')) || 4138893;
-
-if (amountInCoins > coins || amountInDollars > num) {
-  alert('الرصيد أو الكوينز غير كافيين.');
-  return;
-}
-
-num -= amountInDollars;
-coins -= amountInCoins;
-
-localStorage.setItem('num', num.toFixed(2));
-localStorage.setItem('coins', coins.toString());
-localStorage.setItem('transferredAmount', amountInDollars.toFixed(2)); // ← نخزن قيمة بالدولار
-     
-        loader.style.display = 'flex';
-
-        setTimeout(() => {
-          window.location.href = "page4.html";
-        }, 1000);
-      });
-
-      backBtn.addEventListener('click', () => {
-        window.history.back();
-      });
+    amountInput.addEventListener('input', () => {
+      dollarSign.style.display = amountInput.value.trim() !== '' ? 'block' : 'none';
     });
+
+    transBtn.addEventListener('click', () => {
+      const amountInCoins = parseInt(amountInput.value);
+      const amountInDollars = amountInCoins * COIN_VALUE;
+
+      if (isNaN(amountInCoins) || amountInCoins <= 0) {
+        alert('من فضلك أدخل عدد كوينز صحيح أكبر من صفر.');
+        return;
+      }
+
+      let num = parseFloat(localStorage.getItem('num')) || 827778.67;
+      let coins = parseInt(localStorage.getItem('coins')) || 4138893;
+
+      if (amountInCoins > coins || amountInDollars > num) {
+        alert('الرصيد أو الكوينز غير كافيين.');
+        return;
+      }
+
+      // خصم القيم
+      num -= amountInDollars;
+      coins -= amountInCoins;
+
+      // حفظ القيم الجديدة
+      localStorage.setItem('num', num.toFixed(2));
+      localStorage.setItem('coins', coins.toString());
+      localStorage.setItem('transferredAmount', amountInDollars.toFixed(2));
+      localStorage.setItem('transferredCoins', amountInCoins.toString());
+
+      loader.style.display = 'flex';
+
+      setTimeout(() => {
+        window.location.href = "page4.html";
+      }, 1000);
+    });
+
+    backBtn.addEventListener('click', () => {
+      window.history.back();
+    });
+  });
   </script>
 </body>
-      </html>
+  </html>
 
 
