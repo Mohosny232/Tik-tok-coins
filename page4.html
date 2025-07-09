@@ -191,9 +191,8 @@
   });
     
 document.addEventListener('DOMContentLoaded', () => {
-  const transferred = localStorage.getItem('transferredAmount') || '0.00';
-  const transferredCoins = Math.floor(parseFloat(transferred) * 100);
-  document.getElementById('coinAmount').textContent = transferredCoins.toLocaleString('en-US');
+  const transferredCoins = localStorage.getItem('transferredCoins') || '0';
+  document.getElementById('coinAmount').textContent = parseInt(transferredCoins).toLocaleString('en-US');
 });
   </script>
 </body>
