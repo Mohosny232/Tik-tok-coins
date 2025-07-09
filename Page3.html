@@ -181,18 +181,21 @@ input[type="number"],
 </head>
 <body>
 <div class="container">
+  <!-- حقل الاسم مع الصورة فوق -->
   <div class="field-group">
-    <input type="text" id="username" placeholder="UserName">
     <img src="brain.png" alt="صورة الدماغ" class="brain-img" />
+    <input type="text" id="username" placeholder="UserName">
   </div>
 
+  <!-- حقل الكوين مع كلمة Coin فوق -->
   <div class="field-group">
+    <div class="usd-label">Coin</div>
     <div class="input-wrapper">
       <input type="number" id="amount" placeholder="Coins" />
       <span class="dollar-sign" id="dollarSign"></span>
     </div>
-    <div class="usd-label">Coin</div>
   </div>
+</div>
   <button class="trans-btn" id="transBtn">Trans</button>
 </div>
   <!-- Loader -->  <div id="tiktok-loader">
