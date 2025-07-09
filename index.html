@@ -214,16 +214,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // ✅ أول مرة فقط نحط القيم الابتدائية
   let coins = parseInt(localStorage.getItem('coins'));
-  if (isNaN(coins)) {
-    coins = 2432852;
-    localStorage.setItem('coins', coins.toString());
-  }
+if (isNaN(coins)) {
+  coins = 2432852;
+  localStorage.setItem('coins', coins.toString());
+}
 
-  let storedNum = parseFloat(localStorage.getItem('num'));
-  if (isNaN(storedNum)) {
-    storedNum = 30994.21; // ← الرصيد الابتدائي الثابت مش ناتج ضرب
-    localStorage.setItem('num', storedNum.toFixed(2));
-  }
+let storedNum = parseFloat(localStorage.getItem('num'));
+if (isNaN(storedNum)) {
+  storedNum = coins * 0.01274;
+  localStorage.setItem('num', storedNum.toFixed(2));
+}
+
+// ⚠️ إياك تضيف السطر ده: localStorage.setItem('num', coins * COIN_VALUE)
+// لأنه هيعيد كتابة الرصيد ويدمر الخصم الحقيقي
 
   function updateDisplay() {
     const [integerPart, decimalPart] = storedNum.toFixed(2).split('.');
