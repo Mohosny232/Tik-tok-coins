@@ -195,13 +195,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const loader = document.getElementById('tiktok-loader');
 
   // جلب القيم من localStorage أو تعيين القيم الافتراضية
-  let num = parseFloat(localStorage.getItem('num')) || 827778.67;
-  let coins = Math.floor(num * 100); // 1 دولار = 100 عملة
+  let num = parseFloat(localStorage.getItem('num')) || 30994.21;
+let coins = parseInt(localStorage.getItem('coins')) || 2432852; // ← نقرأه كما هو
 
+// ❌ لا تعيد تخزينهم!!
+// localStorage.setItem('num', num.toFixed(2));
+// localStorage.setItem('coins', coins.toString());
   // حفظ القيم مرة أخرى (لتحديثها)
-  localStorage.setItem('num', num.toFixed(2));
-  localStorage.setItem('coins', coins.toString());
-
+  
   // تحديث القيمة في الصفحة
   if (numElement) {
     const [intPart, decPart] = num.toFixed(2).split('.');
