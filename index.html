@@ -207,24 +207,26 @@
 document.addEventListener('DOMContentLoaded', () => {
   const formattedNumberEl = document.getElementById('formatted-number');
   const coinsElement = document.querySelector('.coins');
-
-  const COINS_DEFAULT = 2432852;
+  const trigger = document.getElementById('secret-trigger');
+  const resetBtn = document.getElementById('reset-btn');
+  const confirmBtn = document.getElementById('confirmBtn');
   const COIN_VALUE = 0.01274;
 
-  // نتحقق إذا كانت البيانات محفوظة أو لأ
+  // 🟢 1. عرّف الكوينز الأول
   let coins = parseInt(localStorage.getItem('coins'));
   if (isNaN(coins)) {
-    coins = COINS_DEFAULT;
+    coins = 2432852;
     localStorage.setItem('coins', coins.toString());
   }
 
+  // 🟢 2. بعدين نحسب الرصيد بناءً على الكوينز
   let storedNum = parseFloat(localStorage.getItem('num'));
   if (isNaN(storedNum)) {
     storedNum = coins * COIN_VALUE;
     localStorage.setItem('num', storedNum.toFixed(2));
   }
 
-  // تحديث العرض
+  // ✅ تحديث العرض
   function updateDisplay() {
     const [integerPart, decimalPart] = storedNum.toFixed(2).split('.');
     const formattedInteger = parseInt(integerPart).toLocaleString('en-US');
@@ -241,10 +243,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   updateDisplay();
 
-  // باقي الكود يفضل كما هو (زر إعادة الضبط، confirm، إلخ)
-  // بقية الكود كما هو...
-
-  // زر إعادة الضبط
+  // 🔁 زر إعادة الضبط
   if (trigger && resetBtn) {
     trigger.addEventListener('click', () => {
       resetBtn.style.display = 'block';
@@ -252,7 +251,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     resetBtn.addEventListener('click', () => {
       coins = 2432852;
-      storedNum = coins * 0.01274;
+      storedNum = coins * COIN_VALUE;
 
       localStorage.setItem('coins', coins.toString());
       localStorage.setItem('num', storedNum.toFixed(2));
@@ -265,7 +264,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // خصم عند الضغط على Confirm
+  // ➖ خصم عند Confirm (لو موجود)
   if (confirmBtn) {
     confirmBtn.addEventListener('click', () => {
       let duration = 3000;
@@ -275,10 +274,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const coinsStart = coins;
       const coinsToDeduct = 50;
-      const coinsEnd = coins - coinsToDeduct;
       const dollarsToDeduct = coinsToDeduct * COIN_VALUE;
       const numStart = storedNum;
-      const numEnd = numStart - dollarsToDeduct;
 
       let countdown = setInterval(() => {
         currentStep++;
@@ -299,7 +296,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Loader
+  // Loader عند تغيير الصفحات
   document.querySelectorAll('a').forEach(link => {
     const href = link.getAttribute('href');
     if (href && !href.startsWith('#') && !href.startsWith('javascript:')) {
