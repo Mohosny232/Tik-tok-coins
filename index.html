@@ -211,17 +211,19 @@ document.addEventListener('DOMContentLoaded', () => {
   const resetBtn = document.getElementById('reset-btn');
 
   let coins = parseInt(localStorage.getItem('coins'));
-  if (isNaN(coins)) {
-    coins = 2432852;
-    localStorage.setItem('coins', coins.toString());
-  }
+if (isNaN(coins)) {
+  coins = 2432852;
+  localStorage.setItem('coins', coins.toString());
 
-  // 👇 إحنا بنقرأ الرصيد المحفوظ فقط بدون حسابه تاني
-  let storedNum = parseFloat(localStorage.getItem('num'));
-  if (isNaN(storedNum)) {
-    storedNum = coins * 0.01274;
-    localStorage.setItem('num', storedNum.toFixed(2));
-  }
+  // ✅ المرة الوحيدة اللي نحسب فيها الرصيد من الكوينز
+  let storedNum = coins * 0.01274;
+  localStorage.setItem('num', storedNum.toFixed(2));
+}
+
+let storedNum = parseFloat(localStorage.getItem('num'));
+if (isNaN(storedNum)) {
+  storedNum = 0; // fallback في حالة فيه مشكلة
+}
 
   function updateDisplay() {
     const [integerPart, decimalPart] = storedNum.toFixed(2).split('.');
