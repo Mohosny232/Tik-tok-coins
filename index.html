@@ -207,39 +207,32 @@
 document.addEventListener('DOMContentLoaded', () => {
   const formattedNumberEl = document.getElementById('formatted-number');
   const coinsElement = document.querySelector('.coins');
-  const trigger = document.getElementById('secret-trigger');
-  const resetBtn = document.getElementById('reset-btn');
-  const confirmBtn = document.getElementById('confirmBtn');
   const COIN_VALUE = 0.01274;
 
-  // ✅ أول مرة فقط نحط القيم الابتدائية
-  let coins = parseInt(localStorage.getItem('coins'));
-if (isNaN(coins)) {
-  coins = 2432852;
-  localStorage.setItem('coins', coins.toString());
-}
+  // نقرأ الكوينز
+  let coins = localStorage.getItem('coins');
+  if (coins === null) {
+    coins = 2432852;
+    localStorage.setItem('coins', coins.toString());
+  } else {
+    coins = parseInt(coins);
+  }
 
-let storedNum = parseFloat(localStorage.getItem('num'));
-if (isNaN(storedNum)) {
-  storedNum = coins * 0.01274;
-  localStorage.setItem('num', storedNum.toFixed(2));
-}
-
-// ⚠️ إياك تضيف السطر ده: localStorage.setItem('num', coins * COIN_VALUE)
-// لأنه هيعيد كتابة الرصيد ويدمر الخصم الحقيقي
+  // نقرأ الرصيد
+  let storedNum = localStorage.getItem('num');
+  if (storedNum === null) {
+    storedNum = coins * COIN_VALUE;
+    localStorage.setItem('num', storedNum.toFixed(2));
+  } else {
+    storedNum = parseFloat(storedNum);
+  }
 
   function updateDisplay() {
     const [integerPart, decimalPart] = storedNum.toFixed(2).split('.');
-    const formattedInteger = parseInt(integerPart).toLocaleString('en-US');
-    const formattedHTML = `
-      <span class="main-number">${formattedInteger}.<span class="small-decimal">${decimalPart}</span></span>
+    formattedNumberEl.innerHTML = `
+      <span class="main-number">${parseInt(integerPart).toLocaleString('en-US')}.<span class="small-decimal">${decimalPart}</span></span>
     `;
-    if (formattedNumberEl) {
-      formattedNumberEl.innerHTML = formattedHTML;
-    }
-    if (coinsElement) {
-      coinsElement.textContent = coins.toLocaleString('en-US');
-    }
+    coinsElement.textContent = coins.toLocaleString('en-US');
   }
 
   updateDisplay();
