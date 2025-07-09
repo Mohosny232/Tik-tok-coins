@@ -213,10 +213,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const COIN_VALUE = 0.01274; // ✅
 
   let storedNum = parseFloat(localStorage.getItem('num'));
-  if (isNaN(storedNum)) {
-    storedNum = 30994.21;
-    localStorage.setItem('num', storedNum.toFixed(2));
-  }
+if (isNaN(storedNum)) {
+  storedNum = coins * 0.01274;
+  localStorage.setItem('num', storedNum.toFixed(2));
+}
 
   let coins = parseInt(localStorage.getItem('coins'));
   if (isNaN(coins)) {
