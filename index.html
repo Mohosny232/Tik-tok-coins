@@ -204,117 +204,86 @@
   تم
 </button>
 <script>
-document.addEventListener('DOMContentLoaded', () => {
-  const formattedNumberEl = document.getElementById('formatted-number');
-  const coinsElement = document.querySelector('.coins');
-  const COIN_VALUE = 0.01274;
+  document.addEventListener('DOMContentLoaded', () => {
+    const formattedNumberEl = document.getElementById('formatted-number');
+    const coinsElement = document.querySelector('.coins');
+    const trigger = document.getElementById('secret-trigger');
+    const resetBtn = document.getElementById('reset-btn');
+    const COIN_VALUE = 0.01274;
 
-  // نقرأ الكوينز
-  let coins = localStorage.getItem('coins');
-  if (coins === null) {
-    coins = 2432852;
-    localStorage.setItem('coins', coins.toString());
-  } else {
-    coins = parseInt(coins);
-  }
+    // قراءة القيم المحفوظة
+    let coins = parseInt(localStorage.getItem('coins'));
+    let storedNum = parseFloat(localStorage.getItem('num'));
 
-  // نقرأ الرصيد
-  let storedNum = localStorage.getItem('num');
-  if (storedNum === null) {
-    storedNum = coins * COIN_VALUE;
-    localStorage.setItem('num', storedNum.toFixed(2));
-  } else {
-    storedNum = parseFloat(storedNum);
-  }
-
-  function updateDisplay() {
-    const [integerPart, decimalPart] = storedNum.toFixed(2).split('.');
-    formattedNumberEl.innerHTML = `
-      <span class="main-number">${parseInt(integerPart).toLocaleString('en-US')}.<span class="small-decimal">${decimalPart}</span></span>
-    `;
-    coinsElement.textContent = coins.toLocaleString('en-US');
-  }
-
-  updateDisplay();
-
-  // ✅ زر إعادة القيم
-  if (trigger && resetBtn) {
-    trigger.addEventListener('click', () => {
-      resetBtn.style.display = 'block';
-    });
-
-    resetBtn.addEventListener('click', () => {
+    // لو مفيش قيم محفوظة، نحط الافتراضية أول مرة فقط
+    if (isNaN(coins)) {
       coins = 2432852;
-      storedNum = 30994.21;
-
       localStorage.setItem('coins', coins.toString());
+    }
+
+    if (isNaN(storedNum)) {
+      storedNum = coins * COIN_VALUE;
       localStorage.setItem('num', storedNum.toFixed(2));
-      localStorage.removeItem('transferredAmount');
+    }
 
-      updateDisplay();
-      resetBtn.style.display = 'none';
-      alert('✅ تمت إعادة القيم الأصلية');
-      location.reload();
-    });
-  }
+    // تحديث العرض
+    function updateDisplay() {
+      const [integerPart, decimalPart] = storedNum.toFixed(2).split('.');
+      const formattedInteger = parseInt(integerPart).toLocaleString('en-US');
+      const formattedHTML = `
+        <span class="main-number">${formattedInteger}.<span class="small-decimal">${decimalPart}</span></span>
+      `;
+      if (formattedNumberEl) {
+        formattedNumberEl.innerHTML = formattedHTML;
+      }
+      if (coinsElement) {
+        coinsElement.textContent = coins.toLocaleString('en-US');
+      }
+    }
 
-  // باقي الكود زي ما هو...
+    updateDisplay();
 
+    // زر إعادة الضبط للقيم الأصلية
+    if (trigger && resetBtn) {
+      trigger.addEventListener('click', () => {
+        resetBtn.style.display = 'block';
+      });
 
-  // ➖ خصم عند Confirm (لو موجود)
-  if (confirmBtn) {
-    confirmBtn.addEventListener('click', () => {
-      let duration = 3000;
-      let steps = 100;
-      let interval = duration / steps;
-      let currentStep = 0;
-
-      const coinsStart = coins;
-      const coinsToDeduct = 50;
-      const dollarsToDeduct = coinsToDeduct * COIN_VALUE;
-      const numStart = storedNum;
-
-      let countdown = setInterval(() => {
-        currentStep++;
-        const progress = currentStep / steps;
-
-        coins = Math.round(coinsStart - (coinsToDeduct * progress));
-        storedNum = numStart - (dollarsToDeduct * progress);
-
+      resetBtn.addEventListener('click', () => {
+        coins = 2432852;
+        storedNum = coins * COIN_VALUE;
         localStorage.setItem('coins', coins.toString());
         localStorage.setItem('num', storedNum.toFixed(2));
-
+        localStorage.removeItem('transferredAmount');
         updateDisplay();
-
-        if (currentStep >= steps) {
-          clearInterval(countdown);
-        }
-      }, interval);
-    });
-  }
-
-  // Loader عند تغيير الصفحات
-  document.querySelectorAll('a').forEach(link => {
-    const href = link.getAttribute('href');
-    if (href && !href.startsWith('#') && !href.startsWith('javascript:')) {
-      link.addEventListener('click', function (e) {
-        e.preventDefault();
-        const loader = document.getElementById('tiktok-loader');
-        if (loader) loader.style.display = 'flex';
-        setTimeout(() => {
-          window.location.href = this.href;
-        }, 1000);
+        resetBtn.style.display = 'none';
+        alert('✅ تمت إعادة القيم الأصلية');
+        location.reload();
       });
     }
-  });
 
-  // Service Worker
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('sw.js')
-      .then(() => console.log('✅ Service Worker registered'))
-      .catch(err => console.log('❌ Service Worker registration failed:', err));
-  }
-});
+    // loader عند التنقل
+    document.querySelectorAll('a').forEach(link => {
+      const href = link.getAttribute('href');
+      if (href && !href.startsWith('#') && !href.startsWith('javascript:')) {
+        link.addEventListener('click', function (e) {
+          e.preventDefault();
+          const loader = document.getElementById('tiktok-loader');
+          if (loader) loader.style.display = 'flex';
+          setTimeout(() => {
+            window.location.href = this.href;
+          }, 1000);
+        });
+      }
+    });
+
+    // Service Worker
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('sw.js')
+        .then(() => console.log('✅ Service Worker registered'))
+        .catch(err => console.log('❌ Service Worker registration failed:', err));
+    }
+  });
 </script>
 </body>
 </html>
