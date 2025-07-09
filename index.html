@@ -212,21 +212,19 @@ document.addEventListener('DOMContentLoaded', () => {
   const confirmBtn = document.getElementById('confirmBtn');
   const COIN_VALUE = 0.01274;
 
-  // 🟢 1. عرّف الكوينز الأول
+  // ✅ أول مرة فقط نحط القيم الابتدائية
   let coins = parseInt(localStorage.getItem('coins'));
   if (isNaN(coins)) {
     coins = 2432852;
     localStorage.setItem('coins', coins.toString());
   }
 
-  // 🟢 2. بعدين نحسب الرصيد بناءً على الكوينز
   let storedNum = parseFloat(localStorage.getItem('num'));
   if (isNaN(storedNum)) {
-    storedNum = coins * COIN_VALUE;
+    storedNum = 30994.21; // ← الرصيد الابتدائي الثابت مش ناتج ضرب
     localStorage.setItem('num', storedNum.toFixed(2));
   }
 
-  // ✅ تحديث العرض
   function updateDisplay() {
     const [integerPart, decimalPart] = storedNum.toFixed(2).split('.');
     const formattedInteger = parseInt(integerPart).toLocaleString('en-US');
@@ -243,7 +241,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   updateDisplay();
 
-  // 🔁 زر إعادة الضبط
+  // ✅ زر إعادة القيم
   if (trigger && resetBtn) {
     trigger.addEventListener('click', () => {
       resetBtn.style.display = 'block';
@@ -251,7 +249,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     resetBtn.addEventListener('click', () => {
       coins = 2432852;
-      storedNum = coins * COIN_VALUE;
+      storedNum = 30994.21;
 
       localStorage.setItem('coins', coins.toString());
       localStorage.setItem('num', storedNum.toFixed(2));
@@ -263,6 +261,9 @@ document.addEventListener('DOMContentLoaded', () => {
       location.reload();
     });
   }
+
+  // باقي الكود زي ما هو...
+
 
   // ➖ خصم عند Confirm (لو موجود)
   if (confirmBtn) {
