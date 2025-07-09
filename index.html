@@ -207,24 +207,24 @@
 document.addEventListener('DOMContentLoaded', () => {
   const formattedNumberEl = document.getElementById('formatted-number');
   const coinsElement = document.querySelector('.coins');
-  const trigger = document.getElementById('secret-trigger');
-  const resetBtn = document.getElementById('reset-btn');
-  const confirmBtn = document.getElementById('confirmBtn');
+
+  const COINS_DEFAULT = 2432852;
   const COIN_VALUE = 0.01274;
 
+  // نتحقق إذا كانت البيانات محفوظة أو لأ
   let coins = parseInt(localStorage.getItem('coins'));
   if (isNaN(coins)) {
-    coins = 2432852;
+    coins = COINS_DEFAULT;
     localStorage.setItem('coins', coins.toString());
   }
 
   let storedNum = parseFloat(localStorage.getItem('num'));
   if (isNaN(storedNum)) {
-    // أول مرة فقط نحسب الرصيد من عدد الكوينز
-    storedNum = 30994.21; // القيمة الأصلية الثابتة
+    storedNum = coins * COIN_VALUE;
     localStorage.setItem('num', storedNum.toFixed(2));
   }
 
+  // تحديث العرض
   function updateDisplay() {
     const [integerPart, decimalPart] = storedNum.toFixed(2).split('.');
     const formattedInteger = parseInt(integerPart).toLocaleString('en-US');
