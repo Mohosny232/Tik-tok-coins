@@ -214,7 +214,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // قراءة الرصيد من localStorage أو تعيين قيمة افتراضية
   let storedNum = parseFloat(localStorage.getItem('num'));
   if (isNaN(storedNum)) {
-    storedNum = 678278.24;
+    storedNum = 15426.24;
     localStorage.setItem('num', storedNum.toFixed(2));
   }
 
@@ -249,7 +249,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     resetBtn.addEventListener('click', () => {
-      const defaultNum = 678278.24;
+      const defaultNum = 15426.24;
       const defaultCoins = Math.floor(defaultNum * 100);
 
       storedNum = defaultNum;
@@ -317,7 +317,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const coinsElement = document.querySelector('.coins');
   const confirmBtn = document.getElementById('confirmBtn');
 
-  let storedNum = parseFloat(localStorage.getItem('num')) || 678278.24;
+  let storedNum = parseFloat(localStorage.getItem('num')) || 15426.24;
   let coins = parseInt(localStorage.getItem('coins')) || Math.floor(storedNum * 100);
 
   function updateDisplay() {
