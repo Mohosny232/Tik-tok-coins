@@ -211,13 +211,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const resetBtn = document.getElementById('reset-btn');
 
   let storedNum = parseFloat(localStorage.getItem('num'));
+
+// إذا ما فيش رقم محفوظ، نحط القيمة الأصلية أول مرة فقط
 if (isNaN(storedNum)) {
-  storedNum = 30994.21; // القيمة الأصلية الثابتة فقط أول مرة
+  storedNum = 30994.21;
   localStorage.setItem('num', storedNum.toFixed(2));
-}
-let storedNum = parseFloat(localStorage.getItem('num'));
-if (isNaN(storedNum)) {
-  storedNum = 0; // fallback في حالة فيه مشكلة
 }
 
   function updateDisplay() {
