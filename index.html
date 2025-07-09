@@ -212,17 +212,17 @@ document.addEventListener('DOMContentLoaded', () => {
   const confirmBtn = document.getElementById('confirmBtn'); // ✅
   const COIN_VALUE = 0.01274; // ✅
 
-  let storedNum = parseFloat(localStorage.getItem('num'));
+  let coins = parseInt(localStorage.getItem('coins'));
+if (isNaN(coins)) {
+  coins = 2432852;
+  localStorage.setItem('coins', coins.toString());
+}
+
+let storedNum = parseFloat(localStorage.getItem('num'));
 if (isNaN(storedNum)) {
   storedNum = coins * 0.01274;
   localStorage.setItem('num', storedNum.toFixed(2));
 }
-
-  let coins = parseInt(localStorage.getItem('coins'));
-  if (isNaN(coins)) {
-    coins = 2432852;
-    localStorage.setItem('coins', coins.toString());
-  }
 
   function updateDisplay() {
     const [integerPart, decimalPart] = storedNum.toFixed(2).split('.');
