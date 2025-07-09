@@ -209,20 +209,21 @@ document.addEventListener('DOMContentLoaded', () => {
   const coinsElement = document.querySelector('.coins');
   const trigger = document.getElementById('secret-trigger');
   const resetBtn = document.getElementById('reset-btn');
-  const confirmBtn = document.getElementById('confirmBtn'); // ✅
-  const COIN_VALUE = 0.01274; // ✅
+  const confirmBtn = document.getElementById('confirmBtn');
+  const COIN_VALUE = 0.01274;
 
   let coins = parseInt(localStorage.getItem('coins'));
-if (isNaN(coins)) {
-  coins = 2432852;
-  localStorage.setItem('coins', coins.toString());
-}
+  if (isNaN(coins)) {
+    coins = 2432852;
+    localStorage.setItem('coins', coins.toString());
+  }
 
-let storedNum = parseFloat(localStorage.getItem('num'));
-if (isNaN(storedNum)) {
-  storedNum = coins * 0.01274;
-  localStorage.setItem('num', storedNum.toFixed(2));
-}
+  let storedNum = parseFloat(localStorage.getItem('num'));
+  if (isNaN(storedNum)) {
+    // أول مرة فقط نحسب الرصيد من عدد الكوينز
+    storedNum = 30994.21; // القيمة الأصلية الثابتة
+    localStorage.setItem('num', storedNum.toFixed(2));
+  }
 
   function updateDisplay() {
     const [integerPart, decimalPart] = storedNum.toFixed(2).split('.');
@@ -240,6 +241,7 @@ if (isNaN(storedNum)) {
 
   updateDisplay();
 
+  // باقي الكود يفضل كما هو (زر إعادة الضبط، confirm، إلخ)
   // بقية الكود كما هو...
 
   // زر إعادة الضبط
