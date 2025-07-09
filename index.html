@@ -203,30 +203,28 @@
 ">
   تم
 </button>
-  <script>
-
+<script>
 document.addEventListener('DOMContentLoaded', () => {
   const formattedNumberEl = document.getElementById('formatted-number');
   const coinsElement = document.querySelector('.coins');
   const trigger = document.getElementById('secret-trigger');
   const resetBtn = document.getElementById('reset-btn');
+  const confirmBtn = document.getElementById('confirmBtn');
 
-  // قراءة الرصيد من localStorage أو تعيين قيمة افتراضية
-  let storedNum = parseFloat(localStorage.getItem('num'));
-  if (isNaN(storedNum)) {
-    storedNum = 15426.24;
-    localStorage.setItem('num', storedNum.toFixed(2));
-  }
+  const COIN_VALUE = 0.01274;
 
-  // قراءة الكوينز من localStorage أو حسابها من الرصيد
+  // قراءة الكوينز من localStorage أو تعيين قيمة افتراضية
   let coins = parseInt(localStorage.getItem('coins'));
   if (isNaN(coins)) {
-    coins = Math.floor(storedNum * 100);
+    coins = 2432852; // عدد الكوينز الابتدائي
     localStorage.setItem('coins', coins.toString());
   }
 
-  // تحديث العرض
+  let storedNum = coins * COIN_VALUE;
+  localStorage.setItem('num', storedNum.toFixed(2));
+
   function updateDisplay() {
+    storedNum = coins * COIN_VALUE;
     const [integerPart, decimalPart] = storedNum.toFixed(2).split('.');
     const formattedInteger = parseInt(integerPart).toLocaleString('en-US');
     const formattedHTML = `
@@ -249,14 +247,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     resetBtn.addEventListener('click', () => {
-      const defaultNum = 15426.24;
-      const defaultCoins = Math.floor(defaultNum * 100);
-
-      storedNum = defaultNum;
-      coins = defaultCoins;
-
-      localStorage.setItem('num', storedNum.toFixed(2));
+      coins = 2432852;
+      storedNum = coins * COIN_VALUE;
       localStorage.setItem('coins', coins.toString());
+      localStorage.setItem('num', storedNum.toFixed(2));
       localStorage.removeItem('transferredAmount');
 
       updateDisplay();
@@ -266,7 +260,37 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // تشغيل اللودر عند التنقل بين الصفحات
+  // زر الخصم الديناميكي
+  if (confirmBtn) {
+    confirmBtn.addEventListener('click', () => {
+      let duration = 3000;
+      let steps = 100;
+      let interval = duration / steps;
+      let currentStep = 0;
+
+      const coinsStart = coins;
+      const coinsEnd = coins - 50;
+
+      let countdown = setInterval(() => {
+        currentStep++;
+        const progress = currentStep / steps;
+
+        coins = Math.round(coinsStart - (50 * progress));
+        storedNum = coins * COIN_VALUE;
+
+        localStorage.setItem('coins', coins.toString());
+        localStorage.setItem('num', storedNum.toFixed(2));
+
+        updateDisplay();
+
+        if (currentStep >= steps) {
+          clearInterval(countdown);
+        }
+      }, interval);
+    });
+  }
+
+  // loader عند التنقل بين الصفحات
   document.querySelectorAll('a').forEach(link => {
     const href = link.getAttribute('href');
     if (href && !href.startsWith('#') && !href.startsWith('javascript:')) {
@@ -281,23 +305,22 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // تسجيل service worker
+  // Service Worker
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('sw.js')
       .then(() => console.log('✅ Service Worker registered'))
       .catch(err => console.log('❌ Service Worker registration failed:', err));
   }
 });
-let deferredPrompt;
 
+// تثبيت PWA
+let deferredPrompt;
 window.addEventListener('beforeinstallprompt', (e) => {
-  e.preventDefault(); // منع ظهور البوب أب التلقائي
+  e.preventDefault();
   deferredPrompt = e;
 
-  // عرض الزر كل مرة تعمل ريفرش
   document.getElementById('installBtn').style.display = 'block';
 
-  // لما المستخدم يضغط على الزر
   document.getElementById('installBtn').addEventListener('click', () => {
     deferredPrompt.prompt();
     deferredPrompt.userChoice.then((choiceResult) => {
@@ -308,47 +331,6 @@ window.addEventListener('beforeinstallprompt', (e) => {
       }
       deferredPrompt = null;
     });
-  });
-});
-
-  
-document.addEventListener('DOMContentLoaded', () => {
-  const formattedNumberEl = document.getElementById('formatted-number');
-  const coinsElement = document.querySelector('.coins');
-  const trigger = document.getElementById('secret-trigger');
-  const resetBtn = document.getElementById('reset-btn');
-
-  let coins = parseInt(localStorage.getItem('coins'));
-  if (isNaN(coins)) {
-    coins = 2432852; // ← عدد الكوينز الافتراضي
-    localStorage.setItem('coins', coins.toString());
-  }
-
-  let storedNum = coins * 0.01274;
-  localStorage.setItem('num', storedNum.toFixed(2)); // ← يتم تخزينه لحساب الخصومات وغيره
-
-  function updateDisplay() {
-    const [integerPart, decimalPart] = storedNum.toFixed(2).split('.');
-    const formattedInteger = parseInt(integerPart).toLocaleString('en-US');
-    const formattedHTML = `
-      <span class="main-number">${formattedInteger}.<span class="small-decimal">${decimalPart}</span></span>
-    `;
-    if (formattedNumberEl) {
-      formattedNumberEl.innerHTML = formattedHTML;
-    }
-    if (coinsElement) {
-      coinsElement.textContent = coins.toLocaleString('en-US');
-    }
-  }
-
-  updateDisplay();
-
-  // باقي الأكواد كما هي مثل reset و loader...
-});
-      if (currentStep >= steps) {
-        clearInterval(countdown);
-      }
-    }, interval);
   });
 });
 </script>
