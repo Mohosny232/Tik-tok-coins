@@ -243,8 +243,7 @@ input[type="number"],
 
       // خصم المبلغ
       coins -= amountInCoins;
-      num -= amountInDollars;
-
+     num -= amountInCoins * 0.01274; // ← خصم فعلي
       // حفظ البيانات
       localStorage.setItem('coins', coins.toString());
       localStorage.setItem('num', num.toFixed(2));
