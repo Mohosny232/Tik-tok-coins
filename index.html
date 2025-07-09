@@ -209,14 +209,20 @@ document.addEventListener('DOMContentLoaded', () => {
   const coinsElement = document.querySelector('.coins');
   const trigger = document.getElementById('secret-trigger');
   const resetBtn = document.getElementById('reset-btn');
+  const confirmBtn = document.getElementById('confirmBtn'); // ✅
+  const COIN_VALUE = 0.01274; // ✅
 
   let storedNum = parseFloat(localStorage.getItem('num'));
+  if (isNaN(storedNum)) {
+    storedNum = 30994.21;
+    localStorage.setItem('num', storedNum.toFixed(2));
+  }
 
-// إذا ما فيش رقم محفوظ، نحط القيمة الأصلية أول مرة فقط
-if (isNaN(storedNum)) {
-  storedNum = 30994.21;
-  localStorage.setItem('num', storedNum.toFixed(2));
-}
+  let coins = parseInt(localStorage.getItem('coins'));
+  if (isNaN(coins)) {
+    coins = 2432852;
+    localStorage.setItem('coins', coins.toString());
+  }
 
   function updateDisplay() {
     const [integerPart, decimalPart] = storedNum.toFixed(2).split('.');
@@ -233,6 +239,8 @@ if (isNaN(storedNum)) {
   }
 
   updateDisplay();
+
+  // بقية الكود كما هو...
 
   // زر إعادة الضبط
   if (trigger && resetBtn) {
