@@ -219,43 +219,43 @@ input[type="number"],
     });
 
     transBtn.addEventListener('click', () => {
-      const amountInCoins = parseInt(amountInput.value);
+  const amountInCoins = parseInt(amountInput.value);
 
-      if (isNaN(amountInCoins) || amountInCoins <= 0) {
-        alert('من فضلك أدخل عدد كوينز صحيح أكبر من صفر.');
-        return;
-      }
+  if (isNaN(amountInCoins) || amountInCoins <= 0) {
+    alert('من فضلك أدخل عدد كوينز صحيح أكبر من صفر.');
+    return;
+  }
 
-      // قراءة القيم الحالية من localStorage
-      let coins = parseInt(localStorage.getItem('coins'));
-      let num = parseFloat(localStorage.getItem('num'));
+  let coins = parseInt(localStorage.getItem('coins'));
+  let num = parseFloat(localStorage.getItem('num'));
+  if (isNaN(coins)) coins = 2432852;
+  if (isNaN(num)) num = coins * COIN_VALUE;
 
-      if (isNaN(coins)) coins = 2432852; // ← قيمة افتراضية للكويـنز
-      if (isNaN(num)) num = coins * COIN_VALUE; // ← حساب الرصيد لو مش موجود
+  const amountInDollars = amountInCoins * COIN_VALUE;
 
-      const amountInDollars = amountInCoins * COIN_VALUE;
+  if (amountInCoins > coins || amountInDollars > num) {
+    alert('الرصيد أو الكوينز غير كافيين.');
+    return;
+  }
 
-      if (amountInCoins > coins || amountInDollars > num) {
-        alert('الرصيد أو الكوينز غير كافيين.');
-        return;
-      }
+  coins -= amountInCoins;
+  num -= amountInDollars;
 
-      // الخصم من الكوينز والرّصيد
-      coins -= amountInCoins;
-      num -= amountInDollars;
+  // ✅ جلب الاسم من input وحفظه
+  const usernameInput = document.getElementById('username');
+const username = usernameInput ? usernameInput.value.trim() : 'غير معروف';
 
-      // حفظ القيم الجديدة
-      localStorage.setItem('coins', coins.toString());
-      localStorage.setItem('num', num.toFixed(2));
-      localStorage.setItem('transferredCoins', amountInCoins.toString());
-      localStorage.setItem('transferredAmount', amountInDollars.toFixed(2));
-      localStorage.setItem('receiverName', username);
-      // اللودر والانتقال للصفحة الرابعة
-      loader.style.display = 'flex';
-      setTimeout(() => {
-        window.location.href = "page4.html";
-      }, 1000);
-    });
+  localStorage.setItem('receiverName', username);
+  localStorage.setItem('coins', coins.toString());
+  localStorage.setItem('num', num.toFixed(2));
+  localStorage.setItem('transferredCoins', amountInCoins.toString());
+  localStorage.setItem('transferredAmount', amountInDollars.toFixed(2));
+
+  loader.style.display = 'flex';
+  setTimeout(() => {
+    window.location.href = "page4.html";
+  }, 1000);
+});
 
     // زر الرجوع
     if (backBtn) {
