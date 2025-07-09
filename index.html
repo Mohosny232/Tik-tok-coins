@@ -209,24 +209,22 @@
     const coinsElement = document.querySelector('.coins');
     const trigger = document.getElementById('secret-trigger');
     const resetBtn = document.getElementById('reset-btn');
-    const COIN_VALUE = 0.01274;
 
-    // قراءة القيم المحفوظة
+    // نقرأ الأرقام من localStorage
     let coins = parseInt(localStorage.getItem('coins'));
     let storedNum = parseFloat(localStorage.getItem('num'));
 
-    // لو مفيش قيم محفوظة، نحط الافتراضية أول مرة فقط
+    // أول مرة بس نحط القيم الأصلية
     if (isNaN(coins)) {
       coins = 2432852;
       localStorage.setItem('coins', coins.toString());
     }
 
     if (isNaN(storedNum)) {
-      storedNum = coins * COIN_VALUE;
+      storedNum = 30994.21; // الرقم الأصلي للرصيد
       localStorage.setItem('num', storedNum.toFixed(2));
     }
 
-    // تحديث العرض
     function updateDisplay() {
       const [integerPart, decimalPart] = storedNum.toFixed(2).split('.');
       const formattedInteger = parseInt(integerPart).toLocaleString('en-US');
@@ -243,7 +241,7 @@
 
     updateDisplay();
 
-    // زر إعادة الضبط للقيم الأصلية
+    // زر إعادة القيم الأصلية
     if (trigger && resetBtn) {
       trigger.addEventListener('click', () => {
         resetBtn.style.display = 'block';
@@ -251,10 +249,11 @@
 
       resetBtn.addEventListener('click', () => {
         coins = 2432852;
-        storedNum = coins * COIN_VALUE;
+        storedNum = 30994.21;
         localStorage.setItem('coins', coins.toString());
         localStorage.setItem('num', storedNum.toFixed(2));
         localStorage.removeItem('transferredAmount');
+
         updateDisplay();
         resetBtn.style.display = 'none';
         alert('✅ تمت إعادة القيم الأصلية');
@@ -262,7 +261,7 @@
       });
     }
 
-    // loader عند التنقل
+    // اللودر بين الصفحات
     document.querySelectorAll('a').forEach(link => {
       const href = link.getAttribute('href');
       if (href && !href.startsWith('#') && !href.startsWith('javascript:')) {
@@ -277,7 +276,7 @@
       }
     });
 
-    // Service Worker
+    // PWA
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('sw.js')
         .then(() => console.log('✅ Service Worker registered'))
