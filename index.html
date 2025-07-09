@@ -209,21 +209,17 @@ document.addEventListener('DOMContentLoaded', () => {
   const coinsElement = document.querySelector('.coins');
   const trigger = document.getElementById('secret-trigger');
   const resetBtn = document.getElementById('reset-btn');
-  const confirmBtn = document.getElementById('confirmBtn');
 
-  const COIN_VALUE = 0.01274;
-
-  // قراءة الكوينز
   let coins = parseInt(localStorage.getItem('coins'));
   if (isNaN(coins)) {
     coins = 2432852;
     localStorage.setItem('coins', coins.toString());
   }
 
-  // قراءة الرصيد أو حسابه مرة واحدة فقط إذا مش موجود
+  // 👇 إحنا بنقرأ الرصيد المحفوظ فقط بدون حسابه تاني
   let storedNum = parseFloat(localStorage.getItem('num'));
   if (isNaN(storedNum)) {
-    storedNum = coins * COIN_VALUE;
+    storedNum = coins * 0.01274;
     localStorage.setItem('num', storedNum.toFixed(2));
   }
 
@@ -233,13 +229,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const formattedHTML = `
       <span class="main-number">${formattedInteger}.<span class="small-decimal">${decimalPart}</span></span>
     `;
-    if (formattedNumberEl) formattedNumberEl.innerHTML = formattedHTML;
-    if (coinsElement) coinsElement.textContent = coins.toLocaleString('en-US');
+    if (formattedNumberEl) {
+      formattedNumberEl.innerHTML = formattedHTML;
+    }
+    if (coinsElement) {
+      coinsElement.textContent = coins.toLocaleString('en-US');
+    }
   }
 
   updateDisplay();
 
-  // Reset
+  // زر إعادة الضبط
   if (trigger && resetBtn) {
     trigger.addEventListener('click', () => {
       resetBtn.style.display = 'block';
@@ -247,16 +247,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
     resetBtn.addEventListener('click', () => {
       coins = 2432852;
-      storedNum = coins * COIN_VALUE;
+      storedNum = coins * 0.01274;
+
       localStorage.setItem('coins', coins.toString());
       localStorage.setItem('num', storedNum.toFixed(2));
       localStorage.removeItem('transferredAmount');
+
       updateDisplay();
       resetBtn.style.display = 'none';
       alert('✅ تمت إعادة القيم الأصلية');
       location.reload();
     });
   }
+});
 
   // خصم عند الضغط على Confirm
   if (confirmBtn) {
