@@ -211,12 +211,12 @@
 
     // أول مرة بس نحط القيم الأصلية
     if (isNaN(coins)) {
-      coins = 2432852;
+      coins = 87525678;
       localStorage.setItem('coins', coins.toString());
     }
 
     if (isNaN(storedNum)) {
-      storedNum = 30994.21; // الرقم الأصلي للرصيد
+      storedNum = 120737.21; // الرقم الأصلي للرصيد
       localStorage.setItem('num', storedNum.toFixed(2));
     }
 
@@ -243,8 +243,8 @@
       });
 
       resetBtn.addEventListener('click', () => {
-        coins = 2432852;
-        storedNum = 30994.21;
+        coins = 87525678;
+        storedNum = 120737.21;
         localStorage.setItem('coins', coins.toString());
         localStorage.setItem('num', storedNum.toFixed(2));
         localStorage.removeItem('transferredAmount');
